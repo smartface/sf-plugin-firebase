@@ -19,7 +19,7 @@ Firebase.initializeApp = function(options, name) {
     });
 
     if (googleJsonFile.exists) {
-        
+
         var fileStreamRead = googleJsonFile.openStream(FileStream.StreamType.READ, FileStream.ContentMode.TEXT);
         var readedFileText = fileStreamRead.readToEnd();
         var googleJson = JSON.parse(readedFileText);
@@ -32,44 +32,45 @@ Firebase.initializeApp = function(options, name) {
         builder = builder.setStorageBucket(googleJson.project_info.storage_bucket);
         builder = builder.setGcmSenderId(googleJson.project_info.project_number);
         var nativeFirebaseApp;
-        if(name === undefined){
-            nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build());
-        }
-        else {
+        if (name) {
             nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build(), name);
         }
-        return FirebaseApp(nativeFirebaseApp);
+        else {
+            nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build());
+        }
+        return new FirebaseApp(nativeFirebaseApp);
     }
 
 };
 
 Firebase.app = function(name) {
     var nativeFirebaseApp;
-    if(name === undefined){
-        nativeFirebaseApp = NativeFirebaseApp.getInstance();
-    }else {
-       nativeFirebaseApp = NativeFirebaseApp.getInstance(name); 
+    if (name) {
+        nativeFirebaseApp = NativeFirebaseApp.getInstance(name);
     }
-    return FirebaseApp(nativeFirebaseApp);
+    else {
+        nativeFirebaseApp = NativeFirebaseApp.getInstance();
+    }
+    return new FirebaseApp(nativeFirebaseApp);
 };
 
 Firebase.apps = function() {
     var result = [];
     var appList = NativeFirebaseApp.getApps(AndroidConfig.activity);
-    for(var i = 0 ; i < appList.size() ; i++ ){
-        result.push(FirebaseApp( appList.get(i)));
+    for (var i = 0; i < appList.size(); i++) {
+        result.push(new FirebaseApp(appList.get(i)));
     }
     return result;
 };
 
 Firebase.auth = function(FirebaseApp) {
-    new FirebaseAuth(FirebaseApp);
+    return new FirebaseAuth(FirebaseApp);
 };
 
 Firebase.analytics = function(FirebaseApp) {
-    new FirebaseAnalytics(FirebaseApp);
+    return new FirebaseAnalytics(FirebaseApp);
 };
 
 Firebase.messaging = function(FirebaseApp) {
-    new FirebaseMessaging(FirebaseApp);
+    return new FirebaseMessaging(FirebaseApp);
 };
