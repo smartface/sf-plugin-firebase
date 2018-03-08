@@ -1,4 +1,4 @@
-function FirebaseApp() {}
+function FirebaseApp(nativeFirebaseApp) {}
 
 
 // Return firebaseApp Auth
