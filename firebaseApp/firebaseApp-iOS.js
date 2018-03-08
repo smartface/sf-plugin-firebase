@@ -1,11 +1,12 @@
-const FirebaseAuth = require("./firebaseAuth");
+const Invocation    = require('sf-core/util').Invocation;
+const FirebaseAuth = require("../firebaseAuth");
 
 function FirebaseApp(nativeObject) {
     var self = this;
     self.nativeObject = nativeObject;
     self.ios = {};
     self.android = {};
-
+    self.ios.native = {};
     self.ios.native.firOptions = FirebaseApp.ios.native.options(self.nativeObject);
 
     self.auth = function(){
@@ -120,11 +121,11 @@ FirebaseApp.ios.native.defaultApp = function(){
 }
 
 FirebaseApp.ios.native.appNamed = function(name){
-    var argOptions = new Invocation.Argument({
+    var argName = new Invocation.Argument({
         type:"NSString",
         value: name
     });
-    return Invocation.invokeClassMethod("FIRApp","appNamed:",[],"NSObject");
+    return Invocation.invokeClassMethod("FIRApp","appNamed:",[argName],"NSObject");
 }
 
 FirebaseApp.ios.native.allApps = function(){

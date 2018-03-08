@@ -1,3 +1,4 @@
+const Invocation    = require('sf-core/util').Invocation;
 const FirebaseAnalytics = require("./firebaseAnalytics");
 const FirebaseApp = require("./firebaseApp");
 const FirebaseAuth = require("./firebaseAuth");
@@ -39,11 +40,17 @@ Firebase.app = function(name) {
     }else {
         nativeFirebaseApp = FirebaseApp.ios.native.defaultApp();
     }
-    return FirebaseApp(nativeFirebaseApp);
+    return new FirebaseApp(nativeFirebaseApp);
 };
 
 Firebase.apps = function() {
-    return FirebaseApp.ios.native.allApps();
+    var apps = FirebaseApp.ios.native.allApps();
+    var keys = Object.keys(apps);
+    var appArray = [];
+    for (var i in keys){
+        appArray.push(new FirebaseApp(apps[keys[i]]));
+    }
+    return appArray;
 };
 
 Firebase.auth = function(FirebaseApp) {
