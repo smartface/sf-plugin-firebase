@@ -1,73 +1,84 @@
 const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.FirebaseAnalytics');
 const NativeOnCompleteListener = requireClass('com.google.android.gms.tasks.OnCompleteListener');
-const NativeBundle = requireClass('android.os.Bundle'); 
+const NativeBundle = requireClass('android.os.Bundle');
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
 
-function FirebaseAnalytics(nativeFirebaseApp) {
-    var self = this;
+function FirebaseAnalytics() {}
 
-    this.nativeObject = NativeFirebaseAnalytics.getInstance(AndroidConfig.activity);
+if (!AndroidConfig.isEmulator) {
+    FirebaseAnalytics.nativeObject = NativeFirebaseAnalytics.getInstance(AndroidConfig.activity);
+}
 
-    Object.defineProperties(self, {
-        'logEvent': {
-            value: function(name, params) {
+Object.defineProperties(FirebaseAnalytics, {
+    'logEvent': {
+        value: function(name, customAttributes) {
+
+            if (!AndroidConfig.isEmulator) {
                 var bundle = new NativeBundle();
-                for(var i = 0 ; i<params.length ; i++){
-                    if(typeof(params[i].value) === "string"){
-                        bundle.putString(params[i].key,params[i].value);
+                for (var i = 0; i < customAttributes.length; i++) {
+                    if (typeof(customAttributes[i].value) === "string") {
+                        bundle.putString(customAttributes[i].key, customAttributes[i].value);
                     }
-                    else if (typeof(params[i].value) === "number"){
-                        bundle.putInt(params[i].key,params[i].value);
+                    else if (typeof(customAttributes[i].value) === "number") {
+                        bundle.putInt(customAttributes[i].key, customAttributes[i].value);
                     }
                 }
-                self.nativeObject.logEvent(name, bundle);
-            },
-            enumerable: true,
-            configurable: true
+                FirebaseAnalytics.nativeObject.logEvent(name, bundle);
+            }
         },
-        'setUserProperty': {
-            value: function(name, value) {
-                self.nativeObject.setUserProperty(name, value);
-            },
-            enumerable: true,
-            configurable: true
+        enumerable: true,
+        configurable: true
+    },
+    'setUserProperty': {
+        value: function(name, value) {
+            if (!AndroidConfig.isEmulator) {
+                FirebaseAnalytics.nativeObject.setUserProperty(name, value);
+            }
         },
-        'setUserId': {
-            value: function(id) {
-                self.nativeObject.setUserId(id);
-            },
-            enumerable: true,
-            configurable: true
+        enumerable: true,
+        configurable: true
+    },
+    'setUserId': {
+        value: function(id) {
+            if (!AndroidConfig.isEmulator) {
+                FirebaseAnalytics.nativeObject.setUserId(id);
+            }
         },
-        'setCurrentScreen': {
-            value: function(screenName, screenClassOverride) {
-                self.nativeObject.setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
-            },
-            enumerable: true,
-            configurable: true
+        enumerable: true,
+        configurable: true
+    },
+    'setCurrentScreen': {
+        value: function(screenName, screenClassOverride) {
+            if (!AndroidConfig.isEmulator) {
+                FirebaseAnalytics.nativeObject.setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
+            }
         },
-        'getAppInstanceId': {
-            value: function(callback) {
+        enumerable: true,
+        configurable: true
+    },
+    'getAppInstanceId': {
+        value: function(callback) {
+            if (!AndroidConfig.isEmulator) {
                 var innerCallback = NativeOnCompleteListener.implement({
                     onComplete: function(task) {
-                       if(task.isSuccessful()){
-                           callback(task.getResult(),"");
-                       }else{
-                           callback("",task.getException().getMessage());
-                       }
+                        if (task.isSuccessful()) {
+                            callback(task.getResult(), "");
+                        }
+                        else {
+                            callback("", task.getException().getMessage());
+                        }
                     }
                 });
 
-                self.nativeObject.getAppInstanceId().addOnCompleteListener(innerCallback);
-            },
-            enumerable: true,
-            configurable: true
-        }
-    });
+                FirebaseAnalytics.nativeObject.getAppInstanceId().addOnCompleteListener(innerCallback);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    }
+});
 
-    self.ios = {};
-}
-
+FirebaseAnalytics.CustomAttribute = require("./customattribute");
 FirebaseAnalytics.ios = {};
 
 module.exports = FirebaseAnalytics;
