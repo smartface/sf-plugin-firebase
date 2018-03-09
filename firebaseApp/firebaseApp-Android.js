@@ -1,40 +1,65 @@
-const NativeFirebaseAuth = requireClass('com.google.firebase.auth.FirebaseAuth');
+const FirebaseAuth = require("../firebaseAuth");
 
 function FirebaseApp(nativeFirebaseApp) {
     var self = this;
-    
+
     this.nativeObject = nativeFirebaseApp;
 
     Object.defineProperties(self, {
         'auth': {
             value: function() {
-                    NativeFirebaseAuth.getInstance(self.nativeObject);
+                return new FirebaseAuth(self);
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'getName': {
+            value: function() {
+                return self.nativeObject.getName();
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'getApiKey': {
+            value: function() {
+                return self.nativeObject.getOptions().getApiKey();
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'getApplicationId': {
+            value: function() {
+                return self.nativeObject.getOptions().getApplicationId();
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'getDatabaseUrl': {
+            value: function() {
+                return self.nativeObject.getOptions().getDatabaseUrl();
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'getGcmSenderId': {
+            value: function() {
+                return self.nativeObject.getOptions().getGcmSenderId();
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'getStorageBucket': {
+            value: function() {
+                return self.nativeObject.getOptions().getStorageBucket();
             },
             enumerable: true,
             configurable: true
         }
     });
 
+    self.ios = {};
 }
 
+FirebaseApp.ios = {};
 
-
-
-// Return firebaseApp Auth
-FirebaseApp.prototype.auth = function() {};
-
-// Return firebaseApp Analytic
-FirebaseApp.prototype.analytic = function() {};
-
-// Return firebaseApp messaging
-FirebaseApp.prototype.messaging = function() {};
-
-FirebaseApp.prototype.delete = function() {};
-
-FirebaseApp.prototype.getName = function() {};
-FirebaseApp.prototype.getApiKey = function() {};
-FirebaseApp.prototype.getApplicationId = function() {};
-FirebaseApp.prototype.getDatabaseUrl = function() {};
-FirebaseApp.prototype.getGcmSenderId = function() {};
-FirebaseApp.prototype.getProjectId = function() {};
-FirebaseApp.prototype.getStorageBucket = function() {};
+module.exports = FirebaseApp;

@@ -15,7 +15,7 @@ Firebase.apps = function() {};
 Firebase.auth = function(FirebaseApp) {};
 
 // Return firebaseApp Analytic
-Firebase.analytics = function(FirebaseApp) {};
+Firebase.analytics = function() {};
 
 // Return firebaseApp messaging
-Firebase.messaging = function(FirebaseApp) {};
+Firebase.messaging = function() {};
