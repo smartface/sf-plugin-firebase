@@ -1,8 +1,8 @@
-const Invocation    = require('sf-core/util').Invocation;
-const FirebaseAnalytics = require("./firebaseAnalytics");
-const FirebaseApp = require("./firebaseApp");
-const FirebaseAuth = require("./firebaseAuth");
-const FirebaseMessaging = require("./firebaseMessaging");
+const Invocation            = require('sf-core/util').Invocation;
+const FirebaseAnalytics     = require("./firebaseAnalytics");
+const FirebaseApp           = require("./firebaseApp");
+const FirebaseAuth          = require("./firebaseAuth");
+const FirebaseMessaging     = require("./firebaseMessaging");
 
 function Firebase() {};
 
@@ -57,12 +57,8 @@ Firebase.auth = function(FirebaseApp) {
     return new FirebaseAuth(FirebaseApp);
 };
 
-Firebase.analytics = function(FirebaseApp) {
-    return new FirebaseAnalytics();
-};
+Firebase.analytics = FirebaseAnalytics;
 
-Firebase.messaging = function(FirebaseApp) {
-    return new FirebaseMessaging();
-};
+Firebase.messaging = FirebaseMessaging;
 
 module.exports = Firebase;
