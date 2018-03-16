@@ -33,7 +33,7 @@ function FirebaseAuth(FirebaseApp) {
                 var callbackHandler = function(e){
                     if (typeof callback === 'function') {
                         if (e.error) {
-                            callback(undefined,e.error);
+                            callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
                         }else{
                             //FBUser
                             callback(e.user,undefined);
@@ -64,25 +64,52 @@ function FirebaseAuth(FirebaseApp) {
         },
         'signInWithCustomToken': {
             value: function(token, callback) {
-
+                var callbackHandler = function(e){
+                    if (typeof callback === 'function') {
+                        if (e.error) {
+                            callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
+                        }else{
+                            //FBUser
+                            callback(e.user,undefined);
+                        }
+                    }
+                };
+                FirebaseAuth.ios.native.signInWithCustomTokenCompletion(self.nativeAuth,token,callbackHandler);
             },
             enumerable: true,
             configurable: true
         },
         'signInAnonymously': {
             value: function(callback) {
-                
+                var callbackHandler = function(e){
+                    if (typeof callback === 'function') {
+                        if (e.error) {
+                            callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
+                        }else{
+                            //FBUser
+                            callback(e.user,undefined);
+                        }
+                    }
+                };
+                FirebaseAuth.ios.native.signInAnonymouslyWithCompletion(self.nativeAuth,callbackHandler);
             },
             enumerable: true,
             configurable: true
         },
         'signOut': {
             value: function() {
-   
+                FirebaseAuth.ios.native.signOut(self.nativeAuth);
             },
             enumerable: true,
             configurable: true
-        },
+        },        
+        'useAppLanguage': {
+            value: function() {
+                FirebaseAuth.ios.native.useAppLanguage(self.nativeAuth);
+            },
+            enumerable: true,
+            configurable: true
+        }
     });
 }
 
@@ -118,7 +145,7 @@ FirebaseAuth.ios.native.setLanguageCode = function(auth,languageCode){
         type:"NSString",
         value: languageCode
     });
-    Invocation.invokeInstanceMethod(auth,"setLanguageCode",[argLanguageCode]);
+    Invocation.invokeInstanceMethod(auth,"setLanguageCode:",[argLanguageCode]);
 }
 ///////Error Codes
 FirebaseAuth.ios.native.signInWithEmailPasswordCompletion = function(auth,email,password,completion)
@@ -187,11 +214,11 @@ FirebaseAuth.ios.native.signInAnonymouslyWithCompletion = function(auth,completi
 ///////Error Codes
 FirebaseAuth.ios.native.signOut = function(auth)
 {
-    var argToken = new Invocation.Argument({
+    var argError = new Invocation.Argument({
         type:"NSObject",
         value: undefined
     });
-    return Invocation.invokeInstanceMethod(auth,"signOut:",[]);
+    return Invocation.invokeInstanceMethod(auth,"signOut:",[argError]);
 }
 
 FirebaseAuth.ios.native.getErrorObject = function(nativeError)
@@ -200,6 +227,11 @@ FirebaseAuth.ios.native.getErrorObject = function(nativeError)
     var localizedDescription = Invocation.invokeInstanceMethod(nativeError,"localizedDescription",[],"NSString");
 
     return {code: code, description: localizedDescription};
+}
+
+FirebaseAuth.ios.native.useAppLanguage = function(auth)
+{
+    return Invocation.invokeInstanceMethod(auth,"useAppLanguage",[]);
 }
 
 module.exports = FirebaseAuth;
