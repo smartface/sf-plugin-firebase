@@ -5,7 +5,6 @@ function FirebaseApp(nativeFirebaseApp) {
     var self = this;
     
     this.nativeObject = nativeFirebaseApp;
-
     Object.defineProperties(self, {
         'auth': {
             value: function() {

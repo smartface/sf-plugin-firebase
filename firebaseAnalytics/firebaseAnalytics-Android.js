@@ -1,5 +1,7 @@
 const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.FirebaseAnalytics');
-const NativeOnCompleteListener = requireClass('com.google.android.gms.tasks.OnCompleteListener');
+const NativeOnSuccessListener = requireClass('com.google.android.gms.tasks.OnSuccessListener');
+const NativeOnFailureListener = requireClass('com.google.android.gms.tasks.OnFailureListener');
+
 const NativeBundle = requireClass('android.os.Bundle');
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
 
@@ -9,10 +11,12 @@ if (!AndroidConfig.isEmulator) {
     FirebaseAnalytics.nativeObject = NativeFirebaseAnalytics.getInstance(AndroidConfig.activity);
 }
 
+FirebaseAnalytics.CustomAttribute = require("./customAttribute");
+
+// EVENT ICIN ENUM EKLENECEK
 Object.defineProperties(FirebaseAnalytics, {
     'logEvent': {
         value: function(name, customAttributes) {
-
             if (!AndroidConfig.isEmulator) {
                 var bundle = new NativeBundle();
                 for (var i = 0; i < customAttributes.length; i++) {
@@ -55,30 +59,9 @@ Object.defineProperties(FirebaseAnalytics, {
         },
         enumerable: true,
         configurable: true
-    },
-    'getAppInstanceId': {
-        value: function(callback) {
-            if (!AndroidConfig.isEmulator) {
-                var innerCallback = NativeOnCompleteListener.implement({
-                    onComplete: function(task) {
-                        if (task.isSuccessful()) {
-                            callback(task.getResult(), "");
-                        }
-                        else {
-                            callback("", task.getException().getMessage());
-                        }
-                    }
-                });
-
-                FirebaseAnalytics.nativeObject.getAppInstanceId().addOnCompleteListener(innerCallback);
-            }
-        },
-        enumerable: true,
-        configurable: true
     }
 });
 
-FirebaseAnalytics.CustomAttribute = require("./customattribute");
 FirebaseAnalytics.ios = {};
 
 module.exports = FirebaseAnalytics;
