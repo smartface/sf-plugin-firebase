@@ -4,5 +4,4 @@ FirebaseAnalytics.prototype.logEvent = function(name, params) {};  // params is 
 FirebaseAnalytics.prototype.setUserProperty = function(name, value) {};
 FirebaseAnalytics.prototype.setUserId = function(id) {};
 FirebaseAnalytics.prototype.setCurrentScreen = function(screenName, screenClassOverride) {};
-FirebaseAnalytics.prototype.getAppInstanceId = function(callback) {}; // callback(appInstanceId /*String*/)
 

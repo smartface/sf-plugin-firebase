@@ -46,7 +46,7 @@ function FirebaseAuth(FirebaseApp) {
                     var innerCallback = NativeOnCompleteListener.implement({
                         onComplete: function(task) {
                             if (task.isSuccessful()) {
-                                callback(true, "");
+                                callback(true);
                             }
                             else {
                                 callback(false, task.getException().getMessage());
@@ -66,7 +66,7 @@ function FirebaseAuth(FirebaseApp) {
                     var innerCallback = NativeOnCompleteListener.implement({
                         onComplete: function(task) {
                             if (task.isSuccessful()) {
-                                callback(self.getCurrentUser(), "");
+                                callback(self.getCurrentUser());
                             }
                             else {
                                 callback(null, task.getException().getMessage());
@@ -86,7 +86,7 @@ function FirebaseAuth(FirebaseApp) {
                     var innerCallback = NativeOnCompleteListener.implement({
                         onComplete: function(task) {
                             if (task.isSuccessful()) {
-                                callback(self.getCurrentUser(), "");
+                                callback(self.getCurrentUser());
                             }
                             else {
                                 callback(null, task.getException().getMessage());
@@ -106,7 +106,7 @@ function FirebaseAuth(FirebaseApp) {
                     var innerCallback = NativeOnCompleteListener.implement({
                         onComplete: function(task) {
                             if (task.isSuccessful()) {
-                                callback(self.getCurrentUser(), "");
+                                callback(self.getCurrentUser());
                             }
                             else {
                                 callback(null, task.getException().getMessage());

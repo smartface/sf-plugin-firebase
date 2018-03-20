@@ -1,7 +1,5 @@
-const FirebaseAnalytics = require("./firebaseAnalytics");
 const FirebaseApp = require("./firebaseApp");
 const FirebaseAuth = require("./firebaseAuth");
-const FirebaseMessaging = require("./firebaseMessaging");
 
 const NativeFirebaseApp = requireClass('com.google.firebase.FirebaseApp');
 const NativeFirebaseOptions = requireClass('com.google.firebase.FirebaseOptions');
@@ -32,6 +30,10 @@ Firebase.initializeApp = function(options, name) {
             else {
                 nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build());
             }
+
+            Firebase.analytics = require("./firebaseAnalytics");
+            Firebase.messaging = require("./firebaseMessaging");
+
             return new FirebaseApp(nativeFirebaseApp);
 
         }
@@ -70,17 +72,7 @@ Firebase.auth = function(FirebaseApp) {
     }
 };
 
-Firebase.analytics = function() {
-    if (!AndroidConfig.isEmulator) {
-        return new FirebaseAnalytics();
-    }
-};
 
-Firebase.messaging = function() {
-    if (!AndroidConfig.isEmulator) {
-        return new FirebaseMessaging();
-    }
-};
 
 Firebase.ios = {};
 module.exports = Firebase;
