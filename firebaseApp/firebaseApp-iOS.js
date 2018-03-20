@@ -13,7 +13,7 @@ function FirebaseApp(nativeObject) {
         return new FirebaseAuth(self);
     };
 
-    self.delete = function(callback){
+    self.ios.delete = function(callback){
         function callbackHandler(e){
             if (typeof callback === 'function') {
                 callback(e.success);
