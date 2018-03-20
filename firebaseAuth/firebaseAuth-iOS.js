@@ -1,4 +1,5 @@
 const Invocation = require('sf-core/util').Invocation;
+const FirebaseUser = require("../firebaseUser");
 
 function FirebaseAuth(FirebaseApp) {
 	var self = this;
@@ -22,8 +23,11 @@ function FirebaseAuth(FirebaseApp) {
         },
         'getCurrentUser': {
             value: function() {
-                //FBUser
-                return FirebaseAuth.ios.native.currentUser(self.nativeAuth);
+                var user = FirebaseAuth.ios.native.currentUser(self.nativeAuth);
+                if (user) {
+                    return new FirebaseUser(user);
+                }
+                return undefined;
             },
             enumerable: true,
             configurable: true
@@ -35,8 +39,7 @@ function FirebaseAuth(FirebaseApp) {
                         if (e.error) {
                             callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
                         }else{
-                            //FBUser
-                            callback(e.user,undefined);
+                            callback(new FirebaseUser(e.user),undefined);
                         }
                     }
                 };
@@ -52,8 +55,7 @@ function FirebaseAuth(FirebaseApp) {
                         if (e.error) {
                             callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
                         }else{
-                            //FBUser
-                            callback(e.user,undefined);
+                            callback(new FirebaseUser(e.user),undefined);
                         }
                     }
                 };
@@ -69,8 +71,7 @@ function FirebaseAuth(FirebaseApp) {
                         if (e.error) {
                             callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
                         }else{
-                            //FBUser
-                            callback(e.user,undefined);
+                            callback(new FirebaseUser(e.user),undefined);
                         }
                     }
                 };
@@ -86,8 +87,7 @@ function FirebaseAuth(FirebaseApp) {
                         if (e.error) {
                             callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
                         }else{
-                            //FBUser
-                            callback(e.user,undefined);
+                            callback(new FirebaseUser(e.user),undefined);
                         }
                     }
                 };
