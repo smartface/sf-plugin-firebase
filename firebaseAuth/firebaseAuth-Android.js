@@ -1,8 +1,21 @@
 const FirebaseUser = require("../firebaseUser");
 
 const NativeFirebaseAuth = requireClass('com.google.firebase.auth.FirebaseAuth');
+const NativeOnSuccessListener = requireClass('com.google.android.gms.tasks.OnSuccessListener');
+const NativeOnFailureListener = requireClass('com.google.android.gms.tasks.OnFailureListener');
 const NativeOnCompleteListener = requireClass('com.google.android.gms.tasks.OnCompleteListener');
+
+const NativeFirebaseAuthInvalidCredentialsException = requireClass('com.google.firebase.auth.FirebaseAuthInvalidCredentialsException');
+const NativeFirebaseAuthUserCollisionException = requireClass('com.google.firebase.auth.FirebaseAuthUserCollisionException');
+const NativeFirebaseAuthWeakPasswordException = requireClass('com.google.firebase.auth.FirebaseAuthWeakPasswordException');
+
+const NativeFirebaseAuthInvalidUserException = requireClass('com.google.firebase.auth.FirebaseAuthInvalidUserException');
+
+const NativeFirebaseAuthException = requireClass('com.google.firebase.auth.FirebaseAuthException');
+
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const FirebaseAuthErrors = require("./firebaseAuthErrors");
+
 
 function FirebaseAuth(FirebaseApp) {
     var self = this;
@@ -31,6 +44,15 @@ function FirebaseAuth(FirebaseApp) {
             enumerable: true,
             configurable: true
         },
+        'useAppLanguage': {
+            value: function() {
+                if (!AndroidConfig.isEmulator) {
+                    self.nativeObject.useAppLanguage();
+                }
+            },
+            enumerable: true,
+            configurable: true
+        },
         'getCurrentUser': {
             value: function() {
                 if (!AndroidConfig.isEmulator) {
@@ -43,18 +65,40 @@ function FirebaseAuth(FirebaseApp) {
         'createUserWithEmailAndPassword': {
             value: function(email, password, callback) {
                 if (!AndroidConfig.isEmulator) {
-                    var innerCallback = NativeOnCompleteListener.implement({
-                        onComplete: function(task) {
-                            if (task.isSuccessful()) {
-                                callback(true);
-                            }
-                            else {
-                                callback(false, task.getException().getMessage());
-                            }
+
+                    var innerSuccessCallback = NativeOnSuccessListener.implement({
+                        onSuccess: function(result) {
+                            callback(true);
                         }
                     });
 
-                    self.nativeObject.createUserWithEmailAndPassword(email, password).addOnCompleteListener(innerCallback);
+                    var innerFailureCallback = NativeOnFailureListener.implement({
+                        onFailure: function(e) {
+
+                            if (e.getClass() == NativeFirebaseAuthInvalidCredentialsException.class) { // thrown if the email address is malformed
+                                callback(undefined, {code: FirebaseAuthErrors.InvalidEmail, description: e.getMessage()} );
+                            }
+                            else if (e.getClass() == NativeFirebaseAuthUserCollisionException.class) { // thrown if there already exists an account with the given email address
+                                callback(undefined, {code: FirebaseAuthErrors.EmailAlreadyInUse, description: e.getMessage()} );
+                            }
+                            else if (e.getClass() == NativeFirebaseAuthWeakPasswordException.class) { // thrown if the password is not strong enough
+                                callback(undefined, {code: FirebaseAuthErrors.WeakPassword, description: e.getMessage()} );
+                            }
+                            else if (e.getClass() == NativeFirebaseAuthException.class){
+                                callback(undefined, {code: FirebaseAuthErrors.OperationNotAllowed, description: e.getMessage()} );
+                            }
+                            else {
+                                callback(undefined, e.getMessage());
+                            }
+
+                        }
+                    });
+
+                    var task = self.nativeObject.createUserWithEmailAndPassword(email, password);
+                    task.addOnSuccessListener(innerSuccessCallback);
+                    task.addOnFailureListener(innerFailureCallback);
+
+
                 }
             },
             enumerable: true,
@@ -63,18 +107,40 @@ function FirebaseAuth(FirebaseApp) {
         'signInWithEmailAndPassword': {
             value: function(email, password, callback) {
                 if (!AndroidConfig.isEmulator) {
-                    var innerCallback = NativeOnCompleteListener.implement({
-                        onComplete: function(task) {
-                            if (task.isSuccessful()) {
-                                callback(self.getCurrentUser());
-                            }
-                            else {
-                                callback(null, task.getException().getMessage());
-                            }
+
+                    var innerSuccessCallback = NativeOnSuccessListener.implement({
+                        onSuccess: function(result) {
+                            callback(self.getCurrentUser());
                         }
                     });
 
-                    self.nativeObject.signInWithEmailAndPassword(email, password).addOnCompleteListener(innerCallback);
+                    var innerFailureCallback = NativeOnFailureListener.implement({
+                        onFailure: function(e) {
+
+                            if (e.getClass() == NativeFirebaseAuthInvalidUserException.class) { // emaıl not found or passive
+                                if(e.getMessage().includes("account has been disabled")){
+                                    callback(undefined, {code: FirebaseAuthErrors.UserDisabled, description: e.getMessage()} );
+                                } else {
+                                    callback(undefined, {code: FirebaseAuthErrors.InvalidEmail, description: e.getMessage()} );
+                                }
+                            }
+                            else if (e.getClass() == NativeFirebaseAuthInvalidCredentialsException.class) { // password wrong
+                                callback(undefined, {code: FirebaseAuthErrors.WrongPassword, description: e.getMessage()} );
+                            }
+                            else if (e.getClass() == NativeFirebaseAuthException.class){
+                                callback(undefined, {code: FirebaseAuthErrors.OperationNotAllowed, description: e.getMessage()} );
+                            }
+                            else {
+                                callback(undefined, e.getMessage());
+                            }
+
+                        }
+                    });
+
+                    var task = self.nativeObject.signInWithEmailAndPassword(email, password);
+                    task.addOnSuccessListener(innerSuccessCallback);
+                    task.addOnFailureListener(innerFailureCallback);
+
                 }
             },
             enumerable: true,
@@ -83,18 +149,34 @@ function FirebaseAuth(FirebaseApp) {
         'signInWithCustomToken': {
             value: function(token, callback) {
                 if (!AndroidConfig.isEmulator) {
-                    var innerCallback = NativeOnCompleteListener.implement({
-                        onComplete: function(task) {
-                            if (task.isSuccessful()) {
-                                callback(self.getCurrentUser());
-                            }
-                            else {
-                                callback(null, task.getException().getMessage());
-                            }
+                    
+                    var innerSuccessCallback = NativeOnSuccessListener.implement({
+                        onSuccess: function(result) {
+                            callback(self.getCurrentUser());
                         }
                     });
 
-                    self.nativeObject.signInWithCustomToken(token).addOnCompleteListener(innerCallback);
+                    var innerFailureCallback = NativeOnFailureListener.implement({
+                        onFailure: function(e) {
+
+                            if (e.getClass() == NativeFirebaseAuthInvalidCredentialsException.class) { // thrown if the token format is incorrect or if it corresponds to a different Firebase App
+                                if(e.getMessage().includes("format is incorrect")){
+                                    callback(undefined, {code: FirebaseAuthErrors.InvalidCustomToken, description: e.getMessage()} );
+                                } else {
+                                    callback(undefined, {code: FirebaseAuthErrors.CustomTokenMismatch, description: e.getMessage()} );
+                                }
+                            }
+                            else {
+                                callback(undefined, e.getMessage());
+                            }
+
+                        }
+                    });
+
+                    var task = self.nativeObject.signInWithCustomToken(token);
+                    task.addOnSuccessListener(innerSuccessCallback);
+                    task.addOnFailureListener(innerFailureCallback);
+                    
                 }
             },
             enumerable: true,
@@ -103,17 +185,30 @@ function FirebaseAuth(FirebaseApp) {
         'signInAnonymously': {
             value: function(callback) {
                 if (!AndroidConfig.isEmulator) {
-                    var innerCallback = NativeOnCompleteListener.implement({
-                        onComplete: function(task) {
-                            if (task.isSuccessful()) {
-                                callback(self.getCurrentUser());
-                            }
-                            else {
-                                callback(null, task.getException().getMessage());
-                            }
+                    
+                    var innerSuccessCallback = NativeOnSuccessListener.implement({
+                        onSuccess: function(result) {
+                            callback(self.getCurrentUser());
                         }
                     });
-                    self.nativeObject.signInAnonymously().addOnCompleteListener(innerCallback);
+
+                    var innerFailureCallback = NativeOnFailureListener.implement({
+                        onFailure: function(e) {
+
+                            if (e.getClass() == NativeFirebaseAuthException.class) { // thrown if the token format is incorrect or if it corresponds to a different Firebase App
+                                callback(undefined, {code: FirebaseAuthErrors.OperationNotAllowed, description: e.getMessage()} );
+                            }
+                            else {
+                                callback(undefined, e.getMessage());
+                            }
+
+                        }
+                    });
+
+                    var task = self.nativeObject.signInAnonymously();
+                    task.addOnSuccessListener(innerSuccessCallback);
+                    task.addOnFailureListener(innerFailureCallback);
+
                 }
             },
             enumerable: true,

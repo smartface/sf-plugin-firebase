@@ -28,16 +28,7 @@ function FirebaseUser(nativeUser) {
             },
             enumerable: true,
             configurable: true
-        },
-        'getPhoneNumber': {
-            value: function() {
-                if (!AndroidConfig.isEmulator) {
-                   return self.nativeObject.getPhoneNumber();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
+        }
         'getUID': {
             value: function() {
                 if (!AndroidConfig.isEmulator) {

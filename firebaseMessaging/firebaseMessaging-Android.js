@@ -6,7 +6,7 @@ const Notifications = require("sf-core/notifications");
 function FirebaseMessaging() {}
 
 if (!AndroidConfig.isEmulator) {
-    FirebaseMessaging.nativeObject = NativeFirebaseMessaging.getInstance();
+    FirebaseMessaging.nativeObject = function() { return NativeFirebaseMessaging.getInstance(); };
 }
 
 // GET TOKEN ICIN PUSH PERMISSION GEREKLI
@@ -27,7 +27,7 @@ Object.defineProperties(FirebaseMessaging, {
     'subscribeToTopic': {
         value: function(topic) {
             if (!AndroidConfig.isEmulator) {
-                FirebaseMessaging.nativeObject.subscribeToTopic(topic);
+                FirebaseMessaging.nativeObject().subscribeToTopic(topic);
             }
         },
         enumerable: true,
@@ -35,7 +35,7 @@ Object.defineProperties(FirebaseMessaging, {
     },
     'unsubscribeFromTopic': {
         value: function(topic) {
-            FirebaseMessaging.nativeObject.unsubscribeFromTopic(topic);
+            FirebaseMessaging.nativeObject().unsubscribeFromTopic(topic);
         },
         enumerable: true,
         configurable: true

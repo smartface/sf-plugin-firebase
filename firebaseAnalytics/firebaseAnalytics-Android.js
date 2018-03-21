@@ -1,6 +1,4 @@
 const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.FirebaseAnalytics');
-const NativeOnSuccessListener = requireClass('com.google.android.gms.tasks.OnSuccessListener');
-const NativeOnFailureListener = requireClass('com.google.android.gms.tasks.OnFailureListener');
 
 const NativeBundle = requireClass('android.os.Bundle');
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
@@ -8,7 +6,7 @@ const AndroidConfig = require("sf-core/util/Android/androidconfig");
 function FirebaseAnalytics() {}
 
 if (!AndroidConfig.isEmulator) {
-    FirebaseAnalytics.nativeObject = NativeFirebaseAnalytics.getInstance(AndroidConfig.activity);
+    FirebaseAnalytics.nativeObject = function (){ return NativeFirebaseAnalytics.getInstance(AndroidConfig.activity); };
 }
 
 FirebaseAnalytics.CustomAttribute = require("./customAttribute");
@@ -27,7 +25,7 @@ Object.defineProperties(FirebaseAnalytics, {
                         bundle.putInt(customAttributes[i].key, customAttributes[i].value);
                     }
                 }
-                FirebaseAnalytics.nativeObject.logEvent(name, bundle);
+                FirebaseAnalytics.nativeObject().logEvent(name, bundle);
             }
         },
         enumerable: true,
@@ -36,7 +34,7 @@ Object.defineProperties(FirebaseAnalytics, {
     'setUserProperty': {
         value: function(name, value) {
             if (!AndroidConfig.isEmulator) {
-                FirebaseAnalytics.nativeObject.setUserProperty(name, value);
+                FirebaseAnalytics.nativeObject().setUserProperty(name, value);
             }
         },
         enumerable: true,
@@ -45,7 +43,7 @@ Object.defineProperties(FirebaseAnalytics, {
     'setUserId': {
         value: function(id) {
             if (!AndroidConfig.isEmulator) {
-                FirebaseAnalytics.nativeObject.setUserId(id);
+                FirebaseAnalytics.nativeObject().setUserId(id);
             }
         },
         enumerable: true,
@@ -54,7 +52,7 @@ Object.defineProperties(FirebaseAnalytics, {
     'setCurrentScreen': {
         value: function(screenName, screenClassOverride) {
             if (!AndroidConfig.isEmulator) {
-                FirebaseAnalytics.nativeObject.setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
+                FirebaseAnalytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
             }
         },
         enumerable: true,
