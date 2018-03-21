@@ -155,9 +155,133 @@ Do not call this constructor directly. Instead, use Firebase.auth().
 ```javascript
 var auth = Firebase.auth();
 ```
+#### FirebaseAuth properities
+
+##### languageCode
+
+The current user language code. This property can be set to the app's current language by calling "useAppLanguage".
+The string used to set this property must be a language code that follows BCP 47.
+
+```javascript
+auth.languageCode = "en";
+```
 
 #### FirebaseAuth methods
 
+##### getCurrentUser
+
+Synchronously gets the cached current user, or undefined if there is none
+
+```javascript
+var user = auth.getCurrentUser();
+```
+
+##### useAppLanguage
+
+Sets `languageCode` to the app's current language.
+
+```javascript
+auth.useAppLanguage();
+```
+
+##### createUserWithEmailAndPassword
+
+Creates and, on success, signs in a user with the given email address and password.
+
+  Possible error codes:
+  
+  + `FirebaseAuth.Error.InvalidEmail` - Indicates the email address is malformed.
+  + `FirebaseAuth.Error.EmailAlreadyInUse` - Indicates the email used to attempt sign up
+      already exists. Call fetchProvidersForEmail to check which sign-in mechanisms the user
+      used, and prompt the user to sign in with one of those.
+  + `FirebaseAuth.Error.OperationNotAllowed` - Indicates that email and password accounts
+      are not enabled. Enable them in the Auth section of the Firebase console.
+  + `FirebaseAuth.Error.WeakPassword` - Indicates an attempt to set a password that is
+      considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
+      dictionary object will contain more detailed explanation that can be shown to the user.
+    
+
+```javascript
+auth.createUserWithEmailAndPassword("email", "password", function(user, error) {
+    if (error) {
+        console.log("Code: " + error.code + " Description: " + error.description);
+        return;
+    }
+    console.log("Email: " + user.getEmail());
+});
+```
+
+##### signInWithEmailAndPassword
+
+ Signs in using an email address and password.
+
+  Possible error codes:
+
+   + `FirebaseAuth.Error.OperationNotAllowed` - Indicates that email and password
+       accounts are not enabled. Enable them in the Auth section of the
+       Firebase console.
+   + `FirebaseAuth.Error.UserDisabled` - Indicates the user's account is disabled.
+   + `FirebaseAuth.Error.WrongPassword` - Indicates the user attempted
+       sign in with an incorrect password.
+   + `FirebaseAuth.Error.InvalidEmail` - Indicates the email address is malformed.
+
+```javascript
+auth.signInWithEmailAndPassword("email", "password", function(user, error) {
+    if (error) {
+        console.log("Code: " + error.code + " Description: " + error.description);
+        return;
+    }
+    console.log("Email: " + user.getEmail());
+});
+```
+
+##### signInWithCustomToken
+
+ Asynchronously signs in to Firebase with the given Auth token.
+ 
+   Possible error codes:
+
+   + `FirebaseAuth.Error.InvalidCustomToken` - Indicates a validation error with
+       the custom token.
+   + `FirebaseAuth.Error.CustomTokenMismatch` - Indicates the service account and the API key
+       belong to different projects.
+
+```javascript
+auth.signInWithCustomToken("token", function(user, error) {
+    if (error) {
+        console.log("Code: " + error.code + " Description: " + error.description);
+        return;
+    }
+    console.log("Email: " + user.getEmail());
+});
+```
+
+##### signInAnonymously
+
+ Asynchronously creates and becomes an anonymous user.
+
+   Possible error codes:
+
+   + `FirebaseAuth.Error.OperationNotAllowed` - Indicates that anonymous accounts are
+       not enabled. Enable them in the Auth section of the Firebase console.
+       
+```javascript
+auth.signInAnonymously(function(user, error) {
+    if (error) {
+        console.log("Code: " + error.code + " Description: " + error.description);
+        return;
+    }
+    console.log("Email: " + user.getEmail());
+});
+```
+
+##### signOut
+
+Signs out the current user.
+
+```javascript
+auth.signOut();
+```
 
 ### FirebaseAnalytics
 
@@ -166,6 +290,10 @@ Do not call this constructor directly. Instead, use Firebase.analytics().
 ```javascript
 var analytics = Firebase.analytics();
 ```
+
+#### FirebaseAnalytics methods
+
+
 ### FirebaseMessaging
 
 Do not call this constructor directly. Instead, use Firebase.messaging().
