@@ -266,7 +266,7 @@ auth.signInWithCustomToken("token", function(user, error) {
        not enabled. Enable them in the Auth section of the Firebase console.
        
 ```javascript
-auth.signInAnonymously("token", function(user, error) {
+auth.signInAnonymously(function(user, error) {
     if (error) {
         console.log("Code: " + error.code + " Description: " + error.description);
         return;
@@ -290,6 +290,10 @@ Do not call this constructor directly. Instead, use Firebase.analytics().
 ```javascript
 var analytics = Firebase.analytics();
 ```
+
+#### FirebaseAnalytics methods
+
+
 ### FirebaseMessaging
 
 Do not call this constructor directly. Instead, use Firebase.messaging().
