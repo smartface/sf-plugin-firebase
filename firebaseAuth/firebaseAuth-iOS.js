@@ -147,7 +147,18 @@ FirebaseAuth.ios.native.setLanguageCode = function(auth,languageCode){
     });
     Invocation.invokeInstanceMethod(auth,"setLanguageCode:",[argLanguageCode]);
 }
-///////Error Codes
+
+/**
+    Possible error codes:
+
+    + `OperationNotAllowed` - Indicates that email and password
+        accounts are not enabled. Enable them in the Auth section of the
+        Firebase console.
+    + `UserDisabled` - Indicates the user's account is disabled.
+    + `WrongPassword` - Indicates the user attempted
+        sign in with an incorrect password.
+    + `InvalidEmail` - Indicates the email address is malformed.
+*/        
 FirebaseAuth.ios.native.signInWithEmailPasswordCompletion = function(auth,email,password,completion)
 {
 	var argEmail = new Invocation.Argument({
@@ -166,7 +177,20 @@ FirebaseAuth.ios.native.signInWithEmailPasswordCompletion = function(auth,email,
     });
 	Invocation.invokeInstanceMethod(auth,"signInWithEmail:password:completion:",[argEmail,argPassword,argCompletion]);
 }
-///////Error Codes
+
+/**
+    Possible error codes:
+    
+    + `InvalidEmail` - Indicates the email address is malformed.
+    + `EmailAlreadyInUse` - Indicates the email used to attempt sign up
+        already exists. Call fetchProvidersForEmail to check which sign-in mechanisms the user
+        used, and prompt the user to sign in with one of those.
+    + `OperationNotAllowed` - Indicates that email and password accounts
+        are not enabled. Enable them in the Auth section of the Firebase console.
+    + `WeakPassword` - Indicates an attempt to set a password that is
+        considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
+        dictionary object will contain more detailed explanation that can be shown to the user.
+*/            
 FirebaseAuth.ios.native.createUserWithEmailPasswordCompletion = function(auth,email,password,completion)
 {
     var argEmail = new Invocation.Argument({
@@ -185,7 +209,15 @@ FirebaseAuth.ios.native.createUserWithEmailPasswordCompletion = function(auth,em
     });
     Invocation.invokeInstanceMethod(auth,"createUserWithEmail:password:completion:",[argEmail,argPassword,argCompletion]);
 }
-///////Error Codes
+
+/**
+    Possible error codes:
+
+    + `InvalidCustomToken` - Indicates a validation error with
+        the custom token.
+    + `CustomTokenMismatch` - Indicates the service account and the API key
+        belong to different projects.
+*/
 FirebaseAuth.ios.native.signInWithCustomTokenCompletion = function(auth,token,completion)
 {
     var argToken = new Invocation.Argument({
@@ -200,7 +232,13 @@ FirebaseAuth.ios.native.signInWithCustomTokenCompletion = function(auth,token,co
     });
     Invocation.invokeInstanceMethod(auth,"signInWithCustomToken:completion:",[argToken,argCompletion]);
 }
-///////Error Codes
+
+/**
+    Possible error codes:
+
+    + `OperationNotAllowed` - Indicates that anonymous accounts are
+        not enabled. Enable them in the Auth section of the Firebase console.
+*/
 FirebaseAuth.ios.native.signInAnonymouslyWithCompletion = function(auth,completion)
 {
     var argCompletion = new Invocation.Argument({
@@ -211,7 +249,15 @@ FirebaseAuth.ios.native.signInAnonymouslyWithCompletion = function(auth,completi
     });
     Invocation.invokeInstanceMethod(auth,"signInAnonymouslyWithCompletion:",[argCompletion]);
 }
-///////Error Codes
+
+/**
+    Possible error codes:
+
+    + `KeychainError` - Indicates an error occurred when accessing the
+        keychain. The `NSLocalizedFailureReasonErrorKey` field in the `NSError.userInfo`
+        dictionary will contain more information about the error encountered.
+*/
+
 FirebaseAuth.ios.native.signOut = function(auth)
 {
     var argError = new Invocation.Argument({
@@ -232,6 +278,64 @@ FirebaseAuth.ios.native.getErrorObject = function(nativeError)
 FirebaseAuth.ios.native.useAppLanguage = function(auth)
 {
     return Invocation.invokeInstanceMethod(auth,"useAppLanguage",[]);
+}
+
+FirebaseAuth.ios.native.errorCode = {
+    InvalidCustomToken : 17000,
+    CustomTokenMismatch : 17002,
+    InvalidCredential : 17004,
+    UserDisabled : 17005,
+    OperationNotAllowed : 17006,
+    EmailAlreadyInUse : 17007,
+    InvalidEmail : 17008,
+    WrongPassword : 17009,
+    TooManyRequests : 17010,
+    UserNotFound : 17011,
+    AccountExistsWithDifferentCredential : 17012,
+    RequiresRecentLogin : 17014,
+    ProviderAlreadyLinked : 17015,
+    NoSuchProvider : 17016,
+    InvalidUserToken : 17017,
+    NetworkError : 17020,
+    UserTokenExpired : 17021,
+    InvalidAPIKey : 17023,
+    UserMismatch : 17024,
+    CredentialAlreadyInUse : 17025,
+    WeakPassword : 17026,
+    AppNotAuthorized : 17028,
+    ExpiredActionCode : 17029,
+    InvalidActionCode : 17030,
+    InvalidMessagePayload : 17031,
+    InvalidSender : 17032,
+    InvalidRecipientEmail : 17033,
+    MissingEmail : 17034,
+    MissingIosBundleID : 17036,
+    MissingAndroidPackageName : 17037,
+    UnauthorizedDomain : 17038,
+    InvalidContinueURI : 17039,
+    MissingContinueURI : 17040,
+    MissingPhoneNumber : 17041,
+    InvalidPhoneNumber : 17042,
+    MissingVerificationCode : 17043,
+    InvalidVerificationCode : 17044,
+    MissingVerificationID : 17045,
+    InvalidVerificationID : 17046,
+    MissingAppCredential : 17047,
+    InvalidAppCredential : 17048,
+    SessionExpired : 17051,
+    QuotaExceeded : 17052,
+    MissingAppToken : 17053,
+    NotificationNotForwarded : 17054,
+    AppNotVerified : 17055,
+    CaptchaCheckFailed : 17056,
+    WebContextAlreadyPresented : 17057,
+    WebContextCancelled : 17058,
+    AppVerificationUserInteractionFailure : 17059,
+    InvalidClientID : 17060,
+    WebNetworkRequestFailed : 17061,
+    WebInternalError : 17062,
+    KeychainError : 17995,
+    FirebaseAuthInternalError : 17999
 }
 
 module.exports = FirebaseAuth;
