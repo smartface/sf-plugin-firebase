@@ -31,9 +31,6 @@ Firebase.initializeApp = function(options, name) {
                 nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build());
             }
 
-            Firebase.analytics = require("./firebaseAnalytics");
-            Firebase.messaging = require("./firebaseMessaging");
-
             return new FirebaseApp(nativeFirebaseApp);
 
         }
@@ -72,7 +69,8 @@ Firebase.auth = function(FirebaseApp) {
     }
 };
 
-
+Firebase.analytics = require("./firebaseAnalytics");
+Firebase.messaging = require("./firebaseMessaging");
 
 Firebase.ios = {};
 module.exports = Firebase;
