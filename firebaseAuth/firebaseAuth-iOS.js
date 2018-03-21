@@ -113,6 +113,8 @@ function FirebaseAuth(FirebaseApp) {
     });
 }
 
+FirebaseAuth.Error = require("./firebaseAuthErrors");
+
 FirebaseAuth.ios = {};
 FirebaseAuth.ios.native = {};
 
