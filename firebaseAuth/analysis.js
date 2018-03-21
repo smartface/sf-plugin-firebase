@@ -1,10 +1,145 @@
 function FirebaseAuth() {}
 
-FirebaseAuth.prototype.languageCode = function() {}; 
+/**
+ * The current user language code. This property can be set to the app's current language by
+ * calling `useAppLanguage`.
+ *
+ * @property {String} languageCode
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.languageCode;
+
+/**
+ * Synchronously gets the cached current user, or undefined if there is none
+ *
+ * @event getCurrentUser
+ * @return {FirebaseUser}
+ * @android
+ * @ios
+ * @since 0.1
+ */
 FirebaseAuth.prototype.getCurrentUser = function() {};
 
-FirebaseAuth.prototype.createUserWithEmailAndPassword = function(email,password,callback) {};  // callback(FirebaseUser,isSuccess)
-FirebaseAuth.prototype.signInWithEmailAndPassword = function(email,password,callback) {};  // callback(FirebaseUser,isSuccess)
-FirebaseAuth.prototype.signInWithCustomToken = function(token,callback) {};  // callback(FirebaseUser,isSuccess)
-FirebaseAuth.prototype.signInAnonymously  = function(callback) {}; // callback(FirebaseUser,isSuccess)
+/**
+ * Sets `languageCode` to the app's current language.
+ *
+ * @event useAppLanguage
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.useAppLanguage = function() {};
+
+/**
+ * Creates and, on success, signs in a user with the given email address and password.
+ *
+ *   Possible error codes:
+ *   
+ *   + `InvalidEmail` - Indicates the email address is malformed.
+ *   + `EmailAlreadyInUse` - Indicates the email used to attempt sign up
+ *       already exists. Call fetchProvidersForEmail to check which sign-in mechanisms the user
+ *       used, and prompt the user to sign in with one of those.
+ *   + `OperationNotAllowed` - Indicates that email and password accounts
+ *       are not enabled. Enable them in the Auth section of the Firebase console.
+ *   + `WeakPassword` - Indicates an attempt to set a password that is
+ *       considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
+ *       dictionary object will contain more detailed explanation that can be shown to the user.
+ *     
+ *
+ * @event createUserWithEmailAndPassword
+ * @param {String} email
+ * @param {String} password
+ * @param {Function} callback
+ * @param {FirebaseUser} callback.FirebaseUser
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.createUserWithEmailAndPassword = function(email,password,callback) {};
+
+/**
+ * Signs in using an email address and password.
+ *
+ *  Possible error codes:
+ *
+ *   + `OperationNotAllowed` - Indicates that email and password
+ *       accounts are not enabled. Enable them in the Auth section of the
+ *       Firebase console.
+ *   + `UserDisabled` - Indicates the user's account is disabled.
+ *   + `WrongPassword` - Indicates the user attempted
+ *       sign in with an incorrect password.
+ *   + `InvalidEmail` - Indicates the email address is malformed.
+ *       
+ *
+ * @event signInWithEmailAndPassword
+ * @param {String} email
+ * @param {String} password
+ * @param {Function} callback
+ * @param {FirebaseUser} callback.FirebaseUser
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.signInWithEmailAndPassword = function(email,password,callback) {};
+
+/**
+ * Asynchronously signs in to Firebase with the given Auth token.
+ * 
+ *   Possible error codes:
+ *
+ *   + `InvalidCustomToken` - Indicates a validation error with
+ *       the custom token.
+ *   + `CustomTokenMismatch` - Indicates the service account and the API key
+ *       belong to different projects.
+ *       
+ *
+ * @event signInWithCustomToken
+ * @param {String} token
+ * @param {Function} callback
+ * @param {FirebaseUser} callback.FirebaseUser
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.signInWithCustomToken = function(token,callback) {};
+
+/**
+ * Asynchronously creates and becomes an anonymous user.
+ *
+ *   Possible error codes:
+ *
+ *   + `OperationNotAllowed` - Indicates that anonymous accounts are
+ *       not enabled. Enable them in the Auth section of the Firebase console.
+ *       
+ * @event signInAnonymously
+ * @param {Function} callback
+ * @param {FirebaseUser} callback.FirebaseUser
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.signInAnonymously  = function(callback) {};
+
+/**
+ * Signs out the current user.
+ *
+ * @event signOut
+ * @android
+ * @ios
+ * @since 0.1
+ */
 FirebaseAuth.prototype.signOut  = function() {}; 
