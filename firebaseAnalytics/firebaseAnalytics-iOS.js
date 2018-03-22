@@ -2,6 +2,9 @@ const Invocation = require('sf-core/util').Invocation;
 
 function FirebaseAnalytics() {}
 
+FirebaseAnalytics.Event = require("./firebaseAnalyticsEvent");
+FirebaseAnalytics.Param = require("./firebaseAnalyticsParam");
+
 FirebaseAnalytics.logEvent = function(name,customAttributes){
     var customDictionary = {};
     for(var i = 0 ; i < customAttributes.length ; i++){
