@@ -295,6 +295,8 @@ var analytics = Firebase.analytics();
 
 ##### logEvent
 
+Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported. Using predefined events and/or parameters is recommended for optimal reporting.
+
 The following event names are reserved and cannot be used:
 
   +  ad_activeview
@@ -320,15 +322,15 @@ The following event names are reserved and cannot be used:
   +  user_engagement
 
 name  <br />
-The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved.
+The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved. <br />
 parameters  <br />
 Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores.
  
 ```javascript
-analytics.logEvent('eventName', 
+analytics.logEvent(FirebaseAnalytics.Event.ADD_TO_CART, 
   [
-    new FirebaseAnalytics.CustomAttribute("key1", "value1"), 
-    new FirebaseAnalytics.CustomAttribute("key2", 2) 
+    new FirebaseAnalytics.CustomAttribute(FirebaseAnalytics.Param.ITEM_ID, "item_id"), 
+    new FirebaseAnalytics.CustomAttribute(FirebaseAnalytics.Param.ITEM_NAME, 'item_name') 
   ]
 );
 ``` 
@@ -650,8 +652,6 @@ screenClassOverride	  :  The name of the screen class. By default this is the cl
 analytics.setCurrentScreen('screenName','screenClassOverride');
 ```
 
-
-
 ### FirebaseMessaging
 
 Do not call this constructor directly. Instead, use Firebase.messaging().
@@ -660,7 +660,39 @@ Do not call this constructor directly. Instead, use Firebase.messaging().
 var messaging = Firebase.messaging();
 ```
 
+##### getToken
 
+Returns the master token for the default Firebase project.
+
+```javascript
+var token = messaging.getToken();
+```
+
+##### subscribeToTopic
+
+Subscribes to topic in the background.
+
+```javascript
+messaging.subscribeToTopic('topic');
+```
+
+##### unsubscribeFromTopic
+
+Unsubscribes from topic in the background.
+
+```javascript
+messaging.unsubscribeFromTopic('topic');
+```
+
+##### ios.onTokenReflesh
+
+This method will be called once a token is available, or has been refreshed. Typically it will be called once per app start, but may be called more often, if token is invalidated or updated.
+
+```javascript
+messaging.ios.onTokenReflesh = function(token){ 
+  console.log('Token :' + token)
+};
+```
 
 
 
