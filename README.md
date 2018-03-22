@@ -293,6 +293,75 @@ var analytics = Firebase.analytics();
 
 #### FirebaseAnalytics methods
 
+##### logEvent
+
+The following event names are reserved and cannot be used:
+
+  +  ad_activeview
+  +  ad_click
+  +  ad_exposure
+  +  ad_impression
+  +  ad_query
+  +  adunit_exposure
+  +  app_clear_data
+  +  app_uninstall
+  +  app_update
+  +  error
+  +  first_open
+  +  first_visit
+  +  in_app_purchase
+  +  notification_dismiss
+  +  notification_foreground
+  +  notification_open
+  +  notification_receive
+  +  os_update
+  +  screen_view
+  +  session_start
+  +  user_engagement
+       
+```javascript
+analytics.logEvent('eventName', 
+  [
+    new FirebaseAnalytics.CustomAttribute("key1", "value1"), 
+    new FirebaseAnalytics.CustomAttribute("key2", 2) 
+  ]
+);
+```
+
+##### setUserProperty
+
+The following user property names are reserved and cannot be used:
+
+  +  first_open_time
+  +  first_visit_time
+  +  last_deep_link_referrer
+  +  user_id
+  +  first_open_after_install
+
+```javascript
+analytics.setUserProperty('key', 'value');
+```
+
+##### setUserId
+
+Sets the user ID property.
+
+```javascript
+analytics.setUserId('ID');
+```
+
+##### setCurrentScreen
+
+Sets the current screen name, which specifies the current visual context in your app. This helps identify the areas in your app where users spend their time and how they interact with your app.
+
+screenName            : The name of the current screen. Set to null to clear the current screen name.
+screenClassOverride	  :  The name of the screen class. By default this is the class name of the current Activity. Set to null to revert to the default class name.
+
+```javascript
+analytics.setCurrentScreen('screenName','screenClassOverride');
+```
+
+
 
 ### FirebaseMessaging
 
@@ -301,9 +370,6 @@ Do not call this constructor directly. Instead, use Firebase.messaging().
 ```javascript
 var messaging = Firebase.messaging();
 ```
-
-
-
 
 
 
