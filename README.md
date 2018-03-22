@@ -318,7 +318,7 @@ The following event names are reserved and cannot be used:
   +  screen_view
   +  session_start
   +  user_engagement
-       
+  
 ```javascript
 analytics.logEvent('eventName', 
   [
@@ -326,7 +326,94 @@ analytics.logEvent('eventName',
     new FirebaseAnalytics.CustomAttribute("key2", 2) 
   ]
 );
-```
+``` 
+   
+Constant Event List:
+
+```FirebaseAnalyticsEvent.ADD_PAYMENT_INFO = "add_payment_info";``` <br />
+Add Payment Info event. This event signifies that a user has submitted their payment information to your app.
+
+```FirebaseAnalyticsEvent.ADD_TO_CART = "add_to_cart";``` <br />
+E-Commerce Add To Cart event. This event signifies that an item was added to a cart for purchase.
+
+```FirebaseAnalyticsEvent.ADD_TO_WISHLIST = "add_to_wishlist";``` <br />
+E-Commerce Add To Wishlist event. This event signifies that an item was added to a wishlist. Use this event to identify popular gift items in your app.
+
+```FirebaseAnalyticsEvent.APP_OPEN = "app_open";``` <br />
+App Open event. By logging this event when an App becomes active, developers can understand how often users leave and return during the course of a Session. <br />
+Although Sessions are automatically reported, this event can provide further clarification around the continuous engagement of app-users
+
+```FirebaseAnalyticsEvent.BEGIN_CHECKOUT = "begin_checkout";``` <br />
+E-Commerce Begin Checkout event. This event signifies that a user has begun the process of checking out.
+
+```FirebaseAnalyticsEvent.CAMPAIGN_DETAILS = "campaign_details";``` <br />
+Campaign Detail event. Log this event to supply the referral details of a re-engagement campaign.
+
+```FirebaseAnalyticsEvent.ECOMMERCE_PURCHASE = "ecommerce_purchase";``` <br />
+E-Commerce Purchase event. This event signifies that an item was purchased by a user.
+
+```FirebaseAnalyticsEvent.GENERATE_LEAD = "generate_lead";``` <br />
+Generate Lead event. Log this event when a lead has been generated in the app to understand the efficacy of your install and re-engagement campaigns.
+
+```FirebaseAnalyticsEvent.JOIN_GROUP = "join_group";``` <br />
+Join Group event. Log this event when a user joins a group such as a guild, team or family. Use this event to analyze how popular certain groups or social features are in your app.
+
+```FirebaseAnalyticsEvent.LEVEL_UP = "level_up";``` <br />
+Level Up event. This event signifies that a player has leveled up in your gaming app.  
+It can help you gauge the level distribution of your userbase and help you identify certain levels that are difficult to pass.
+ 
+```FirebaseAnalyticsEvent.LOGIN = "login";``` <br />
+Login event. Apps with a login feature can report this event to signify that a user has logged in.
+
+```FirebaseAnalyticsEvent.POST_SCORE = "post_score";``` <br />
+Post Score event. Log this event when the user posts a score in your gaming app. This event can help you understand how users are actually performing in your game and it can help you correlate high scores with certain audiences or behaviors.
+
+```FirebaseAnalyticsEvent.PRESENT_OFFER = "present_offer";``` <br />
+Present Offer event. This event signifies that the app has presented a purchase offer to a user.
+
+```FirebaseAnalyticsEvent.PURCHASE_REFUND = "purchase_refund";``` <br />
+E-Commerce Purchase Refund event. This event signifies that an item purchase was refunded.
+
+```FirebaseAnalyticsEvent.SEARCH = "search";``` <br />
+Search event. Apps that support search features can use this event to contextualize search operations by supplying the appropriate, corresponding parameters.  <br />
+This event can help you identify the most popular content in your app.
+ 
+```FirebaseAnalyticsEvent.SELECT_CONTENT = "select_content";``` <br />
+Select Content event. This general purpose event signifies that a user has selected some content of a certain type in an app. The content can be any object in your app. <br />
+This event can help you identify popular content and categories of content in your app.
+ 
+```FirebaseAnalyticsEvent.SHARE = "share";``` <br />
+Share event. Apps with social features can log the Share event to identify the most viral content.
+
+```FirebaseAnalyticsEvent.SIGN_UP = "sign_up";``` <br />
+Sign Up event. This event indicates that a user has signed up for an account in your app. The parameter signifies the method by which the user signed up.  <br />
+Use this event to understand the different behaviors between logged in and logged out users.
+ 
+```FirebaseAnalyticsEvent.SPEND_VIRTUAL_CURRENCY = "spend_virtual_currency";``` <br />
+Spend Virtual Currency event. This event tracks the sale of virtual goods in your app and can help you identify which virtual goods are the most popular objects of purchase.
+
+```FirebaseAnalyticsEvent.TUTORIAL_BEGIN = "tutorial_begin";``` <br />
+Tutorial Begin event. This event signifies the start of the on-boarding process in your app.
+
+```FirebaseAnalyticsEvent.TUTORIAL_COMPLETE = "tutorial_complete";``` <br />
+Tutorial End event. Use this event to signify the user’s completion of your app’s on-boarding process.
+
+```FirebaseAnalyticsEvent.UNLOCK_ACHIEVEMENT = "unlock_achievement";``` <br />
+Unlock Achievement event. Log this event when the user has unlocked an achievement in your game. <br /> 
+Since achievements generally represent the breadth of a gaming experience, this event can help you understand how many users are experiencing all that your game has to offer.
+ 
+```FirebaseAnalyticsEvent.VIEW_ITEM = "view_item";``` <br />
+View Item event. This event signifies that some content was shown to the user. This content may be a product, a webpage or just a simple image or text. Use the appropriate parameters to contextualize the event.  <br /> 
+Use this event to discover the most popular items viewed in your app.
+ 
+```FirebaseAnalyticsEvent.VIEW_ITEM_LIST = "view_item_list";``` <br />
+View Item List event. Log this event when the user has been presented with a list of items of a certain category.
+
+```FirebaseAnalyticsEvent.VIEW_SEARCH_RESULTS = "view_search_results";``` <br />
+View Search Results event. Log this event when the user has been presented with the results of a search.
+
+```FirebaseAnalyticsEvent.EARN_VIRTUAL_CURRENCY = "earn_virtual_currency";``` <br />
+Earn Virtual Currency event. This event tracks the awarding of virtual currency in your app.
 
 ##### setUserProperty
 
@@ -354,7 +441,7 @@ analytics.setUserId('ID');
 
 Sets the current screen name, which specifies the current visual context in your app. This helps identify the areas in your app where users spend their time and how they interact with your app.
 
-screenName            : The name of the current screen. Set to null to clear the current screen name.
+screenName            : The name of the current screen. Set to null to clear the current screen name.  <br />
 screenClassOverride	  :  The name of the screen class. By default this is the class name of the current Activity. Set to null to revert to the default class name.
 
 ```javascript
