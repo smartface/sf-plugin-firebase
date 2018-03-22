@@ -275,12 +275,156 @@ auth.signInAnonymously(function(user, error) {
 });
 ```
 
+##### sendPasswordResetEmail
+
+Triggers the Firebase Authentication backend to send a password-reset email to the given email address, which must correspond to an existing user of your app.
+       
+```javascript
+auth.sendPasswordResetEmail('email', function(isSended, error) {
+	console.log("isSended: " + isSended + " Description: " + error);
+});
+```
+
 ##### signOut
 
 Signs out the current user.
 
 ```javascript
 auth.signOut();
+```
+
+### FirebaseUser
+
+Synchronously gets the cached current user, or undefined if there is none
+
+```javascript
+var user = auth.getCurrentUser();
+```
+
+##### getEmail
+
+Returns the main email address of the user, as stored in the Firebase project's user database.
+
+```javascript
+var email = user.getEmail();
+```
+
+##### getDisplayName
+
+Returns the main display name of this user from the Firebase project's user database.
+
+```javascript
+var displayName = user.getDisplayName();
+```
+
+##### getPhoneNumber
+
+Returns the phone number of the user, as stored in the Firebase project's user database, or null if none exists.
+
+```javascript
+var phoneNumber = user.getPhoneNumber();
+```
+
+##### getUID
+
+Returns a string used to uniquely identify your user in your Firebase project's user database.
+
+```javascript
+var UID = user.getUID();
+```
+
+##### isAnonymous
+
+Returns true if the user is anonymous; that is, the user account was created with signInAnonymously().
+
+```javascript
+var isAnonymous = user.isAnonymous();
+```
+
+##### getIdToken
+
+Fetches a Firebase Auth ID Token for the user; useful when authenticating against your own backend. Use our server SDKs or follow the official documentation to securely verify the integrity and validity of this token.
+
+```javascript
+user.getIdToken(false, function(token, error) {
+  console.log("User getIdToken " + token + " Error : " + error);
+});
+```
+
+##### setDisplayName
+
+Updates the user display name.
+
+```javascript
+user.setDisplayName('name', function(isUpdated, error) {
+  console.log("isUpdated " + isUpdated + " Error : " + error);
+});
+```
+
+##### getPhotoURL
+
+Returns the URL of this user's main profile picture.
+
+```javascript
+var photoUrl = user.getPhotoURL();
+```
+
+##### setPhotoURL
+
+Updates the user photo url.
+
+```javascript
+user.setPhotoURL('photoUrl', function(isUpdated, error) {
+  console.log("isUpdated " + isUpdated + " Error : " + error);
+});
+```
+ 
+##### sendEmailVerification
+
+Initiates email verification for the user.
+
+```javascript
+user.sendEmailVerification();
+```
+
+##### isEmailVerified
+
+Check if user's email is verified.
+
+```javascript
+user.isEmailVerified();
+```
+
+##### updateEmail
+
+Updates the email address of the user.
+
+```javascript
+user.updateEmail('emailAdress');
+```
+
+##### updatePassword
+
+Updates the password of the user.
+
+```javascript
+user.updatePassword('password');
+```
+
+##### reload
+
+Manually refreshes the data of the current user.
+
+```javascript
+user.reload();
+```
+
+##### delete
+
+Deletes the user record from your Firebase project's database.
+
+```javascript
+user.delete();
 ```
 
 ### FirebaseAnalytics
@@ -662,7 +806,17 @@ var messaging = Firebase.messaging();
 
 ##### getToken
 
-Returns the master token for the default Firebase project.
+iOS : The FCM token is used to identify this device so that FCM can send notifications to it.
+It is associated with your APNS token when the APNS token is supplied, so that sending
+messages to the FCM token will be delivered over APNS. <br />
+
+The FCM token is sometimes refreshed automatically. `onTokenReflesh` method will be called once a token is
+available, or has been refreshed. Typically it should be called once per app start, but
+may be called more often, if token is invalidated or updated. <br />
+
+Once you have an FCM token, you should send it to your application server, so it can use
+the FCM token to send notifications to your device. <br />
+Android : Returns the notification token.
 
 ```javascript
 var token = messaging.getToken();
@@ -686,15 +840,22 @@ messaging.unsubscribeFromTopic('topic');
 
 ##### ios.onTokenReflesh
 
-This method will be called once a token is available, or has been refreshed. Typically it will be called once per app start, but may be called more often, if token is invalidated or updated.
+The FCM token is used to identify this device so that FCM can send notifications to it.
+It is associated with your APNS token when the APNS token is supplied, so that sending
+messages to the FCM token will be delivered over APNS. <br />
+
+The FCM token is sometimes refreshed automatically. `onTokenReflesh` method will be called once a token is
+available, or has been refreshed. Typically it should be called once per app start, but
+may be called more often, if token is invalidated or updated. <br />
+
+Once you have an FCM token, you should send it to your application server, so it can use
+the FCM token to send notifications to your device. <br />
 
 ```javascript
-messaging.ios.onTokenReflesh = function(token){ 
-  console.log('Token :' + token)
+messaging.ios.onTokenReflesh = function(fcmToken){ 
+  console.log('Token :' + fcmToken)
 };
 ```
-
-
 
 ## License
 This project is licensed under the terms of the MIT license. See the [LICENSE](https://raw.githubusercontent.com/smartface/sf-extension-extendedlabel/master/LICENSE) file. Within the scope of this license, all modifications to the source code, regardless of the fact that it is used commercially or not, shall be committed as a contribution back to this repository.
