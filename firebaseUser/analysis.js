@@ -7,4 +7,19 @@ FirebaseUser.prototype.getUID = function() {};
 FirebaseUser.prototype.isAnonymous = function() {};
 FirebaseUser.prototype.getIdToken = function(forceRefresh /*bool*/ , callback) {}; // callback(token,isSucces)
 
+delete
 
+setDisplayName
+
+getPhotosURL
+setPhotoURL
+
+sendEmailVerificationWithCompletion
+
+isEmailVerified
+
+updateEmail
+
+updatePassword
+
+reloadWithCompletion
