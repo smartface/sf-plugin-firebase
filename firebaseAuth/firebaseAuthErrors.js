@@ -51,4 +51,10 @@ FirebaseAuthErrors.InvalidCredential = 17004;
  */
 FirebaseAuthErrors.UserMismatch = 17024;
 
+/** 
+ * Indicates the user has attemped to change email or password more than 5 minutes after
+ * signing in.
+ */
+FirebaseAuthErrors.RequiresRecentLogin = 17014;
+
 module.exports = Object.freeze(FirebaseAuthErrors);
