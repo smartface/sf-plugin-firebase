@@ -73,4 +73,9 @@ FirebaseAuthErrors.InvalidSender = 17032;
  */
 FirebaseAuthErrors.InvalidRecipientEmail = 17033;
 
+/** 
+ * Indicates the user account was not found.
+ */
+FirebaseAuthErrors.UserNotFound = 17011;
+
 module.exports = Object.freeze(FirebaseAuthErrors);
