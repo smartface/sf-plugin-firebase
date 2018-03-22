@@ -244,7 +244,7 @@ auth.signInWithEmailAndPassword("email", "password", function(user, error) {
    + `FirebaseAuth.Error.InvalidCustomToken` - Indicates a validation error with
        the custom token.
    + `FirebaseAuth.Error.CustomTokenMismatch` - Indicates the service account and the API key
-       belong to different projects.
+       beNumber to different projects.
 
 ```javascript
 auth.signInWithCustomToken("token", function(user, error) {
@@ -295,6 +295,8 @@ var analytics = Firebase.analytics();
 
 ##### logEvent
 
+Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported. Using predefined events and/or parameters is recommended for optimal reporting.
+
 The following event names are reserved and cannot be used:
 
   +  ad_activeview
@@ -318,12 +320,17 @@ The following event names are reserved and cannot be used:
   +  screen_view
   +  session_start
   +  user_engagement
-  
+
+name  <br />
+The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved. <br />
+parameters  <br />
+Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores.
+ 
 ```javascript
-analytics.logEvent('eventName', 
+analytics.logEvent(FirebaseAnalytics.Event.ADD_TO_CART, 
   [
-    new FirebaseAnalytics.CustomAttribute("key1", "value1"), 
-    new FirebaseAnalytics.CustomAttribute("key2", 2) 
+    new FirebaseAnalytics.CustomAttribute(FirebaseAnalytics.Param.ITEM_ID, "item_id"), 
+    new FirebaseAnalytics.CustomAttribute(FirebaseAnalytics.Param.ITEM_NAME, 'item_name') 
   ]
 );
 ``` 
@@ -336,32 +343,36 @@ Add Payment Info event. This event signifies that a user has submitted their pay
 ```FirebaseAnalytics.Event.ADD_TO_CART = "add_to_cart";``` <br />
 E-Commerce Add To Cart event. This event signifies that an item was added to a cart for purchase.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.ITEM_ID (String)
 + FirebaseAnalytics.Param.ITEM_NAME (String)
 + FirebaseAnalytics.Param.ITEM_CATEGORY (String)
-+ FirebaseAnalytics.Param.QUANTITY (long)
-+ FirebaseAnalytics.Param.PRICE (double) (optional)
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.ORIGIN (String) (optional)
-+ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) (optional)
-+ FirebaseAnalytics.Param.DESTINATION (String) (optional)
-+ FirebaseAnalytics.Param.START_DATE (String) (optional)
-+ FirebaseAnalytics.Param.END_DATE (String) (optional)
++ FirebaseAnalytics.Param.QUANTITY (Number)
++ FirebaseAnalytics.Param.PRICE (Number) 
++ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.ORIGIN (String) 
++ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) 
++ FirebaseAnalytics.Param.DESTINATION (String) 
++ FirebaseAnalytics.Param.START_DATE (String) 
++ FirebaseAnalytics.Param.END_DATE (String) 
+```
 
 ```FirebaseAnalytics.Event.ADD_TO_WISHLIST = "add_to_wishlist";``` <br />
 E-Commerce Add To Wishlist event. This event signifies that an item was added to a wishlist. Use this event to identify popular gift items in your app.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.ITEM_ID (String)
 + FirebaseAnalytics.Param.ITEM_NAME (String)
 + FirebaseAnalytics.Param.ITEM_CATEGORY (String)
-+ FirebaseAnalytics.Param.QUANTITY (long)
-+ FirebaseAnalytics.Param.PRICE (double) (optional)
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) (optional)
++ FirebaseAnalytics.Param.QUANTITY (Number)
++ FirebaseAnalytics.Param.PRICE (Number) 
++ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) 
+```
 
 ```FirebaseAnalytics.Event.APP_OPEN = "app_open";``` <br />
 App Open event. By logging this event when an App becomes active, developers can understand how often users leave and return during the course of a Session. <br />
@@ -370,152 +381,182 @@ Although Sessions are automatically reported, this event can provide further cla
 ```FirebaseAnalytics.Event.BEGIN_CHECKOUT = "begin_checkout";``` <br />
 E-Commerce Begin Checkout event. This event signifies that a user has begun the process of checking out.
 
-Param list in This Key : 
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.TRANSACTION_ID (String) (optional)
-+ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (long) (optional) for hotel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (long) (optional) for hotel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (long) (optional) for travel bookings
-+ FirebaseAnalytics.Param.ORIGIN (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.DESTINATION (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.START_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.END_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.TRAVEL_CLASS (String) (optional) for travel bookings
+```
+Params : 
++ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.TRANSACTION_ID (String) 
++ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (Number)  for hotel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (Number)  for hotel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (Number)  for travel bookings
++ FirebaseAnalytics.Param.ORIGIN (String)  for travel bookings
++ FirebaseAnalytics.Param.DESTINATION (String)  for travel bookings
++ FirebaseAnalytics.Param.START_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.END_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.TRAVEL_CLASS (String)  for travel bookings
+```
 
 ```FirebaseAnalytics.Event.CAMPAIGN_DETAILS = "campaign_details";``` <br />
 Campaign Detail event. Log this event to supply the referral details of a re-engagement campaign.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.SOURCE
 + FirebaseAnalytics.Param.MEDIUM
 + FirebaseAnalytics.Param.CAMPAIGN
-+ FirebaseAnalytics.Param.TERM (optional)
-+ FirebaseAnalytics.Param.CONTENT (optional)
-+ FirebaseAnalytics.Param.ACLID (optional)
-+ FirebaseAnalytics.Param.CP1 (optional)
++ FirebaseAnalytics.Param.TERM 
++ FirebaseAnalytics.Param.CONTENT 
++ FirebaseAnalytics.Param.ACLID 
++ FirebaseAnalytics.Param.CP1 
+```
 
 ```FirebaseAnalytics.Event.ECOMMERCE_PURCHASE = "ecommerce_purchase";``` <br />
 E-Commerce Purchase event. This event signifies that an item was purchased by a user.
 
-Param list in This Key : 
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.TRANSACTION_ID (String) (optional)
-+ FirebaseAnalytics.Param.TAX (double) (optional)
-+ FirebaseAnalytics.Param.SHIPPING (double) (optional)
-+ FirebaseAnalytics.Param.COUPON (String) (optional)
-+ FirebaseAnalytics.Param.LOCATION (String) (optional)
-+ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (long) (optional) for hotel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (long) (optional) for hotel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (long) (optional) for travel bookings
-+ FirebaseAnalytics.Param.ORIGIN (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.DESTINATION (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.START_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.END_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.TRAVEL_CLASS (String) (optional) for travel bookings
+```
+Params : 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.TRANSACTION_ID (String) 
++ FirebaseAnalytics.Param.TAX (Number) 
++ FirebaseAnalytics.Param.SHIPPING (Number) 
++ FirebaseAnalytics.Param.COUPON (String) 
++ FirebaseAnalytics.Param.LOCATION (String) 
++ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (Number)  for hotel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (Number)  for hotel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (Number)  for travel bookings
++ FirebaseAnalytics.Param.ORIGIN (String)  for travel bookings
++ FirebaseAnalytics.Param.DESTINATION (String)  for travel bookings
++ FirebaseAnalytics.Param.START_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.END_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.TRAVEL_CLASS (String)  for travel bookings
+```
 
 ```FirebaseAnalytics.Event.GENERATE_LEAD = "generate_lead";``` <br />
 Generate Lead event. Log this event when a lead has been generated in the app to understand the efficacy of your install and re-engagement campaigns.
 
-Param list in This Key : 
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
+```
+Params : 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.VALUE (Number) 
+```
 
 ```FirebaseAnalytics.Event.JOIN_GROUP = "join_group";``` <br />
 Join Group event. Log this event when a user joins a group such as a guild, team or family. Use this event to analyze how popular certain groups or social features are in your app.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.GROUP_ID (String)
+```
 
 ```FirebaseAnalytics.Event.LEVEL_UP = "level_up";``` <br />
 Level Up event. This event signifies that a player has leveled up in your gaming app.  
 It can help you gauge the level distribution of your userbase and help you identify certain levels that are difficult to pass.
- 
-Param list in This Key : 
-+ FirebaseAnalytics.Param.LEVEL (long)
-+ FirebaseAnalytics.Param.CHARACTER (String) (optional)
+
+```
+Params : 
++ FirebaseAnalytics.Param.LEVEL (Number)
++ FirebaseAnalytics.Param.CHARACTER (String) 
+```
 
 ```FirebaseAnalytics.Event.LOGIN = "login";``` <br />
 Login event. Apps with a login feature can report this event to signify that a user has logged in.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.METHOD (String)
+```
 
 ```FirebaseAnalytics.Event.POST_SCORE = "post_score";``` <br />
 Post Score event. Log this event when the user posts a score in your gaming app. This event can help you understand how users are actually performing in your game and it can help you correlate high scores with certain audiences or behaviors.
 
-Param list in This Key : 
-+ FirebaseAnalytics.Param.SCORE (long)
-+ FirebaseAnalytics.Param.LEVEL (long) (optional)
-+ FirebaseAnalytics.Param.CHARACTER (String) (optional)
+```
+Params : 
++ FirebaseAnalytics.Param.SCORE (Number)
++ FirebaseAnalytics.Param.LEVEL (Number) 
++ FirebaseAnalytics.Param.CHARACTER (String) 
+```
 
 ```FirebaseAnalytics.Event.PRESENT_OFFER = "present_offer";``` <br />
 Present Offer event. This event signifies that the app has presented a purchase offer to a user.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.ITEM_ID (String)
 + FirebaseAnalytics.Param.ITEM_NAME (String)
 + FirebaseAnalytics.Param.ITEM_CATEGORY (String)
-+ FirebaseAnalytics.Param.QUANTITY (long)
-+ FirebaseAnalytics.Param.PRICE (double) (optional)
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) (optional)
++ FirebaseAnalytics.Param.QUANTITY (Number)
++ FirebaseAnalytics.Param.PRICE (Number) 
++ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) 
+```
 
 ```FirebaseAnalytics.Event.PURCHASE_REFUND = "purchase_refund";``` <br />
 E-Commerce Purchase Refund event. This event signifies that an item purchase was refunded.
 
-Param list in This Key : 
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.TRANSACTION_ID (String) (optional)
+```
+Params : 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.TRANSACTION_ID (String) 
+```
 
 ```FirebaseAnalytics.Event.SEARCH = "search";``` <br />
 Search event. Apps that support search features can use this event to contextualize search operations by supplying the appropriate, corresponding parameters.  <br />
 This event can help you identify the most popular content in your app.
 
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.SEARCH_TERM (String)
-+ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (long) (optional) for hotel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (long) (optional) for hotel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (long) (optional) for travel bookings
-+ FirebaseAnalytics.Param.ORIGIN (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.DESTINATION (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.START_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.END_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.TRAVEL_CLASS (String) (optional) for travel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (Number)  for hotel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (Number)  for hotel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (Number)  for travel bookings
++ FirebaseAnalytics.Param.ORIGIN (String)  for travel bookings
++ FirebaseAnalytics.Param.DESTINATION (String)  for travel bookings
++ FirebaseAnalytics.Param.START_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.END_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.TRAVEL_CLASS (String)  for travel bookings
+```
  
 ```FirebaseAnalytics.Event.SELECT_CONTENT = "select_content";``` <br />
 Select Content event. This general purpose event signifies that a user has selected some content of a certain type in an app. The content can be any object in your app. <br />
 This event can help you identify popular content and categories of content in your app.
  
-Param list in This Key : 
+```
+Params : 
 + FirebaseAnalytics.Param.CONTENT_TYPE (String)
 + FirebaseAnalytics.Param.ITEM_ID (String)
+```
 
 ```FirebaseAnalytics.Event.SHARE = "share";``` <br />
 Share event. Apps with social features can log the Share event to identify the most viral content.
 
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.CONTENT_TYPE (String)
 + FirebaseAnalytics.Param.ITEM_ID (String)
 + FirebaseAnalytics.Param.METHOD (String)
+```
 
 ```FirebaseAnalytics.Event.SIGN_UP = "sign_up";``` <br />
 Sign Up event. This event indicates that a user has signed up for an account in your app. The parameter signifies the method by which the user signed up.  <br />
 Use this event to understand the different behaviors between logged in and logged out users.
  
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.METHOD (String)
+```
 
 ```FirebaseAnalytics.Event.SPEND_VIRTUAL_CURRENCY = "spend_virtual_currency";``` <br />
 Spend Virtual Currency event. This event tracks the sale of virtual goods in your app and can help you identify which virtual goods are the most popular objects of purchase.
 
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.ITEM_NAME (String)
 + FirebaseAnalytics.Param.VIRTUAL_CURRENCY_NAME (String)
-+ FirebaseAnalytics.Param.VALUE (long or double)
++ FirebaseAnalytics.Param.VALUE (Number or Number)
+```
 
 ```FirebaseAnalytics.Event.TUTORIAL_BEGIN = "tutorial_begin";``` <br />
 Tutorial Begin event. This event signifies the start of the on-boarding process in your app.
@@ -531,44 +572,52 @@ Since achievements generally represent the breadth of a gaming experience, this 
 View Item event. This event signifies that some content was shown to the user. This content may be a product, a webpage or just a simple image or text. Use the appropriate parameters to contextualize the event.  <br /> 
 Use this event to discover the most popular items viewed in your app.
 
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.ITEM_ID (String)
 + FirebaseAnalytics.Param.ITEM_NAME (String)
 + FirebaseAnalytics.Param.ITEM_CATEGORY (String)
-+ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) (optional)
-+ FirebaseAnalytics.Param.PRICE (double) (optional)
-+ FirebaseAnalytics.Param.QUANTITY (long) (optional)
-+ FirebaseAnalytics.Param.CURRENCY (String) (optional)
-+ FirebaseAnalytics.Param.+ FirebaseAnalytics.Param.VALUE (double) (optional)
-+ FirebaseAnalytics.Param.FLIGHT_NUMBER (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (long) (optional) for travel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (long) (optional) for travel bookings
-+ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (long) (optional) for travel bookings
-+ FirebaseAnalytics.Param.ORIGIN (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.DESTINATION (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.START_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.END_DATE (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.SEARCH_TERM (String) (optional) for travel bookings
-+ FirebaseAnalytics.Param.TRAVEL_CLASS (String) (optional) for travel bookings
++ FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) 
++ FirebaseAnalytics.Param.PRICE (Number) 
++ FirebaseAnalytics.Param.QUANTITY (Number) 
++ FirebaseAnalytics.Param.CURRENCY (String) 
++ FirebaseAnalytics.Param.+ FirebaseAnalytics.Param.VALUE (Number) 
++ FirebaseAnalytics.Param.FLIGHT_NUMBER (String)  for travel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_PASSENGERS (Number)  for travel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_NIGHTS (Number)  for travel bookings
++ FirebaseAnalytics.Param.NUMBER_OF_ROOMS (Number)  for travel bookings
++ FirebaseAnalytics.Param.ORIGIN (String)  for travel bookings
++ FirebaseAnalytics.Param.DESTINATION (String)  for travel bookings
++ FirebaseAnalytics.Param.START_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.END_DATE (String)  for travel bookings
++ FirebaseAnalytics.Param.SEARCH_TERM (String)  for travel bookings
++ FirebaseAnalytics.Param.TRAVEL_CLASS (String)  for travel bookings
+```
 
 ```FirebaseAnalytics.Event.VIEW_ITEM_LIST = "view_item_list";``` <br />
 View Item List event. Log this event when the user has been presented with a list of items of a certain category.
 
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.ITEM_CATEGORY (String)
+```
 
 ```FirebaseAnalytics.Event.VIEW_SEARCH_RESULTS = "view_search_results";``` <br />
 View Search Results event. Log this event when the user has been presented with the results of a search.
 
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.SEARCH_TERM (String)
+```
 
 ```FirebaseAnalytics.Event.EARN_VIRTUAL_CURRENCY = "earn_virtual_currency";``` <br />
 Earn Virtual Currency event. This event tracks the awarding of virtual currency in your app.
 
-Param list in This Key :
+```
+Params :
 + FirebaseAnalytics.Param.VIRTUAL_CURRENCY_NAME (String)
-+ FirebaseAnalytics.Param.VALUE (long or double)
++ FirebaseAnalytics.Param.VALUE (Number or Number)
+```
 
 ##### setUserProperty
 
@@ -603,8 +652,6 @@ screenClassOverride	  :  The name of the screen class. By default this is the cl
 analytics.setCurrentScreen('screenName','screenClassOverride');
 ```
 
-
-
 ### FirebaseMessaging
 
 Do not call this constructor directly. Instead, use Firebase.messaging().
@@ -613,7 +660,39 @@ Do not call this constructor directly. Instead, use Firebase.messaging().
 var messaging = Firebase.messaging();
 ```
 
+##### getToken
 
+Returns the master token for the default Firebase project.
+
+```javascript
+var token = messaging.getToken();
+```
+
+##### subscribeToTopic
+
+Subscribes to topic in the background.
+
+```javascript
+messaging.subscribeToTopic('topic');
+```
+
+##### unsubscribeFromTopic
+
+Unsubscribes from topic in the background.
+
+```javascript
+messaging.unsubscribeFromTopic('topic');
+```
+
+##### ios.onTokenReflesh
+
+This method will be called once a token is available, or has been refreshed. Typically it will be called once per app start, but may be called more often, if token is invalidated or updated.
+
+```javascript
+messaging.ios.onTokenReflesh = function(token){ 
+  console.log('Token :' + token)
+};
+```
 
 
 
