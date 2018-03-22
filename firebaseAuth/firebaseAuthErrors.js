@@ -57,4 +57,20 @@ FirebaseAuthErrors.UserMismatch = 17024;
  */
 FirebaseAuthErrors.RequiresRecentLogin = 17014;
 
+/** 
+ * Indicates that there are invalid parameters in the payload during a "send password reset
+ *  email" attempt.
+ */
+FirebaseAuthErrors.InvalidMessagePayload = 17031;
+
+/** 
+ * Indicates that the sender email is invalid during a "send password reset email" attempt.
+ */
+FirebaseAuthErrors.InvalidSender = 17032;
+
+/** 
+ * Indicates that the recipient email is invalid.
+ */
+FirebaseAuthErrors.InvalidRecipientEmail = 17033;
+
 module.exports = Object.freeze(FirebaseAuthErrors);
