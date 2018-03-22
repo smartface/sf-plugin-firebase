@@ -285,6 +285,16 @@ auth.sendPasswordResetEmail('email', function(isSended, error) {
 });
 ```
 
+##### verifyPasswordResetCode
+
+Triggers the Firebase Authentication backend to send a password-reset email to the given email address, which must correspond to an existing user of your app.
+       
+```javascript
+auth.verifyPasswordResetCode('code', function(isSuccess, error) {
+	console.log("isSuccess: " + isSuccess + " Description: " + error);
+});
+```
+
 ##### signOut
 
 Signs out the current user.
@@ -356,8 +366,8 @@ user.getIdToken(false, function(token, error) {
 Updates the user display name.
 
 ```javascript
-user.setDisplayName('name', function(isUpdated, error) {
-  console.log("isUpdated " + isUpdated + " Error : " + error);
+user.setDisplayName('name', function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
 });
 ```
 
