@@ -40,5 +40,15 @@ FirebaseAuthErrors.InvalidCustomToken = 17000;
  */
 FirebaseAuthErrors.CustomTokenMismatch = 17002;
 
+/** 
+ * Indicates the IDP token or requestUri is invalid.
+ */
+FirebaseAuthErrors.InvalidCredential = 17004;
+
+/** 
+ * Indicates that an attempt was made to reauthenticate with a user which is not the current
+ *  user.
+ */
+FirebaseAuthErrors.UserMismatch = 17024;
 
 module.exports = Object.freeze(FirebaseAuthErrors);
