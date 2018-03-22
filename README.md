@@ -374,8 +374,8 @@ var photoUrl = user.getPhotoURL();
 Updates the user photo url.
 
 ```javascript
-user.setPhotoURL('photoUrl', function(isUpdated, error) {
-  console.log("isUpdated " + isUpdated + " Error : " + error);
+user.setPhotoURL('photoUrl', function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
 });
 ```
  
@@ -384,7 +384,9 @@ user.setPhotoURL('photoUrl', function(isUpdated, error) {
 Initiates email verification for the user.
 
 ```javascript
-user.sendEmailVerification();
+user.sendEmailVerification(function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
 ```
 
 ##### isEmailVerified
@@ -400,7 +402,9 @@ user.isEmailVerified();
 Updates the email address of the user.
 
 ```javascript
-user.updateEmail('emailAdress');
+user.updateEmail('emailAdress',function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
 ```
 
 ##### updatePassword
@@ -408,7 +412,9 @@ user.updateEmail('emailAdress');
 Updates the password of the user.
 
 ```javascript
-user.updatePassword('password');
+user.updatePassword('password',function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
 ```
 
 ##### reload
@@ -416,7 +422,9 @@ user.updatePassword('password');
 Manually refreshes the data of the current user.
 
 ```javascript
-user.reload();
+user.reload(function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
 ```
 
 ##### delete
@@ -424,7 +432,9 @@ user.reload();
 Deletes the user record from your Firebase project's database.
 
 ```javascript
-user.delete();
+user.delete(function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
 ```
 
 ### FirebaseAnalytics
