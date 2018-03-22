@@ -447,6 +447,16 @@ user.delete(function(isSuccess, error) {
 });
 ```
 
+##### reauthenticate
+
+Deletes the user record from your Firebase project's database.
+
+```javascript
+user.reauthenticate('email','password',function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
+```
+
 ### FirebaseAnalytics
 
 Do not call this constructor directly. Instead, use Firebase.analytics().
