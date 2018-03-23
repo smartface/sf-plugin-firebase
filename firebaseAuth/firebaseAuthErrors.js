@@ -78,4 +78,16 @@ FirebaseAuthErrors.InvalidRecipientEmail = 17033;
  */
 FirebaseAuthErrors.UserNotFound = 17011;
 
+/** 
+ * Indicates the saved token has expired, for example, the user may have changed account
+    password on another device. The user needs to sign in again on the device that made this
+    request.
+ */
+FirebaseAuthErrors.UserTokenExpired = 17021;
+
+/** 
+ * Indicates user's saved auth credential is invalid, the user needs to sign in again.
+ */
+FirebaseAuthErrors.InvalidUserToken = 17017;
+
 module.exports = Object.freeze(FirebaseAuthErrors);
