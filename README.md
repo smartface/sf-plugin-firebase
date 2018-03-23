@@ -457,8 +457,9 @@ user.updatePassword('password',function(isSuccess, error) {
 
 Reloads the user’s profile data from the server.
 
- Possible error code;
-    + `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
+Possible error code;
+
++ `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
 
 ```javascript
 user.reload(function(isSuccess, error) {
@@ -471,8 +472,9 @@ user.reload(function(isSuccess, error) {
 Deletes the user record from your Firebase project's database. 
 If the operation is successful, the user will be signed out.
 
- Possible error code;
-    + `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
+Possible error code;
+
++ `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
 
 ```javascript
 user.delete(function(isSuccess, error) {
