@@ -277,7 +277,13 @@ auth.signInAnonymously(function(user, error) {
 
 ##### sendPasswordResetEmail
 
-Triggers the Firebase Authentication backend to send a password-reset email to the given email address, which must correspond to an existing user of your app.
+Initiates a password reset for the given email address.
+
+     Possible error codes:
+     
+      + `OperationNotAllowed` - Indicates the administrator disabled sign
+          in with the specified identity provider.
+      + `UserNotFound` - Indicates the OOB code is expired.
        
 ```javascript
 auth.sendPasswordResetEmail('email', function(isSended, error) {
@@ -287,8 +293,15 @@ auth.sendPasswordResetEmail('email', function(isSended, error) {
 
 ##### verifyPasswordResetCode
 
-Triggers the Firebase Authentication backend to send a password-reset email to the given email address, which must correspond to an existing user of your app.
-       
+Checks the validity of a verify password reset code.
+
+      Possible error codes:
+     
+      + `OperationNotAllowed` - Indicates the administrator disabled sign
+          in with the specified identity provider.
+      + `ExpiredActionCode` - Indicates the OOB code is expired.
+      + `InvalidActionCode` - Indicates the OOB code is invalid. 
+    
 ```javascript
 auth.verifyPasswordResetCode('code', function(isSuccess, error) {
 	console.log("isSuccess: " + isSuccess + " Description: " + error);
@@ -298,6 +311,16 @@ auth.verifyPasswordResetCode('code', function(isSuccess, error) {
 ##### confirmPasswordReset
 
 Changes the user's password to newPassword for the account for which the code is valid. Code validity can be checked with verifyPasswordResetCode(String). This use case is only valid for signed-out users, and behavior is undefined for signed-in users. Password changes for signed-in users should be made using updatePassword(String).
+
+    Possible error codes:
+   
+    + `WeakPassword` - Indicates an attempt to set a password that is
+         considered too weak.
+    + `OperationNotAllowed` - Indicates the administrator disabled sign
+        in with the specified identity provider.
+    + `ExpiredActionCode` - Indicates the OOB code is expired.
+    + `InvalidActionCode` - Indicates the OOB code is invalid.    
+ 
        
 ```javascript
 auth.confirmPasswordReset('code', 'newPassword', function(isSuccess, error) {
