@@ -178,6 +178,8 @@ FirebaseUser.prototype.isEmailVerified = function() {};
  *   + `InvalidEmail`
  * 
  * @event reauthenticate
+ * @param {String} email
+ * @param {String} password
  * @param {Function} callback
  * @param {Boolean} callback.isSuccess
  * @param {Object} callback.error
@@ -187,7 +189,7 @@ FirebaseUser.prototype.isEmailVerified = function() {};
  * @ios
  * @since 0.1
  */
-FirebaseUser.prototype.reauthenticate = function(callback) {}; 
+FirebaseUser.prototype.reauthenticate = function(email,password,callback) {}; 
 
 /**
  * Update email.
