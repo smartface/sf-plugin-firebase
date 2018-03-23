@@ -40,7 +40,10 @@ Open this lines in config/Android/AndroidManifest.xml file.
 
 You must request permission. (API LEVEL 23 AND UPPER)
 ```javascript
-Application.android.requestPermissions(1002,[Application.Android.Permissions.INTERNET,Application.Android.Permissions.ACCESS_NETWORK_STATE, Application.Android.Permissions.WAKE_LOCK]);
+Application.android.requestPermissions(1002,Application.Android.Permissions.INTERNET);
+Application.android.requestPermissions(1003,Application.Android.Permissions.ACCESS_NETWORK_STATE);
+Application.android.requestPermissions(1004,Application.Android.Permissions.WAKE_LOCK);
+
 
 ```
 
