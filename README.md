@@ -31,6 +31,19 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 }
 ```
 
+Open this lines in config/Android/AndroidManifest.xml file.
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+```
+
+You must request permission. (API LEVEL 23 AND UPPER)
+```javascript
+Application.android.requestPermissions(1002,[Application.Android.Permissions.INTERNET,Application.Android.Permissions.ACCESS_NETWORK_STATE, Application.Android.Permissions.WAKE_LOCK]);
+
+```
+
 ## How to use
 - Initialize your SDK using the following code snippet: (You must write this code in app.js)
 
