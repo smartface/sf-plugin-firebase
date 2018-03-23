@@ -295,6 +295,16 @@ auth.verifyPasswordResetCode('code', function(isSuccess, error) {
 });
 ```
 
+##### confirmPasswordReset
+
+Changes the user's password to newPassword for the account for which the code is valid. Code validity can be checked with verifyPasswordResetCode(String). This use case is only valid for signed-out users, and behavior is undefined for signed-in users. Password changes for signed-in users should be made using updatePassword(String).
+       
+```javascript
+auth.confirmPasswordReset('code', 'newPassword', function(isSuccess, error) {
+	console.log("isSuccess: " + isSuccess + " Description: " + error);
+});
+```
+
 ##### signOut
 
 Signs out the current user.
@@ -393,6 +403,12 @@ user.setPhotoURL('photoUrl', function(isSuccess, error) {
 
 Initiates email verification for the user.
 
+ Possible error code;
+  + `UserNotFound` - Indicates the user account was not found.
+  + `UserDisabled`
+  + `InvalidUserToken`
+  + `UserTokenExpired`
+
 ```javascript
 user.sendEmailVerification(function(isSuccess, error) {
   console.log("isSuccess " + isSuccess + " Error : " + error);
@@ -409,7 +425,12 @@ user.isEmailVerified();
 
 ##### updateEmail
 
-Updates the email address of the user.
+Update email.
+
+ Possible error code;
+  + `EmailAlreadyInUse`
+  + `InvalidEmail`
+  + `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
 
 ```javascript
 user.updateEmail('emailAdress',function(isSuccess, error) {
@@ -419,7 +440,12 @@ user.updateEmail('emailAdress',function(isSuccess, error) {
 
 ##### updatePassword
 
-Updates the password of the user.
+Update password.
+
+ Possible error code;
+  + `OperationNotAllowed`
+  + `WeakPassword`
+  + `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
 
 ```javascript
 user.updatePassword('password',function(isSuccess, error) {
@@ -429,7 +455,10 @@ user.updatePassword('password',function(isSuccess, error) {
 
 ##### reload
 
-Manually refreshes the data of the current user.
+Reloads the user’s profile data from the server.
+
+ Possible error code;
+    + `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
 
 ```javascript
 user.reload(function(isSuccess, error) {
@@ -439,7 +468,11 @@ user.reload(function(isSuccess, error) {
 
 ##### delete
 
-Deletes the user record from your Firebase project's database.
+Deletes the user record from your Firebase project's database. 
+If the operation is successful, the user will be signed out.
+
+ Possible error code;
+    + `RequiresRecentLogin` - Updating a user’s email is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking user.reauthenticate('email','password',callback)
 
 ```javascript
 user.delete(function(isSuccess, error) {
@@ -449,7 +482,14 @@ user.delete(function(isSuccess, error) {
 
 ##### reauthenticate
 
-Deletes the user record from your Firebase project's database.
+Reauthenticate.
+
+ Possible error code;
+  + `OperationNotAllowed`
+  + `UserDisabled`
+  + `WrongPassword`
+  + `UserMismatch`
+  + `InvalidEmail`
 
 ```javascript
 user.reauthenticate('email','password',function(isSuccess, error) {
