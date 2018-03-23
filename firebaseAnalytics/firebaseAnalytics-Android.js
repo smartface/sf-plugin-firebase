@@ -10,8 +10,10 @@ if (!AndroidConfig.isEmulator) {
 }
 
 FirebaseAnalytics.CustomAttribute = require("./customAttribute");
+FirebaseAnalytics.Event = require("./firebaseAnalyticsEvent");
+FirebaseAnalytics.Param = require("./firebaseAnalyticsParam");
 
-// EVENT ICIN ENUM EKLENECEK
+
 Object.defineProperties(FirebaseAnalytics, {
     'logEvent': {
         value: function(name, customAttributes) {
