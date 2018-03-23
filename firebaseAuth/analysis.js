@@ -143,3 +143,75 @@ FirebaseAuth.prototype.signInAnonymously  = function(callback) {};
  * @since 0.1
  */
 FirebaseAuth.prototype.signOut  = function() {}; 
+
+/**
+ * Initiates a password reset for the given email address.
+ * 
+ *      Possible error codes:
+ *      
+ *       + `OperationNotAllowed` - Indicates the administrator disabled sign
+ *           in with the specified identity provider.
+ *       + `UserNotFound` - Indicates the OOB code is expired.
+ *
+ * @event sendPasswordResetEmail
+ * @param {String} email
+ * @param {Function} callback
+ * @param {Boolean} callback.isSuccess
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.sendPasswordResetEmail = function(email,callback) {};
+
+/**
+ * Checks the validity of a verify password reset code.
+ * 
+ *       Possible error codes:
+ *      
+ *       + `OperationNotAllowed` - Indicates the administrator disabled sign
+ *           in with the specified identity provider.
+ *       + `ExpiredActionCode` - Indicates the OOB code is expired.
+ *       + `InvalidActionCode` - Indicates the OOB code is invalid. 
+ *
+ * @event verifyPasswordResetCode
+ * @param {String} code
+ * @param {Function} callback
+ * @param {Boolean} callback.email
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.verifyPasswordResetCode = function(code,callback) {};
+
+/**
+ * Resets the password given a code sent to the user outside of the app and a new password for the user.
+ * 
+ *       Possible error codes:
+ *      
+ *       + `WeakPassword` - Indicates an attempt to set a password that is
+ *            considered too weak.
+ *       + `OperationNotAllowed` - Indicates the administrator disabled sign
+ *           in with the specified identity provider.
+ *       + `ExpiredActionCode` - Indicates the OOB code is expired.
+ *       + `InvalidActionCode` - Indicates the OOB code is invalid.    
+ *       
+ *       
+ * @event confirmPasswordReset
+ * @param {String} code
+ * @param {String} newPassword
+ * @param {Function} callback
+ * @param {Boolean} callback.email
+ * @param {Object} callback.error
+ * @param {String} callback.error.code
+ * @param {String} callback.error.description
+ * @android
+ * @ios
+ * @since 0.1
+ */
+FirebaseAuth.prototype.confirmPasswordReset = function(code, newPassword, callback) {};
