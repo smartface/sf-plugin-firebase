@@ -96,6 +96,54 @@ function FirebaseAuth(FirebaseApp) {
             enumerable: true,
             configurable: true
         },
+        'sendPasswordResetEmail': {
+            value: function(email, callback) {
+                var callbackHandler = function(e){
+                    if (typeof callback === 'function') {
+                        if (e.error) {
+                            callback(false,FirebaseAuth.ios.native.getErrorObject(e.error));
+                        }else{
+                            callback(true,undefined);
+                        }
+                    }
+                };
+                FirebaseAuth.ios.native.sendPasswordResetWithEmailCompletion(self.nativeAuth,email,callbackHandler);
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'verifyPasswordResetCode': {
+            value: function(code, callback) {
+                var callbackHandler = function(e){
+                    if (typeof callback === 'function') {
+                        if (e.error) {
+                            callback(undefined,FirebaseAuth.ios.native.getErrorObject(e.error));
+                        }else{
+                            callback(e.email,undefined);
+                        }
+                    }
+                };
+                FirebaseAuth.ios.native.verifyPasswordResetCodeCompletion(self.nativeAuth,code,callbackHandler);
+            },
+            enumerable: true,
+            configurable: true
+        },
+        'confirmPasswordReset': {
+            value: function(code, newPassword, callback) {
+                var callbackHandler = function(e){
+                    if (typeof callback === 'function') {
+                        if (e.error) {
+                            callback(false,FirebaseAuth.ios.native.getErrorObject(e.error));
+                        }else{
+                            callback(true,undefined);
+                        }
+                    }
+                };
+                FirebaseAuth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion(self.nativeAuth,code,newPassword,callbackHandler);
+            },
+            enumerable: true,
+            configurable: true
+        },
         'signOut': {
             value: function() {
                 FirebaseAuth.ios.native.signOut(self.nativeAuth);
@@ -280,6 +328,55 @@ FirebaseAuth.ios.native.getErrorObject = function(nativeError)
 FirebaseAuth.ios.native.useAppLanguage = function(auth)
 {
     return Invocation.invokeInstanceMethod(auth,"useAppLanguage",[]);
+}
+
+FirebaseAuth.ios.native.sendPasswordResetWithEmailCompletion = function(auth,email,completion)
+{
+    var argEmail = new Invocation.Argument({
+        type:"NSString",
+        value: email
+    });
+    var argCompletion = new Invocation.Argument({
+        type:"UserProfileChangeCallback",
+        value: function(e){
+            completion(e);
+        }
+    });
+    Invocation.invokeInstanceMethod(auth,"sendPasswordResetWithEmail:completion:",[argEmail,argCompletion]);
+}
+
+FirebaseAuth.ios.native.verifyPasswordResetCodeCompletion = function(auth,code,completion)
+{
+    var argCode = new Invocation.Argument({
+        type:"NSString",
+        value: code
+    });
+    var argCompletion = new Invocation.Argument({
+        type:"VerifyPasswordResetCodeCallback",
+        value: function(e){
+            completion(e);
+        }
+    });
+    Invocation.invokeInstanceMethod(auth,"verifyPasswordResetCode:completion:",[argCode,argCompletion]);
+}
+
+FirebaseAuth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion = function(auth,code,newPassword,completion)
+{
+    var argCode = new Invocation.Argument({
+        type:"NSString",
+        value: code
+    });
+    var argNewPassword = new Invocation.Argument({
+        type:"NSString",
+        value: newPassword
+    });
+    var argCompletion = new Invocation.Argument({
+        type:"UserProfileChangeCallback",
+        value: function(e){
+            completion(e);
+        }
+    });
+    Invocation.invokeInstanceMethod(auth,"confirmPasswordResetWithCode:newPassword:completion:",[argCode,argNewPassword,argCompletion]);
 }
 
 FirebaseAuth.ios.native.errorCode = {

@@ -90,4 +90,14 @@ FirebaseAuthErrors.UserTokenExpired = 17021;
  */
 FirebaseAuthErrors.InvalidUserToken = 17017;
 
+/** 
+ * Indicates the OOB code is expired.
+ */
+FirebaseAuthErrors.ExpiredActionCode = 17029;
+
+/** 
+ * Indicates the OOB code is invalid.
+ */
+FirebaseAuthErrors.InvalidActionCode = 17030;
+
 module.exports = Object.freeze(FirebaseAuthErrors);
