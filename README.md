@@ -49,17 +49,18 @@ Application.android.requestPermissions(1002,[Application.Android.Permissions.INT
 
 ```javascript
 const Firebase = require('sf-plugin-firebase');
+const File = require('sf-core/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
 var androidJsonFile = new File({
     path: 'assets://google-services.json'
 });
-var config = {
+var firebaseConfig = {
     iosFile : iOSPlistFile,
     androidFile : androidJsonFile
 }
-Firebase.initializeApp(config);
+Firebase.initializeApp(firebaseConfig);
 ```
 
 ### FirebaseApp
