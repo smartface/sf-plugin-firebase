@@ -171,13 +171,13 @@ var auth = Firebase.auth();
 ```
 ### FirebaseAuth properities
 
-##### languageCode
+##### ios.languageCode
 
 The current user language code. This property can be set to the app's current language by calling "useAppLanguage".
 The string used to set this property must be a language code that follows BCP 47.
 
 ```javascript
-auth.languageCode = "en";
+auth.ios.languageCode = "en";
 ```
 
 ### FirebaseAuth methods
@@ -190,12 +190,12 @@ Synchronously gets the cached current user, or undefined if there is none
 var user = auth.getCurrentUser();
 ```
 
-##### useAppLanguage
+##### ios.useAppLanguage
 
 Sets `languageCode` to the app's current language.
 
 ```javascript
-auth.useAppLanguage();
+auth.ios.useAppLanguage();
 ```
 
 ##### createUserWithEmailAndPassword
