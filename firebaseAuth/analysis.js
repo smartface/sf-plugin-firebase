@@ -5,11 +5,10 @@ function FirebaseAuth() {}
  * calling `useAppLanguage`.
  *
  * @property {String} languageCode
- * @android
  * @ios
  * @since 0.1
  */
-FirebaseAuth.prototype.languageCode;
+FirebaseAuth.prototype.ios.languageCode;
 
 /**
  * Synchronously gets the cached current user, or undefined if there is none
@@ -26,11 +25,10 @@ FirebaseAuth.prototype.getCurrentUser = function() {};
  * Sets `languageCode` to the app's current language.
  *
  * @event useAppLanguage
- * @android
  * @ios
  * @since 0.1
  */
-FirebaseAuth.prototype.useAppLanguage = function() {};
+FirebaseAuth.prototype.ios.useAppLanguage = function() {};
 
 /**
  * Creates and, on success, signs in a user with the given email address and password.
