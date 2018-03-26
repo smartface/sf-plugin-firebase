@@ -38,7 +38,7 @@ Open this lines in config/Android/AndroidManifest.xml file.
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
-## How to use
+# How to use
 - Initialize your SDK using the following code snippet: (You must write this code in app.js)
 
 ```javascript
@@ -57,7 +57,7 @@ var firebaseConfig = {
 Firebase.initializeApp(firebaseConfig);
 ```
 
-### FirebaseApp
+## FirebaseApp
 
 When called with no arguments, the default app is returned. When an app name is provided, the app corresponding to that name is returned.
 
@@ -65,7 +65,7 @@ When called with no arguments, the default app is returned. When an app name is 
 var app = Firebase.app();
 ```
 
-#### FirebaseApp methods
+### FirebaseApp methods
 
 ##### auth
 
@@ -156,14 +156,14 @@ The tracking ID for Google Analytics.
 var trackingId = app.ios.getTrackingId();
 ```
 
-### FirebaseAuth
+## FirebaseAuth
 
 Do not call this constructor directly. Instead, use Firebase.auth().
 
 ```javascript
 var auth = Firebase.auth();
 ```
-#### FirebaseAuth properities
+### FirebaseAuth properities
 
 ##### languageCode
 
@@ -174,7 +174,7 @@ The string used to set this property must be a language code that follows BCP 47
 auth.languageCode = "en";
 ```
 
-#### FirebaseAuth methods
+### FirebaseAuth methods
 
 ##### getCurrentUser
 
@@ -344,7 +344,7 @@ Signs out the current user.
 auth.signOut();
 ```
 
-### FirebaseUser
+## FirebaseUser
 
 Synchronously gets the cached current user, or undefined if there is none
 
@@ -530,7 +530,7 @@ user.reauthenticate('email','password',function(isSuccess, error) {
 });
 ```
 
-### FirebaseAnalytics
+## FirebaseAnalytics
 
 Do not call this constructor directly. Instead, use Firebase.analytics().
 
@@ -538,7 +538,7 @@ Do not call this constructor directly. Instead, use Firebase.analytics().
 var analytics = Firebase.analytics();
 ```
 
-#### FirebaseAnalytics methods
+### FirebaseAnalytics methods
 
 ##### logEvent
 
@@ -899,7 +899,7 @@ screenClassOverride	  :  The name of the screen class. By default this is the cl
 analytics.setCurrentScreen('screenName','screenClassOverride');
 ```
 
-### FirebaseMessaging
+## FirebaseMessaging
 
 Do not call this constructor directly. Instead, use Firebase.messaging().
 
