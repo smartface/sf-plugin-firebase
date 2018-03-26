@@ -38,15 +38,6 @@ Open this lines in config/Android/AndroidManifest.xml file.
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
-You must request permission. (API LEVEL 23 AND UPPER)
-```javascript
-Application.android.requestPermissions(1002,Application.Android.Permissions.INTERNET);
-Application.android.requestPermissions(1003,Application.Android.Permissions.ACCESS_NETWORK_STATE);
-Application.android.requestPermissions(1004,Application.Android.Permissions.WAKE_LOCK);
-
-
-```
-
 ## How to use
 - Initialize your SDK using the following code snippet: (You must write this code in app.js)
 
