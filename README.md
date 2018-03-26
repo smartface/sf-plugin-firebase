@@ -56,6 +56,8 @@ var firebaseConfig = {
 }
 Firebase.initializeApp(firebaseConfig);
 ```
+<a href="#anchors-in-firebaseapp">`^`</a>
+[Firebase](./sf-plugin-firebase#baz)
 
 ## FirebaseApp
 
