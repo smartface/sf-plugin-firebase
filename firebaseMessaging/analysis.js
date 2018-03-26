@@ -16,7 +16,7 @@ function FirebaseMessaging() {}
  * @ios
  * @since 0.1
  */
-FirebaseMessaging.prototype.ios.onTokenReflesh = function(fcmToken) {};
+FirebaseMessaging.ios.onTokenReflesh = function(fcmToken) {};
 
 /**
  * iOS : Returns the FCM token.
@@ -27,7 +27,7 @@ FirebaseMessaging.prototype.ios.onTokenReflesh = function(fcmToken) {};
  * @ios
  * @since 0.1
  */
-FirebaseMessaging.prototype.getToken = function() {}; // Return string
+FirebaseMessaging.getToken = function() {}; // Return string
 
 /**
  * Asynchronously subscribes to a topic.
@@ -38,7 +38,7 @@ FirebaseMessaging.prototype.getToken = function() {}; // Return string
  * @ios
  * @since 0.1
  */
-FirebaseMessaging.prototype.subscribeToTopic = function(topic) {};
+FirebaseMessaging.subscribeToTopic = function(topic) {};
 
 /**
  * Asynchronously unsubscribe from a topic.
@@ -49,5 +49,5 @@ FirebaseMessaging.prototype.subscribeToTopic = function(topic) {};
  * @ios
  * @since 0.1
  */
-FirebaseMessaging.prototype.unsubscribeFromTopic = function(topic) {};
+FirebaseMessaging.unsubscribeFromTopic = function(topic) {};
 
