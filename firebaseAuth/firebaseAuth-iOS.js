@@ -10,7 +10,9 @@ function FirebaseAuth(FirebaseApp) {
         self.nativeAuth = FirebaseAuth.ios.native.auth();
     }
 
-    Object.defineProperties(self, {
+    self.ios = {};
+
+    Object.defineProperties(self.ios, {
         'languageCode': {
             get: function() {
                 return FirebaseAuth.ios.native.getLanguageCode(self.nativeAuth);
@@ -20,7 +22,17 @@ function FirebaseAuth(FirebaseApp) {
             },
             enumerable: true,
             configurable: true
-        },
+        },        
+        'useAppLanguage': {
+            value: function() {
+                FirebaseAuth.ios.native.useAppLanguage(self.nativeAuth);
+            },
+            enumerable: true,
+            configurable: true
+        }
+    });
+
+    Object.defineProperties(self, {
         'getCurrentUser': {
             value: function() {
                 var user = FirebaseAuth.ios.native.currentUser(self.nativeAuth);
@@ -147,13 +159,6 @@ function FirebaseAuth(FirebaseApp) {
         'signOut': {
             value: function() {
                 FirebaseAuth.ios.native.signOut(self.nativeAuth);
-            },
-            enumerable: true,
-            configurable: true
-        },        
-        'useAppLanguage': {
-            value: function() {
-                FirebaseAuth.ios.native.useAppLanguage(self.nativeAuth);
             },
             enumerable: true,
             configurable: true
