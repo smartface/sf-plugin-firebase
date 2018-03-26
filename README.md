@@ -57,7 +57,7 @@ var firebaseConfig = {
 Firebase.initializeApp(firebaseConfig);
 ```
 <a href="#anchors-in-firebaseapp">`^`</a>
-[Firebase](#baz)
+[Firebase](#FirebaseApp)
 
 ## FirebaseApp
 
