@@ -11,7 +11,7 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 - Run command `(cd ~/workspace/scripts && npm i -S sf-plugin-firebase)`
 
 ### iOS
-- Add instabug plugin to config/project.json.
+- Add firebase plugin to config/project.json.
 
 ```javascript
 "firebaseios": {
@@ -21,7 +21,7 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 }
 ```
 ### Android
-- Add instabug plugin to config/project.json.
+- Add firebase plugin to config/project.json.
 
 ```javascript
 "firebaseandroid": {
