@@ -28,6 +28,18 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
   "active": true
 }
 ```
+Download google-services.json from Firebase console and fill strings.xml.
+strings.xml file should be edited. ( config/Android/strings.xml )
+
+```xml
+<resources>
+    <string name="google_app_id" translatable="false">mobilesdk_app_id</string>
+    <string name="gcm_defaultSenderId" translatable="false">project_number</string>
+    <string name="default_web_client_id" translatable="false">client_id</string>
+    <string name="firebase_database_url" translatable="false">firebase_url</string>
+    <string name="google_api_key" translatable="false">current_key</string>
+</resources>
+```
 
 Open this lines in config/Android/AndroidManifest.xml file.
 ```xml
@@ -45,12 +57,8 @@ const File = require('sf-core/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
-var androidJsonFile = new File({
-    path: 'assets://google-services.json'
-});
 var firebaseConfig = {
-    iosFile : iOSPlistFile,
-    androidFile : androidJsonFile
+    iosFile : iOSPlistFile
 };
 Firebase.initializeApp(firebaseConfig);
 ```
