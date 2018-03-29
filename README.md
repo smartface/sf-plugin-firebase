@@ -574,9 +574,9 @@ The following event names are reserved and cannot be used:
   +  session_start
   +  user_engagement
 
-name  <br />
+**name**  <br />
 The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved. <br />
-parameters  <br />
+**parameters**  <br />
 Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores.
  
 ```javascript
