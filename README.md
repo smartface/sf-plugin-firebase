@@ -51,7 +51,7 @@ var androidJsonFile = new File({
 var firebaseConfig = {
     iosFile : iOSPlistFile,
     androidFile : androidJsonFile
-}
+};
 Firebase.initializeApp(firebaseConfig);
 ```
 
