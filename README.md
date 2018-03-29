@@ -15,7 +15,6 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 
 ```javascript
 "firebaseios": {
-  "url": "",
   "path": "plugins/iOS/firebaseios.zip",
   "active": true
 }
@@ -25,7 +24,6 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 
 ```javascript
 "firebaseandroid": {
-  "url": "",
   "path": "plugins/Android/firebaseandroid.zip",
   "active": true
 }
