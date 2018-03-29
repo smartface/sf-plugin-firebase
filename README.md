@@ -41,6 +41,14 @@ strings.xml file should be edited. ( config/Android/strings.xml )
 </resources>
 ```
 
+senderID should be edited. (config/project.json) (senderID = gcm_defaultSenderId ) 
+
+```json
+"googleCloudMessaging": {
+	"senderID": gcm_defaultSenderId
+}
+```
+
 Open this lines in config/Android/AndroidManifest.xml file.
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
