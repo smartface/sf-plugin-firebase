@@ -3,16 +3,6 @@ const FirebaseUser = require("../firebaseUser");
 const NativeFirebaseAuth = requireClass('com.google.firebase.auth.FirebaseAuth');
 const NativeOnSuccessListener = requireClass('com.google.android.gms.tasks.OnSuccessListener');
 const NativeOnFailureListener = requireClass('com.google.android.gms.tasks.OnFailureListener');
-const NativeOnCompleteListener = requireClass('com.google.android.gms.tasks.OnCompleteListener');
-
-const NativeFirebaseAuthInvalidCredentialsException = requireClass('com.google.firebase.auth.FirebaseAuthInvalidCredentialsException');
-const NativeFirebaseAuthUserCollisionException = requireClass('com.google.firebase.auth.FirebaseAuthUserCollisionException');
-const NativeFirebaseAuthWeakPasswordException = requireClass('com.google.firebase.auth.FirebaseAuthWeakPasswordException');
-const NativeFirebaseAuthInvalidUserException = requireClass('com.google.firebase.auth.FirebaseAuthInvalidUserException');
-const NativeFirebaseAuthException = requireClass('com.google.firebase.auth.FirebaseAuthException');
-const NativeFirebaseAuthActionCodeException = requireClass('com.google.firebase.auth.FirebaseAuthActionCodeException');
-
-
 
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
 
@@ -30,29 +20,6 @@ function FirebaseAuth(FirebaseApp) {
     }
 
     Object.defineProperties(self, {
-        'languageCode': {
-            get: function() {
-                if (!AndroidConfig.isEmulator) {
-                    self.nativeObject.getLanguageCode();
-                }
-            },
-            set: function(value) {
-                if (!AndroidConfig.isEmulator) {
-                    self.nativeObject.setLanguageCode(value);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        'useAppLanguage': {
-            value: function() {
-                if (!AndroidConfig.isEmulator) {
-                    self.nativeObject.useAppLanguage();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
         'getCurrentUser': {
             value: function() {
                 if (!AndroidConfig.isEmulator) {
@@ -74,10 +41,12 @@ function FirebaseAuth(FirebaseApp) {
 
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
-                            if (e.getErrorCode() == "ERROR_USER_NOT_FOUND") { // thrown if the password is not strong enough
+                            var errorCode = "" + e.getErrorCode();
+
+                            if (errorCode.includes("ERROR_USER_NOT_FOUND")) { // thrown if the password is not strong enough
                                 callback(undefined, { code: FirebaseAuth.Error.UserNotFound, description: e.getMessage() });
                             }
-                            else if (e.getErrorCode() == "ERROR_OPERATION_NOT_ALLOWED") { // thrown if the password is not strong enough
+                            else if (errorCode.includes("ERROR_OPERATION_NOT_ALLOWED")) { // thrown if the password is not strong enough
                                 callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
                             }
                             else {
@@ -107,21 +76,22 @@ function FirebaseAuth(FirebaseApp) {
 
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
-                            if (e.getErrorCode() == "ERROR_USER_NOT_FOUND") {
+
+                            var errorCode = "" + e.getErrorCode();
+
+                            if (errorCode.includes("ERROR_USER_NOT_FOUND")) {
                                 callback(undefined, { code: FirebaseAuth.Error.UserNotFound, description: e.getMessage() });
                             }
-                            else if (e.getErrorCode() == "ERROR_OPERATION_NOT_ALLOWED") {
+                            else if (errorCode.includes("ERROR_OPERATION_NOT_ALLOWED")) {
                                 callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthActionCodeException.class) {
-                                if (e.getErrorCode().includes('expired')) {
-                                    callback(undefined, { code: FirebaseAuth.Error.ExpiredActionCode, description: e.getMessage() });
-                                }
-                                else {
-                                    callback(undefined, { code: FirebaseAuth.Error.InvalidActionCode, description: e.getMessage() });
-                                }
+                            else if (errorCode.includes('expired')) {
+                                callback(undefined, { code: FirebaseAuth.Error.ExpiredActionCode, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthWeakPasswordException.class) {
+                            else if (errorCode.includes('ERROR_INVALID_CUSTOM_TOKEN')) {
+                                callback(undefined, { code: FirebaseAuth.Error.InvalidActionCode, description: e.getMessage() });
+                            }
+                            else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
                                 callback(undefined, { code: FirebaseAuth.Error.WeakPassword, description: e.getMessage() });
                             }
                             else {
@@ -151,21 +121,22 @@ function FirebaseAuth(FirebaseApp) {
 
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
-                            if (e.getErrorCode() == "ERROR_USER_NOT_FOUND") {
+
+                            var errorCode = "" + e.getErrorCode();
+
+                            if (errorCode.includes("ERROR_USER_NOT_FOUND")) {
                                 callback(undefined, { code: FirebaseAuth.Error.UserNotFound, description: e.getMessage() });
                             }
-                            else if (e.getErrorCode() == "ERROR_OPERATION_NOT_ALLOWED") {
+                            else if (errorCode.includes("ERROR_OPERATION_NOT_ALLOWED")) {
                                 callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthActionCodeException.class) {
-                                if (e.getErrorCode().includes('expired')) {
-                                    callback(undefined, { code: FirebaseAuth.Error.ExpiredActionCode, description: e.getMessage() });
-                                }
-                                else {
-                                    callback(undefined, { code: FirebaseAuth.Error.InvalidActionCode, description: e.getMessage() });
-                                }
+                            else if (errorCode.includes('expired')) {
+                                callback(undefined, { code: FirebaseAuth.Error.ExpiredActionCode, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthWeakPasswordException.class) {
+                            else if (errorCode.includes('ERROR_INVALID_CUSTOM_TOKEN')) {
+                                callback(undefined, { code: FirebaseAuth.Error.InvalidActionCode, description: e.getMessage() });
+                            }
+                            else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
                                 callback(undefined, { code: FirebaseAuth.Error.WeakPassword, description: e.getMessage() });
                             }
                             else {
@@ -196,17 +167,19 @@ function FirebaseAuth(FirebaseApp) {
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
 
-                            if (e.getClass() == NativeFirebaseAuthInvalidCredentialsException.class) { // thrown if the email address is malformed
+                            var errorCode = "" + e.getErrorCode();
+
+                            if (errorCode.includes("ERROR_OPERATION_NOT_ALLOWED")) {
+                                callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
+                            }
+                            else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
                                 callback(undefined, { code: FirebaseAuth.Error.InvalidEmail, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthUserCollisionException.class) { // thrown if there already exists an account with the given email address
+                            else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
                                 callback(undefined, { code: FirebaseAuth.Error.EmailAlreadyInUse, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthWeakPasswordException.class) { // thrown if the password is not strong enough
+                            else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
                                 callback(undefined, { code: FirebaseAuth.Error.WeakPassword, description: e.getMessage() });
-                            }
-                            else if (e.getClass() == NativeFirebaseAuthException.class) {
-                                callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
                             }
                             else {
                                 callback(undefined, { code: undefined, description: e.getMessage() });
@@ -237,18 +210,18 @@ function FirebaseAuth(FirebaseApp) {
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
 
-                            if (e.getClass() == NativeFirebaseAuthInvalidUserException.class) { // emaıl not found or passive
-                                if (e.getErrorCode() == "ERROR_USER_DISABLED") { // thrown if the password is not strong enough
-                                    callback(undefined, { code: FirebaseAuth.Error.UserDisabled, description: e.getMessage() });
-                                }
-                                else {
-                                    callback(undefined, { code: FirebaseAuth.Error.InvalidEmail, description: e.getMessage() });
-                                }
+                            var errorCode = "" + e.getErrorCode();
+
+                            if (errorCode.includes("ERROR_USER_DISABLED")) { // thrown if the password is not strong enough
+                                callback(undefined, { code: FirebaseAuth.Error.UserDisabled, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthInvalidCredentialsException.class) { // password wrong
+                            else if (errorCode.includes("ERROR_INVALID_EMAIL")) {
+                                callback(undefined, { code: FirebaseAuth.Error.InvalidEmail, description: e.getMessage() });
+                            }
+                            else if (errorCode.includes("ERROR_WRONG_PASSWORD")) {
                                 callback(undefined, { code: FirebaseAuth.Error.WrongPassword, description: e.getMessage() });
                             }
-                            else if (e.getClass() == NativeFirebaseAuthException.class) {
+                            else if (errorCode.includes("ERROR_OPERATION_NOT_ALLOWED")) {
                                 callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
                             }
                             else {
@@ -280,13 +253,13 @@ function FirebaseAuth(FirebaseApp) {
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
 
-                            if (e.getClass() == NativeFirebaseAuthInvalidCredentialsException.class) { // thrown if the token format is incorrect or if it corresponds to a different Firebase App
-                                if (e.getErrorCode() == "ERROR_INVALID_CUSTOM_TOKEN") { // thrown if the password is not strong enough
-                                    callback(undefined, { code: FirebaseAuth.Error.InvalidCustomToken, description: e.getMessage() });
-                                }
-                                else {
-                                    callback(undefined, { code: FirebaseAuth.Error.CustomTokenMismatch, description: e.getMessage() });
-                                }
+                            var errorCode = "" + e.getErrorCode();
+
+                            if (errorCode.includes("ERROR_INVALID_CUSTOM_TOKEN")) { // thrown if the password is not strong enough
+                                callback(undefined, { code: FirebaseAuth.Error.InvalidCustomToken, description: e.getMessage() });
+                            }
+                            else if (errorCode.includes("mismatch")) {
+                                callback(undefined, { code: FirebaseAuth.Error.CustomTokenMismatch, description: e.getMessage() });
                             }
                             else {
                                 callback(undefined, { code: undefined, description: e.getMessage() });
@@ -317,7 +290,9 @@ function FirebaseAuth(FirebaseApp) {
                     var innerFailureCallback = NativeOnFailureListener.implement({
                         onFailure: function(e) {
 
-                            if (e.getClass() == NativeFirebaseAuthException.class) { // thrown if the token format is incorrect or if it corresponds to a different Firebase App
+                            var errorCode = "" + e.getErrorCode();
+                            
+                            if (errorCode.includes("ERROR_OPERATION_NOT_ALLOWED")) { // thrown if the token format is incorrect or if it corresponds to a different Firebase App
                                 callback(undefined, { code: FirebaseAuth.Error.OperationNotAllowed, description: e.getMessage() });
                             }
                             else {
@@ -347,7 +322,7 @@ function FirebaseAuth(FirebaseApp) {
         },
     });
 
-    self.ios = {};
+    self.ios = { useAppLanguage: function() {} };
 }
 
 FirebaseAuth.ios = {};
