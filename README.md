@@ -29,7 +29,7 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 }
 ```
 Download google-services.json from Firebase console and fill strings.xml.
-strings.xml file should be edited. ( config/Android/strings.xml )
+strings.xml file should be edited. (config/Android/strings.xml)
 
 ```xml
 <resources>
