@@ -45,7 +45,7 @@ senderID should be edited. (config/project.json) (senderID = gcm_defaultSenderId
 
 ```json
 "googleCloudMessaging": {
-	"senderID": gcm_defaultSenderId
+	"senderID": "gcm_defaultSenderId"
 }
 ```
 
