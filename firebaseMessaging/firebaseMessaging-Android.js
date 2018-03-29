@@ -40,8 +40,9 @@ Object.defineProperties(FirebaseMessaging, {
         enumerable: true,
         configurable: true
     }
+    
 });
 
-FirebaseMessaging.ios = {};
+FirebaseMessaging.ios = { onTokenReflesh : function() {} };
 
 module.exports = FirebaseMessaging;

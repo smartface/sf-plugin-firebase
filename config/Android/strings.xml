@@ -1,0 +1,7 @@
+<resources>
+    <string name="google_app_id" translatable="false">mobilesdk_app_id</string>
+    <string name="gcm_defaultSenderId" translatable="false">project_number</string>
+    <string name="default_web_client_id" translatable="false">client_id</string>
+    <string name="firebase_database_url" translatable="false">firebase_url</string>
+    <string name="google_api_key" translatable="false">current_key</string>
+</resources>

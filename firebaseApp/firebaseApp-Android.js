@@ -71,7 +71,12 @@ function FirebaseApp(nativeFirebaseApp) {
         }
     });
 
-    self.ios = {};
+    self.ios = { 
+        delete : function() {}, 
+        getBundleId : function() {}, 
+        getClientId : function() {}, 
+        getTrackingId : function() {} 
+    };
 }
 
 FirebaseApp.ios = {};

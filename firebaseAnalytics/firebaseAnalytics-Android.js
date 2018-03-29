@@ -1,5 +1,4 @@
 const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.FirebaseAnalytics');
-
 const NativeBundle = requireClass('android.os.Bundle');
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
 
@@ -20,6 +19,7 @@ Object.defineProperties(FirebaseAnalytics, {
             if (!AndroidConfig.isEmulator) {
                 var bundle = new NativeBundle();
                 for (var i = 0; i < customAttributes.length; i++) {
+                    
                     if (typeof(customAttributes[i].value) === "string") {
                         bundle.putString(customAttributes[i].key, customAttributes[i].value);
                     }

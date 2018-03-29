@@ -11,26 +11,15 @@ function Firebase() {}
 Firebase.initializeApp = function(options, name) {
     if (!AndroidConfig.isEmulator) {
         if (options && options.androidFile.exists) {
-
-            var fileStreamRead = options.androidFile.openStream(FileStream.StreamType.READ, FileStream.ContentMode.TEXT);
-            var readedFileText = fileStreamRead.readToEnd();
-            var googleJson = JSON.parse(readedFileText);
-            fileStreamRead.close();
-
-            var builder = new NativeFirebaseOptions.Builder();
-            builder = builder.setApplicationId(googleJson.client[0].client_info.mobilesdk_app_id);
-            builder = builder.setApiKey(googleJson.client[0].api_key[0].current_key);
-            builder = builder.setDatabaseUrl(googleJson.project_info.firebase_url);
-            builder = builder.setStorageBucket(googleJson.project_info.storage_bucket);
-            builder = builder.setGcmSenderId(googleJson.project_info.project_number);
+            
             var nativeFirebaseApp;
             if (name) {
-                nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build(), name);
+                nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, name);
             }
             else {
-                nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, builder.build());
+                nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity);
             }
-
+ 
             return new FirebaseApp(nativeFirebaseApp);
 
         }
