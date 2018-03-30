@@ -6,4 +6,6 @@ rm -rf ./plugins
 mv -u ./config/Android/strings.xml ~/workspace/config/Android/strings.xml
 rm -rf ./config
 
+node ./project.js
+
 
