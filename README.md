@@ -555,7 +555,7 @@ user.reauthenticate('email','password',function(isSuccess, error) {
 Do not call this constructor directly. Instead, use Firebase.analytics().
 
 ```javascript
-var analytics = Firebase.analytics();
+var analytics = Firebase.analytics;
 ```
 
 ### FirebaseAnalytics methods
@@ -924,7 +924,7 @@ analytics.setCurrentScreen('screenName','screenClassOverride');
 Do not call this constructor directly. Instead, use Firebase.messaging().
 
 ```javascript
-var messaging = Firebase.messaging();
+var messaging = Firebase.messaging;
 ```
 
 ##### getToken
