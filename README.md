@@ -942,7 +942,7 @@ the FCM token to send notifications to your device. <br />
 Android : Returns the notification token.
 
 ```javascript
-var token = messaging.getToken();
+messaging.getToken(function(token){});
 ```
 
 ##### subscribeToTopic
