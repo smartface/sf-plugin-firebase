@@ -18,15 +18,18 @@ Object.defineProperties(FirebaseAnalytics, {
         value: function(name, customAttributes) {
             if (!AndroidConfig.isEmulator) {
                 var bundle = new NativeBundle();
-                for (var i = 0; i < customAttributes.length; i++) {
-                    
-                    if (typeof(customAttributes[i].value) === "string") {
-                        bundle.putString(customAttributes[i].key, customAttributes[i].value);
-                    }
-                    else if (typeof(customAttributes[i].value) === "number") {
-                        bundle.putInt(customAttributes[i].key, customAttributes[i].value);
+                
+                if(customAttributes instanceof Array){
+                    for (var i = 0; i < customAttributes.length; i++) {            
+                        if (typeof(customAttributes[i].value) === "string") {
+                            bundle.putString(customAttributes[i].key, customAttributes[i].value);
+                        }
+                        else if (typeof(customAttributes[i].value) === "number") {
+                            bundle.putInt(customAttributes[i].key, customAttributes[i].value);
+                        }
                     }
                 }
+                
                 FirebaseAnalytics.nativeObject().logEvent(name, bundle);
             }
         },

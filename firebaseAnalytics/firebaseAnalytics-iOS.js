@@ -7,8 +7,10 @@ FirebaseAnalytics.Param = require("./firebaseAnalyticsParam");
 
 FirebaseAnalytics.logEvent = function(name,customAttributes){
     var customDictionary = {};
-    for(var i = 0 ; i < customAttributes.length ; i++){
-        customDictionary[customAttributes[i].key] = customAttributes[i].value;
+    if(customAttributes instanceof Array){
+        for(var i = 0 ; i < customAttributes.length ; i++){
+            customDictionary[customAttributes[i].key] = customAttributes[i].value;
+        }
     }
     FirebaseAnalytics.ios.native.logEventWithNameParameters(name,customDictionary);
 }
