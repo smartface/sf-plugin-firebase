@@ -1,10 +1,11 @@
 {
   "name": "sf-plugin-firebase",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "main": "index.js",
   "scripts": {
-    "postinstall": "./scripts/postinstall.sh"
+    "postinstall": "./scripts/postinstall.sh",
+    "androidConfig": "node /.scripts/strings.js"
   },
   "keywords": [
     "smartface",
