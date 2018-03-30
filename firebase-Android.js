@@ -10,19 +10,15 @@ function Firebase() {}
 
 Firebase.initializeApp = function(options, name) {
     if (!AndroidConfig.isEmulator) {
-        if (options && options.androidFile.exists) {
-            
-            var nativeFirebaseApp;
-            if (name) {
-                nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, name);
-            }
-            else {
-                nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity);
-            }
- 
-            return new FirebaseApp(nativeFirebaseApp);
-
+        var nativeFirebaseApp;
+        if (name) {
+            nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity, name);
         }
+        else {
+            nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity);
+        }
+
+        return new FirebaseApp(nativeFirebaseApp);
     }
 };
 
