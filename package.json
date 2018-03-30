@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "./scripts/postinstall.sh",
-    "androidConfig": "node /.scripts/strings.js"
+    "androidConfig": "node ./scripts/strings.js"
   },
   "keywords": [
     "smartface",
