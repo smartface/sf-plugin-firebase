@@ -10,8 +10,6 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 
 - Run command `(cd ~/workspace/scripts && npm i -S sf-plugin-firebase)`
 
-## Configuration
-
 ### iOS
 - Add firebase plugin to config/project.json.
 
