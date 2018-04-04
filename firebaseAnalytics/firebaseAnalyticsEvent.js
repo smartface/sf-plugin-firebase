@@ -9,19 +9,19 @@ const FirebaseAnalyticsEvent = {
 
     /**
      * E-Commerce Add To Cart event. This event signifies that an item was added to a cart for purchase. <br />
-     * **params**
-     * - FirebaseAnalytics.Param.ITEM_ID (String)
-     * - FirebaseAnalytics.Param.ITEM_NAME (String)
-     * - FirebaseAnalytics.Param.ITEM_CATEGORY (String)
-     * - FirebaseAnalytics.Param.QUANTITY (Number)
-     * - FirebaseAnalytics.Param.PRICE (Number) 
-     * - FirebaseAnalytics.Param.VALUE (Number) 
-     * - FirebaseAnalytics.Param.CURRENCY (String) 
-     * - FirebaseAnalytics.Param.ORIGIN (String) 
-     * - FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) 
-     * - FirebaseAnalytics.Param.DESTINATION (String) 
-     * - FirebaseAnalytics.Param.START_DATE (String) 
-     * - FirebaseAnalytics.Param.END_DATE (String) 
+     * **params**<br /><ul>
+     * <li> FirebaseAnalytics.Param.ITEM_ID (String)</li>
+     * <li> FirebaseAnalytics.Param.ITEM_NAME (String)</li>
+     * <li> FirebaseAnalytics.Param.ITEM_CATEGORY (String)</li>
+     * <li> FirebaseAnalytics.Param.QUANTITY (Number)</li>
+     * <li> FirebaseAnalytics.Param.PRICE (Number)</li>
+     * <li> FirebaseAnalytics.Param.VALUE (Number)</li>
+     * <li> FirebaseAnalytics.Param.CURRENCY (String)</li>
+     * <li> FirebaseAnalytics.Param.ORIGIN (String)</li>
+     * <li> FirebaseAnalytics.Param.ITEM_LOCATION_ID (String)</li>
+     * <li> FirebaseAnalytics.Param.DESTINATION (String)</li>
+     * <li> FirebaseAnalytics.Param.START_DATE (String)</li>
+     * <li> FirebaseAnalytics.Param.END_DATE (String)</li></ul>
      */
     ADD_TO_CART: "add_to_cart",
 
