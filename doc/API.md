@@ -59,6 +59,7 @@
         * [.analytics](#Firebase.analytics)
             * [.CustomAttribute](#Firebase.analytics.CustomAttribute)
                 * [new CustomAttribute()](#new_Firebase.analytics.CustomAttribute_new)
+            * [.Event](#Firebase.analytics.Event)
             * [.logEvent()](#Firebase.analytics.logEvent)
             * [.setUserProperty()](#Firebase.analytics.setUserProperty)
             * [.setUserId()](#Firebase.analytics.setUserId)
@@ -97,6 +98,7 @@ Firebase Analytics service
 * [.analytics](#Firebase.analytics)
     * [.CustomAttribute](#Firebase.analytics.CustomAttribute)
         * [new CustomAttribute()](#new_Firebase.analytics.CustomAttribute_new)
+    * [.Event](#Firebase.analytics.Event)
     * [.logEvent()](#Firebase.analytics.logEvent)
     * [.setUserProperty()](#Firebase.analytics.setUserProperty)
     * [.setUserId()](#Firebase.analytics.setUserId)
@@ -112,8 +114,15 @@ Firebase Analytics service
 <a name="new_Firebase.analytics.CustomAttribute_new"></a>
 
 ##### new CustomAttribute()
-Creates a new
+Creates a new CustomAttribute
 
+<a name="Firebase.analytics.Event"></a>
+
+#### analytics.Event
+Enumeration for predefined Firebase events
+
+**Kind**: static enum of [<code>analytics</code>](#Firebase.analytics)  
+**See**: [firebaseAnalyticsEvent](./firebaseAnalyticsEvent.md)  
 <a name="Firebase.analytics.logEvent"></a>
 
 #### analytics.logEvent()
