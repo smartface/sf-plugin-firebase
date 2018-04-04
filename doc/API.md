@@ -1,3 +1,14 @@
+## Classes
+
+<dl>
+<dt><a href="#FirebaseUser">FirebaseUser</a></dt>
+<dd><p>Firebase User</p>
+</dd>
+<dt><a href="#FirebaseAuth">FirebaseAuth</a></dt>
+<dd><p>Firebase Auth</p>
+</dd>
+</dl>
+
 ## Constants
 
 <dl>
@@ -8,46 +19,127 @@
 </dd>
 </dl>
 
-## Functions
+<a name="FirebaseUser"></a>
 
-<dl>
-<dt><a href="#FirebaseUser">FirebaseUser()</a></dt>
-<dd></dd>
-<dt><a href="#getEmail">getEmail()</a> ⇒ <code>string</code></dt>
-<dd><p>Returns the main email address of the user, as stored in the Firebase project&#39;s user database</p>
-</dd>
-<dt><a href="#getDisplayName">getDisplayName()</a> ⇒ <code>string</code></dt>
-<dd><p>Returns the main display name of this user from the Firebase project&#39;s user database</p>
-</dd>
-<dt><a href="#getPhoneNumber">getPhoneNumber()</a> ⇒ <code>string</code></dt>
-<dd><p>Returns the phone number of the user, as stored in the Firebase project&#39;s user database, or null if none exists</p>
-</dd>
-<dt><a href="#getUID">getUID()</a> ⇒ <code>string</code></dt>
-<dd><p>Returns a string used to uniquely identify your user in your Firebase project&#39;s user database</p>
-</dd>
-<dt><a href="#isAnonymous">isAnonymous()</a> ⇒ <code>boolean</code></dt>
-<dd><p>Returns true if the user is anonymous; that is, the user account was created with signInAnonymously()</p>
-</dd>
-<dt><a href="#getIdToken">getIdToken([forceRefresh], callback)</a></dt>
-<dd><p>Fetches a Firebase Auth ID Token for the user; useful when authenticating against your own backend. Use our server SDKs or follow the official documentation to securely verify the integrity and validity of this token</p>
-</dd>
-<dt><a href="#setDisplayName">setDisplayName(name, callback)</a></dt>
-<dd><p>Updates the user display name</p>
-</dd>
-<dt><a href="#getPhotoURL">getPhotoURL()</a> ⇒ <code>string</code></dt>
-<dd><p>Returns the URL of this user&#39;s main profile picture</p>
-</dd>
-<dt><a href="#setPhotoURL">setPhotoURL(photoUrl, callback)</a></dt>
-<dd><p>Updates the user photo url</p>
-</dd>
-<dt><a href="#FirebaseAuth">FirebaseAuth()</a></dt>
-<dd><p>classdesc Firebase Auth</p>
-</dd>
-<dt><a href="#getCurrentUser">getCurrentUser()</a> ⇒ <code><a href="#FirebaseUser">FirebaseUser</a></code></dt>
-<dd><p>Synchronously gets the cached current user, or undefined if there is none</p>
-</dd>
-</dl>
+## FirebaseUser
+Firebase User
 
+**Kind**: global class  
+**See**: [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User)  
+
+* [FirebaseUser](#FirebaseUser)
+    * [.getEmail()](#FirebaseUser+getEmail) ⇒ <code>string</code>
+    * [.getDisplayName()](#FirebaseUser+getDisplayName) ⇒ <code>string</code>
+    * [.getPhoneNumber()](#FirebaseUser+getPhoneNumber) ⇒ <code>string</code>
+    * [.getUID()](#FirebaseUser+getUID) ⇒ <code>string</code>
+    * [.isAnonymous()](#FirebaseUser+isAnonymous) ⇒ <code>boolean</code>
+    * [.getIdToken([forceRefresh], callback)](#FirebaseUser+getIdToken)
+    * [.setDisplayName(name, callback)](#FirebaseUser+setDisplayName)
+    * [.getPhotoURL()](#FirebaseUser+getPhotoURL) ⇒ <code>string</code>
+    * [.setPhotoURL(photoUrl, callback)](#FirebaseUser+setPhotoURL)
+
+<a name="FirebaseUser+getEmail"></a>
+
+### firebaseUser.getEmail() ⇒ <code>string</code>
+Returns the main email address of the user, as stored in the Firebase project's user database
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+<a name="FirebaseUser+getDisplayName"></a>
+
+### firebaseUser.getDisplayName() ⇒ <code>string</code>
+Returns the main display name of this user from the Firebase project's user database
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+<a name="FirebaseUser+getPhoneNumber"></a>
+
+### firebaseUser.getPhoneNumber() ⇒ <code>string</code>
+Returns the phone number of the user, as stored in the Firebase project's user database, or null if none exists
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+<a name="FirebaseUser+getUID"></a>
+
+### firebaseUser.getUID() ⇒ <code>string</code>
+Returns a string used to uniquely identify your user in your Firebase project's user database
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+<a name="FirebaseUser+isAnonymous"></a>
+
+### firebaseUser.isAnonymous() ⇒ <code>boolean</code>
+Returns true if the user is anonymous; that is, the user account was created with signInAnonymously()
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+<a name="FirebaseUser+getIdToken"></a>
+
+### firebaseUser.getIdToken([forceRefresh], callback)
+Fetches a Firebase Auth ID Token for the user; useful when authenticating against your own backend. Use our server SDKs or follow the official documentation to securely verify the integrity and validity of this token
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [forceRefresh] | <code>boolean</code> | <code>false</code> | Force refresh regardless of token expiration |
+| callback | [<code>getIdTokenCallback</code>](#Firebase..getIdTokenCallback) |  | Callback for getting the response |
+
+**Example**  
+```js
+user.getIdToken(false, function(token, error) {
+  console.log("User getIdToken " + token + " Error : " + error);
+});
+```
+<a name="FirebaseUser+setDisplayName"></a>
+
+### firebaseUser.setDisplayName(name, callback)
+Updates the user display name
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | new display name |
+| callback | [<code>setDisplayNameCallback</code>](#Firebase..setDisplayNameCallback) | Callback to get the result of setting display name |
+
+**Example**  
+```js
+user.setDisplayName('name', function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
+```
+<a name="FirebaseUser+getPhotoURL"></a>
+
+### firebaseUser.getPhotoURL() ⇒ <code>string</code>
+Returns the URL of this user's main profile picture
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+<a name="FirebaseUser+setPhotoURL"></a>
+
+### firebaseUser.setPhotoURL(photoUrl, callback)
+Updates the user photo url
+
+**Kind**: instance method of [<code>FirebaseUser</code>](#FirebaseUser)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| photoUrl | <code>string</code> | new url for user photo |
+| callback | <code>Firebase~setPhotoURLCallback</code> | Callback to get the result of setting user photo |
+
+**Example**  
+```js
+user.setPhotoURL('photoUrl', function(isSuccess, error) {
+  console.log("isSuccess " + isSuccess + " Error : " + error);
+});
+```
+<a name="FirebaseAuth"></a>
+
+## FirebaseAuth
+Firebase Auth
+
+**Kind**: global class  
+<a name="FirebaseAuth+getCurrentUser"></a>
+
+### firebaseAuth.getCurrentUser() ⇒ [<code>FirebaseUser</code>](#FirebaseUser)
+Synchronously gets the cached current user, or undefined if there is none
+
+**Kind**: instance method of [<code>FirebaseAuth</code>](#FirebaseAuth)  
 <a name="Firebase"></a>
 
 ## Firebase : <code>object</code>
@@ -480,113 +572,6 @@ The Project Number from the Google Developer's console, for example 012345678901
 The Google Cloud Storage bucket name
 
 **Kind**: static method of [<code>FirebaseApp</code>](#FirebaseApp)  
-<a name="FirebaseUser"></a>
-
-## FirebaseUser()
-**Kind**: global function  
-**See**: [firebase.User](https://firebase.google.com/docs/reference/js/firebase.User)  
-<a name="getEmail"></a>
-
-## getEmail() ⇒ <code>string</code>
-Returns the main email address of the user, as stored in the Firebase project's user database
-
-**Kind**: global function  
-<a name="getDisplayName"></a>
-
-## getDisplayName() ⇒ <code>string</code>
-Returns the main display name of this user from the Firebase project's user database
-
-**Kind**: global function  
-<a name="getPhoneNumber"></a>
-
-## getPhoneNumber() ⇒ <code>string</code>
-Returns the phone number of the user, as stored in the Firebase project's user database, or null if none exists
-
-**Kind**: global function  
-<a name="getUID"></a>
-
-## getUID() ⇒ <code>string</code>
-Returns a string used to uniquely identify your user in your Firebase project's user database
-
-**Kind**: global function  
-<a name="isAnonymous"></a>
-
-## isAnonymous() ⇒ <code>boolean</code>
-Returns true if the user is anonymous; that is, the user account was created with signInAnonymously()
-
-**Kind**: global function  
-<a name="getIdToken"></a>
-
-## getIdToken([forceRefresh], callback)
-Fetches a Firebase Auth ID Token for the user; useful when authenticating against your own backend. Use our server SDKs or follow the official documentation to securely verify the integrity and validity of this token
-
-**Kind**: global function  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [forceRefresh] | <code>boolean</code> | <code>false</code> | Force refresh regardless of token expiration |
-| callback | [<code>getIdTokenCallback</code>](#Firebase..getIdTokenCallback) |  | Callback for getting the response |
-
-**Example**  
-```js
-user.getIdToken(false, function(token, error) {
-  console.log("User getIdToken " + token + " Error : " + error);
-});
-```
-<a name="setDisplayName"></a>
-
-## setDisplayName(name, callback)
-Updates the user display name
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | new display name |
-| callback | [<code>setDisplayNameCallback</code>](#Firebase..setDisplayNameCallback) | Callback to get the result of setting display name |
-
-**Example**  
-```js
-user.setDisplayName('name', function(isSuccess, error) {
-  console.log("isSuccess " + isSuccess + " Error : " + error);
-});
-```
-<a name="getPhotoURL"></a>
-
-## getPhotoURL() ⇒ <code>string</code>
-Returns the URL of this user's main profile picture
-
-**Kind**: global function  
-<a name="setPhotoURL"></a>
-
-## setPhotoURL(photoUrl, callback)
-Updates the user photo url
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| photoUrl | <code>string</code> | new url for user photo |
-| callback | <code>Firebase~setPhotoURLCallback</code> | Callback to get the result of setting user photo |
-
-**Example**  
-```js
-user.setPhotoURL('photoUrl', function(isSuccess, error) {
-  console.log("isSuccess " + isSuccess + " Error : " + error);
-});
-```
-<a name="FirebaseAuth"></a>
-
-## FirebaseAuth()
-classdesc Firebase Auth
-
-**Kind**: global function  
-<a name="getCurrentUser"></a>
-
-## getCurrentUser() ⇒ [<code>FirebaseUser</code>](#FirebaseUser)
-Synchronously gets the cached current user, or undefined if there is none
-
-**Kind**: global function  
 <a name="initializeApp"></a>
 
 ## .initializeApp(config, name(Optional))
