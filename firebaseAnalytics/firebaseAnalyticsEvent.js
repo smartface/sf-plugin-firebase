@@ -89,7 +89,7 @@ const FirebaseAnalyticsEvent = {
      * <li>FirebaseAnalytics.Param.DESTINATION (String)  for travel bookings</li>
      * <li>FirebaseAnalytics.Param.START_DATE (String)  for travel bookings</li>
      * <li>FirebaseAnalytics.Param.END_DATE (String)  for travel bookings</li>
-     * <li>FirebaseAnalytics.Param.TRAVEL_CLASS (String)  for travel bookings</li>/<ul>
+     * <li>FirebaseAnalytics.Param.TRAVEL_CLASS (String)  for travel bookings</li></ul>
      */
     ECOMMERCE_PURCHASE: "ecommerce_purchase",
 
@@ -246,7 +246,7 @@ const FirebaseAnalyticsEvent = {
      * Earn Virtual Currency event. This event tracks the awarding of virtual currency in your app.<br />
      * **params**<br /><ul>
      * <li>FirebaseAnalytics.Param.VIRTUAL_CURRENCY_NAME (String)</li><
-     * <li>FirebaseAnalytics.Param.VALUE (Number or Number)</li>/<ul>
+     * <li>FirebaseAnalytics.Param.VALUE (Number or Number)</li></ul>
      */
     EARN_VIRTUAL_CURRENCY: "earn_virtual_currency"
 };
