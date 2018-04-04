@@ -5,7 +5,7 @@
 const Firebase = {
 
     /**
-     * Gets the Analytics service.
+     * Firebase Analytics service
      * @static
      * @public
      * @property {object}
@@ -14,7 +14,7 @@ const Firebase = {
         /**
          * Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported. Using predefined events and/or parameters is recommended for optimal reporting<br />
          * The following event names are reserved and cannot be used: <br />
-         * <span style="color:orange;"> ad_activeview, ad_click, ad_exposure, ad_impression, ad_query, adunit_exposure, app_clear_data, app_uninstall, app_update, error, first_open, first_visit, in_app_purchase, notification_dismiss, notification_foreground, notification_open, notification_receive, os_update, screen_view, session_start, user_engagement</span><br />
+         * <span style="color:orange;">ad_activeview, ad_click, ad_exposure, ad_impression, ad_query, adunit_exposure, app_clear_data, app_uninstall, app_update, error, first_open, first_visit, in_app_purchase, notification_dismiss, notification_foreground, notification_open, notification_receive, os_update, screen_view, session_start, user_engagement</span><br />
          * For predefined event list please see {@link ./firebaseAnalyticsEvent.md|firebaseAnalyticsEvent}
          * @method
          * @params {string} eventName - The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved
@@ -30,7 +30,7 @@ const Firebase = {
          * );
          */
         logEvent: function(eventName, attributes) {},
-        
+
         /**
          * Creates a new
          * @class
@@ -39,9 +39,110 @@ const Firebase = {
          * @params {string} name - Name of the attribute
          * @params {string|number|boolean} value - Value of the attribute
          */
-        CustomAttribute: function(name, value){}
-        
-        
+        CustomAttribute: function(name, value) {},
+
+        /**
+         * Sets a user property<br />
+         * The following event names are reserved and cannot be used: <br />
+         * <span style="color:orange;">first_open_time, first_visit_time, last_deep_link_referrer, user_id, first_open_after_install</span>
+         * @method
+         * @public
+         * @static
+         * @params {string} key - user property name
+         * @params {string} value - user property value
+         */
+        setUserProperty: function(key, value) {},
+
+        /**
+         * Sets the user ID property
+         * @params {string} id
+         */
+        setUserId: function(id) {},
+
+        /**
+         * Sets the current screen name, which specifies the current visual context in your app. This helps identify the areas in your app where users spend their time and how they interact with your app
+         * @params {string} screenName - The name of the current screen. Set to null to clear the current screen name
+         * @params {string} - screenClassOverride - The name of the screen class. By default this is the class name of the current Activity. Set to null to revert to the default class name
+         */
+        setCurrentScreen: function(screenName, screenClassOverride) {}
+    },
+
+    /**
+     * Firebase Messaging service
+     * @static
+     * @public
+     * @property {object}
+     */
+    messaging: {
+        /**
+         * This function is used to keep track of notification tokens of devices. Calling this, automatically registers for push notifcations.
+         * 
+         * **iOS** : The FCM token is used to identify this device so that FCM can send notifications to it. It is associated with your APNS token when the APNS token is supplied, so that sending messages to the FCM token will be delivered over APNS. 
+         * 
+         * The FCM token is sometimes refreshed automatically. onTokenReflesh method will be called once a token is available, or has been refreshed. Typically it should be called once per app start, but may be called more often, if token is invalidated or updated. 
+         * 
+         * Once you have an FCM token, you should send it to your application server, so it can use the FCM token to send notifications to your device. 
+         * **Android** : Returns the notification token.
+         * @method
+         * @public
+         * @static
+         * @param {Firebase~getTokenCallback}
+         * @example
+         * messaging.getToken(function(token) {
+         *     alert(token, "FCM Token");
+         * });
+         */
+        getToken: function(callback) {},
+        /**
+         * This callback is used to get device notification FCM token
+         * @callback Firebase~getTokenCallback
+         * @param {string} token
+         */
+
+        /**
+         * Subscribes to topic in the background. Calling this, automatically registers for push notifcations.
+         * @method
+         * @public
+         * @static
+         * @params {string} topicName - name of the messaging topic
+         */
+        subscribeToTopic: function(topicName) {},
+
+
+        /**
+         * Unsubscribes from topic in the background.
+         * @method
+         * @public
+         * @static
+         * @params {string} topicName - name of the messaging topic
+         */
+        unsubscribeFromTopic: function(topicName) {},
+
+        /**
+         * iOS specific members
+         * @public
+         * @static
+         */
+        ios: {
+
+            /**
+             * The FCM token is used to identify this device so that FCM can send notifications to it. It is associated with your APNS token when the APNS token is supplied, so that sending messages to the FCM token will be delivered over APNS. 
+             * 
+             * The FCM token is sometimes refreshed automatically. onTokenReflesh method will be called once a token is available, or has been refreshed. Typically it should be called once per app start, but may be called more often, if token is invalidated or updated. 
+             * 
+             * Once you have an FCM token, you should send it to your application server, so it can use the FCM token to send notifications to your device. 
+             * @event
+             * @public
+             * @static
+             * @params {string} fcmToken 
+             * @example
+             * messaging.ios.onTokenReflesh = function(fcmToken) {
+             *     alert(fcmToken, "onTokenReflesh");
+             * };
+             */
+            onTokenReflesh: function(fcmToken) {}
+        }
+
     }
 
 };
