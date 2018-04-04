@@ -181,6 +181,7 @@ Firebase.initializeApp = function(config, name) {};
 /**
  * @classdesc Firebase User
  * @see {@link https://firebase.google.com/docs/reference/js/firebase.User|firebase.User}
+ * @constructor
  */
 function FirebaseUser() {
     /**
@@ -285,7 +286,8 @@ function FirebaseUser() {
 }
 
 /**
- * classdesc Firebase Auth
+ * @classdesc Firebase Auth
+ * @class
  */
 function FirebaseAuth() {
 
