@@ -32,7 +32,7 @@ const Firebase = {
         logEvent: function(eventName, attributes) {},
 
         /**
-         * Creates a new
+         * Creates a new CustomAttribute
          * @class
          * @public
          * @static
@@ -64,7 +64,14 @@ const Firebase = {
          * @params {string} screenName - The name of the current screen. Set to null to clear the current screen name
          * @params {string} - screenClassOverride - The name of the screen class. By default this is the class name of the current Activity. Set to null to revert to the default class name
          */
-        setCurrentScreen: function(screenName, screenClassOverride) {}
+        setCurrentScreen: function(screenName, screenClassOverride) {},
+        
+        /**
+         * Enumeration for predefined Firebase events
+         * @enum
+         * @see {@link ./firebaseAnalyticsEvent.md|firebaseAnalyticsEvent}
+         */
+        Event: {}
     },
 
     /**
