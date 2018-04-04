@@ -17,10 +17,17 @@ const Firebase = {
          * <span style="color:orange;"> ad_activeview, ad_click, ad_exposure, ad_impression, ad_query, adunit_exposure, app_clear_data, app_uninstall, app_update, error, first_open, first_visit, in_app_purchase, notification_dismiss, notification_foreground, notification_open, notification_receive, os_update, screen_view, session_start, user_engagement</span><br />
          * For predefined event list please see {@link ./firebaseAnalyticsEvent.md|firebaseAnalyticsEvent}
          * @method
-         * @params {string} eventName
-         * @params {Firebase.analytics.CustomAttribute[]} attributes
+         * @params {string} eventName - The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved
+         * @params {Firebase.analytics.CustomAttribute[]} attributes - Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores
          * @public
          * @static
+         * @example
+         * analytics.logEvent(FirebaseAnalytics.Event.ADD_TO_CART, 
+         *   [
+         *     new FirebaseAnalytics.CustomAttribute(FirebaseAnalytics.Param.ITEM_ID, "item_id"), 
+         *     new FirebaseAnalytics.CustomAttribute(FirebaseAnalytics.Param.ITEM_NAME, 'item_name') 
+         *   ]
+         * );
          */
         logEvent: function(eventName, attributes) {},
         

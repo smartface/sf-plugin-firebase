@@ -7,7 +7,22 @@ const FirebaseAnalyticsEvent = {
     /** Add Payment Info event. This event signifies that a user has submitted their payment information to your app. */
     ADD_PAYMENT_INFO: "add_payment_info",
 
-    /** E-Commerce Add To Cart event. This event signifies that an item was added to a cart for purchase.  */
+    /**
+     * E-Commerce Add To Cart event. This event signifies that an item was added to a cart for purchase. <br />
+     * **params**
+     * - FirebaseAnalytics.Param.ITEM_ID (String)
+     * - FirebaseAnalytics.Param.ITEM_NAME (String)
+     * - FirebaseAnalytics.Param.ITEM_CATEGORY (String)
+     * - FirebaseAnalytics.Param.QUANTITY (Number)
+     * - FirebaseAnalytics.Param.PRICE (Number) 
+     * - FirebaseAnalytics.Param.VALUE (Number) 
+     * - FirebaseAnalytics.Param.CURRENCY (String) 
+     * - FirebaseAnalytics.Param.ORIGIN (String) 
+     * - FirebaseAnalytics.Param.ITEM_LOCATION_ID (String) 
+     * - FirebaseAnalytics.Param.DESTINATION (String) 
+     * - FirebaseAnalytics.Param.START_DATE (String) 
+     * - FirebaseAnalytics.Param.END_DATE (String) 
+     */
     ADD_TO_CART: "add_to_cart",
 
     /** E-Commerce Add To Wishlist event. This event signifies that an item was added to a wishlist. Use this event to identify popular gift items in your app. */
