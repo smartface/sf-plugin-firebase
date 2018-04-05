@@ -35,7 +35,9 @@ Object.defineProperties(FirebaseMessaging, {
     },
     'unsubscribeFromTopic': {
         value: function(topic) {
-            FirebaseMessaging.nativeObject().unsubscribeFromTopic(topic);
+            if (!AndroidConfig.isEmulator) {
+                FirebaseMessaging.nativeObject().unsubscribeFromTopic(topic);
+            }   
         },
         enumerable: true,
         configurable: true
