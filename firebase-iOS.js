@@ -45,11 +45,14 @@ Firebase.app = function(name) {
 
 Firebase.apps = function() {
     var apps = FirebaseApp.ios.native.allApps();
-    var keys = Object.keys(apps);
     var appArray = [];
+    if (!apps) {
+        return appArray;
+    };
+    var keys = Object.keys(apps);
     for (var i in keys){
         appArray.push(new FirebaseApp(apps[keys[i]]));
-    }
+    };
     return appArray;
 };
 

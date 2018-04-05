@@ -2,11 +2,11 @@ const Invocation = require('sf-core/util').Invocation;
 const FirebaseUser = require("../firebaseUser");
 
 function FirebaseAuth(FirebaseApp) {
-	var self = this;
+    var self = this;
 
-	if (FirebaseApp) {
+    if (FirebaseApp) {
         self.nativeAuth = FirebaseAuth.ios.native.authWithApp(FirebaseApp);
-	}else{
+    }else{
         self.nativeAuth = FirebaseAuth.ios.native.auth();
     }
 
@@ -35,6 +35,9 @@ function FirebaseAuth(FirebaseApp) {
     Object.defineProperties(self, {
         'getCurrentUser': {
             value: function() {
+                if(!FirebaseAuth.ios.native.isFrameworkEnabled()){
+                    return new FirebaseUser();
+                }
                 var user = FirebaseAuth.ios.native.currentUser(self.nativeAuth);
                 if (user) {
                     return new FirebaseUser(user);
@@ -172,7 +175,7 @@ FirebaseAuth.ios = {};
 FirebaseAuth.ios.native = {};
 
 FirebaseAuth.ios.native.auth = function(){
-	return Invocation.invokeClassMethod("FIRAuth","auth",[],"NSObject");
+    return Invocation.invokeClassMethod("FIRAuth","auth",[],"NSObject");
 };
 
 FirebaseAuth.ios.native.authWithApp = function(app){
@@ -180,19 +183,19 @@ FirebaseAuth.ios.native.authWithApp = function(app){
         type:"NSObject",
         value: app
     });
-	return Invocation.invokeClassMethod("FIRAuth","authWithApp:",[argApp],"NSObject");
+    return Invocation.invokeClassMethod("FIRAuth","authWithApp:",[argApp],"NSObject");
 };
 
 FirebaseAuth.ios.native.app = function(auth){
-	return Invocation.invokeInstanceMethod(auth,"app",[],"NSObject");
+    return Invocation.invokeInstanceMethod(auth,"app",[],"NSObject");
 }
 
 FirebaseAuth.ios.native.currentUser = function(auth){
-	return Invocation.invokeInstanceMethod(auth,"currentUser",[],"NSObject");
+    return Invocation.invokeInstanceMethod(auth,"currentUser",[],"NSObject");
 }
 
 FirebaseAuth.ios.native.getLanguageCode = function(auth){
-	return Invocation.invokeInstanceMethod(auth,"languageCode",[],"NSString");
+    return Invocation.invokeInstanceMethod(auth,"languageCode",[],"NSString");
 }
 
 FirebaseAuth.ios.native.setLanguageCode = function(auth,languageCode){
@@ -216,7 +219,7 @@ FirebaseAuth.ios.native.setLanguageCode = function(auth,languageCode){
 */        
 FirebaseAuth.ios.native.signInWithEmailPasswordCompletion = function(auth,email,password,completion)
 {
-	var argEmail = new Invocation.Argument({
+    var argEmail = new Invocation.Argument({
         type:"NSString",
         value: email
     });
@@ -227,10 +230,10 @@ FirebaseAuth.ios.native.signInWithEmailPasswordCompletion = function(auth,email,
     var argCompletion = new Invocation.Argument({
         type:"FIRAuthResultCallback",
         value: function(e){
-        	completion(e);
+            completion(e);
         }
     });
-	Invocation.invokeInstanceMethod(auth,"signInWithEmail:password:completion:",[argEmail,argPassword,argCompletion]);
+    Invocation.invokeInstanceMethod(auth,"signInWithEmail:password:completion:",[argEmail,argPassword,argCompletion]);
 }
 
 /**
@@ -441,5 +444,10 @@ FirebaseAuth.ios.native.errorCode = {
     KeychainError : 17995,
     FirebaseAuthInternalError : 17999
 }
+
+FirebaseAuth.ios.native.isFrameworkEnabled = function(){
+    var invocation = __SF_NSInvocation.createClassInvocationWithSelectorInstance("alloc", "FIROptions");
+    return invocation ? true : false;
+};
 
 module.exports = FirebaseAuth;
