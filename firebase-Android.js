@@ -17,8 +17,9 @@ Firebase.initializeApp = function(options, name) {
         else {
             nativeFirebaseApp = NativeFirebaseApp.initializeApp(AndroidConfig.activity);
         }
-
         return new FirebaseApp(nativeFirebaseApp);
+    } else {
+        return new FirebaseApp();
     }
 };
 
@@ -33,6 +34,8 @@ Firebase.app = function(name) {
             nativeFirebaseApp = NativeFirebaseApp.getInstance();
         }
         return new FirebaseApp(nativeFirebaseApp);
+    } else {
+        return new FirebaseApp();
     }
 
 };
@@ -51,6 +54,8 @@ Firebase.apps = function() {
 Firebase.auth = function(FirebaseApp) {
     if (!AndroidConfig.isEmulator) {
         return new FirebaseAuth(FirebaseApp);
+    } else {
+        return new FirebaseAuth();
     }
 };
 
