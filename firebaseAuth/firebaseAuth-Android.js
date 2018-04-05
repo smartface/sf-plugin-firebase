@@ -24,6 +24,8 @@ function FirebaseAuth(FirebaseApp) {
             value: function() {
                 if (!AndroidConfig.isEmulator) {
                     return new FirebaseUser(self.nativeObject.getCurrentUser());
+                } else {
+                    return new FirebaseUser();
                 }
             },
             enumerable: true,
