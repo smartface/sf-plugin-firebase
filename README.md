@@ -37,7 +37,7 @@ There are several ways to do it.
 
 **Step 1**
 
-Download google-services.json from [Firebase console](console.firebase.google.com)
+Download google-services.json from [Firebase console](https://console.firebase.google.com)
 
 **Step 2 - Option 1**
 
