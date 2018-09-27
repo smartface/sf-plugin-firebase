@@ -82,13 +82,11 @@
 		C3A135042065261000B52698 /* upload-sym.sh in Resources */ = {isa = PBXBuildFile; fileRef = C3A134C72065261000B52698 /* upload-sym.sh */; };
 		C3A135052065261000B52698 /* FirebaseCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A134C82065261000B52698 /* FirebaseCrash.framework */; };
 		C3A135062065261000B52698 /* extract-keys in Resources */ = {isa = PBXBuildFile; fileRef = C3A134C92065261000B52698 /* extract-keys */; };
-		C3A135072065261000B52698 /* dump_syms in Resources */ = {isa = PBXBuildFile; fileRef = C3A134CA2065261000B52698 /* dump_syms */; };
 		C3A135082065261000B52698 /* upload-sym-util.bash in Resources */ = {isa = PBXBuildFile; fileRef = C3A134CB2065261000B52698 /* upload-sym-util.bash */; };
 		C3A135092065261000B52698 /* batch-upload in Resources */ = {isa = PBXBuildFile; fileRef = C3A134CC2065261000B52698 /* batch-upload */; };
 		C3A1350A2065261000B52698 /* NOTICES in Resources */ = {isa = PBXBuildFile; fileRef = C3A134CD2065261000B52698 /* NOTICES */; };
 		C3A1350B2065261000B52698 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A134CF2065261000B52698 /* GTMSessionFetcher.framework */; };
 		C3A1350C2065261000B52698 /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A134D02065261000B52698 /* FirebaseStorage.framework */; };
-		C3A1350D2065261000B52698 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C3A134D12065261000B52698 /* README.md */; };
 		C3A1350E2065261000B52698 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A134D32065261000B52698 /* SafariServices.framework */; };
 		C3A1350F2065261000B52698 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A134D42065261000B52698 /* StoreKit.framework */; };
 		C3A135102065261000B52698 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A134D52065261000B52698 /* GLKit.framework */; };
@@ -860,14 +858,12 @@
 				C3A135082065261000B52698 /* upload-sym-util.bash in Resources */,
 				C3A135062065261000B52698 /* extract-keys in Resources */,
 				C3A135042065261000B52698 /* upload-sym.sh in Resources */,
-				C3A1350D2065261000B52698 /* README.md in Resources */,
 				61F73F091B739F5F003AADE5 /* assets in Resources */,
 				C3A135022065261000B52698 /* upload-sym in Resources */,
 				3CE6D1A814D188F400FFC954 /* Smartface-Info.plist in Resources */,
 				FD3A74611FE92BE60005E262 /* Assets.xcassets in Resources */,
 				0CB69E24157CF14500AB37EE /* Localization.strings in Resources */,
 				C3A135092065261000B52698 /* batch-upload in Resources */,
-				C3A135072065261000B52698 /* dump_syms in Resources */,
 				C3A134F62065261000B52698 /* gRPCCertificates.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
