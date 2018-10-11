@@ -4,7 +4,6 @@ const FirebaseAuth = require("./firebaseAuth");
 const NativeFirebaseApp = requireClass('com.google.firebase.FirebaseApp');
 const NativeFirebaseOptions = requireClass('com.google.firebase.FirebaseOptions');
 const AndroidConfig = require("sf-core/util/Android/androidconfig");
-const FileStream = require('sf-core/io/filestream');
 
 function Firebase() {}
 
