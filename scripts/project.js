@@ -7,6 +7,7 @@ if (!project.build.input.ios.plugins.firebaseios)
     project.build.input.ios.plugins.firebaseios = {
         path: "plugins/iOS/firebaseios.zip",
         active: true
+        crashlytics: true
     };
 
 if (!project.build.input.android.plugins.firebaseandroid)
