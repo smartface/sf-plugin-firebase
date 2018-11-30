@@ -57,6 +57,11 @@
 		C303C5D51FA074F5003CEEF0 /* ZXingObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C303C5D41FA074F2003CEEF0 /* ZXingObjC.framework */; };
 		C303C5D61FA074F5003CEEF0 /* ZXingObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C303C5D41FA074F2003CEEF0 /* ZXingObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C308737E1E5DBD3E0073D30C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C308737D1E5DBD3D0073D30C /* WebKit.framework */; };
+		C320F0A121B140F1009EF925 /* Fabric+SF.m in Sources */ = {isa = PBXBuildFile; fileRef = C320F09921B140F1009EF925 /* Fabric+SF.m */; };
+		C320F0A221B140F1009EF925 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C320F09A21B140F1009EF925 /* Fabric.framework */; };
+		C320F0A321B140F2009EF925 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C320F09B21B140F1009EF925 /* Crashlytics.framework */; };
+		C320F0A421B140F2009EF925 /* Answers+SF.m in Sources */ = {isa = PBXBuildFile; fileRef = C320F09F21B140F1009EF925 /* Answers+SF.m */; };
+		C320F0A521B140F2009EF925 /* Crashlytics+SF.m in Sources */ = {isa = PBXBuildFile; fileRef = C320F0A021B140F1009EF925 /* Crashlytics+SF.m */; };
 		C362686321B00571003F06EB /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36267E921B00571003F06EB /* leveldb-library.framework */; };
 		C362686421B00571003F06EB /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36267EA21B00571003F06EB /* FirebaseDatabase.framework */; };
 		C362686521B00571003F06EB /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36267EC21B00571003F06EB /* Protobuf.framework */; };
@@ -237,6 +242,14 @@
 		61F73F081B739F5F003AADE5 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		C303C5D41FA074F2003CEEF0 /* ZXingObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ZXingObjC.framework; path = ZXingObjC/Release/ZXingObjC.framework; sourceTree = "<group>"; };
 		C308737D1E5DBD3D0073D30C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C320F09921B140F1009EF925 /* Fabric+SF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Fabric+SF.m"; sourceTree = "<group>"; };
+		C320F09A21B140F1009EF925 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		C320F09B21B140F1009EF925 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		C320F09C21B140F1009EF925 /* Crashlytics+SF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Crashlytics+SF.h"; sourceTree = "<group>"; };
+		C320F09D21B140F1009EF925 /* Answers+SF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answers+SF.h"; sourceTree = "<group>"; };
+		C320F09E21B140F1009EF925 /* Fabric+SF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fabric+SF.h"; sourceTree = "<group>"; };
+		C320F09F21B140F1009EF925 /* Answers+SF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Answers+SF.m"; sourceTree = "<group>"; };
+		C320F0A021B140F1009EF925 /* Crashlytics+SF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Crashlytics+SF.m"; sourceTree = "<group>"; };
 		C36267E921B00571003F06EB /* leveldb-library.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "leveldb-library.framework"; sourceTree = "<group>"; };
 		C36267EA21B00571003F06EB /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = "<group>"; };
 		C36267EC21B00571003F06EB /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Protobuf.framework; sourceTree = "<group>"; };
@@ -331,6 +344,7 @@
 				C36268B521B00572003F06EB /* FIRAnalyticsConnector.framework in Frameworks */,
 				C36268B421B00572003F06EB /* nanopb.framework in Frameworks */,
 				0CF72942186DD9370010DD42 /* CoreData.framework in Frameworks */,
+				C320F0A321B140F2009EF925 /* Crashlytics.framework in Frameworks */,
 				C362689D21B00571003F06EB /* Protobuf.framework in Frameworks */,
 				3CBF2C7F153C5BE900A066F0 /* Security.framework in Frameworks */,
 				3C8D2DB8141A2E50009C20A2 /* AVFoundation.framework in Frameworks */,
@@ -340,6 +354,7 @@
 				C362686521B00571003F06EB /* Protobuf.framework in Frameworks */,
 				3C3F0461147BD73000778778 /* CoreLocation.framework in Frameworks */,
 				FDAEA2601E892CAF00347393 /* SMFNative.framework in Frameworks */,
+				C320F0A221B140F1009EF925 /* Fabric.framework in Frameworks */,
 				3C91A79E143DCB7F00FD7AEC /* CoreTelephony.framework in Frameworks */,
 				3C455188143B5F70002CF6F2 /* AddressBook.framework in Frameworks */,
 				C362687421B00571003F06EB /* gRPC-C++.framework in Frameworks */,
@@ -484,10 +499,26 @@
 		0CCB09791A5E7EA700D36A6E /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				C320F09821B140F1009EF925 /* Fabric */,
 				C36267DE21B00571003F06EB /* Firebase */,
 				FD9B6ECB1E3B3C8A003EDD42 /* Smartface-Objects */,
 			);
 			path = Plugins;
+			sourceTree = "<group>";
+		};
+		C320F09821B140F1009EF925 /* Fabric */ = {
+			isa = PBXGroup;
+			children = (
+				C320F09921B140F1009EF925 /* Fabric+SF.m */,
+				C320F09A21B140F1009EF925 /* Fabric.framework */,
+				C320F09B21B140F1009EF925 /* Crashlytics.framework */,
+				C320F09C21B140F1009EF925 /* Crashlytics+SF.h */,
+				C320F09D21B140F1009EF925 /* Answers+SF.h */,
+				C320F09E21B140F1009EF925 /* Fabric+SF.h */,
+				C320F09F21B140F1009EF925 /* Answers+SF.m */,
+				C320F0A021B140F1009EF925 /* Crashlytics+SF.m */,
+			);
+			path = Fabric;
 			sourceTree = "<group>";
 		};
 		C36267DE21B00571003F06EB /* Firebase */ = {
@@ -840,6 +871,9 @@
 				C362689B21B00571003F06EB /* FIRApp+Smartface.m in Sources */,
 				C362689A21B00571003F06EB /* NSInvocation+Firebase.m in Sources */,
 				FDBB873B1E7881B90090B2B9 /* SMFApplication.m in Sources */,
+				C320F0A121B140F1009EF925 /* Fabric+SF.m in Sources */,
+				C320F0A421B140F2009EF925 /* Answers+SF.m in Sources */,
+				C320F0A521B140F2009EF925 /* Crashlytics+SF.m in Sources */,
 				C362689921B00571003F06EB /* MessagingDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -983,6 +1017,7 @@
 					"$(PROJECT_DIR)/Smartface/Plugins/Firebase/Functions",
 					"$(PROJECT_DIR)/Smartface/Plugins/Firebase/InAppMessaging",
 					"$(PROJECT_DIR)/Smartface/Plugins/Firebase/Invites",
+					"$(PROJECT_DIR)/Smartface/Plugins/Fabric",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -1076,6 +1111,7 @@
 					"$(PROJECT_DIR)/Smartface/Plugins/Firebase/Functions",
 					"$(PROJECT_DIR)/Smartface/Plugins/Firebase/InAppMessaging",
 					"$(PROJECT_DIR)/Smartface/Plugins/Firebase/Invites",
+					"$(PROJECT_DIR)/Smartface/Plugins/Fabric",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
