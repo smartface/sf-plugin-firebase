@@ -14,6 +14,7 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 ## Configuration
 Installation script automatically configures project.json. Please verify following records are in place.
 Configuration is needed once only
+
 ### iOS
 - Add firebase plugin to config/project.json.
 
@@ -23,49 +24,35 @@ Configuration is needed once only
   "active": true
 }
 ```
-### Android
-- Add firebase plugin to config/project.json.
 
-```javascript
-"firebaseandroid": {
-  "path": "plugins/Android/firebaseandroid.zip",
-  "active": true
-}
-```
-Installation creates a file under `config/Android/strings.xml`. This file needs to be modified with Firebase settings.
-There are several ways to do it.
+### Android
+
+***Building Android Plugin***
+It is necessary to build your own plugin in order to use firebase plugin. Follow the below steps;
 
 **Step 1**
 
 Download google-services.json from [Firebase console](https://console.firebase.google.com)
 
-**Step 2 - Option 1**
+**Step 2**
 
-You may manually fill strings.xml:
+- This repository already contains ready plugin project. Just left to you open in Android Studio (preferred version 3.2 ) and placed  google-services.json  file  into plugin project's app folder. 
+- Generate Singed Bundle/APK
+- Then follow up from [Running Smartface CLI Tool](https://developer.smartface.io/docs/android-plugins)
+- Place builded output plugin zip to  your workspace's /plugins/Android  directory. 
 
-strings.xml file should be edited. (config/Android/strings.xml)
+- Finally add firebase plugin to config/project.json.
 
-```xml
-<resources>
-    <string name="google_app_id" translatable="false">mobilesdk_app_id</string>
-    <string name="gcm_defaultSenderId" translatable="false">project_number</string>
-    <string name="default_web_client_id" translatable="false">client_id</string>
-    <string name="firebase_database_url" translatable="false">firebase_url</string>
-    <string name="google_api_key" translatable="false">current_key</string>
-</resources>
-```
-
-**Step 2 - Option 2**
-
-1. Place the google-services.json under assets
-2. Run the following script on terminal
-```shell
-(cd ~/workspace/scripts/node_modules/sf-plugin-firebase && npm run androidConfig)
+```javascript
+"firebaseandroid": {
+"path": "plugins/Android/YOURSPECIFIEDNAME.zip",
+"active": true
+}
 ```
 
 **Step 3**
 
-senderID should be edited. `config/project.json` ⇒ (senderID = gcm_defaultSenderId ) 
+- senderID should be edited. `config/project.json` ⇒ (senderID = gcm_defaultSenderId ) 
 
 ```json
 "googleCloudMessaging": {
@@ -74,12 +61,13 @@ senderID should be edited. `config/project.json` ⇒ (senderID = gcm_defaultSend
 ```
 **Step 4**
 
-Open this lines in `config/Android/AndroidManifest.xml` file.
+- Open this lines in `config/Android/AndroidManifest.xml` file.
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
+- Congrats you just done Android configuration.
 
 # How to use
 - Initialize your SDK using the following code snippet: (You must write this code in app.js)
@@ -95,6 +83,14 @@ var firebaseConfig = {
     iosFile : iOSPlistFile
 };
 Firebase.initializeApp(firebaseConfig);
+
+// To initialize Fabric
+
+const Fabric = require("sf-plugin-firebase/fabric");
+const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
+const Answers = require("sf-plugin-firebase/fabric/answers");
+
+Fabric.with([new Crashlytics(), new Answers()]);
 ```
 
 ## API docs
