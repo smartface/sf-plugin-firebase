@@ -6,7 +6,7 @@ var project = require(projectJSONPath);
 if (!project.build.input.ios.plugins.firebaseios)
     project.build.input.ios.plugins.firebaseios = {
         path: "plugins/iOS/firebaseios.zip",
-        active: true
+        active: true,
         crashlytics: true
     };
 
