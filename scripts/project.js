@@ -12,7 +12,7 @@ if (!project.build.input.ios.plugins.firebaseios)
 
 if (!project.build.input.android.plugins.firebaseandroid)
     project.build.input.android.plugins.firebaseandroid = {
-        path: "plugins/Android/firebaseandroid.zip",
+        path: "plugins/Android/YOURSPECIFIEDNAME.zip",
         active: true
     };
 

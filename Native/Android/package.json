@@ -1,0 +1,15 @@
+{
+  "name": "sf-plugin-firebase",
+  "version": "1.0.0",
+  "description": "Sample Smartface Android Plugin",
+  "keywords": [
+    "smartface",
+    "sample",
+    "plugin"
+  ],
+  "author": "info@smartface.io",
+  "license": "ISC",
+  "os": "Android",
+  "cpu": ["ARM", "x86"]
+}
+
