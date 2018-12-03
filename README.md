@@ -21,7 +21,8 @@ Configuration is needed once only
 ```javascript
 "firebaseios": {
   "path": "plugins/iOS/firebaseios.zip",
-  "active": true
+  "active": true,
+  "crashlytics": true
 }
 ```
 
@@ -69,7 +70,12 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 ```
 - Congrats you just done Android configuration.
 
-# How to use
+## API docs
+After initializing the Firebase, Firebase APIs can be used.
+- [Full API Docs](./doc/API.md)
+- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
+
+# Crashlytics
 - Initialize your SDK using the following code snippet: (You must write this code in app.js)
 
 Firebase has to be initialized before any use
@@ -92,12 +98,67 @@ const Answers = require("sf-plugin-firebase/fabric/answers");
 
 Fabric.with([new Crashlytics(), new Answers()]);
 ```
+# Sample Page for Crashlytics
+```javascript
 
-## API docs
-After initializing the Firebase, Firebase APIs can be used.
-- [Full API Docs](./doc/API.md)
-- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
+const Page = require("sf-core/ui/page");
+const Page = require("sf-core/ui/page");
+const extend = require("js-base/core/extend");
 
+const Fabric = require("sf-plugin-firebase/fabric");   
+const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
+const Answers = require("sf-plugin-firebase/fabric/answers");
+                
+var Page1 = extend(Page)(
+    function(_super) {
+        _super(this, {
+            onShow: function(params) {
+                this.statusBar.visible = true;
+                this.headerBar.visible = true;
+       
+                /*
+                  You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely     
+                  identifies the end-user of your application without disclosing or transmitting any of their personal 
+                  information. This value is displayed right in the Fabric dashboard.
+                */
+                Crashlytics.setUserIdentifier("UserIdentifier");
+                
+                // If you would like to take advantage of advanced user identifier features, you can additionally use both:
+                Crashlytics.setUserName("UserName");
+                Crashlytics.setUserEmail("UserEmail");
+                
+                /*
+                  Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable 
+                  right from the Crashlytics dashboard. Setting keys are as easy as calling: Crashlytics.setString(key, value) 
+                  or one of the related methods. Options are:
+                */
+                Crashlytics.setString("key", "value");
+                Crashlytics.setBool("key", true);
+                Crashlytics.setFloat("key", 15.5);
+                Crashlytics.setInt("key", 12);
+
+                /*
+                  To log a custom event to be sent to Answers, use the following.
+                  You can also include a series of custom attributes to get even deeper insight into what’s happening in your 
+                  app.
+                  In addition to the recommended attributes for each event, you can also add custom attributes for any event. 
+                  To log an event with a custom attribute, use the following.
+                */
+                Answers.logCustom('Log-Title', 
+                  [
+                    // Value must be only string or number
+                    new Answers.CustomAttribute("key1","value1"), 
+                    new Answers.CustomAttribute("key2",2)
+                  ] 
+                );
+                
+            }
+        });
+
+    }
+);
+module.exports = Page1;
+```
 
 ## Samples
 All of the samples assumes that initialization has been completed
