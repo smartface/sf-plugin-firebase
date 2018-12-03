@@ -75,7 +75,7 @@ After initializing the Firebase, Firebase APIs can be used.
 - [Full API Docs](./doc/API.md)
 - [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
 
-# Crashlytics
+## Crashlytics
 - Initialize your SDK using the following code snippet: (You must write this code in app.js)
 
 Firebase has to be initialized before any use
@@ -98,7 +98,7 @@ const Answers = require("sf-plugin-firebase/fabric/answers");
 
 Fabric.with([new Crashlytics(), new Answers()]);
 ```
-# Sample Page for Crashlytics
+### Sample Page for Crashlytics
 ```javascript
 
 const Page = require("sf-core/ui/page");
