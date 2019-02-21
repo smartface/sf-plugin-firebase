@@ -16,7 +16,14 @@ Installation script automatically configures project.json. Please verify followi
 Configuration is needed once only
 
 ### iOS
-- Add firebase plugin to config/project.json.
+
+**Step 1**
+
+Download GoogleService-Info.plist from [Firebase console](https://console.firebase.google.com) and placed this file into workspace's /assets directory.
+
+**Step 2**
+
+Add firebase plugin to config/project.json.
 
 ```javascript
 "firebaseios": {
@@ -53,11 +60,11 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 
 **Step 3**
 
-- senderID should be edited. `config/project.json` ⇒ (senderID = gcm_defaultSenderId ) 
+- Get senderID from firebase and edit `config/project.json`'s senderID ⇒ (senderID = gcm_defaultSenderId ) 
 
 ```json
 "googleCloudMessaging": {
-	"senderID": "gcm_defaultSenderId"
+	"senderID": "${senderID}"
 }
 ```
 **Step 4**
