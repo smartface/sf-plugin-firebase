@@ -20,12 +20,16 @@ Object.defineProperties(FirebaseAnalytics, {
                 var bundle = new NativeBundle();
                 
                 if(customAttributes instanceof Array){
-                    for (var i = 0; i < customAttributes.length; i++) {            
-                        if (typeof(customAttributes[i].value) === "string") {
-                            bundle.putString(customAttributes[i].key, customAttributes[i].value);
+                    for (var i = 0; i < customAttributes.length; i++) {
+                        let value = customAttributes[i].value;            
+                        if (typeof(value) === "string") {
+                            bundle.putString(customAttributes[i].key, value);
                         }
-                        else if (typeof(customAttributes[i].value) === "number") {
-                            bundle.putInt(customAttributes[i].key, customAttributes[i].value);
+                        else if (typeof(value) === "number") {
+                            if(Number.isInteger(value))
+                                bundle.putInt(customAttributes[i].key, value);
+                            else
+                                bundle.putDouble(customAttributes[i].key, value);   
                         }
                     }
                 }
