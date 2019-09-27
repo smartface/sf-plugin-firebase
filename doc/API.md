@@ -201,8 +201,8 @@ Firebase Analytics service
 #### analytics.CustomAttribute
 **Kind**: static class of [<code>analytics</code>](#Firebase.analytics)  
 **Access**: public  
-**Params**: <code>string</code> name - Name of the attribute  
-**Params**: <code>string\|number\|boolean</code> value - Value of the attribute  
+**Params**: <code>string</code> name - Name of the attribute. Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores. String, long and double value types are supported. String  values can be up to 100 characters long. The "firebase_", "google_" and "ga_" prefixes are reserved and should not be used for parameter names.  
+**Params**: <code>string\|number</code> value - Value of the attribute. String, long and double value types are supported. String  values can be up to 100 characters long. The "firebase_", "google_" and "ga_" prefixes are reserved and should not be used for parameter names.  
 <a name="new_Firebase.analytics.CustomAttribute_new"></a>
 
 ##### new CustomAttribute()
@@ -226,7 +226,7 @@ For predefined event list please see [firebaseAnalyticsEvent](./firebaseAnalytic
 **Kind**: static method of [<code>analytics</code>](#Firebase.analytics)  
 **Access**: public  
 **Params**: <code>string</code> eventName - The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved  
-**Params**: <code>Firebase.analytics.CustomAttribute[]</code> attributes - Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores  
+**Params**: <code>Firebase.analytics.CustomAttribute[]</code> attributes - Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores. String, long and double value types are supported. String  values can be up to 100 characters long. The "firebase_", "google_" and "ga_" prefixes are reserved and should not be used for parameter names.  
 **Example**  
 ```js
 analytics.logEvent(FirebaseAnalytics.Event.ADD_TO_CART, 

@@ -18,7 +18,7 @@ const Firebase = {
          * For predefined event list please see {@link ./firebaseAnalyticsEvent.md|firebaseAnalyticsEvent}
          * @method
          * @params {string} eventName - The name of the event. Should contain 1 to 40 alphanumeric characters or underscores. The name must start with an alphabetic character. Some event names are reserved
-         * @params {Firebase.analytics.CustomAttribute[]} attributes - Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores
+         * @params {Firebase.analytics.CustomAttribute[]} attributes - Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores. String, long and double value types are supported. String  values can be up to 100 characters long. The "firebase_", "google_" and "ga_" prefixes are reserved and should not be used for parameter names.
          * @public
          * @static
          * @example
@@ -36,8 +36,8 @@ const Firebase = {
          * @class
          * @public
          * @static
-         * @params {string} name - Name of the attribute
-         * @params {string|number|boolean} value - Value of the attribute
+         * @params {string} name - Name of the attribute. Parameter names can be up to 40 characters Number and must start with an alphabetic character and contain only alphanumeric characters and underscores. String, long and double value types are supported. String  values can be up to 100 characters long. The "firebase_", "google_" and "ga_" prefixes are reserved and should not be used for parameter names.
+         * @params {string|number} value - Value of the attribute. String, long and double value types are supported. String  values can be up to 100 characters long. The "firebase_", "google_" and "ga_" prefixes are reserved and should not be used for parameter names.
          */
         CustomAttribute: function(name, value) {},
 
