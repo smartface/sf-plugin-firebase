@@ -10,7 +10,7 @@
 config.gypi
 CVS
 npm-debug.log
-Native
+Native/iOS
 .c9
 .gitignore
 plugins
