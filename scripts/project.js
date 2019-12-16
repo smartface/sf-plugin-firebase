@@ -13,7 +13,7 @@ if (!project.build.input.ios.plugins.firebaseios) {
 
 if (!project.build.input.android.plugins.modules || !project.build.input.android.plugins.modules.firebaseandroid) {
     project.build.input.android.plugins.modules = project.build.input.android.plugins.modules ? project.build.input.android.plugins.modules : {};
-    project.build.input.android.plugins.modules.firebaseandroid = {
+    project.build.input.android.plugins.modules.firebaseplugin = {
         path: "plugins/Android/firebaseplugin",
         active: true
     };
