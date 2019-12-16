@@ -4,7 +4,9 @@ wget https://github.com/smartface/sf-plugin-firebase/raw/master/plugins/firebase
 
 rm -rf ./config
 
+mv $parent_path/../Native/Android/firebaseplugin ~/workspace/plugins/Android/firebaseplugin
 (
     cd "$parent_path"
     node ./project.js
 )
+rm -rvf $parent_path/../Native
