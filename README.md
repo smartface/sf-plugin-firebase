@@ -36,7 +36,7 @@ Add firebase plugin to config/project.json.
 ### Android
 
 ***Building Android Plugin***
-It is necessary to build your own plugin in order to use firebase plugin. Follow the below steps;
+It is necessary to place a few files & modification in order to use firebase plugin. Follow the below steps;
 
 **Step 1**
 
@@ -44,18 +44,19 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 
 **Step 2**
 
-- This repository already contains ready plugin project. Just left to you open in Android Studio (preferred version 3.2 ) and placed  google-services.json  file  into plugin project's app folder. 
-- Generate Singed Bundle/APK
-- Then follow up from [Running Smartface CLI Tool](https://developer.smartface.io/docs/android-plugins)
-- Place builded output plugin zip to  your workspace's /plugins/Android  directory. 
-
-- Finally add firebase plugin to config/project.json.
+- Place google-services.json  file  into `~/workspace/config/Android` 
+- This repository contains prepared android library project under `~/Native/Android` directory. 
+- Finally, specify firebase plugin library to config/project.json.
 
 ```javascript
-"firebaseandroid": {
-"path": "plugins/Android/YOURSPECIFIEDNAME.zip",
-"active": true
-}
+"plugins": {
+  "modules": {
+    "firebaseplugin": {
+      "path": "plugins/Android/firebaseplugin",
+      "active": true
+    }
+  }
+},
 ```
 
 **Step 3**
@@ -64,7 +65,7 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 
 ```json
 "googleCloudMessaging": {
-	"senderID": "${senderID}"
+  "senderID": "${senderID}"
 }
 ```
 **Step 4**
@@ -75,7 +76,24 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
-- Congrats you just done Android configuration.
+
+**Step 5**
+- By default, crashlytic ndk is disabled so enable it, apply plugins & specify library project as below;
+- (Optional) Add [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon) 
+```groovy
+dependencies {
+implementation project(":firebaseplugin")
+}
+apply plugin:  'com.google.gms.google-services'
+apply plugin:  'com.google.firebase.firebase-perf' //(Optional)
+apply plugin: 'io.fabric'  
+crashlytics {  
+    enableNdk=true  
+}
+```
+- Congrats you have just done Android configuration.
+
+*Note:  Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
 
 ## API docs
 After initializing the Firebase, Firebase APIs can be used.
