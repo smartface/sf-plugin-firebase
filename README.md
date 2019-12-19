@@ -78,13 +78,12 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 ```
 
 **Step 5**
-- By default, crashlytic is disabled so enable crashlytics and crashlytics' ndk, apply plugins & specify library project as below;
+- By default, crashlytic ndk is disabled so enable it, apply plugins & specify library project as below;
 - (Optional) Add [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon) 
 ```groovy
 dependencies {
 implementation project(":firebaseplugin")
 }
-ext.enableCrashlytics =  true;
 apply plugin:  'com.google.gms.google-services'
 apply plugin:  'com.google.firebase.firebase-perf' //(Optional)
 apply plugin: 'io.fabric'  
