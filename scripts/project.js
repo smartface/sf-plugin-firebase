@@ -1,5 +1,6 @@
 var fs = require("fs");
-var projectJSONPath = "/home/ubuntu/workspace/config/project.json";
+var path = require("path");
+var projectJSONPath = path.join(__dirname,"../../../../config/project.json");
 var project = require(projectJSONPath);
 
 
