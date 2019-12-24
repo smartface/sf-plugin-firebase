@@ -78,7 +78,7 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 ```
 
 **Step 5**
-- By default, crashlytic ndk is disabled so enable it, apply plugins & specify library project as below;
+- By default, crashlytic and its ndk is disabled so enable it, apply plugins & specify library project as below;
 - (Optional) Add [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon) 
 ```groovy
 dependencies {
@@ -90,10 +90,11 @@ apply plugin: 'io.fabric'
 crashlytics {  
     enableNdk=true  
 }
+ext.enableCrashlytics = false
 ```
 - Congrats you have just done Android configuration.
 
-*Note:  Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
+*Note:  By post-install scripts, Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
 
 ## API docs
 After initializing the Firebase, Firebase APIs can be used.
