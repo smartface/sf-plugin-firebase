@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-wget https://github.com/smartface/sf-plugin-firebase/raw/master/plugins/firebaseios.zip -O $parent_path/../../../../plugins/iOS/firebaseios.zip
+curl -o $parent_path/../../../../plugins/iOS/firebaseios.zip https://cd.smartface.io/repository/smartfacefirebase/ios/3.0.2/firebaseios.zip
 
 rm -rf ./config
 
@@ -10,3 +10,4 @@ mv $parent_path/../Native/Android/firebaseplugin $parent_path/../../../../plugin
     node ./project.js
 )
 rm -rvf $parent_path/../Native
+

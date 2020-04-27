@@ -17,6 +17,10 @@ Configuration is needed once only
 
 ### iOS
 
+You can manually access the Firebaseios.zip file from the link below.
+https://cd.smartface.io/repository/smartfacefirebase/ios/VERSION_NUMBER/firebaseios.zip
+Sample : https://cd.smartface.io/repository/smartfacefirebase/ios/3.0.2/firebaseios.zip
+
 **Step 1**
 
 Download GoogleService-Info.plist from [Firebase console](https://console.firebase.google.com) and placed this file into workspace's /assets directory.
