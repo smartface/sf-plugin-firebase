@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
-var androidConfigPath = path.normalize("/home/ubuntu/workspace/assets/google-services.json");
-var xmlPath = path.normalize("/home/ubuntu/workspace/config/Android/strings.xml");
+var androidConfigPath = path.join(__dirname, "../../../../assets/google-services.json");
+var xmlPath = path.join(__dirname, "../../../../config/Android/strings.xml");
 var fileExists = fs.statSync(androidConfigPath);
 
 if (!fileExists) {
