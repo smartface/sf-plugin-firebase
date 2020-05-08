@@ -4,8 +4,7 @@
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bash ./scripts/postinstall.sh",
-    "androidConfig": "node ./scripts/strings.js"
+    "postinstall": "bash ./scripts/postinstall.sh"
   },
   "keywords": [
     "smartface",
