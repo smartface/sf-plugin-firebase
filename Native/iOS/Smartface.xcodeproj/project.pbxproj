@@ -59,7 +59,6 @@
 		C308737E1E5DBD3E0073D30C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C308737D1E5DBD3D0073D30C /* WebKit.framework */; };
 		C320F0A121B140F1009EF925 /* Fabric+SF.m in Sources */ = {isa = PBXBuildFile; fileRef = C320F09921B140F1009EF925 /* Fabric+SF.m */; };
 		C320F0A221B140F1009EF925 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C320F09A21B140F1009EF925 /* Fabric.framework */; };
-		C320F0A321B140F2009EF925 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C320F09B21B140F1009EF925 /* Crashlytics.framework */; };
 		C320F0A421B140F2009EF925 /* Answers+SF.m in Sources */ = {isa = PBXBuildFile; fileRef = C320F09F21B140F1009EF925 /* Answers+SF.m */; };
 		C320F0A521B140F2009EF925 /* Crashlytics+SF.m in Sources */ = {isa = PBXBuildFile; fileRef = C320F0A021B140F1009EF925 /* Crashlytics+SF.m */; };
 		C362689921B00571003F06EB /* MessagingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C362683321B00571003F06EB /* MessagingDelegate.m */; };
@@ -103,6 +102,9 @@
 		C381AD36247E666800188E7F /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C381AD2B247E666700188E7F /* nanopb.xcframework */; };
 		C381AD37247E666800188E7F /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C381AD2C247E666800188E7F /* GoogleUtilities.xcframework */; };
 		C381AD38247E666800188E7F /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C381AD2D247E666800188E7F /* GoogleDataTransport.xcframework */; };
+		C381AD3C247E6BB100188E7F /* upload-symbols in Resources */ = {isa = PBXBuildFile; fileRef = C381AD39247E6BB000188E7F /* upload-symbols */; };
+		C381AD3D247E6BB100188E7F /* run in Resources */ = {isa = PBXBuildFile; fileRef = C381AD3A247E6BB000188E7F /* run */; };
+		C381AD3E247E6BB100188E7F /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = C381AD3B247E6BB100188E7F /* FirebaseCrashlytics.xcframework */; };
 		E407BFE413D6F24400A7B3BD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E407BFE313D6F24400A7B3BD /* MapKit.framework */; };
 		E43FB52C13CF681D004A4669 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43FB52B13CF681D004A4669 /* UIKit.framework */; };
 		E43FB52E13CF681D004A4669 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43FB52D13CF681D004A4669 /* Foundation.framework */; };
@@ -245,7 +247,6 @@
 		C308737D1E5DBD3D0073D30C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		C320F09921B140F1009EF925 /* Fabric+SF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Fabric+SF.m"; sourceTree = "<group>"; };
 		C320F09A21B140F1009EF925 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		C320F09B21B140F1009EF925 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C320F09C21B140F1009EF925 /* Crashlytics+SF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Crashlytics+SF.h"; sourceTree = "<group>"; };
 		C320F09D21B140F1009EF925 /* Answers+SF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answers+SF.h"; sourceTree = "<group>"; };
 		C320F09E21B140F1009EF925 /* Fabric+SF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fabric+SF.h"; sourceTree = "<group>"; };
@@ -297,6 +298,9 @@
 		C381AD2B247E666700188E7F /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = nanopb.xcframework; sourceTree = "<group>"; };
 		C381AD2C247E666800188E7F /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleUtilities.xcframework; sourceTree = "<group>"; };
 		C381AD2D247E666800188E7F /* GoogleDataTransport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransport.xcframework; sourceTree = "<group>"; };
+		C381AD39247E6BB000188E7F /* upload-symbols */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "upload-symbols"; sourceTree = "<group>"; };
+		C381AD3A247E6BB000188E7F /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run; sourceTree = "<group>"; };
+		C381AD3B247E6BB100188E7F /* FirebaseCrashlytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCrashlytics.xcframework; sourceTree = "<group>"; };
 		E407BFE313D6F24400A7B3BD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E43FB52713CF681D004A4669 /* Smartface-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smartface-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E43FB52B13CF681D004A4669 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -340,13 +344,13 @@
 				0C0746D719D2EF82007630CA /* EventKitUI.framework in Frameworks */,
 				0CAA2C2D19C09529000032F9 /* CoreText.framework in Frameworks */,
 				0C2ABDEA194F2D5F001EB99B /* CoreBluetooth.framework in Frameworks */,
+				C381AD3E247E6BB100188E7F /* FirebaseCrashlytics.xcframework in Frameworks */,
 				C381AD13247E65AF00188E7F /* GTMSessionFetcher.xcframework in Frameworks */,
 				0CECF7D61917BFBD0047299F /* AdSupport.framework in Frameworks */,
 				0CE2DC4118B668D500AE351B /* CoreMotion.framework in Frameworks */,
 				FD013C901E747D6300E46D43 /* Nativeface.framework in Frameworks */,
 				C381AD0C247E657E00188E7F /* FirebaseRemoteConfig.xcframework in Frameworks */,
 				0CF72942186DD9370010DD42 /* CoreData.framework in Frameworks */,
-				C320F0A321B140F2009EF925 /* Crashlytics.framework in Frameworks */,
 				C381AD01247E64BF00188E7F /* gRPC-C++.xcframework in Frameworks */,
 				C381ACF2247E647400188E7F /* FirebaseABTesting.xcframework in Frameworks */,
 				3CBF2C7F153C5BE900A066F0 /* Security.framework in Frameworks */,
@@ -512,9 +516,11 @@
 		C320F09821B140F1009EF925 /* Fabric */ = {
 			isa = PBXGroup;
 			children = (
+				C381AD3B247E6BB100188E7F /* FirebaseCrashlytics.xcframework */,
+				C381AD3A247E6BB000188E7F /* run */,
+				C381AD39247E6BB000188E7F /* upload-symbols */,
 				C320F09921B140F1009EF925 /* Fabric+SF.m */,
 				C320F09A21B140F1009EF925 /* Fabric.framework */,
-				C320F09B21B140F1009EF925 /* Crashlytics.framework */,
 				C320F09C21B140F1009EF925 /* Crashlytics+SF.h */,
 				C320F09D21B140F1009EF925 /* Answers+SF.h */,
 				C320F09E21B140F1009EF925 /* Fabric+SF.h */,
@@ -840,9 +846,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C381AD3D247E6BB100188E7F /* run in Resources */,
 				61F73F091B739F5F003AADE5 /* assets in Resources */,
 				3CE6D1A814D188F400FFC954 /* Smartface-Info.plist in Resources */,
 				FD3A74611FE92BE60005E262 /* Assets.xcassets in Resources */,
+				C381AD3C247E6BB100188E7F /* upload-symbols in Resources */,
 				0CB69E24157CF14500AB37EE /* Localization.strings in Resources */,
 				C381AD00247E64BF00188E7F /* gRPCCertificates-Cpp.bundle in Resources */,
 			);
