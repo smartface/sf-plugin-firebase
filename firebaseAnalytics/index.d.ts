@@ -1,6 +1,7 @@
 export = FirebaseAnalytics;
 
 import CustomAttribute from "./customAttribute";
+import PredefinedEvent from "./firebaseAnalyticsEvent";
 
 /**
  * Firebase Analytics service
@@ -69,4 +70,5 @@ declare namespace FirebaseAnalytics {
         key: string;
         value: string | number;
     }
+    export import Event = PredefinedEvent; 
 }
