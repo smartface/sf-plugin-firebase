@@ -102,8 +102,8 @@ ext.enableCrashlytics = false
 
 ## API docs (Typescript)
 After initializing the Firebase, Firebase APIs can be used.
-- [Full API Docs](./doc/API.md)
-- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
+- [Full API Docs](./doc/API.md) - You can use intelliSense on Smartface Cloud IDE for better & faster development.
+- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md) - You can access the values from code via intelliSense on `Firebase.analytics.Events`
 
 ## Crashlytics
 - Initialize your SDK using the following code snippet: (You must write this code in app.ts)
