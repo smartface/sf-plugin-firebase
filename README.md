@@ -100,7 +100,7 @@ ext.enableCrashlytics = false
 
 *Note:  By post-install scripts, Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
 
-## API docs
+## API docs (Typescript)
 After initializing the Firebase, Firebase APIs can be used.
 - [Full API Docs](./doc/API.md)
 - [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
@@ -215,6 +215,125 @@ Firebase.messaging.subscribeToTopic("all"); //this triggers register for notific
 ### Sample Analtics
 ```typescript
 import Firebase from 'sf-plugin-firebase';
+/*
+ * Init code
+ */
+Firebase.analytics.logEvent(Firebase.analytics.Event.APP_OPEN);
+
+```
+
+## API docs (Javascript) - For older versions
+If your project is not yet migrated to TypeScript, please refer to this usage.
+
+After initializing the Firebase, Firebase APIs can be used.
+- [Full API Docs](./doc/API.md)
+- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
+
+## Crashlytics
+- Initialize your SDK using the following code snippet: (You must write this code in app.js)
+
+Firebase has to be initialized before any use
+```javascript
+const Firebase = require('sf-plugin-firebase');
+const File = require('sf-core/io/file');
+var iOSPlistFile = new File({
+    path: 'assets://GoogleService-Info.plist'
+});
+var firebaseConfig = {
+    iosFile : iOSPlistFile
+};
+Firebase.initializeApp(firebaseConfig);
+
+// To initialize Fabric
+
+const Fabric = require("sf-plugin-firebase/fabric");
+const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
+const Answers = require("sf-plugin-firebase/fabric/answers");
+
+Fabric.with([new Crashlytics(), new Answers()]);
+```
+### Sample Page for Crashlytics
+```javascript
+
+const Page = require("sf-core/ui/page");
+const extend = require("js-base/core/extend");
+
+const Fabric = require("sf-plugin-firebase/fabric");   
+const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
+const Answers = require("sf-plugin-firebase/fabric/answers");
+                
+var Page1 = extend(Page)(
+    function(_super) {
+        _super(this, {
+            onShow: function(params) {
+                this.statusBar.visible = true;
+                this.headerBar.visible = true;
+       
+                /*
+                  You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely     
+                  identifies the end-user of your application without disclosing or transmitting any of their personal 
+                  information. This value is displayed right in the Fabric dashboard.
+                */
+                Crashlytics.setUserIdentifier("UserIdentifier");
+                
+                // If you would like to take advantage of advanced user identifier features, you can additionally use both:
+                Crashlytics.setUserName("UserName");
+                Crashlytics.setUserEmail("UserEmail");
+                
+                /*
+                  Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable 
+                  right from the Crashlytics dashboard. Setting keys are as easy as calling: Crashlytics.setString(key, value) 
+                  or one of the related methods. Options are:
+                */
+                Crashlytics.setString("key", "value");
+                Crashlytics.setBool("key", true);
+                Crashlytics.setFloat("key", 15.5);
+                Crashlytics.setInt("key", 12);
+
+                /*
+                  To log a custom event to be sent to Answers, use the following.
+                  You can also include a series of custom attributes to get even deeper insight into what’s happening in your 
+                  app.
+                  In addition to the recommended attributes for each event, you can also add custom attributes for any event. 
+                  To log an event with a custom attribute, use the following.
+                */
+                Answers.logCustom('Log-Title', 
+                  [
+                    // Value must be only string or number
+                    new Answers.CustomAttribute("key1","value1"), 
+                    new Answers.CustomAttribute("key2",2)
+                  ] 
+                );
+                
+            }
+        });
+
+    }
+);
+module.exports = Page1;
+```
+
+## Samples
+All of the samples assumes that initialization has been completed
+
+### Push Notifications
+```javascript
+const Application = require("sf-core/application");
+const Firebase = require('sf-plugin-firebase');
+/*
+ * Init code
+ */
+Application.onReceivedNotification = function(e){
+    alert("Notification: " + typeof e);
+    alert("Notification: " + JSON.stringify(e.remote));
+};
+
+Firebase.messaging.subscribeToTopic("all"); //this triggers register for notifications
+```
+
+### Sample Analtics
+```javascript
+const Firebase = require('sf-plugin-firebase');
 /*
  * Init code
  */
