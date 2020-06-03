@@ -1,6 +1,6 @@
 {
   "name": "sf-plugin-firebase",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "main": "index.js",
   "scripts": {

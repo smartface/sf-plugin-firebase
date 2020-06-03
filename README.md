@@ -100,7 +100,131 @@ ext.enableCrashlytics = false
 
 *Note:  By post-install scripts, Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
 
-## API docs
+## API docs (TypeScript)
+After initializing the Firebase, Firebase APIs can be used.
+- [Full API Docs](./doc/API.md) - You can use intelliSense on Smartface Cloud IDE for better & faster development.
+- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md) - You can access the values from code via intelliSense on `Firebase.analytics.Events`
+
+## Crashlytics
+- Initialize your SDK using the following code snippet: (You must write this code in app.ts)
+
+Firebase has to be initialized before any use.
+
+```typescript
+import Firebase from 'sf-plugin-firebase';
+import File = require('sf-core/io/file');
+var iOSPlistFile = new File({
+    path: 'assets://GoogleService-Info.plist'
+});
+var firebaseConfig = {
+    iosFile : iOSPlistFile
+};
+Firebase.initializeApp(firebaseConfig);
+
+// To initialize Fabric
+
+import Fabric from 'sf-plugin-firebase/fabric';
+import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
+import Answers from 'sf-plugin-firebase/fabric/answers';
+
+Fabric.with([new Crashlytics(), new Answers()]);
+```
+### Sample Page for Crashlytics
+```typescript
+
+import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
+import Answers from 'sf-plugin-firebase/fabric/answers';
+
+import Page1Design from 'generated/pages/page1'; // Generated default page on ts workspace
+
+export default class Page1 extends Page1Design {
+    constructor () {
+    super();
+    this.onShow = onShow.bind(this, this.onShow.bind(this));
+    this.onLoad = onLoad.bind(this, this.onLoad.bind(this));
+  }
+}
+
+function onShow(superOnShow) {
+    superOnShow();
+
+    this.statusBar.visible = true;
+    this.headerBar.visible = true;
+
+    /*
+      You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely     
+      identifies the end-user of your application without disclosing or transmitting any of their personal 
+      information. This value is displayed right in the Fabric dashboard.
+    */
+    Crashlytics.setUserIdentifier("UserIdentifier");
+    
+    // If you would like to take advantage of advanced user identifier features, you can additionally use both:
+    Crashlytics.setUserName("UserName");
+    Crashlytics.setUserEmail("UserEmail");
+    
+    /*
+      Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable 
+      right from the Crashlytics dashboard. Setting keys are as easy as calling: Crashlytics.setString(key, value) 
+      or one of the related methods. Options are:
+    */
+    Crashlytics.setString("key", "value");
+    Crashlytics.setBool("key", true);
+    Crashlytics.setFloat("key", 15.5);
+    Crashlytics.setInt("key", 12);
+
+    /*
+      To log a custom event to be sent to Answers, use the following.
+      You can also include a series of custom attributes to get even deeper insight into what’s happening in your 
+      app.
+      In addition to the recommended attributes for each event, you can also add custom attributes for any event. 
+      To log an event with a custom attribute, use the following.
+    */
+    Answers.logCustom('Log-Title', 
+      [
+        // Value must be only string or number
+        new Answers.CustomAttribute("key1","value1"), 
+        new Answers.CustomAttribute("key2",2)
+      ] 
+    );
+    
+}
+
+function onLoad(superOnLoad) {
+    superOnLoad();
+}
+```
+
+## Samples
+All of the samples assumes that initialization has been completed
+
+### Push Notifications
+```typescript
+import * as Application from 'sf-core/application';
+import Firebase from 'sf-plugin-firebase';
+/*
+ * Init code
+ */
+Application.onReceivedNotification = (e) => {
+    alert("Notification: " + typeof e);
+    alert("Notification: " + JSON.stringify(e.remote));
+};
+
+Firebase.messaging.subscribeToTopic("all"); //this triggers register for notifications
+```
+
+### Sample Analtics
+```typescript
+import Firebase from 'sf-plugin-firebase';
+/*
+ * Init code
+ */
+Firebase.analytics.logEvent(Firebase.analytics.Event.APP_OPEN);
+
+```
+
+## API docs (JavaScript) - For older versions
+If your project is not yet migrated to TypeScript, please refer to this usage.
+
 After initializing the Firebase, Firebase APIs can be used.
 - [Full API Docs](./doc/API.md)
 - [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
@@ -131,7 +255,6 @@ Fabric.with([new Crashlytics(), new Answers()]);
 ### Sample Page for Crashlytics
 ```javascript
 
-const Page = require("sf-core/ui/page");
 const Page = require("sf-core/ui/page");
 const extend = require("js-base/core/extend");
 
