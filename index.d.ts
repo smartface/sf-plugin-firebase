@@ -52,7 +52,7 @@ declare class Firebase {
      * @public
      * @returns {FirebaseApp}
      */
-    static app(name: string): FirebaseApp;
+    static app(name?: string): FirebaseApp;
 
     /**
      * Gets the FirebaseApp Array.
@@ -62,7 +62,7 @@ declare class Firebase {
      * @public
      * @returns {FirebaseApp[]} apps
      */
-    static apps(name: String): FirebaseApp[];
+    static apps(name?: string): FirebaseApp[];
 }
 
 
