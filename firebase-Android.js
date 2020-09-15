@@ -40,14 +40,14 @@ Firebase.app = function(name) {
 };
 
 Firebase.apps = function() {
+    var result = [];
     if (!AndroidConfig.isEmulator) {
-        var result = [];
         var appList = NativeFirebaseApp.getApps(AndroidConfig.activity);
         for (var i = 0; i < appList.size(); i++) {
             result.push(new FirebaseApp(appList.get(i)));
         }
-        return result;
     }
+    return result;
 };
 
 Firebase.auth = function(FirebaseApp) {
