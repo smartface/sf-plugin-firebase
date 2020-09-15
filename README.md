@@ -119,15 +119,15 @@ var iOSPlistFile = new File({
 var firebaseConfig = {
     iosFile : iOSPlistFile
 };
-Firebase.initializeApp(firebaseConfig);
-
-// To initialize Fabric
 
 import Fabric from 'sf-plugin-firebase/fabric';
 import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
 import Answers from 'sf-plugin-firebase/fabric/answers';
 
-Fabric.with([new Crashlytics(), new Answers()]);
+if (Firebase.apps().length === 0) {
+  Firebase.initializeApp(firebaseConfig);
+  Fabric.with([new Crashlytics(), new Answers()]);
+}
 ```
 ### Sample Page for Crashlytics
 ```typescript
@@ -242,15 +242,16 @@ var iOSPlistFile = new File({
 var firebaseConfig = {
     iosFile : iOSPlistFile
 };
-Firebase.initializeApp(firebaseConfig);
-
-// To initialize Fabric
 
 const Fabric = require("sf-plugin-firebase/fabric");
 const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
 const Answers = require("sf-plugin-firebase/fabric/answers");
 
-Fabric.with([new Crashlytics(), new Answers()]);
+if (Firebase.apps().length === 0) {
+  Firebase.initializeApp(firebaseConfig);
+  Fabric.with([new Crashlytics(), new Answers()]);
+}
+
 ```
 ### Sample Page for Crashlytics
 ```javascript
