@@ -20,10 +20,6 @@
 // Smartface-Objects
 #import "SMFApplication.h"
 
-#import "Fabric+SF.h"
-#import "Crashlytics+SF.h"
-#import "Answers+SF.h"
-
 @implementation SmartfaceAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -133,17 +129,6 @@
 - (void)willSetCustomPluginsOnContext:(JSContext*)context
 {
     
-    class_addProtocol([Fabric class], @protocol(FabricExport));
-    class_addProtocol(object_getClass([Fabric class]), @protocol(FabricExport));
-    context[@"__SF_Fabric"] = [Fabric class];
-    
-    class_addProtocol([Crashlytics class], @protocol(CrashlyticsExport));
-    class_addProtocol(object_getClass([Crashlytics class]), @protocol(CrashlyticsExport));
-    context[@"__SF_Crashlytics"] = [Crashlytics class];
-    
-    class_addProtocol([Answers class], @protocol(AnswersExport));
-    class_addProtocol(object_getClass([Answers class]), @protocol(AnswersExport));
-    context[@"__SF_Answers"] = [Answers class];
     /*
      
      1. Register plugin's class, write the following line here:
