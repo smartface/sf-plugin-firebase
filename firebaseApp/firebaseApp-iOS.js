@@ -120,6 +120,10 @@ FirebaseApp.ios.native.defaultApp = function(){
     return Invocation.invokeClassMethod("FIRApp","defaultApp",[],"NSObject");
 }
 
+FirebaseApp.ios.native.configure = function(){
+    Invocation.invokeClassMethod("FIRApp","configure");
+}
+
 FirebaseApp.ios.native.appNamed = function(name){
     var argName = new Invocation.Argument({
         type:"NSString",
