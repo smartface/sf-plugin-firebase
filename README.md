@@ -243,13 +243,8 @@ var firebaseConfig = {
     iosFile : iOSPlistFile
 };
 
-const Fabric = require("sf-plugin-firebase/fabric");
-const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
-const Answers = require("sf-plugin-firebase/fabric/answers");
-
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);
-  Fabric.with([new Crashlytics(), new Answers()]);
 }
 
 ```
