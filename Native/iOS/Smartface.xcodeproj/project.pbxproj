@@ -61,6 +61,8 @@
 		461BC7B5258B3ABE00BA617E /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461BC794258B39C200BA617E /* GoogleUtilities.xcframework */; };
 		461BC7B9258B3AC600BA617E /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461BC791258B39C000BA617E /* nanopb.xcframework */; };
 		461BC7BD258B3FBF00BA617E /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461BC795258B39C200BA617E /* PromisesObjC.xcframework */; };
+		46E0A2032643D6D500CC73C1 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A2022643D6D500CC73C1 /* FirebaseInstanceID.xcframework */; };
+		46E0A2072643D6EF00CC73C1 /* FirebaseMessaging.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E0A2062643D6EF00CC73C1 /* FirebaseMessaging.xcframework */; };
 		612F45361C787C5E00A3386F /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 612F45351C787C5E00A3386F /* QuickLook.framework */; };
 		615596081C3303DD002C467E /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615596071C3303DD002C467E /* LocalAuthentication.framework */; };
 		61F73F091B739F5F003AADE5 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 61F73F081B739F5F003AADE5 /* assets */; };
@@ -186,6 +188,8 @@
 		461BC797258B39DF00BA617E /* run */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run; sourceTree = "<group>"; };
 		461BC798258B39E000BA617E /* FirebaseCrashlytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCrashlytics.xcframework; sourceTree = "<group>"; };
 		46330C97258BA99E003BDCF1 /* upload-symbols */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "upload-symbols"; sourceTree = "<group>"; };
+		46E0A2022643D6D500CC73C1 /* FirebaseInstanceID.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseInstanceID.xcframework; sourceTree = "<group>"; };
+		46E0A2062643D6EF00CC73C1 /* FirebaseMessaging.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseMessaging.xcframework; sourceTree = "<group>"; };
 		5529DAE4176206200077C7A4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		612F45351C787C5E00A3386F /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		615596071C3303DD002C467E /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
@@ -235,6 +239,7 @@
 				0CF72942186DD9370010DD42 /* CoreData.framework in Frameworks */,
 				3CBF2C7F153C5BE900A066F0 /* Security.framework in Frameworks */,
 				3C8D2DB8141A2E50009C20A2 /* AVFoundation.framework in Frameworks */,
+				46E0A2072643D6EF00CC73C1 /* FirebaseMessaging.xcframework in Frameworks */,
 				3C9B43621483754900ADC3B5 /* CoreMedia.framework in Frameworks */,
 				461BC7B9258B3AC600BA617E /* nanopb.xcframework in Frameworks */,
 				3C3F0461147BD73000778778 /* CoreLocation.framework in Frameworks */,
@@ -262,6 +267,7 @@
 				E43FB53013CF681D004A4669 /* CoreGraphics.framework in Frameworks */,
 				461BC7B1258B3AB700BA617E /* GoogleDataTransport.xcframework in Frameworks */,
 				E407BFE413D6F24400A7B3BD /* MapKit.framework in Frameworks */,
+				46E0A2032643D6D500CC73C1 /* FirebaseInstanceID.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +373,8 @@
 		C36267DE21B00571003F06EB /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				46E0A2062643D6EF00CC73C1 /* FirebaseMessaging.xcframework */,
+				46E0A2022643D6D500CC73C1 /* FirebaseInstanceID.xcframework */,
 				46330C97258BA99E003BDCF1 /* upload-symbols */,
 				461BC798258B39E000BA617E /* FirebaseCrashlytics.xcframework */,
 				461BC797258B39DF00BA617E /* run */,
