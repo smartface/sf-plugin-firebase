@@ -37,7 +37,7 @@ declare class FirebaseMessaging {
      * @ios
      * @since 0.1
      */
-    static getToken(): string;
+    static getToken(e: (token: string) => void): string;
 
     /**
      * Asynchronously subscribes to a topic.

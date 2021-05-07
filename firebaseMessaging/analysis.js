@@ -22,12 +22,13 @@ FirebaseMessaging.ios.onTokenReflesh = function(fcmToken) {};
  * iOS : Returns the FCM token.
  * Android : Returns the notification token.
  * 
- * @event getToken
- * @android
- * @ios
- * @since 0.1
+ * @param {Firebase~getTokenCallback}
+ * @example
+ * messaging.getToken(function(token) {
+ *     alert(token, "FCM Token");
+ * });
  */
-FirebaseMessaging.getToken = function() {}; // Return string
+FirebaseMessaging.getToken = function(token) {}; // Return string
 
 /**
  * Asynchronously subscribes to a topic.
