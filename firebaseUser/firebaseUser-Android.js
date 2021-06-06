@@ -7,7 +7,7 @@ const NativeUri = requireClass('android.net.Uri');
 const FirebaseAuthError = require('../firebaseAuth/firebaseAuthErrors');
 
 
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 function FirebaseUser(nativeUser) {
     var self = this;

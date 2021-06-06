@@ -112,7 +112,7 @@ Firebase has to be initialized before any use.
 
 ```typescript
 import Firebase from 'sf-plugin-firebase';
-import File = require('sf-core/io/file');
+import File = require('@smartface/native/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
@@ -199,7 +199,7 @@ All of the samples assumes that initialization has been completed
 
 ### Push Notifications
 ```typescript
-import * as Application from 'sf-core/application';
+import * as Application from '@smartface/native/application';
 import Firebase from 'sf-plugin-firebase';
 /*
  * Init code
@@ -235,7 +235,7 @@ After initializing the Firebase, Firebase APIs can be used.
 Firebase has to be initialized before any use
 ```javascript
 const Firebase = require('sf-plugin-firebase');
-const File = require('sf-core/io/file');
+const File = require('@smartface/native/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
@@ -251,7 +251,7 @@ if (Firebase.apps().length === 0) {
 ### Sample Page for Crashlytics
 ```javascript
 
-const Page = require("sf-core/ui/page");
+const Page = require("@smartface/native/ui/page");
 const extend = require("js-base/core/extend");
 
 const Fabric = require("sf-plugin-firebase/fabric");   
@@ -314,7 +314,7 @@ All of the samples assumes that initialization has been completed
 
 ### Push Notifications
 ```javascript
-const Application = require("sf-core/application");
+const Application = require("@smartface/native/application");
 const Firebase = require('sf-plugin-firebase');
 /*
  * Init code

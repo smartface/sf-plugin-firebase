@@ -1,6 +1,6 @@
 const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.FirebaseAnalytics');
 const NativeBundle = requireClass('android.os.Bundle');
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 function FirebaseAnalytics() {}
 

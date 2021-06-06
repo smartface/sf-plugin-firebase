@@ -1,7 +1,8 @@
 {
-  "name": "sf-plugin-firebase",
-  "version": "4.0.6",
+  "name": "@smartface/plugin-firebase",
+  "version": "^5.0.0-rc.0",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
+  "repository": "https://github.com/smartface/sf-plugin-firebase",
   "main": "index.js",
   "scripts": {
     "postinstall": "bash ./scripts/postinstall.sh"
@@ -18,6 +19,11 @@
     "email": "info@smartface.io",
     "url": "http://smartface.io"
   },
-  "license": "ISC",
-  "homepage": "http://bitbucket.org/smartface-team/sf-plugins#readme"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@smartface/native": "^4.0.0"
+  }
 }

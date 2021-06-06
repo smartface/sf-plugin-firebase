@@ -1,7 +1,7 @@
 const NativeFirebaseMessaging = requireClass('com.google.firebase.messaging.FirebaseMessaging');
 
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
-const Notifications = require("sf-core/notifications");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
+const Notifications = require("@smartface/native/notifications");
 
 function FirebaseMessaging() {}
 
