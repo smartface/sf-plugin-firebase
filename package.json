@@ -1,6 +1,6 @@
 {
   "name": "@smartface/plugin-firebase",
-  "version": "5.0.0-rc.0",
+  "version": "5.0.0-rc.1",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "repository": "https://github.com/smartface/sf-plugin-firebase",
   "main": "index.js",
@@ -22,8 +22,5 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
-  },
-  "peerDependencies": {
-    "@smartface/native": "^4.0.0"
   }
 }

@@ -31,7 +31,7 @@ declare class Firebase {
      * @param {IO.File} config.iosFile - iOS plist file
      * @param {String} name(Optional)
      * @example
-     * const Firebase = require('sf-plugin-firebase');
+     * const Firebase = require('@smartace/plugin-firebase');
      * const File = require('@smartface/native/io/file');
      * 
      * var iOSPlistFile = new File({

@@ -588,7 +588,7 @@ Initialize your SDK
 
 **Example**  
 ```js
-const Firebase = require('sf-plugin-firebase');
+const Firebase = require('@smartface/firebase');
 const File = require('@smartface/native/io/file');
 
 var iOSPlistFile = new File({
