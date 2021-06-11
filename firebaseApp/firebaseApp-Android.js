@@ -1,5 +1,5 @@
 const FirebaseAuth = require("../firebaseAuth");
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 function FirebaseApp(nativeFirebaseApp) {
     var self = this;

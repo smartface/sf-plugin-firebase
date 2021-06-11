@@ -166,7 +166,7 @@ const Firebase = {
  * @param {String} name(Optional)
  * @example
  * const Firebase = require('sf-plugin-firebase');
- * const File = require('sf-core/io/file');
+ * const File = require('@smartface/native/io/file');
  * 
  * var iOSPlistFile = new File({
  *     path: 'assets://GoogleService-Info.plist'

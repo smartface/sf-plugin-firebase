@@ -3,7 +3,7 @@ const FirebaseAuth = require("./firebaseAuth");
 
 const NativeFirebaseApp = requireClass('com.google.firebase.FirebaseApp');
 const NativeFirebaseOptions = requireClass('com.google.firebase.FirebaseOptions');
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 function Firebase() {}
 

@@ -1,4 +1,4 @@
-const Invocation    = require('sf-core/util').Invocation;
+const Invocation    = require('@smartface/native/util').Invocation;
 const FirebaseAuth = require("../firebaseAuth");
 
 function FirebaseApp(nativeObject) {

@@ -588,8 +588,8 @@ Initialize your SDK
 
 **Example**  
 ```js
-const Firebase = require('sf-plugin-firebase');
-const File = require('sf-core/io/file');
+const Firebase = require('@smartface/firebase');
+const File = require('@smartface/native/io/file');
 
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'

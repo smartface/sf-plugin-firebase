@@ -4,7 +4,7 @@ const NativeFirebaseAuth = requireClass('com.google.firebase.auth.FirebaseAuth')
 const NativeOnSuccessListener = requireClass('com.google.android.gms.tasks.OnSuccessListener');
 const NativeOnFailureListener = requireClass('com.google.android.gms.tasks.OnFailureListener');
 
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 
 function FirebaseAuth(FirebaseApp) {

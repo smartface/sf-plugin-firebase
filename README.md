@@ -9,7 +9,7 @@ Firebase gives you the tools to develop high-quality apps, grow your user base, 
 ## Installation
 Smartface Firebase plugin can be installed via npm easily from our public npm repository. The installation is pretty easy via Smartface Cloud IDE.
 
-- Run command in terminal `(cd ~/workspace/scripts && npm i -S sf-plugin-firebase)`
+- Run command in terminal `(cd ~/workspace/scripts && npm i -S @smartface/firebase)`
 
 ## Configuration
 Installation script automatically configures project.json. Please verify following records are in place.
@@ -111,8 +111,8 @@ After initializing the Firebase, Firebase APIs can be used.
 Firebase has to be initialized before any use.
 
 ```typescript
-import Firebase from 'sf-plugin-firebase';
-import File = require('sf-core/io/file');
+import Firebase from '@smartface/firebase';
+import File = require('@smartface/native/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
@@ -120,9 +120,9 @@ var firebaseConfig = {
     iosFile : iOSPlistFile
 };
 
-import Fabric from 'sf-plugin-firebase/fabric';
-import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
-import Answers from 'sf-plugin-firebase/fabric/answers';
+import Fabric from '@smartface/firebase/fabric';
+import Crashlytics from '@smartface/firebase/fabric/crashlytics';
+import Answers from '@smartface/firebase/fabric/answers';
 
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);
@@ -132,8 +132,8 @@ if (Firebase.apps().length === 0) {
 ### Sample Page for Crashlytics
 ```typescript
 
-import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
-import Answers from 'sf-plugin-firebase/fabric/answers';
+import Crashlytics from '@smartface/firebase/fabric/crashlytics';
+import Answers from '@smartface/firebase/fabric/answers';
 
 import Page1Design from 'generated/pages/page1'; // Generated default page on ts workspace
 
@@ -199,8 +199,8 @@ All of the samples assumes that initialization has been completed
 
 ### Push Notifications
 ```typescript
-import * as Application from 'sf-core/application';
-import Firebase from 'sf-plugin-firebase';
+import * as Application from '@smartface/native/application';
+import Firebase from '@smartface/firebase';
 /*
  * Init code
  */
@@ -214,7 +214,7 @@ Firebase.messaging.subscribeToTopic("all"); //this triggers register for notific
 
 ### Sample Analtics
 ```typescript
-import Firebase from 'sf-plugin-firebase';
+import Firebase from '@smartface/firebase';
 /*
  * Init code
  */
@@ -234,8 +234,8 @@ After initializing the Firebase, Firebase APIs can be used.
 
 Firebase has to be initialized before any use
 ```javascript
-const Firebase = require('sf-plugin-firebase');
-const File = require('sf-core/io/file');
+const Firebase = require('@smartface/firebase');
+const File = require('@smartface/native/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
@@ -251,12 +251,12 @@ if (Firebase.apps().length === 0) {
 ### Sample Page for Crashlytics
 ```javascript
 
-const Page = require("sf-core/ui/page");
+const Page = require("@smartface/native/ui/page");
 const extend = require("js-base/core/extend");
 
-const Fabric = require("sf-plugin-firebase/fabric");   
-const Crashlytics = require("sf-plugin-firebase/fabric/crashlytics");
-const Answers = require("sf-plugin-firebase/fabric/answers");
+const Fabric = require("@smartface/firebase/fabric");   
+const Crashlytics = require("@smartface/firebase/fabric/crashlytics");
+const Answers = require("@smartface/firebase/fabric/answers");
                 
 var Page1 = extend(Page)(
     function(_super) {
@@ -314,8 +314,8 @@ All of the samples assumes that initialization has been completed
 
 ### Push Notifications
 ```javascript
-const Application = require("sf-core/application");
-const Firebase = require('sf-plugin-firebase');
+const Application = require("@smartface/native/application");
+const Firebase = require('@smartface/firebase');
 /*
  * Init code
  */
@@ -329,7 +329,7 @@ Firebase.messaging.subscribeToTopic("all"); //this triggers register for notific
 
 ### Sample Analtics
 ```javascript
-const Firebase = require('sf-plugin-firebase');
+const Firebase = require('@smartface/firebase');
 /*
  * Init code
  */
