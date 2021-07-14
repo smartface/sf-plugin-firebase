@@ -55,16 +55,9 @@ function addDefaultConfigToProjectJSON() {
   fs.writeFileSync(projectJSONPath, output, "utf8");
 }
 
-async function deleteRemainders() {
-  return new Promise((resolve, reject) => {
-    const nativePath = path.normalize(path.join(__dirname, "Native"));
-    fs.rmdir(nativePath, (err) => {
-      if (err) {
-        reject(err);
-      }
-      resolve();
-    })
-  });
+function deleteRemainders() {
+  const nativePath = path.normalize(path.join(__dirname, "Native"));
+  fs.rmSync(nativePath, { recursive: true, force: true });
 }
 
 Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
