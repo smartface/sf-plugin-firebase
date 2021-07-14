@@ -5,7 +5,7 @@
   "repository": "https://github.com/smartface/sf-plugin-firebase",
   "main": "index.js",
   "scripts": {
-    "postinstall": "bash ./scripts/postinstall.sh"
+    "postinstall": "node postinstall.js"
   },
   "keywords": [
     "smartface",
