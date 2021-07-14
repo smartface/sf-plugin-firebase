@@ -22,6 +22,7 @@ async function getIOSFirebasePlugin() {
 async function getAndroidFirebasePlugin() {
   const androidFirebasePath = path.normalize(path.join(__dirname, "Native/Android/firebaseplugin"));
   const projectPluginPath = path.normalize(path.join(__dirname, "../../../../plugins/Android/firebaseplugin"));
+  fs.rmdirSync(projectPluginPath);
   return new Promise((resolve, reject) => {
     fs.rename(androidFirebasePath, projectPluginPath, (err) => {
       if (err) {
