@@ -1,6 +1,6 @@
 {
   "name": "@smartface/plugin-firebase",
-  "version": "5.0.0-rc.5",
+  "version": "5.0.0-rc.6",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "repository": "https://github.com/smartface/sf-plugin-firebase",
   "main": "index.js",
