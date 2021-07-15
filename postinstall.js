@@ -1,6 +1,7 @@
 const fs = require("fs");
 const https = require("https");
 const path = require("path");
+const rimraf = require("./rimraf");
 
 const FIREBASE_URL = "https://cd.smartface.io/repository/smartfacefirebase/ios/3.0.4/firebaseios.zip";
 
@@ -22,7 +23,7 @@ async function getIOSFirebasePlugin() {
 async function getAndroidFirebasePlugin() {
   const androidFirebasePath = path.normalize(path.join(__dirname, "Native/Android/firebaseplugin"));
   const projectPluginPath = path.normalize(path.join(__dirname, "../../../../plugins/Android/firebaseplugin"));
-  fs.rmSync(projectPluginPath, { recursive: true, force: true });
+  rimraf.sync(projectPluginPath, { recursive: true, force: true, disableGlob: true });
   return new Promise((resolve, reject) => {
     fs.rename(androidFirebasePath, projectPluginPath, (err) => {
       if (err) {
@@ -57,7 +58,7 @@ function addDefaultConfigToProjectJSON() {
 
 function deleteRemainders() {
   const nativePath = path.normalize(path.join(__dirname, "Native"));
-  fs.rmSync(nativePath, { recursive: true, force: true });
+  rimraf.sync(nativePath, { recursive: true, force: true, disableGlob: true });
 }
 
 Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
@@ -69,3 +70,4 @@ Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
     console.error("An error occurred : ", err);
     process.exit(1);
   });
+
