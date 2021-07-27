@@ -1,6 +1,6 @@
 function Fabric(params) {}
 
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 Fabric.NativeClass = requireClass("io.fabric.sdk.android.Fabric");
 
@@ -11,7 +11,7 @@ Fabric.with = function(kits){
 			arr.push(new kits[i].nativeClass());
 		}
 
-		const AndroidConfig = require('sf-core/util/Android/androidconfig');
+		const AndroidConfig = require('@smartface/native/util/Android/androidconfig');
 		var activity = AndroidConfig.activity;
 	    Fabric.NativeClass.with(activity, array(arr, "io.fabric.sdk.android.Kit"));
 	}	

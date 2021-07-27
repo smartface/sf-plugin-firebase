@@ -2,7 +2,7 @@ function Answers() {
 	this.nativeClass = Answers.NativeClass;
 }
 
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 Answers.NativeClass = requireClass("com.crashlytics.android.answers.Answers");
 Answers.CustomEvent = requireClass("com.crashlytics.android.answers.CustomEvent");

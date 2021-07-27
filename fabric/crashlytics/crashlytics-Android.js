@@ -2,7 +2,7 @@ function Crashlytics() {
 	this.nativeClass = Crashlytics.NativeClass;
 }
 
-const AndroidConfig = require("sf-core/util/Android/androidconfig");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
 Crashlytics.NativeClass = requireClass("com.crashlytics.android.Crashlytics");
 
