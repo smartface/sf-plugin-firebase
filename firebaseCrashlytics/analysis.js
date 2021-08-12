@@ -1,13 +1,12 @@
 /**
- * @class Crashlytics
+ * @class FirebaseCrashlytics
  * @since 1.0
- * @see https://fabric.io/home
  *
  * Spend less time finding and more time fixing crashes. 
  * Named the #1 performance SDK on both iOS and Android, Crashlytics provides deep and actionable insights, even the exact line of code your app crashed on.
  *
  */
-function Crashlytics(params){}
+function FirebaseCrashlytics(params){}
 
 /**
  * You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information. 
@@ -24,7 +23,7 @@ function Crashlytics(params){}
  * @static
  * @since 1.0
  */
-Crashlytics.setUserIdentifier = function(identifier){};
+FirebaseCrashlytics.setUserIdentifier = function(identifier){};
 
 /**
  * If you would like to take advantage of advanced user identifier features, you can setUserName function.
@@ -40,7 +39,7 @@ Crashlytics.setUserIdentifier = function(identifier){};
  * @static
  * @since 1.0
  */
-Crashlytics.setUserName = function(name){};
+FirebaseCrashlytics.setUserName = function(name){};
 
 /**
  * If you would like to take advantage of advanced user identifier features, you can setUserEmail function.
@@ -56,7 +55,7 @@ Crashlytics.setUserName = function(name){};
  * @static
  * @since 1.0
  */
-Crashlytics.setUserEmail = function(email){};
+FirebaseCrashlytics.setUserEmail = function(email){};
 
 /**
  * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
@@ -74,7 +73,7 @@ Crashlytics.setUserEmail = function(email){};
  * @static
  * @since 1.0
  */
-Crashlytics.setString = function(key, value){};
+FirebaseCrashlytics.setString = function(key, value){};
 
 /**
  * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
@@ -92,7 +91,7 @@ Crashlytics.setString = function(key, value){};
  * @static
  * @since 1.0
  */
-Crashlytics.setBool = function(key, value){};
+FirebaseCrashlytics.setBool = function(key, value){};
 
 /**
  * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
@@ -110,7 +109,7 @@ Crashlytics.setBool = function(key, value){};
  * @static
  * @since 1.0
  */
-Crashlytics.setFloat = function(key, value){};
+FirebaseCrashlytics.setFloat = function(key, value){};
 
 /**
  * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
@@ -128,7 +127,7 @@ Crashlytics.setFloat = function(key, value){};
  * @static
  * @since 1.0
  */
-Crashlytics.setInt = function(key, value){};
+FirebaseCrashlytics.setInt = function(key, value){};
 
 /**
  * Crashlytics version
@@ -143,6 +142,25 @@ Crashlytics.setInt = function(key, value){};
  * @static
  * @since 1.0
  */
-Crashlytics.getVersion = function(){};
+FirebaseCrashlytics.getVersion = function(){};
 
-module.exports = Crashlytics;
+
+/**
+ * Initialize Fabric and all provided kits.Only the first call to this method is honored. Subsequent calls are no-ops.
+ * Call this method within your `app.js` and provide the kits you wish to use.
+ *
+ *     @example
+ *      import Fabric from 'sf-plugin-firebase/fabric';
+ *      import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
+ *      Fabric.with([new Crashlytics()]);
+ *
+ * @method with
+ * @param {Array} kits
+ * @android
+ * @ios
+ * @static
+ * @since 1.0
+ */
+FirebaseCrashlytics.with = function(kits){};
+
+module.exports = FirebaseCrashlytics;

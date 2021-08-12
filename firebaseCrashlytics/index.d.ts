@@ -117,4 +117,19 @@ declare class Crashlytics {
      * @since 1.0
      */
     static getVersion(): string;
+
+
+    /**
+     * Initialize Fabric and all provided kits.Only the first call to this method is honored. Subsequent calls are no-ops.
+     * Call this method within your `app.ts` and provide the kits you wish to use.
+     *
+     *     @example
+     *      import Fabric from 'sf-plugin-firebase/fabric';
+     *      import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
+     *      Fabric.with([new Crashlytics()]);
+     * @android
+     * @ios
+     * @since 1.0
+     */
+    static with(kits: Array<(Crashlytics)>): void;
 }
