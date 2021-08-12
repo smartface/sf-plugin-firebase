@@ -3,18 +3,17 @@
  * @since 1.0
  *
  * Spend less time finding and more time fixing crashes. 
- * Named the #1 performance SDK on both iOS and Android, Crashlytics provides deep and actionable insights, even the exact line of code your app crashed on.
+ * Named the #1 performance SDK on both iOS and Android, FirebaseCrashlytics provides deep and actionable insights, even the exact line of code your app crashed on.
  *
  */
 function FirebaseCrashlytics(params){}
 
 /**
- * You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information. 
- * This value is displayed right in the Fabric dashboard.
+ * You can use FirebaseCrashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information. 
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setUserIdentifier("UserIdentifier");
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.setUserIdentifier("UserIdentifier");
  *
  * @method setUserIdentifier
  * @param {String} UserIdentifier
@@ -29,12 +28,11 @@ FirebaseCrashlytics.setUserIdentifier = function(identifier){};
  * If you would like to take advantage of advanced user identifier features, you can setUserName function.
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setUserName("UserName");
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.ios.setUserName("UserName");
  *
  * @method setUserName
  * @param {String} UserName
- * @android
  * @ios
  * @static
  * @since 1.0
@@ -45,12 +43,11 @@ FirebaseCrashlytics.setUserName = function(name){};
  * If you would like to take advantage of advanced user identifier features, you can setUserEmail function.
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setUserEmail("UserEmail");
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.ios.setUserEmail("UserEmail");
  *
  * @method setUserEmail
  * @param {String} UserEmail
- * @android
  * @ios
  * @static
  * @since 1.0
@@ -58,12 +55,12 @@ FirebaseCrashlytics.setUserName = function(name){};
 FirebaseCrashlytics.setUserEmail = function(email){};
 
 /**
- * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
+ * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
  * Setting keys are as easy as calling: Crashlytics.setString(key, value).
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setString("key","value");
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.setString("key","value");
  *
  * @method setString
  * @param {String} key
@@ -76,12 +73,12 @@ FirebaseCrashlytics.setUserEmail = function(email){};
 FirebaseCrashlytics.setString = function(key, value){};
 
 /**
- * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
+ * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
  * Setting keys are as easy as calling: Crashlytics.setBool(key, value).
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setBool("key",true);
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.setBool("key",true);
  *
  * @method setBool
  * @param {String} key
@@ -94,12 +91,12 @@ FirebaseCrashlytics.setString = function(key, value){};
 FirebaseCrashlytics.setBool = function(key, value){};
 
 /**
- * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
+ * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
  * Setting keys are as easy as calling: Crashlytics.setFloat(key, value).
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setFloat("key",true);
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.setFloat("key",true);
  *
  * @method setFloat
  * @param {String} key
@@ -112,12 +109,12 @@ FirebaseCrashlytics.setBool = function(key, value){};
 FirebaseCrashlytics.setFloat = function(key, value){};
 
 /**
- * Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable right from the Crashlytics dashboard. 
+ * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
  * Setting keys are as easy as calling: Crashlytics.setInt(key, value).
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.setInt("key",true);
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.setInt("key",true);
  *
  * @method setInt
  * @param {String} key
@@ -133,11 +130,10 @@ FirebaseCrashlytics.setInt = function(key, value){};
  * Crashlytics version
  *
  *     @example
- *      const Crashlytics = require('sf-plugin-fabric/crashlytics');
- *      Crashlytics.getVersion();
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.ios.getVersion();
  *
  * @method getVersion
- * @android
  * @ios
  * @static
  * @since 1.0
@@ -150,13 +146,11 @@ FirebaseCrashlytics.getVersion = function(){};
  * Call this method within your `app.js` and provide the kits you wish to use.
  *
  *     @example
- *      import Fabric from 'sf-plugin-firebase/fabric';
- *      import Crashlytics from 'sf-plugin-firebase/fabric/crashlytics';
- *      Fabric.with([new Crashlytics()]);
+ *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+ *      FirebaseCrashlytics.ios.with([new FirebaseCrashlytics()]);
  *
  * @method with
  * @param {Array} kits
- * @android
  * @ios
  * @static
  * @since 1.0
