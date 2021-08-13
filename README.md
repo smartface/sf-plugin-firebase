@@ -83,19 +83,37 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 
 **Step 5**
 - By default, crashlytic and its ndk is disabled so enable it, apply plugins & specify library project in dependencies.gradle which is located under `~/workspace/config/Android` folder. Such as;
+```groovy
+apply plugin:  'com.google.firebase.crashlytics'
+apply plugin:  'com.google.gms.google-services'
+
+dependencies {
+    implementation project(":firebaseplugin")
+}
+googleServices.disableVersionCheck = true
+```
 - (Optional) Add [Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon) 
 ```groovy
-dependencies {
-implementation project(":firebaseplugin")
-}
-apply plugin:  'com.google.gms.google-services'
 apply plugin:  'com.google.firebase.firebase-perf' //(Optional)
-apply plugin: 'io.fabric'  
-crashlytics {  
-    enableNdk=true  
-}
-ext.enableCrashlytics = false
 ```
+- (Optional) Add `nativeSymbolUploadEnabled` after `apply plugin` statements. This allows your app to process and upload native symbols to Crashlytics so you can view properly-symbolicated stack traces. Smartface framework contains CPP libraries. To investigate the problems with Smartface professionals, it's recommend.
+```groovy
+android {
+    buildTypes {
+        release {
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+            }
+        }
+    }
+}
+```
+If `nativeSymbolUploadEnabled` is true then add this below statement to your build process.
+```bash/script
+//call after assembling the project. eg ./gradlew app:assembleBUILT_TYPES
+> ./gradlew app:uploadCrashlyticsSymbolFile$BUILT_TYPES
+```
+
 - Congrats you have just done Android configuration.
 
 *Note:  By post-install scripts, Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
@@ -120,20 +138,17 @@ var firebaseConfig = {
     iosFile : iOSPlistFile
 };
 
-import Fabric from '@smartface/firebase/fabric';
-import Crashlytics from '@smartface/firebase/fabric/crashlytics';
-import Answers from '@smartface/firebase/fabric/answers';
+import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
 
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);
-  Fabric.with([new Crashlytics(), new Answers()]);
+  FirebaseCrashlytics.ios.with([new FirebaseCrashlytics()]);
 }
 ```
 ### Sample Page for Crashlytics
 ```typescript
 
-import Crashlytics from '@smartface/firebase/fabric/crashlytics';
-import Answers from '@smartface/firebase/fabric/answers';
+import FirebaseAnalytics from '@smartface/firebase/firebaseAnalytics';
 
 import Page1Design from 'generated/pages/page1'; // Generated default page on ts workspace
 
@@ -151,42 +166,26 @@ function onShow(superOnShow) {
     this.statusBar.visible = true;
     this.headerBar.visible = true;
 
-    /*
+     /*
       You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely     
       identifies the end-user of your application without disclosing or transmitting any of their personal 
-      information. This value is displayed right in the Fabric dashboard.
+      information. This value is displayed right in the FirebaseCrashlytics dashboard.
     */
-    Crashlytics.setUserIdentifier("UserIdentifier");
+    FirebaseCrashlytics.setUserIdentifier("UserIdentifier");
     
     // If you would like to take advantage of advanced user identifier features, you can additionally use both:
-    Crashlytics.setUserName("UserName");
-    Crashlytics.setUserEmail("UserEmail");
+    FirebaseCrashlytics.ios.setUserName("UserName");
+    FirebaseCrashlytics.ios.setUserEmail("UserEmail");
     
     /*
       Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable 
       right from the Crashlytics dashboard. Setting keys are as easy as calling: Crashlytics.setString(key, value) 
       or one of the related methods. Options are:
     */
-    Crashlytics.setString("key", "value");
-    Crashlytics.setBool("key", true);
-    Crashlytics.setFloat("key", 15.5);
-    Crashlytics.setInt("key", 12);
-
-    /*
-      To log a custom event to be sent to Answers, use the following.
-      You can also include a series of custom attributes to get even deeper insight into what’s happening in your 
-      app.
-      In addition to the recommended attributes for each event, you can also add custom attributes for any event. 
-      To log an event with a custom attribute, use the following.
-    */
-    Answers.logCustom('Log-Title', 
-      [
-        // Value must be only string or number
-        new Answers.CustomAttribute("key1","value1"), 
-        new Answers.CustomAttribute("key2",2)
-      ] 
-    );
-    
+    FirebaseCrashlytics.setString("keyString", "value");
+    FirebaseCrashlytics.setBool("setBool", true);
+    FirebaseCrashlytics.setFloat("setFloat", 15.5);
+    FirebaseCrashlytics.setInt("setInt", 12);
 }
 
 function onLoad(superOnLoad) {
@@ -219,7 +218,6 @@ import Firebase from '@smartface/firebase';
  * Init code
  */
 Firebase.analytics.logEvent(Firebase.analytics.Event.APP_OPEN);
-
 ```
 
 ## API docs (JavaScript) - For older versions
