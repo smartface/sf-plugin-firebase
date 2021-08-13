@@ -39,6 +39,7 @@ FirebaseCrashlytics.ios.setUserEmail = function(email){
 
 FirebaseCrashlytics.ios.getVersion = function(){
     //ToDo: No longer supported.
+    return 0;
 };
  
 FirebaseCrashlytics.ios.crash = function(){

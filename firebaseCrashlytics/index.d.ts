@@ -26,7 +26,7 @@ declare class FirebaseCrashlytics {
     static setUserIdentifier(identifier: string): void;
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: Crashlytics.setString(key, value).
+     * Setting keys are as easy as calling: FirebaseCrashlytics.setString(key, value).
      *
      *     @example
      *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
@@ -44,7 +44,7 @@ declare class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: Crashlytics.setBool(key, value).
+     * Setting keys are as easy as calling: FirebaseCrashlytics.setBool(key, value).
      *
      *     @example
      *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
@@ -62,7 +62,7 @@ declare class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: Crashlytics.setFloat(key, value).
+     * Setting keys are as easy as calling: FirebaseCrashlytics.setFloat(key, value).
      *
      *     @example
      *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
@@ -80,7 +80,7 @@ declare class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: Crashlytics.setInt(key, value).
+     * Setting keys are as easy as calling: FirebaseCrashlytics.setInt(key, value).
      *
      *     @example
      *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
@@ -127,7 +127,7 @@ declare class FirebaseCrashlytics {
      */
     setUserEmail(email: string): void;
     /**
-     * Crashlytics version
+     * FirebaseCrashlytics version. In Android, always returns 0.
      *
      *     @example
      *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
@@ -140,7 +140,7 @@ declare class FirebaseCrashlytics {
      */
     getVersion(): string;
      /**
-      * Initialize Fabric and all provided kits.Only the first call to this method is honored. Subsequent calls are no-ops.
+      * Initialize FirebaseCrashlytics and all provided kits.Only the first call to this method is honored. Subsequent calls are no-ops.
       * Call this method within your `app.js` and provide the kits you wish to use.
       *
       *     @example
