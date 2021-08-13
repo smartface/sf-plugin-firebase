@@ -19,7 +19,7 @@ FirebaseAnalytics.logEvent = function(name, params) {};
  *
  * @event setUserProperty
  * @param {String} name
- * @param {String | Number} value
+ * @param {String,Number} value
  * @android
  * @ios
  * @since 0.1
