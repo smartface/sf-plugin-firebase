@@ -1,5 +1,5 @@
 
-const FirebaseCrashlytics = {};
+function FirebaseCrashlytics (){};
 FirebaseCrashlytics.NativeClass = requireClass("com.google.firebase.crashlytics.FirebaseCrashlytics");
 const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
 
