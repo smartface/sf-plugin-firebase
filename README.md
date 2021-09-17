@@ -129,7 +129,7 @@ After initializing the Firebase, Firebase APIs can be used.
 Firebase has to be initialized before any use.
 
 ```typescript
-import Firebase from '@smartface/firebase';
+import Firebase from '@smartface/plugin-firebase';
 import File = require('@smartface/native/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
@@ -138,7 +138,7 @@ var firebaseConfig = {
     iosFile : iOSPlistFile
 };
 
-import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
+import FirebaseCrashlytics from '@smartface/plugin-firebase/firebaseCrashlytics';
 
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);
@@ -148,7 +148,7 @@ if (Firebase.apps().length === 0) {
 ### Sample Page for Crashlytics
 ```typescript
 
-import FirebaseAnalytics from '@smartface/firebase/firebaseAnalytics';
+import FirebaseAnalytics from '@smartface/plugin-firebase/firebaseAnalytics';
 
 import Page1Design from 'generated/pages/page1'; // Generated default page on ts workspace
 
@@ -199,7 +199,7 @@ All of the samples assumes that initialization has been completed
 ### Push Notifications
 ```typescript
 import * as Application from '@smartface/native/application';
-import Firebase from '@smartface/firebase';
+import Firebase from '@smartface/plugin-firebase';
 /*
  * Init code
  */
@@ -213,7 +213,7 @@ Firebase.messaging.subscribeToTopic("all"); //this triggers register for notific
 
 ### Sample Analtics
 ```typescript
-import Firebase from '@smartface/firebase';
+import Firebase from '@smartface/plugin-firebase';
 /*
  * Init code
  */
@@ -232,7 +232,7 @@ After initializing the Firebase, Firebase APIs can be used.
 
 Firebase has to be initialized before any use
 ```javascript
-const Firebase = require('@smartface/firebase');
+const Firebase = require('@smartface/plugin-firebase');
 const File = require('@smartface/native/io/file');
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
