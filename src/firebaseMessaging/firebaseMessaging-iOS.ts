@@ -1,10 +1,5 @@
 import { Invocation } from '@smartface/native/util';
 
-type FirebaseMessagingIOS = {
-    native: any;
-    onTokenReflesh: (token?: string) => void;
-};
-
 export class FirebaseMessaging {
     static ios: FirebaseMessagingIOS = {
         native: {},
