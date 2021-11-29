@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rm -rf lib && tsc",
     "watch": "rm -rf lib && tsc -w",
-    "postinstall": ""
+    "postinstall": "node postinstall.js"
   },
   "keywords": [
     "smartface",

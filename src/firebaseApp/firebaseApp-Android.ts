@@ -1,13 +1,13 @@
-const FirebaseAuth = require("../firebaseAuth");
-const AndroidConfig = require("@smartface/native/util/Android/androidconfig");
+const FirebaseAuth = require('../firebaseAuth');
+import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 function FirebaseApp(nativeFirebaseApp) {
     var self = this;
-    
+
     this.nativeObject = nativeFirebaseApp;
     Object.defineProperties(self, {
-        'auth': {
-            value: function() {
+        auth: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return new FirebaseAuth(self);
                 }
@@ -15,8 +15,8 @@ function FirebaseApp(nativeFirebaseApp) {
             enumerable: true,
             configurable: true
         },
-        'getName': {
-            value: function() {
+        getName: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return self.nativeObject.getName();
                 }
@@ -24,8 +24,8 @@ function FirebaseApp(nativeFirebaseApp) {
             enumerable: true,
             configurable: true
         },
-        'getApiKey': {
-            value: function() {
+        getApiKey: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return self.nativeObject.getOptions().getApiKey();
                 }
@@ -33,8 +33,8 @@ function FirebaseApp(nativeFirebaseApp) {
             enumerable: true,
             configurable: true
         },
-        'getApplicationId': {
-            value: function() {
+        getApplicationId: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return self.nativeObject.getOptions().getApplicationId();
                 }
@@ -42,8 +42,8 @@ function FirebaseApp(nativeFirebaseApp) {
             enumerable: true,
             configurable: true
         },
-        'getDatabaseUrl': {
-            value: function() {
+        getDatabaseUrl: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return self.nativeObject.getOptions().getDatabaseUrl();
                 }
@@ -51,8 +51,8 @@ function FirebaseApp(nativeFirebaseApp) {
             enumerable: true,
             configurable: true
         },
-        'getGcmSenderId': {
-            value: function() {
+        getGcmSenderId: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return self.nativeObject.getOptions().getGcmSenderId();
                 }
@@ -60,8 +60,8 @@ function FirebaseApp(nativeFirebaseApp) {
             enumerable: true,
             configurable: true
         },
-        'getStorageBucket': {
-            value: function() {
+        getStorageBucket: {
+            value: function () {
                 if (!AndroidConfig.isEmulator) {
                     return self.nativeObject.getOptions().getStorageBucket();
                 }
@@ -71,11 +71,11 @@ function FirebaseApp(nativeFirebaseApp) {
         }
     });
 
-    self.ios = { 
-        delete : function() {}, 
-        getBundleId : function() {}, 
-        getClientId : function() {}, 
-        getTrackingId : function() {} 
+    self.ios = {
+        delete: function () {},
+        getBundleId: function () {},
+        getClientId: function () {},
+        getTrackingId: function () {}
     };
 }
 

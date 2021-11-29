@@ -1,3 +1,4 @@
+// @ts-ignore
 import System from '@smartface/native/device/system';
 import type FirebaseMessagingAndroid from './firebaseMessaging-Android';
 import type FirebaseMessagingIOS from './firebaseMessaging-iOS';
