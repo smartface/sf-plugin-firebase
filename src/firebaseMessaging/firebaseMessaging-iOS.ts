@@ -7,8 +7,7 @@ export default class FirebaseMessaging {
         onTokenReflesh: () => {}
     };
     constructor() {
-        FirebaseMessaging.ios.native.FirebaseMessaging.ios.native.messaging = () =>
-            Invocation.invokeClassMethod('FIRMessaging', 'messaging', [], 'NSObject');
+        FirebaseMessaging.ios.native.messaging = () => Invocation.invokeClassMethod('FIRMessaging', 'messaging', [], 'NSObject');
 
         FirebaseMessaging.ios.native.FCMToken = () =>
             Invocation.invokeInstanceMethod(FirebaseMessaging.ios.native.messaging(), 'FCMToken', [], 'NSString');
