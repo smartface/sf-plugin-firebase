@@ -1,10 +1,11 @@
 // @ts-ignore
 const NativeFirebaseMessaging = requireClass('com.google.firebase.messaging.FirebaseMessaging');
-
+// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
+// @ts-ignore
 import Notifications from '@smartface/native/notifications';
 
-export class FirebaseMessaging {
+export default class FirebaseMessaging {
     static nativeObject: Function;
     static ios = { onTokenReflesh: () => {} };
     constructor() {

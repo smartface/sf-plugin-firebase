@@ -1,6 +1,7 @@
+// @ts-ignore
 import { Invocation } from '@smartface/native/util';
 
-export class FirebaseMessaging {
+export default class FirebaseMessaging {
     static ios: FirebaseMessagingIOS = {
         native: {},
         onTokenReflesh: () => {}

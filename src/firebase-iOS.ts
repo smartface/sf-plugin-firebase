@@ -1,10 +1,11 @@
+// @ts-ignore
 import { Invocation } from '@smartface/native/util';
 import FirebaseAnalytics from './firebaseAnalytics';
 import FirebaseApp from './firebaseApp';
 import FirebaseAuth from './firebaseAuth';
 import FirebaseMessaging from './firebaseMessaging';
 
-export class Firebase {
+export default class Firebase {
     static analytics = FirebaseAnalytics;
     static messaging = FirebaseMessaging;
 
@@ -21,10 +22,14 @@ export class Firebase {
 
             let nativeFirebaseApp;
             if (name) {
+                // @ts-ignore
                 FirebaseApp.ios.native.configureWithNameOptions(name, firOptions);
+                // @ts-ignore
                 nativeFirebaseApp = FirebaseApp.ios.native.appNamed(name);
             } else {
+                // @ts-ignore
                 FirebaseApp.ios.native.configureWithOptions(firOptions);
+                // @ts-ignore
                 nativeFirebaseApp = FirebaseApp.ios.native.defaultApp();
             }
             return new FirebaseApp(nativeFirebaseApp);
@@ -32,18 +37,21 @@ export class Firebase {
     }
 
     static app(name) {
-        var nativeFirebaseApp;
+        let nativeFirebaseApp;
         if (name) {
+            // @ts-ignore
             nativeFirebaseApp = FirebaseApp.ios.native.appNamed(name);
         } else {
+            // @ts-ignore
             nativeFirebaseApp = FirebaseApp.ios.native.defaultApp();
         }
         return new FirebaseApp(nativeFirebaseApp);
     }
 
     static apps() {
-        var apps = FirebaseApp.ios.native.allApps();
-        var appArray = [];
+        // @ts-ignore
+        const apps = FirebaseApp.ios.native.allApps();
+        let appArray: any = [];
         if (!apps) {
             return appArray;
         }
@@ -55,6 +63,7 @@ export class Firebase {
     }
 
     static auth(firebaseApp) {
+        // @ts-ignore
         return new FirebaseAuth(firebaseApp);
     }
 }
