@@ -9,22 +9,22 @@ export default class FirebaseMessaging {
     static nativeObject = !AndroidConfig.isEmulator ? () => NativeFirebaseMessaging.getInstance() : undefined;
     static ios = { onTokenReflesh: () => {} };
     // Required push permission for get token.
-    getToken(callback: (token?: string) => void) {
+    getToken = (callback: (token?: string) => void) => {
         if (!AndroidConfig.isEmulator) {
             Notifications.registerForPushNotifications(
                 (e) => callback(e.token),
                 () => callback(undefined)
             );
         }
-    }
-    subscribeToTopic(topic) {
+    };
+    subscribeToTopic = (topic) => {
         if (FirebaseMessaging.nativeObject) {
             FirebaseMessaging.nativeObject().subscribeToTopic(topic);
         }
-    }
-    unsubscribeFromTopic(topic) {
+    };
+    unsubscribeFromTopic = (topic) => {
         if (FirebaseMessaging.nativeObject) {
             FirebaseMessaging.nativeObject().unsubscribeFromTopic(topic);
         }
-    }
+    };
 }
