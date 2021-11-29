@@ -1,84 +1,57 @@
 const FirebaseAuth = require('../firebaseAuth');
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
-function FirebaseApp(nativeFirebaseApp) {
-    var self = this;
-
-    this.nativeObject = nativeFirebaseApp;
-    Object.defineProperties(self, {
-        auth: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return new FirebaseAuth(self);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getName: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getName();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getApiKey: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getOptions().getApiKey();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getApplicationId: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getOptions().getApplicationId();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getDatabaseUrl: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getOptions().getDatabaseUrl();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getGcmSenderId: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getOptions().getGcmSenderId();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getStorageBucket: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getOptions().getStorageBucket();
-                }
-            },
-            enumerable: true,
-            configurable: true
+export default class FirebaseApp {
+    nativeObject: any;
+    static ios = {};
+    ios: {};
+    constructor(nativeFirebaseApp: any) {
+        this.nativeObject = nativeFirebaseApp;
+        this.ios = {
+            delete: function () {},
+            getBundleId: function () {},
+            getClientId: function () {},
+            getTrackingId: function () {}
+        };
+    }
+    auth = () => {
+        if (!AndroidConfig.isEmulator) {
+            return new FirebaseAuth(this);
         }
-    });
+    };
+    getName: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getName();
+        }
+    };
 
-    self.ios = {
-        delete: function () {},
-        getBundleId: function () {},
-        getClientId: function () {},
-        getTrackingId: function () {}
+    getApiKey: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getOptions().getApiKey();
+        }
+    };
+
+    getApplicationId: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getOptions().getApplicationId();
+        }
+    };
+
+    getDatabaseUrl: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getOptions().getDatabaseUrl();
+        }
+    };
+
+    getGcmSenderId: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getOptions().getGcmSenderId();
+        }
+    };
+
+    getStorageBucket: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getOptions().getStorageBucket();
+        }
     };
 }
-
-FirebaseApp.ios = {};
-
-module.exports = FirebaseApp;

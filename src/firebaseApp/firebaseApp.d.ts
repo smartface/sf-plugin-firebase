@@ -1,0 +1,3 @@
+type FirebaseAppIOS = {
+    native?: any;
+};
