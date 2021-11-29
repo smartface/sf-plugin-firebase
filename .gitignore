@@ -8,3 +8,5 @@
 **/*.keystore
 **/signing.properties
 **/.tmp
+lib
+node_modules
