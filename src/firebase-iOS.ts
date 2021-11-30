@@ -4,12 +4,11 @@ import FirebaseAnalytics from './firebaseAnalytics';
 import FirebaseApp from './firebaseApp';
 import FirebaseAuth from './firebaseAuth';
 import FirebaseMessaging from './firebaseMessaging';
-
 export default class Firebase {
     static analytics = FirebaseAnalytics;
     static messaging = FirebaseMessaging;
 
-    static initializeApp(options, name) {
+    static initializeApp(name: string, options?: { iosFile: any }) {
         if (options && options.iosFile.exists) {
             const pathPlist = options.iosFile.nativeObject.getActualPath();
 
@@ -22,34 +21,27 @@ export default class Firebase {
 
             let nativeFirebaseApp;
             if (name) {
-                // @ts-ignore
                 FirebaseApp.ios.native.configureWithNameOptions(name, firOptions);
-                // @ts-ignore
                 nativeFirebaseApp = FirebaseApp.ios.native.appNamed(name);
             } else {
-                // @ts-ignore
                 FirebaseApp.ios.native.configureWithOptions(firOptions);
-                // @ts-ignore
                 nativeFirebaseApp = FirebaseApp.ios.native.defaultApp();
             }
             return new FirebaseApp(nativeFirebaseApp);
         }
     }
 
-    static app(name) {
+    static app(name: string) {
         let nativeFirebaseApp;
         if (name) {
-            // @ts-ignore
             nativeFirebaseApp = FirebaseApp.ios.native.appNamed(name);
         } else {
-            // @ts-ignore
             nativeFirebaseApp = FirebaseApp.ios.native.defaultApp();
         }
         return new FirebaseApp(nativeFirebaseApp);
     }
 
     static apps() {
-        // @ts-ignore
         const apps = FirebaseApp.ios.native.allApps();
         let appArray: any = [];
         if (!apps) {
@@ -63,7 +55,6 @@ export default class Firebase {
     }
 
     static auth(firebaseApp) {
-        // @ts-ignore
         return new FirebaseAuth(firebaseApp);
     }
 }

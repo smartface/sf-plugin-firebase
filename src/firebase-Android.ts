@@ -15,7 +15,7 @@ export default class Firebase {
     static messaging = FirebaseMessaging;
     static iOS = {};
 
-    static initializeApp(options, name) {
+    static initializeApp(name: string, options?: { iosFile: any }) {
         if (!AndroidConfig.isEmulator) {
             const nativeFirebaseApp = name
                 ? NativeFirebaseApp.initializeApp(AndroidConfig.activity, name)
@@ -27,7 +27,7 @@ export default class Firebase {
         }
     }
 
-    static app(name) {
+    static app(name: string) {
         if (!AndroidConfig.isEmulator) {
             const nativeFirebaseApp = name ? NativeFirebaseApp.getInstance(name) : NativeFirebaseApp.getInstance();
             return new FirebaseApp(nativeFirebaseApp);
@@ -38,11 +38,10 @@ export default class Firebase {
     }
 
     static apps() {
-        const result = [];
+        const result: FirebaseApp[] = [];
         if (!AndroidConfig.isEmulator) {
             var appList = NativeFirebaseApp.getApps(AndroidConfig.activity);
             for (var i = 0; i < appList.size(); i++) {
-                // @ts-ignore
                 result.push(new FirebaseApp(appList.get(i)));
             }
         }
@@ -51,7 +50,6 @@ export default class Firebase {
 
     static auth(firebaseApp) {
         if (!AndroidConfig.isEmulator) {
-            // @ts-ignore
             return new FirebaseAuth(firebaseApp);
         } else {
             return new FirebaseAuth();

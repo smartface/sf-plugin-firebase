@@ -1,4 +1,5 @@
 const FirebaseAuth = require('../firebaseAuth');
+// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 export default class FirebaseApp {

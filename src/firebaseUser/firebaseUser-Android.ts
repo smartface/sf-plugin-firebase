@@ -8,368 +8,534 @@ const NativeUserProfileChangeRequest = requireClass('com.google.firebase.auth.Us
 const NativeEmailAuthProvider = requireClass('com.google.firebase.auth.EmailAuthProvider');
 // @ts-ignore
 const NativeUri = requireClass('android.net.Uri');
-const FirebaseAuthError = require('../firebaseAuth/firebaseAuthErrors');
+import FirebaseAuthError from '../firebaseAuth/firebaseAuthErrors';
 
-const AndroidConfig = require('@smartface/native/util/Android/androidconfig');
+// @ts-ignore
+import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
-function FirebaseUser(nativeUser) {
-    var self = this;
+type FirebaseUserErrorBody = {
+    code?: FirebaseAuthError;
+    description: string;
+};
 
-    if (!AndroidConfig.isEmulator) {
-        this.nativeObject = nativeUser;
+type FirebaseUserCallback = (
+    FirebaseUser: any,
+    options?: {
+        error: FirebaseUserErrorBody;
+        isSuccess?: boolean;
+        email?: string;
+        token?: string;
+    }
+) => void | ((arg: boolean) => void);
+
+export default class FirebaseUser {
+    nativeObject: any;
+    ios = {};
+    static ios = {};
+    constructor(nativeUser) {
+        if (!AndroidConfig.isEmulator) {
+            this.nativeObject = nativeUser;
+        }
     }
 
-    Object.defineProperties(self, {
-        getEmail: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getEmail();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getDisplayName: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getDisplayName();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        setDisplayName: {
-            value: function (name, callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var profileUpdates = new NativeUserProfileChangeRequest.Builder();
-                    profileUpdates = profileUpdates.setDisplayName(name);
-                    var request = profileUpdates.build();
-
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            callback(false, e.getMessage());
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.updateProfile(request);
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getPhotoURL: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getPhotoUrl();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        setPhotoURL: {
-            value: function (url, callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var profileUpdates = new NativeUserProfileChangeRequest.Builder();
-                    profileUpdates = profileUpdates.setPhotoUri(NativeUri.parse(url));
-                    var request = profileUpdates.build();
-
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            callback(false, e.getMessage());
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.updateProfile(request);
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        sendEmailVerification: {
-            value: function (callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            var errorCode = '' + e.getErrorCode();
-
-                            if (errorCode.includes('ERROR_USER_DISABLED')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.UserDisabled, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_USER_NOT_FOUND')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.UserNotFound, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_USER_TOKEN_EXPIRED')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.UserTokenExpired, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_INVALID_USER_TOKEN')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.InvalidUserToken, description: e.getMessage() });
-                            } else {
-                                callback(false, { code: undefined, description: e.getMessage() });
-                            }
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.sendEmailVerification();
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        isEmailVerified: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.isEmailVerified();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        updateEmail: {
-            value: function (email, callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            var errorCode = '' + e.getErrorCode();
-
-                            if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
-                                callback(false, { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
-                                callback(false, { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
-                                callback(false, { code: FirebaseAuthError.EmailAlreadyInUse, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
-                                callback(false, { code: FirebaseAuthError.WeakPassword, description: e.getMessage() });
-                            } else if (errorCode.includes('recent')) {
-                                callback(false, { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() });
-                            } else {
-                                callback(false, { code: undefined, description: e.getMessage() });
-                            }
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.updateEmail(email);
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        updatePassword: {
-            value: function (password, callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            var errorCode = '' + e.getErrorCode();
-
-                            if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
-                                callback(false, { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
-                                callback(false, { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
-                                callback(false, { code: FirebaseAuthError.EmailAlreadyInUse, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
-                                callback(false, { code: FirebaseAuthError.WeakPassword, description: e.getMessage() });
-                            } else if (errorCode.includes('recent')) {
-                                callback(false, { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() });
-                            } else {
-                                callback(false, { code: undefined, description: e.getMessage() });
-                            }
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.updatePassword(password);
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        reload: {
-            value: function (callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            var errorCode = '' + e.getErrorCode();
-
-                            if (errorCode.includes('recent')) {
-                                callback(false, { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() });
-                            } else {
-                                callback(false, { code: undefined, description: e.getMessage() });
-                            }
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.reload();
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        delete: {
-            value: function (callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            var errorCode = '' + e.getErrorCode();
-
-                            if (errorCode.includes('recent')) {
-                                callback(false, { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() });
-                            } else {
-                                callback(false, { code: undefined, description: e.getMessage() });
-                            }
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.delete();
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        reauthenticate: {
-            value: function (email, password, callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var credential = NativeEmailAuthProvider.getCredential(email, password);
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(true);
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            var errorCode = '' + e.getErrorCode();
-
-                            if (errorCode.includes('ERROR_USER_DISABLED')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.UserDisabled, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_USER_NOT_FOUND')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.UserMismatch, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_WRONG_PASSWORD')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.WrongPassword, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() });
-                            } else if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
-                                // thrown if the password is not strong enough
-                                callback(false, { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() });
-                            } else {
-                                callback(false, { code: undefined, description: e.getMessage() });
-                            }
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.reauthenticate(credential);
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getUID: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.getUid();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        isAnonymous: {
-            value: function () {
-                if (!AndroidConfig.isEmulator) {
-                    return self.nativeObject.isAnonymous();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        },
-        getIdToken: {
-            value: function (forceRefresh, callback) {
-                if (!AndroidConfig.isEmulator) {
-                    var innerSuccessCallback = NativeOnSuccessListener.implement({
-                        onSuccess: function (result) {
-                            callback(result.getToken());
-                        }
-                    });
-
-                    var innerFailureCallback = NativeOnFailureListener.implement({
-                        onFailure: function (e) {
-                            callback(undefined, e.getMessage());
-                        }
-                    });
-
-                    var tokenTask = self.nativeObject.getToken(forceRefresh);
-                    tokenTask.addOnSuccessListener(innerSuccessCallback);
-                    tokenTask.addOnFailureListener(innerFailureCallback);
-                }
-            },
-            enumerable: true,
-            configurable: true
+    /**
+     * Returns the main email address of the user, as stored in the Firebase project's user database.
+     *
+     * @event getEmail
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    getEmail: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getEmail();
         }
-    });
+    };
 
-    self.ios = {};
+    /**
+     * Returns the main display name of this user from the Firebase project's user database.
+     *
+     * @event getDisplayName
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    getDisplayName: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getDisplayName();
+        }
+    };
+
+    /**
+     * Set displayName.
+     *
+     * @event setDisplayName
+     * @param {String} displayName
+     * @param {Function} callback
+     * @param {String} callback.token
+     * @param {String} callback.error
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    setDisplayName = (name: string, callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            let profileUpdates = new NativeUserProfileChangeRequest.Builder();
+            profileUpdates = profileUpdates.setDisplayName(name);
+            const request = profileUpdates.build();
+
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    callback(false, e.getMessage());
+                }
+            });
+
+            const tokenTask = this.nativeObject.updateProfile(request);
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Returns the URL of this user's main profile picture, as stored in the Firebase project's user database.
+     *
+     * @event NtosURL
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    getPhotoURL: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getPhotoUrl();
+        }
+    };
+
+    /**
+     * Set photoURL.
+     *
+     * @event setPhotoURL
+     * @param {String} photoURL
+     * @param {Function} callback
+     * @param {String} callback.token
+     * @param {String} callback.error
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    setPhotoURL = (url: string, callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            let profileUpdates = new NativeUserProfileChangeRequest.Builder();
+            profileUpdates = profileUpdates.setPhotoUri(NativeUri.parse(url));
+            const request = profileUpdates.build();
+
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    callback(false, e.getMessage());
+                }
+            });
+
+            const tokenTask = this.nativeObject.updateProfile(request);
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Initiates email verification for the user.
+     *
+     *  Possible error code;
+     *   + `UserNotFound` - Indicates the user account was not found.
+     *   + `UserDisabled`
+     *   + `InvalidUserToken`
+     *   + `UserTokenExpired`
+     *
+     * @event sendEmailVerification
+     * @param {Function} callback
+     * @param {Boolean} callback.isSuccess
+     * @param {Object} callback.error
+     * @param {String} callback.error.code
+     * @param {String} callback.error.description
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    sendEmailVerification = (callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    const errorCode = '' + e.getErrorCode();
+
+                    if (errorCode.includes('ERROR_USER_DISABLED')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.UserDisabled, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_USER_NOT_FOUND')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.UserNotFound, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_USER_TOKEN_EXPIRED')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.UserTokenExpired, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_INVALID_USER_TOKEN')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.InvalidUserToken, description: e.getMessage() } });
+                    } else {
+                        callback(false, { error: { code: undefined, description: e.getMessage() } });
+                    }
+                }
+            });
+
+            const tokenTask = this.nativeObject.sendEmailVerification();
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Indicates the email address associated with this user has been verified.
+     *
+     * @event isEmailVerified
+     * @return {Boolean} verified
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    isEmailVerified: () => boolean = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.isEmailVerified();
+        }
+    };
+
+    /**
+     * Update email.
+     *
+     *  Possible error code;
+     *   + `EmailAlreadyInUse`
+     *   + `InvalidEmail`
+     *   + `RequiresRecentLogin`
+     *
+     * @event updateEmail
+     * @param {String} email
+     * @param {Function} callback
+     * @param {Boolean} callback.isSuccess
+     * @param {Object} callback.error
+     * @param {String} callback.error.code
+     * @param {String} callback.error.description
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    updateEmail = (email: string, callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    const errorCode = '' + e.getErrorCode();
+
+                    if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
+                        callback(false, { error: { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
+                        callback(false, { error: { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
+                        callback(false, { error: { code: FirebaseAuthError.EmailAlreadyInUse, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
+                        callback(false, { error: { code: FirebaseAuthError.WeakPassword, description: e.getMessage() } });
+                    } else if (errorCode.includes('recent')) {
+                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                    } else {
+                        callback(false, { error: { code: undefined, description: e.getMessage() } });
+                    }
+                }
+            });
+
+            const tokenTask = this.nativeObject.updateEmail(email);
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Update password.
+     *
+     *  Possible error code;
+     *   + `OperationNotAllowed`
+     *   + `WeakPassword`
+     *   + `RequiresRecentLogin`
+     *
+     * @event updatePassword
+     * @param {String} password
+     * @param {Function} callback
+     * @param {Boolean} callback.isSuccess
+     * @param {Object} callback.error
+     * @param {String} callback.error.code
+     * @param {String} callback.error.description
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    updatePassword = (password: string, callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    const errorCode = '' + e.getErrorCode();
+
+                    if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
+                        callback(false, { error: { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
+                        callback(false, { error: { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
+                        callback(false, { error: { code: FirebaseAuthError.EmailAlreadyInUse, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
+                        callback(false, { error: { code: FirebaseAuthError.WeakPassword, description: e.getMessage() } });
+                    } else if (errorCode.includes('recent')) {
+                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                    } else {
+                        callback(false, { error: { code: undefined, description: e.getMessage() } });
+                    }
+                }
+            });
+
+            const tokenTask = this.nativeObject.updatePassword(password);
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Reloads the user’s profile data from the server.
+     * 
+     *  Possible error code;
+     *      `RequiresRecentLogin` - Updating email is a security sensitive
+                operation that requires a recent login from the user. This error indicates the user
+                has not signed in recently enough.
+    *
+    * @event reload
+    * @param {Function} callback
+    * @param {Boolean} callback.isSuccess
+    * @param {Object} callback.error
+    * @param {String} callback.error.code
+    * @param {String} callback.error.description
+    * @android
+    * @ios
+    * @since 0.1
+    */
+    reload = (callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    const errorCode = '' + e.getErrorCode();
+
+                    if (errorCode.includes('recent')) {
+                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                    } else {
+                        callback(false, { error: { code: undefined, description: e.getMessage() } });
+                    }
+                }
+            });
+
+            const tokenTask = this.nativeObject.reload();
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Deletes the user record from your Firebase project's database. 
+     * If the operation is successful, the user will be signed out.
+     * 
+     *  Possible error code;
+     *      `RequiresRecentLogin` - Updating email is a security sensitive
+                operation that requires a recent login from the user. This error indicates the user
+                has not signed in recently enough.
+    *
+    * @event delete
+    * @param {Function} callback
+    * @param {Boolean} callback.isSuccess
+    * @param {Object} callback.error
+    * @param {String} callback.error.code
+    * @param {String} callback.error.description
+    * @android
+    * @ios
+    * @since 0.1
+    */
+    delete = (callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    const errorCode = '' + e.getErrorCode();
+
+                    if (errorCode.includes('recent')) {
+                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                    } else {
+                        callback(false, { error: { code: undefined, description: e.getMessage() } });
+                    }
+                }
+            });
+
+            const tokenTask = this.nativeObject.delete();
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Reauthenticate.
+     *
+     *  Possible error code;
+     *   + `OperationNotAllowed`
+     *   + `UserDisabled`
+     *   + `WrongPassword`
+     *   + `UserMismatch`
+     *   + `InvalidEmail`
+     *
+     * @event reauthenticate
+     * @param {String} email
+     * @param {String} password
+     * @param {Function} callback
+     * @param {Boolean} callback.isSuccess
+     * @param {Object} callback.error
+     * @param {String} callback.error.code
+     * @param {String} callback.error.description
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    reauthenticate = (email: string, password: string, callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const credential = NativeEmailAuthProvider.getCredential(email, password);
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(true);
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    const errorCode = '' + e.getErrorCode();
+
+                    if (errorCode.includes('ERROR_USER_DISABLED')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.UserDisabled, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_USER_NOT_FOUND')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.UserMismatch, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_WRONG_PASSWORD')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.WrongPassword, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() } });
+                    } else if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
+                        // thrown if the password is not strong enough
+                        callback(false, { error: { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() } });
+                    } else {
+                        callback(false, { error: { code: undefined, description: e.getMessage() } });
+                    }
+                }
+            });
+
+            const tokenTask = this.nativeObject.reauthenticate(credential);
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Returns a string used to uniquely identify your user in your Firebase project's user database.
+     *
+     * @event getUID
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    getUID: () => string = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getUid();
+        }
+    };
+
+    /**
+     * Returns true if the user is anonymous.
+     *
+     * @event isAnonymous
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    isAnonymous: () => boolean = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.isAnonymous();
+        }
+    };
+
+    /**
+     * Returns token.
+     *
+     * @event getIdToken
+     * @param {Boolean} forceRefresh
+     * @param {Function} callback
+     * @param {String} callback.token
+     * @param {String} callback.error
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    getIdToken = (forceRefresh: boolean, callback: FirebaseUserCallback) => {
+        if (!AndroidConfig.isEmulator) {
+            const innerSuccessCallback = NativeOnSuccessListener.implement({
+                onSuccess: function (result) {
+                    callback(result.getToken());
+                }
+            });
+
+            const innerFailureCallback = NativeOnFailureListener.implement({
+                onFailure: function (e) {
+                    callback(undefined, e.getMessage());
+                }
+            });
+
+            const tokenTask = this.nativeObject.getToken(forceRefresh);
+            tokenTask.addOnSuccessListener(innerSuccessCallback);
+            tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
 }
-
-FirebaseUser.ios = {};
-
-module.exports = FirebaseUser;

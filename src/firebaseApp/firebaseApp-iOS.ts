@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Invocation } from '@smartface/native/util';
 const FirebaseAuth = require('../firebaseAuth');
 
