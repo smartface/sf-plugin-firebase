@@ -1,7 +1,7 @@
 export = FirebaseAnalytics;
 
-import CustomAttribute from "./customAttribute";
-import PredefinedEvent from "./firebaseAnalyticsEvent";
+import CustomAttribute from './customAttribute';
+import PredefinedEvent from './firebaseAnalyticsEvent';
 
 /**
  * Firebase Analytics service
@@ -12,7 +12,7 @@ import PredefinedEvent from "./firebaseAnalyticsEvent";
 declare class FirebaseAnalytics {
     private constructor(); // To prevent creating instance
     /**
-     * Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported. 
+     * Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported.
      * Using predefined events and/or parameters is recommended for optimal reporting.
      *
      * @android
@@ -21,7 +21,7 @@ declare class FirebaseAnalytics {
      */
     static logEvent(name: string, params: FirebaseAnalytics.CustomAttribute | FirebaseAnalytics.CustomAttribute[]): void;
     /**
-     * Sets a user property to a given value. Up to 25 user property names are supported. 
+     * Sets a user property to a given value. Up to 25 user property names are supported.
      * Once set, user property values persist throughout the app lifecycle and across sessions.
      *
      * @android
@@ -40,8 +40,8 @@ declare class FirebaseAnalytics {
     static setUserId(id: string);
 
     /**
-     * Sets the current screen name, which specifies the current visual context in your app. 
-     * This helps identify the areas in your app where users spend their time and how they interact with your app. 
+     * Sets the current screen name, which specifies the current visual context in your app.
+     * This helps identify the areas in your app where users spend their time and how they interact with your app.
      * Must be called on the main thread.
      *
      * @android
@@ -58,17 +58,17 @@ declare namespace FirebaseAnalytics {
      *     @example
      *      const Answers = require('sf-plugin-fabric/answers');
      *		var attribute1 = new Answers.CustomAttribute("key","value");
-    *		var attribute2 = new Answers.CustomAttribute("key",12);
-    *
-    * @android
-    * @ios
-    * @static
-    * @since 1.0
-    */
+     *		var attribute2 = new Answers.CustomAttribute("key",12);
+     *
+     * @android
+     * @ios
+     * @static
+     * @since 1.0
+     */
     class CustomAttribute {
         constructor(key: String, value: string | number);
         key: string;
         value: string | number;
     }
-    export import Event = PredefinedEvent; 
+    export import Event = PredefinedEvent;
 }

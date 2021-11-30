@@ -4,72 +4,109 @@ const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.Fire
 const NativeBundle = requireClass('android.os.Bundle');
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
+import FirebaseAnalyticsEvent from './firebaseAnalyticsEvent';
+import FirebaseAnalyticsParam from './firebaseAnalyticsParam';
 
-function FirebaseAnalytics() {}
-
-if (!AndroidConfig.isEmulator) {
-    FirebaseAnalytics.nativeObject = function () {
-        return NativeFirebaseAnalytics.getInstance(AndroidConfig.activity);
+export default class FirebaseAnalytics {
+    static ios = {};
+    static nativeObject = !AndroidConfig.isEmulator ? () => NativeFirebaseAnalytics.getInstance(AndroidConfig.activity) : undefined;
+    static Event = FirebaseAnalyticsEvent;
+    static Param = FirebaseAnalyticsParam;
+    /**
+     * CustomAttribute for logCustom.
+     *
+     *     @example
+     *      const Answers = require('sf-plugin-fabric/answers');
+     *		var attribute1 = new Answers.CustomAttribute("key","value");
+     *		var attribute2 = new Answers.CustomAttribute("key",12);
+     *
+     * @android
+     * @ios
+     * @static
+     * @since 1.0
+     */
+    static CustomAttribute = class {
+        key: string;
+        value: string | number;
+        constructor(key: string, value: string | number) {
+            this.key = key;
+            this.value = value;
+        }
     };
-}
 
-FirebaseAnalytics.CustomAttribute = require('./customAttribute');
-FirebaseAnalytics.Event = require('./firebaseAnalyticsEvent');
-FirebaseAnalytics.Param = require('./firebaseAnalyticsParam');
+    /**
+     * Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported.
+     * Using predefined events and/or parameters is recommended for optimal reporting.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    static logEvent = (
+        name: string,
+        customAttributes: InstanceType<typeof FirebaseAnalytics.CustomAttribute> | InstanceType<typeof FirebaseAnalytics.CustomAttribute>[]
+    ): void => {
+        if (!AndroidConfig.isEmulator) {
+            const bundle = new NativeBundle();
 
-Object.defineProperties(FirebaseAnalytics, {
-    logEvent: {
-        value: function (name, customAttributes) {
-            if (!AndroidConfig.isEmulator) {
-                var bundle = new NativeBundle();
-
-                if (customAttributes instanceof Array) {
-                    for (var i = 0; i < customAttributes.length; i++) {
-                        let value = customAttributes[i].value;
-                        if (typeof value === 'string') {
-                            bundle.putString(customAttributes[i].key, value);
-                        } else if (typeof value === 'number') {
-                            if (Number.isInteger(value)) bundle.putInt(customAttributes[i].key, value);
-                            else bundle.putDouble(customAttributes[i].key, value);
-                        }
+            if (customAttributes instanceof Array) {
+                for (let i = 0; i < customAttributes.length; i++) {
+                    let value = customAttributes[i].value;
+                    if (typeof value === 'string') {
+                        bundle.putString(customAttributes[i].key, value);
+                    } else if (typeof value === 'number') {
+                        if (Number.isInteger(value)) bundle.putInt(customAttributes[i].key, value);
+                        else bundle.putDouble(customAttributes[i].key, value);
                     }
                 }
+            }
+            // @ts-ignore
+            FirebaseAnalytics.nativeObject().logEvent(name, bundle);
+        }
+    };
 
-                FirebaseAnalytics.nativeObject().logEvent(name, bundle);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    },
-    setUserProperty: {
-        value: function (name, value) {
-            if (!AndroidConfig.isEmulator) {
-                FirebaseAnalytics.nativeObject().setUserProperty(name, value);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    },
-    setUserId: {
-        value: function (id) {
-            if (!AndroidConfig.isEmulator) {
-                FirebaseAnalytics.nativeObject().setUserId(id);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    },
-    setCurrentScreen: {
-        value: function (screenName, screenClassOverride) {
-            if (!AndroidConfig.isEmulator) {
-                FirebaseAnalytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    }
-});
+    /**
+     * Sets a user property to a given value. Up to 25 user property names are supported.
+     * Once set, user property values persist throughout the app lifecycle and across sessions.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    static setUserProperty = (name: string, value: string) => {
+        if (!AndroidConfig.isEmulator) {
+            // @ts-ignore
+            FirebaseAnalytics.nativeObject().setUserProperty(name, value);
+        }
+    };
 
-FirebaseAnalytics.ios = {};
+    /**
+     * Sets the user ID property. This feature must be used in accordance with Google’s Privacy Policy.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    static setUserId = (id: string) => {
+        if (!AndroidConfig.isEmulator) {
+            // @ts-ignore
+            FirebaseAnalytics.nativeObject().setUserId(id);
+        }
+    };
 
-module.exports = FirebaseAnalytics;
+    /**
+     * Sets the current screen name, which specifies the current visual context in your app.
+     * This helps identify the areas in your app where users spend their time and how they interact with your app.
+     * Must be called on the main thread.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    static setCurrentScreen = (screenName: string, screenClassOverride: null) => {
+        if (!AndroidConfig.isEmulator) {
+            // @ts-ignore
+            FirebaseAnalytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
+        }
+    };
+}
