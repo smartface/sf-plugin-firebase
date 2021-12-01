@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rm -rf lib && tsc",
     "watch": "rm -rf lib && tsc -w",
-    "postinstall": "node postinstall.js"
+    "postinstall": "node -e \"if (require('fs').existsSync('config/project.json')){require('child_process').fork('postinstall.js');} \""
   },
   "keywords": [
     "smartface",
