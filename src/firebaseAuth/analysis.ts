@@ -1,4 +1,4 @@
-class FirebaseAuth {
+export default class FirebaseAuth {
     ios: {
         /**
          * The current user language code. This property can be set to the app's current language by

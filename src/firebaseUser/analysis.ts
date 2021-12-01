@@ -1,4 +1,4 @@
-class FirebaseUser {
+export default class FirebaseUser {
     /**
      * Returns the main email address of the user, as stored in the Firebase project's user database.
      *

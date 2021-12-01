@@ -1,4 +1,4 @@
-class FirebaseApp {
+export default class FirebaseApp {
     static ios: FirebaseAppIOS = {
         native: {}
     };
