@@ -22,6 +22,6 @@
 		"noImplicitAny": false,
 		"strictBindCallApply": true
 	},
-	"include": ["src"],
+	"include": ["./src/**/*.ts"],
 	"exclude": ["node_modules", "lib"]
 }

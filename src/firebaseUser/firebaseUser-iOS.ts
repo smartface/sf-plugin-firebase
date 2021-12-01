@@ -1,4 +1,4 @@
-import FirebaseAuthErrors from 'firebaseAuth/firebaseAuthErrors';
+import FirebaseAuthErrors from '../firebaseAuth/firebaseAuthErrors';
 
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';

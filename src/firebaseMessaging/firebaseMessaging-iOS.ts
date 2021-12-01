@@ -69,12 +69,39 @@ export default class FirebaseMessaging {
 
         FirebaseMessaging.ios.native.messagingDidReceiveRegistrationToken();
     }
+    /**
+     * Asynchronously subscribes to a topic.
+     *
+     * @event subscribeToTopic
+     * @param {String} topic
+     * @android
+     * @ios
+     * @since 0.1
+     */
     static subscribeToTopic(topic: string) {
         FirebaseMessaging.ios.native.subscribeToTopic(topic);
     }
+    /**
+     * Asynchronously unsubscribe from a topic.
+     *
+     * @event unsubscribeFromTopic
+     * @param {String} topic
+     * @android
+     * @ios
+     * @since 0.1
+     */
     static unsubscribeFromTopic(topic: string) {
         FirebaseMessaging.ios.native.unsubscribeFromTopic(topic);
     }
+    /**
+     * iOS : Returns the FCM token.
+     * Android : Returns the notification token.
+     *
+     * @event getToken
+     * @android
+     * @ios
+     * @since 0.1
+     */
     static getToken(callback: (token?: string) => void) {
         typeof callback === 'function' && callback(FirebaseMessaging.ios.native.FCMToken());
     }

@@ -1,5 +1,7 @@
 export default class FirebaseApp {
-    static ios: FirebaseAppIOS = {
+    static ios: {
+        native?: any;
+    } = {
         native: {}
     };
     /**

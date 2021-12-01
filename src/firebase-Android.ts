@@ -38,7 +38,7 @@ export default class Firebase {
     }
 
     static apps() {
-        const result: FirebaseApp[] = [];
+        const result: InstanceType<typeof FirebaseApp>[] = [];
         if (!AndroidConfig.isEmulator) {
             var appList = NativeFirebaseApp.getApps(AndroidConfig.activity);
             for (var i = 0; i < appList.size(); i++) {

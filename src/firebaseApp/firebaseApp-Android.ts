@@ -2,10 +2,15 @@ import FirebaseAuth from '../firebaseAuth';
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
+/**
+ * @classdesc Firebase App
+ * @class
+ */
 export default class FirebaseApp {
     nativeObject: any;
     static ios = {};
     ios: {};
+    android = {};
     constructor(nativeFirebaseApp: any) {
         this.nativeObject = nativeFirebaseApp;
         this.ios = {

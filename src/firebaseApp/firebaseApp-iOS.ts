@@ -2,6 +2,10 @@
 import { Invocation } from '@smartface/native/util';
 import FirebaseAuth from '../firebaseAuth';
 
+/**
+ * @classdesc Firebase App
+ * @class
+ */
 export default class FirebaseApp {
     nativeObject: any;
     android: any;
@@ -12,7 +16,9 @@ export default class FirebaseApp {
         getClientId?: () => any;
         getTrackingId?: () => any;
     };
-    static ios: FirebaseAppIOS = {
+    static ios: {
+        native?: any;
+    } = {
         native: {}
     };
     constructor(nativeObject: any) {
@@ -125,7 +131,7 @@ export default class FirebaseApp {
      * @ios
      * @since 0.1
      */
-    auth = () => {
+    auth: () => InstanceType<typeof FirebaseAuth> | undefined = () => {
         return new FirebaseAuth(this);
     };
 

@@ -15,7 +15,7 @@ type FirebaseUserErrorBody = {
 };
 
 type FirebaseUserCallback = (
-    FirebaseUser?: FirebaseUser,
+    FirebaseUser?: any,
     options?: {
         error: FirebaseUserErrorBody;
         isSuccess?: boolean;
@@ -38,6 +38,7 @@ export default class FirebaseAuth {
         useAppLanguage: function () {}
     };
     nativeObject;
+    nativeAuth = {};
     constructor(FirebaseApp?: any) {
         this.FirebaseApp = FirebaseApp;
         this.nativeObject = !AndroidConfig.isEmulator
