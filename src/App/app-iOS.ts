@@ -70,22 +70,27 @@ export default class FirebaseApp {
         FirebaseApp.ios = {};
         FirebaseApp.ios.native = {};
         FirebaseApp.ios.native.configureWithOptions = function (firOptions) {
+            // @ts-ignore
             const argOptions = new Invocation.Argument({
                 type: 'NSObject',
                 value: firOptions
             });
+            // @ts-ignore
             Invocation.invokeClassMethod('FIRApp', 'configureWithOptions:', [argOptions]);
         };
 
         FirebaseApp.ios.native.configureWithNameOptions = function (name, firOptions) {
+            // @ts-ignore
             const argName = new Invocation.Argument({
                 type: 'NSString',
                 value: name
             });
+            // @ts-ignore
             const argOptions = new Invocation.Argument({
                 type: 'NSObject',
                 value: firOptions
             });
+            // @ts-ignore
             Invocation.invokeClassMethod('FIRApp', 'configureWithName:options:', [argName, argOptions]);
         };
 
@@ -94,6 +99,7 @@ export default class FirebaseApp {
         };
 
         FirebaseApp.ios.native.appNamed = function (name) {
+            // @ts-ignore
             const argName = new Invocation.Argument({
                 type: 'NSString',
                 value: name
@@ -114,12 +120,14 @@ export default class FirebaseApp {
         };
 
         FirebaseApp.ios.native.deleteApp = function (firApp, callback) {
+            // @ts-ignore
             const argCallback = new Invocation.Argument({
                 type: 'JSValue',
                 value: function (e) {
                     callback(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(firApp, 'deleteAppBridge:', [argCallback]);
         };
     }

@@ -130,6 +130,7 @@ export default class Auth {
         };
 
         Auth.ios.native.authWithApp = function (app) {
+            // @ts-ignore
             var argApp = new Invocation.Argument({
                 type: 'NSObject',
                 value: app
@@ -150,10 +151,12 @@ export default class Auth {
         };
 
         Auth.ios.native.setLanguageCode = function (auth, languageCode) {
+            // @ts-ignore
             var argLanguageCode = new Invocation.Argument({
                 type: 'NSString',
                 value: languageCode
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'setLanguageCode:', [argLanguageCode]);
         };
 
@@ -169,20 +172,24 @@ export default class Auth {
             + `InvalidEmail` - Indicates the email address is malformed.
         */
         Auth.ios.native.signInWithEmailPasswordCompletion = function (auth, email, password, completion) {
+            // @ts-ignore
             var argEmail = new Invocation.Argument({
                 type: 'NSString',
                 value: email
             });
+            // @ts-ignore
             var argPassword = new Invocation.Argument({
                 type: 'NSString',
                 value: password
             });
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'FIRAuthResultCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'signInWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
         };
 
@@ -200,20 +207,24 @@ export default class Auth {
                 dictionary object will contain more detailed explanation that can be shown to the user.
         */
         Auth.ios.native.createUserWithEmailPasswordCompletion = function (auth, email, password, completion) {
+            // @ts-ignore
             var argEmail = new Invocation.Argument({
                 type: 'NSString',
                 value: email
             });
+            // @ts-ignore
             var argPassword = new Invocation.Argument({
                 type: 'NSString',
                 value: password
             });
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'FIRAuthResultCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'createUserWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
         };
 
@@ -226,16 +237,19 @@ export default class Auth {
                 belong to different projects.
         */
         Auth.ios.native.signInWithCustomTokenCompletion = function (auth, token, completion) {
+            // @ts-ignore
             var argToken = new Invocation.Argument({
                 type: 'NSString',
                 value: token
             });
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'FIRAuthResultCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'signInWithCustomToken:completion:', [argToken, argCompletion]);
         };
 
@@ -246,12 +260,14 @@ export default class Auth {
                 not enabled. Enable them in the Auth section of the Firebase console.
         */
         Auth.ios.native.signInAnonymouslyWithCompletion = function (auth, completion) {
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'FIRAuthResultCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'signInAnonymouslyWithCompletion:', [argCompletion]);
         };
 
@@ -264,10 +280,12 @@ export default class Auth {
         */
 
         Auth.ios.native.signOut = function (auth) {
+            // @ts-ignore
             var argError = new Invocation.Argument({
                 type: 'NSObject',
                 value: undefined
             });
+            // @ts-ignore
             return Invocation.invokeInstanceMethod(auth, 'signOut:', [argError]);
         };
 
@@ -279,52 +297,63 @@ export default class Auth {
         };
 
         Auth.ios.native.useAppLanguage = function (auth) {
+            // @ts-ignore
             return Invocation.invokeInstanceMethod(auth, 'useAppLanguage', []);
         };
 
         Auth.ios.native.sendPasswordResetWithEmailCompletion = function (auth, email, completion) {
+            // @ts-ignore
             var argEmail = new Invocation.Argument({
                 type: 'NSString',
                 value: email
             });
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'UserProfileChangeCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'sendPasswordResetWithEmail:completion:', [argEmail, argCompletion]);
         };
 
         Auth.ios.native.verifyPasswordResetCodeCompletion = function (auth, code, completion) {
+            // @ts-ignore
             var argCode = new Invocation.Argument({
                 type: 'NSString',
                 value: code
             });
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'VerifyPasswordResetCodeCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'verifyPasswordResetCode:completion:', [argCode, argCompletion]);
         };
 
         Auth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion = function (auth, code, newPassword, completion) {
+            // @ts-ignore
             var argCode = new Invocation.Argument({
                 type: 'NSString',
                 value: code
             });
+            // @ts-ignore
             var argNewPassword = new Invocation.Argument({
                 type: 'NSString',
                 value: newPassword
             });
+            // @ts-ignore
             var argCompletion = new Invocation.Argument({
                 type: 'UserProfileChangeCallback',
                 value: function (e) {
                     completion(e);
                 }
             });
+            // @ts-ignore
             Invocation.invokeInstanceMethod(auth, 'confirmPasswordResetWithCode:newPassword:completion:', [
                 argCode,
                 argNewPassword,

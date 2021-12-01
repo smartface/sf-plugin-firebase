@@ -38,43 +38,54 @@ export default class Analytics {
     } = {
         native: {
             logEventWithNameParameters: function (name, parameters) {
+                // @ts-ignore
                 const argName = new Invocation.Argument({
                     type: 'NSString',
                     value: name
                 });
+                // @ts-ignore
                 const argParameters = new Invocation.Argument({
                     type: 'id',
                     value: parameters
                 });
+                // @ts-ignore
                 Invocation.invokeClassMethod('FIRAnalytics', 'logEventWithName:parameters:', [argName, argParameters]);
             },
             setUserPropertyStringForName: function (value, name) {
+                // @ts-ignore
                 const argName = new Invocation.Argument({
                     type: 'NSString',
                     value: name
                 });
+                // @ts-ignore
                 const argValue = new Invocation.Argument({
                     type: 'NSString',
                     value: value
                 });
+                // @ts-ignore
                 Invocation.invokeClassMethod('FIRAnalytics', 'setUserPropertyString:forName:', [argValue, argName]);
             },
             setUserID: function (userID) {
+                // @ts-ignore
                 const argUserID = new Invocation.Argument({
                     type: 'NSString',
                     value: userID
                 });
+                // @ts-ignore
                 Invocation.invokeClassMethod('FIRAnalytics', 'setUserID:', [argUserID]);
             },
             setScreenNameScreenClass: function (screenName, screenClassOverride) {
+                // @ts-ignore
                 const argScreen = new Invocation.Argument({
                     type: 'NSString',
                     value: screenName
                 });
+                // @ts-ignore
                 const argClassOverride = new Invocation.Argument({
                     type: 'NSString',
                     value: screenClassOverride
                 });
+                // @ts-ignore
                 Invocation.invokeClassMethod('FIRAnalytics', 'setScreenName:screenClass:', [argScreen, argClassOverride]);
             },
             appInstanceID: function () {

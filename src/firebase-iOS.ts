@@ -14,6 +14,7 @@ export default class Firebase {
             const pathPlist = options.iosFile.nativeObject.getActualPath();
 
             const alloc = Invocation.invokeClassMethod('FIROptions', 'alloc', [], 'id');
+            // @ts-ignore
             const argPathPlist = new Invocation.Argument({
                 type: 'NSString',
                 value: pathPlist

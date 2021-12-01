@@ -9,18 +9,22 @@ class Messaging {
             FCMToken: () => Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'FCMToken', [], 'NSString'),
 
             subscribeToTopic: (topic) => {
+                // @ts-ignore
                 const argTopic = new Invocation.Argument({
                     type: 'NSString',
                     value: topic
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'subscribeToTopic:', [argTopic]);
             },
 
             unsubscribeFromTopic: (topic) => {
+                // @ts-ignore
                 const argTopic = new Invocation.Argument({
                     type: 'NSString',
                     value: topic
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'unsubscribeFromTopic:', [argTopic]);
             },
 
@@ -28,12 +32,15 @@ class Messaging {
                 if (!Messaging.ios.native.messagingDelegate) {
                     const messagingAlloc = Invocation.invokeClassMethod('MessagingDelegate', 'alloc', [], 'id');
                     Messaging.ios.native.messagingDelegate = Invocation.invokeInstanceMethod(messagingAlloc, 'init', [], 'NSObject');
+                    // @ts-ignore
                     const argDelegate = new Invocation.Argument({
                         type: 'NSObject',
                         value: Messaging.ios.native.messagingDelegate
                     });
+                    // @ts-ignore
                     Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'setDelegate:', [argDelegate]);
                 }
+                // @ts-ignore
                 const argMessaggingDidRecieve = new Invocation.Argument({
                     type: 'JSValue',
                     value: function (e) {
@@ -42,6 +49,7 @@ class Messaging {
                         }
                     }
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(Messaging.ios.native.messagingDelegate, 'setMessagingDidReceiveRegistrationToken:', [
                     argMessaggingDidRecieve
                 ]);

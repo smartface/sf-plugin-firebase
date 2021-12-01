@@ -43,23 +43,26 @@ export default class User {
 
             setDisplayName: function (user, displayName, completion) {
                 const profileChangeRequest = Invocation.invokeInstanceMethod(user, 'profileChangeRequest', [], 'NSObject');
+                // @ts-ignore
                 const argDisplayName = new Invocation.Argument({
                     type: 'NSString',
                     value: displayName
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(profileChangeRequest, 'setDisplayName:', [argDisplayName]);
-
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
-
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(profileChangeRequest, 'commitChangesWithCompletion:', [argCompletion]);
             },
 
             setPhotoURL: function (user, photoURL, completion) {
+                // @ts-ignore
                 const argURL = new Invocation.Argument({
                     type: 'NSString',
                     value: photoURL
@@ -67,19 +70,21 @@ export default class User {
                 const url = Invocation.invokeClassMethod('NSURL', 'URLWithString:', [argURL], 'NSObject');
 
                 const profileChangeRequest = Invocation.invokeInstanceMethod(user, 'profileChangeRequest', [], 'NSObject');
+                // @ts-ignore
                 const argPhotoURL = new Invocation.Argument({
                     type: 'NSObject',
                     value: url
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(profileChangeRequest, 'setPhotoURL:', [argPhotoURL]);
-
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
-
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(profileChangeRequest, 'commitChangesWithCompletion:', [argCompletion]);
             },
 
@@ -96,54 +101,65 @@ export default class User {
             },
 
             reloadWithCompletion: function (user, completion) {
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(user, 'reloadWithCompletion:', [argCompletion]);
             },
 
             updateEmailCompletion: function (user, email, completion) {
+                // @ts-ignore
                 const argEmail = new Invocation.Argument({
                     type: 'NSString',
                     value: email
                 });
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(user, 'updateEmail:completion:', [argEmail, argCompletion]);
             },
 
             updatePasswordCompletion: function (user, password, completion) {
+                // @ts-ignore
                 const argPassword = new Invocation.Argument({
                     type: 'NSString',
                     value: password
                 });
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(user, 'updatePassword:completion:', [argPassword, argCompletion]);
             },
 
             getIDTokenForcingRefreshCompletion: function (user, forceRefresh, completion) {
+                // @ts-ignore
                 const argForceRefresh = new Invocation.Argument({
                     type: 'BOOL',
                     value: forceRefresh
                 });
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'FIRAuthTokenCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
+                // @ts-ignore
                 return Invocation.invokeInstanceMethod(user, 'getIDTokenForcingRefresh:completion:', [argForceRefresh, argCompletion]);
             },
 
@@ -155,10 +171,12 @@ export default class User {
             },
 
             reauthenticateWithCredentialCompletion: function (user, email, password, completion) {
+                // @ts-ignore
                 const argEmail = new Invocation.Argument({
                     type: 'NSString',
                     value: email
                 });
+                // @ts-ignore
                 const argPassword = new Invocation.Argument({
                     type: 'NSString',
                     value: password
@@ -170,40 +188,43 @@ export default class User {
                     [argEmail, argPassword],
                     'NSObject'
                 );
-
+                // @ts-ignore
                 const argCredential = new Invocation.Argument({
                     type: 'NSObject',
                     value: credential
                 });
-
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(user, 'reauthenticateWithCredential:completion:', [argCredential, argCompletion]);
             },
 
             deleteWithCompletion: function (user, completion) {
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
-
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(user, 'deleteWithCompletion:', [argCompletion]);
             },
 
             sendEmailVerificationWithCompletion: function (user, completion) {
+                // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
                     }
                 });
-
+                // @ts-ignore
                 Invocation.invokeInstanceMethod(user, 'sendEmailVerificationWithCompletion:', [argCompletion]);
             }
         }

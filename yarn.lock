@@ -2,10 +2,22 @@
 # yarn lockfile v1
 
 
+"@smartface/native@^4.3.6-beta.3":
+  version "4.3.6-beta.3"
+  resolved "https://registry.yarnpkg.com/@smartface/native/-/native-4.3.6-beta.3.tgz#cc63adfc38c003388efcedeec453781f86668ede"
+  integrity sha512-h6zKovGJZY862x5sJ01NB5vKiduX3DU/CrKSLLGIW5kcKqZysqk5WfrPXqitIUjDE9v9UQoQeMJryMCZnMu9sw==
+  dependencies:
+    events "^3.3.0"
+
 "@types/node@^16.11.11":
   version "16.11.11"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.11.tgz#6ea7342dfb379ea1210835bada87b3c512120234"
   integrity sha512-KB0sixD67CeecHC33MYn+eYARkqTheIRNuu97y2XMjR7Wu3XibO1vaY6VBV6O/a89SPI81cEUIYT87UqUWlZNw==
+
+events@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
 typescript@^4.5.2:
   version "4.5.2"
