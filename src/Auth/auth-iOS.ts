@@ -1,17 +1,17 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
-import FirebaseAuthErrors from './firebaseAuthErrors';
-import FirebaseUser from '../firebaseUser';
+import AuthErrors from './authErrors';
+import User from '../User';
 
-type FirebaseUserErrorBody = {
-    code?: FirebaseAuthErrors;
+type UserErrorBody = {
+    code?: AuthErrors;
     description: string;
 };
 
-type FirebaseUserCallback = (
-    FirebaseUser: any,
+type UserCallback = (
+    User: any,
     options?: {
-        error: FirebaseUserErrorBody;
+        error: UserErrorBody;
         isSuccess?: boolean;
         email?: string;
         token?: string;
@@ -76,8 +76,8 @@ const errorCode = {
     FirebaseAuthInternalError: 17999
 };
 
-export default class FirebaseAuth {
-    static Error = FirebaseAuthErrors;
+export default class Auth {
+    static Error = AuthErrors;
     nativeAuth: any;
     static ios: {
         native?: any;
@@ -103,35 +103,33 @@ export default class FirebaseAuth {
          */
         useAppLanguage?: () => void;
     } = {};
-    constructor(FirebaseApp?: any) {
-        FirebaseApp
-            ? (this.nativeAuth = FirebaseAuth.ios.native.authWithApp(FirebaseApp))
-            : (this.nativeAuth = FirebaseAuth.ios.native.auth());
+    constructor(App?: any) {
+        App ? (this.nativeAuth = Auth.ios.native.authWithApp(App)) : (this.nativeAuth = Auth.ios.native.auth());
         Object.defineProperties(this.ios, {
             languageCode: {
                 get: function () {
-                    return FirebaseAuth.ios.native.getLanguageCode(this.nativeAuth);
+                    return Auth.ios.native.getLanguageCode(this.nativeAuth);
                 },
                 set: function (value) {
-                    FirebaseAuth.ios.native.setLanguageCode(this.nativeAuth, value);
+                    Auth.ios.native.setLanguageCode(this.nativeAuth, value);
                 },
                 enumerable: true,
                 configurable: true
             },
             useAppLanguage: {
                 value: function () {
-                    FirebaseAuth.ios.native.useAppLanguage(this.nativeAuth);
+                    Auth.ios.native.useAppLanguage(this.nativeAuth);
                 },
                 enumerable: true,
                 configurable: true
             }
         });
 
-        FirebaseAuth.ios.native.auth = function () {
+        Auth.ios.native.auth = function () {
             return Invocation.invokeClassMethod('FIRAuth', 'auth', [], 'NSObject');
         };
 
-        FirebaseAuth.ios.native.authWithApp = function (app) {
+        Auth.ios.native.authWithApp = function (app) {
             var argApp = new Invocation.Argument({
                 type: 'NSObject',
                 value: app
@@ -139,19 +137,19 @@ export default class FirebaseAuth {
             return Invocation.invokeClassMethod('FIRAuth', 'authWithApp:', [argApp], 'NSObject');
         };
 
-        FirebaseAuth.ios.native.app = function (auth) {
+        Auth.ios.native.app = function (auth) {
             return Invocation.invokeInstanceMethod(auth, 'app', [], 'NSObject');
         };
 
-        FirebaseAuth.ios.native.currentUser = function (auth) {
+        Auth.ios.native.currentUser = function (auth) {
             return Invocation.invokeInstanceMethod(auth, 'currentUser', [], 'NSObject');
         };
 
-        FirebaseAuth.ios.native.getLanguageCode = function (auth) {
+        Auth.ios.native.getLanguageCode = function (auth) {
             return Invocation.invokeInstanceMethod(auth, 'languageCode', [], 'NSString');
         };
 
-        FirebaseAuth.ios.native.setLanguageCode = function (auth, languageCode) {
+        Auth.ios.native.setLanguageCode = function (auth, languageCode) {
             var argLanguageCode = new Invocation.Argument({
                 type: 'NSString',
                 value: languageCode
@@ -170,7 +168,7 @@ export default class FirebaseAuth {
                 sign in with an incorrect password.
             + `InvalidEmail` - Indicates the email address is malformed.
         */
-        FirebaseAuth.ios.native.signInWithEmailPasswordCompletion = function (auth, email, password, completion) {
+        Auth.ios.native.signInWithEmailPasswordCompletion = function (auth, email, password, completion) {
             var argEmail = new Invocation.Argument({
                 type: 'NSString',
                 value: email
@@ -201,7 +199,7 @@ export default class FirebaseAuth {
                 considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
                 dictionary object will contain more detailed explanation that can be shown to the user.
         */
-        FirebaseAuth.ios.native.createUserWithEmailPasswordCompletion = function (auth, email, password, completion) {
+        Auth.ios.native.createUserWithEmailPasswordCompletion = function (auth, email, password, completion) {
             var argEmail = new Invocation.Argument({
                 type: 'NSString',
                 value: email
@@ -227,7 +225,7 @@ export default class FirebaseAuth {
             + `CustomTokenMismatch` - Indicates the service account and the API key
                 belong to different projects.
         */
-        FirebaseAuth.ios.native.signInWithCustomTokenCompletion = function (auth, token, completion) {
+        Auth.ios.native.signInWithCustomTokenCompletion = function (auth, token, completion) {
             var argToken = new Invocation.Argument({
                 type: 'NSString',
                 value: token
@@ -247,7 +245,7 @@ export default class FirebaseAuth {
             + `OperationNotAllowed` - Indicates that anonymous accounts are
                 not enabled. Enable them in the Auth section of the Firebase console.
         */
-        FirebaseAuth.ios.native.signInAnonymouslyWithCompletion = function (auth, completion) {
+        Auth.ios.native.signInAnonymouslyWithCompletion = function (auth, completion) {
             var argCompletion = new Invocation.Argument({
                 type: 'FIRAuthResultCallback',
                 value: function (e) {
@@ -265,7 +263,7 @@ export default class FirebaseAuth {
                 dictionary will contain more information about the error encountered.
         */
 
-        FirebaseAuth.ios.native.signOut = function (auth) {
+        Auth.ios.native.signOut = function (auth) {
             var argError = new Invocation.Argument({
                 type: 'NSObject',
                 value: undefined
@@ -273,18 +271,18 @@ export default class FirebaseAuth {
             return Invocation.invokeInstanceMethod(auth, 'signOut:', [argError]);
         };
 
-        FirebaseAuth.ios.native.getErrorObject = function (nativeError) {
+        Auth.ios.native.getErrorObject = function (nativeError) {
             var code = Invocation.invokeInstanceMethod(nativeError, 'code', [], 'NSInteger');
             var localizedDescription = Invocation.invokeInstanceMethod(nativeError, 'localizedDescription', [], 'NSString');
 
             return { code: code, description: localizedDescription };
         };
 
-        FirebaseAuth.ios.native.useAppLanguage = function (auth) {
+        Auth.ios.native.useAppLanguage = function (auth) {
             return Invocation.invokeInstanceMethod(auth, 'useAppLanguage', []);
         };
 
-        FirebaseAuth.ios.native.sendPasswordResetWithEmailCompletion = function (auth, email, completion) {
+        Auth.ios.native.sendPasswordResetWithEmailCompletion = function (auth, email, completion) {
             var argEmail = new Invocation.Argument({
                 type: 'NSString',
                 value: email
@@ -298,7 +296,7 @@ export default class FirebaseAuth {
             Invocation.invokeInstanceMethod(auth, 'sendPasswordResetWithEmail:completion:', [argEmail, argCompletion]);
         };
 
-        FirebaseAuth.ios.native.verifyPasswordResetCodeCompletion = function (auth, code, completion) {
+        Auth.ios.native.verifyPasswordResetCodeCompletion = function (auth, code, completion) {
             var argCode = new Invocation.Argument({
                 type: 'NSString',
                 value: code
@@ -312,7 +310,7 @@ export default class FirebaseAuth {
             Invocation.invokeInstanceMethod(auth, 'verifyPasswordResetCode:completion:', [argCode, argCompletion]);
         };
 
-        FirebaseAuth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion = function (auth, code, newPassword, completion) {
+        Auth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion = function (auth, code, newPassword, completion) {
             var argCode = new Invocation.Argument({
                 type: 'NSString',
                 value: code
@@ -334,9 +332,9 @@ export default class FirebaseAuth {
             ]);
         };
 
-        FirebaseAuth.ios.native.errorCode = errorCode;
+        Auth.ios.native.errorCode = errorCode;
 
-        FirebaseAuth.ios.native.isFrameworkEnabled = function () {
+        Auth.ios.native.isFrameworkEnabled = function () {
             // @ts-ignore
             var invocation = __SF_NSInvocation.createClassInvocationWithSelectorInstance('alloc', 'FIROptions');
             return invocation ? true : false;
@@ -347,19 +345,19 @@ export default class FirebaseAuth {
      * Synchronously gets the cached current user, or undefined if there is none
      *
      * @event getCurrentUser
-     * @return {FirebaseUser}
+     * @return {User}
      * @android
      * @ios
      * @since 0.1
      */
     getCurrentUser = () => {
-        if (!FirebaseAuth.ios.native.isFrameworkEnabled()) {
+        if (!Auth.ios.native.isFrameworkEnabled()) {
             // @ts-ignore
-            return new FirebaseUser();
+            return new User();
         }
-        const user = FirebaseAuth.ios.native.currentUser(this.nativeAuth);
+        const user = Auth.ios.native.currentUser(this.nativeAuth);
         if (user) {
-            return new FirebaseUser(user);
+            return new User(user);
         }
         return undefined;
     };
@@ -384,7 +382,7 @@ export default class FirebaseAuth {
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -392,17 +390,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    createUserWithEmailAndPassword = (email: string, password: string, callback: FirebaseUserCallback) => {
+    createUserWithEmailAndPassword = (email: string, password: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(undefined, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(undefined, Auth.ios.native.getErrorObject(e.error));
                 } else {
-                    callback(new FirebaseUser(e.user), undefined);
+                    callback(new User(e.user), undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.createUserWithEmailPasswordCompletion(this.nativeAuth, email, password, callbackHandler);
+        Auth.ios.native.createUserWithEmailPasswordCompletion(this.nativeAuth, email, password, callbackHandler);
     };
 
     /**
@@ -423,7 +421,7 @@ export default class FirebaseAuth {
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -431,17 +429,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    signInWithEmailAndPassword = (email: string, password: string, callback: FirebaseUserCallback) => {
+    signInWithEmailAndPassword = (email: string, password: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(undefined, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(undefined, Auth.ios.native.getErrorObject(e.error));
                 } else {
-                    callback(new FirebaseUser(e.user), undefined);
+                    callback(new User(e.user), undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.signInWithEmailPasswordCompletion(this.nativeAuth, email, password, callbackHandler);
+        Auth.ios.native.signInWithEmailPasswordCompletion(this.nativeAuth, email, password, callbackHandler);
     };
 
     /**
@@ -458,7 +456,7 @@ export default class FirebaseAuth {
      * @event signInWithCustomToken
      * @param {String} token
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -466,17 +464,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    signInWithCustomToken = (token: string, callback: FirebaseUserCallback) => {
+    signInWithCustomToken = (token: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(undefined, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(undefined, Auth.ios.native.getErrorObject(e.error));
                 } else {
-                    callback(new FirebaseUser(e.user), undefined);
+                    callback(new User(e.user), undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.signInWithCustomTokenCompletion(this.nativeAuth, token, callbackHandler);
+        Auth.ios.native.signInWithCustomTokenCompletion(this.nativeAuth, token, callbackHandler);
     };
 
     /**
@@ -489,7 +487,7 @@ export default class FirebaseAuth {
      *
      * @event signInAnonymously
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -497,17 +495,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    signInAnonymously = (callback: FirebaseUserCallback) => {
+    signInAnonymously = (callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(undefined, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(undefined, Auth.ios.native.getErrorObject(e.error));
                 } else {
-                    callback(new FirebaseUser(e.user), undefined);
+                    callback(new User(e.user), undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.signInAnonymouslyWithCompletion(this.nativeAuth, callbackHandler);
+        Auth.ios.native.signInAnonymouslyWithCompletion(this.nativeAuth, callbackHandler);
     };
 
     /**
@@ -530,17 +528,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    sendPasswordResetEmail = (email: string, callback: FirebaseUserCallback) => {
+    sendPasswordResetEmail = (email: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(false, Auth.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.sendPasswordResetWithEmailCompletion(this.nativeAuth, email, callbackHandler);
+        Auth.ios.native.sendPasswordResetWithEmailCompletion(this.nativeAuth, email, callbackHandler);
     };
 
     /**
@@ -564,17 +562,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    verifyPasswordResetCode = (code: string, callback: FirebaseUserCallback) => {
+    verifyPasswordResetCode = (code: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(undefined, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(undefined, Auth.ios.native.getErrorObject(e.error));
                 } else {
                     callback(e.email, undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.verifyPasswordResetCodeCompletion(this.nativeAuth, code, callbackHandler);
+        Auth.ios.native.verifyPasswordResetCodeCompletion(this.nativeAuth, code, callbackHandler);
     };
 
     /**
@@ -602,17 +600,17 @@ export default class FirebaseAuth {
      * @ios
      * @since 0.1
      */
-    confirmPasswordReset = (code: string, newPassword: string, callback: FirebaseUserCallback) => {
+    confirmPasswordReset = (code: string, newPassword: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseAuth.ios.native.getErrorObject(e.error));
+                    callback(false, Auth.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseAuth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion(this.nativeAuth, code, newPassword, callbackHandler);
+        Auth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion(this.nativeAuth, code, newPassword, callbackHandler);
     };
 
     /**
@@ -624,6 +622,6 @@ export default class FirebaseAuth {
      * @since 0.1
      */
     signOut = () => {
-        FirebaseAuth.ios.native.signOut(this.nativeAuth);
+        Auth.ios.native.signOut(this.nativeAuth);
     };
 }

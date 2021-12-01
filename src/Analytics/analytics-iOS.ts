@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
-import FirebaseAnalyticsEvent from './firebaseAnalyticsEvent';
-import FirebaseAnalyticsParam from './firebaseAnalyticsParam';
+import AnalyticsEvent from './analyticsEvent';
+import AnalyticsParam from './analyticsParam';
 
 /**
  * Firebase Analytics service
@@ -9,16 +9,16 @@ import FirebaseAnalyticsParam from './firebaseAnalyticsParam';
  * @public
  * @property {object}
  */
-export default class FirebaseAnalytics {
-    static Event = FirebaseAnalyticsEvent;
-    static Param = FirebaseAnalyticsParam;
+export default class Analytics {
+    static Event = AnalyticsEvent;
+    static Param = AnalyticsParam;
     /**
      * CustomAttribute for logCustom.
      *
      *     @example
-     *      import FirebaseAnalytics from '@smartface/plugin-firebase';
-     *		var attribute1 = new FirebaseAnalytics.CustomAttribute("key","value");
-     *		var attribute2 = new FirebaseAnalytics.CustomAttribute("key",12);
+     *      import Analytics from '@smartface/plugin-firebase';
+     *		var attribute1 = new Analytics.CustomAttribute("key","value");
+     *		var attribute2 = new Analytics.CustomAttribute("key",12);
      *
      * @android
      * @ios
@@ -92,7 +92,7 @@ export default class FirebaseAnalytics {
      */
     static logEvent = (
         name: string,
-        customAttributes: InstanceType<typeof FirebaseAnalytics.CustomAttribute> | InstanceType<typeof FirebaseAnalytics.CustomAttribute>[]
+        customAttributes: InstanceType<typeof Analytics.CustomAttribute> | InstanceType<typeof Analytics.CustomAttribute>[]
     ): void => {
         const customDictionary = {};
         if (customAttributes instanceof Array) {
@@ -100,7 +100,7 @@ export default class FirebaseAnalytics {
                 customDictionary[customAttributes[i].key] = customAttributes[i].value;
             }
         }
-        FirebaseAnalytics.ios.native.logEventWithNameParameters(name, customDictionary);
+        Analytics.ios.native.logEventWithNameParameters(name, customDictionary);
     };
 
     /**
@@ -112,7 +112,7 @@ export default class FirebaseAnalytics {
      * @since 0.1
      */
     static setUserProperty = function (name: string, value: string) {
-        FirebaseAnalytics.ios.native.setUserPropertyStringForName(value, name);
+        Analytics.ios.native.setUserPropertyStringForName(value, name);
     };
 
     /**
@@ -123,7 +123,7 @@ export default class FirebaseAnalytics {
      * @since 0.1
      */
     static setUserId = function (id: string) {
-        FirebaseAnalytics.ios.native.setUserID(id);
+        Analytics.ios.native.setUserID(id);
     };
 
     /**
@@ -136,12 +136,12 @@ export default class FirebaseAnalytics {
      * @since 0.1
      */
     static setCurrentScreen = function (screenName: string, screenClassOverride: null) {
-        FirebaseAnalytics.ios.native.setScreenNameScreenClass(screenName, screenClassOverride);
+        Analytics.ios.native.setScreenNameScreenClass(screenName, screenClassOverride);
     };
 
     static getAppInstanceId = function (callback) {
         if (typeof callback === 'function') {
-            callback(FirebaseAnalytics.ios.native.appInstanceID());
+            callback(Analytics.ios.native.appInstanceID());
         }
     };
 }

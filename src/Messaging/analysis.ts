@@ -1,4 +1,4 @@
-export default class FirebaseMessaging {
+export default class Messaging {
     static ios: { native: any; onTokenReflesh: (token?: string) => void } = {
         native: {},
         onTokenReflesh: () => {}

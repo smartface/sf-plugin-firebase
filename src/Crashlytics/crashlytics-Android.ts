@@ -4,28 +4,28 @@ const NativeClass = requireClass('com.google.firebase.crashlytics.FirebaseCrashl
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 /**
- * @class FirebaseCrashlytics
+ * @class Crashlytics
  * @since 1.0
  *
  * Spend less time finding and more time fixing crashes.
- * Named the #1 performance SDK on both iOS and Android, FirebaseCrashlytics provides deep and actionable insights, even the exact line of code your app crashed on.
+ * Named the #1 performance SDK on both iOS and Android, Crashlytics provides deep and actionable insights, even the exact line of code your app crashed on.
  *
  */
-export default class FirebaseCrashlytics {
+export default class Crashlytics {
     static NativeClass = NativeClass;
     static ios = {
         setUserName: function (name: string) {},
         setUserEmail: function (email: string) {},
         getVersion: function () {},
         crash: function () {},
-        with: function (kits: Array<FirebaseCrashlytics>) {}
+        with: function (kits: Array<Crashlytics>) {}
     };
     /**
-     * You can use FirebaseCrashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information.
+     * You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information.
      *
      *     @example
-     *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
-     *      FirebaseCrashlytics.setUserIdentifier("UserIdentifier");
+     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      Crashlytics.setUserIdentifier("UserIdentifier");
      *
      * @method setUserIdentifier
      * @param {String} UserIdentifier
@@ -35,16 +35,16 @@ export default class FirebaseCrashlytics {
      * @since 1.0
      */
     static setUserIdentifier = function (identifier: string) {
-        if (!AndroidConfig.isEmulator) FirebaseCrashlytics.NativeClass.getInstance().setUserId(identifier);
+        if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setUserId(identifier);
     };
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setString(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setString(key, value).
      *
      *     @example
-     *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
-     *      FirebaseCrashlytics.setString("key","value");
+     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      Crashlytics.setString("key","value");
      *
      * @method setString
      * @param {String} key
@@ -55,16 +55,16 @@ export default class FirebaseCrashlytics {
      * @since 1.0
      */
     static setString = function (key: string, value: string) {
-        if (!AndroidConfig.isEmulator) FirebaseCrashlytics.NativeClass.getInstance().setCustomKey(key, value);
+        if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
     };
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setBool(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setBool(key, value).
      *
      *     @example
-     *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
-     *      FirebaseCrashlytics.setBool("key",true);
+     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      Crashlytics.setBool("key",true);
      *
      * @method setBool
      * @param {String} key
@@ -75,16 +75,16 @@ export default class FirebaseCrashlytics {
      * @since 1.0
      */
     static setBool = function (key: string, value: boolean) {
-        if (!AndroidConfig.isEmulator) FirebaseCrashlytics.NativeClass.getInstance().setCustomKey(key, value);
+        if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
     };
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setFloat(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setFloat(key, value).
      *
      *     @example
-     *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
-     *      FirebaseCrashlytics.setFloat("key",true);
+     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      Crashlytics.setFloat("key",true);
      *
      * @method setFloat
      * @param {String} key
@@ -95,16 +95,16 @@ export default class FirebaseCrashlytics {
      * @since 1.0
      */
     static setFloat = function (key: string, value: number) {
-        if (!AndroidConfig.isEmulator) FirebaseCrashlytics.NativeClass.getInstance().setCustomKey(key, value);
+        if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
     };
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setInt(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setInt(key, value).
      *
      *     @example
-     *      import FirebaseCrashlytics from 'sf-plugin-firebase/firebaseCrashlytics';
-     *      FirebaseCrashlytics.setInt("key",true);
+     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      Crashlytics.setInt("key",true);
      *
      * @method setInt
      * @param {String} key
@@ -115,6 +115,6 @@ export default class FirebaseCrashlytics {
      * @since 1.0
      */
     static setInt = function (key: string, value: number) {
-        if (!AndroidConfig.isEmulator) FirebaseCrashlytics.NativeClass.getInstance().setCustomKey(key, value);
+        if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
     };
 }

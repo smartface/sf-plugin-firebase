@@ -1,11 +1,11 @@
-export default class FirebaseAnalytics {
+export default class Analytics {
     /**
      * Logs an app event. The event can have up to 25 parameters. Events with the same name must have the same parameters. Up to 500 event names are supported.
      * Using predefined events and/or parameters is recommended for optimal reporting.
      *
      * @event logEvent
      * @param {String} name
-     * @param {FirebaseAnalytics.CustomAttribute} params
+     * @param {Analytics.CustomAttribute} params
      * @android
      * @ios
      * @since 0.1

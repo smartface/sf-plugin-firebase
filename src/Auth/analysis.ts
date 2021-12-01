@@ -1,4 +1,4 @@
-export default class FirebaseAuth {
+export default class Auth {
     ios: {
         /**
          * The current user language code. This property can be set to the app's current language by
@@ -18,7 +18,7 @@ export default class FirebaseAuth {
          */
         useAppLanguage?: () => void;
     };
-    constructor(FirabaseApp) {
+    constructor(App) {
         this.ios = {};
     }
 
@@ -26,7 +26,7 @@ export default class FirebaseAuth {
      * Synchronously gets the cached current user, or undefined if there is none
      *
      * @event getCurrentUser
-     * @return {FirebaseUser}
+     * @return {User}
      * @android
      * @ios
      * @since 0.1
@@ -53,7 +53,7 @@ export default class FirebaseAuth {
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -81,7 +81,7 @@ export default class FirebaseAuth {
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -105,7 +105,7 @@ export default class FirebaseAuth {
      * @event signInWithCustomToken
      * @param {String} token
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description
@@ -125,7 +125,7 @@ export default class FirebaseAuth {
      *
      * @event signInAnonymously
      * @param {Function} callback
-     * @param {FirebaseUser} callback.FirebaseUser
+     * @param {User} callback.User
      * @param {Object} callback.error
      * @param {String} callback.error.code
      * @param {String} callback.error.description

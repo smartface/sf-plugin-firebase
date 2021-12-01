@@ -4,14 +4,14 @@ const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.Fire
 const NativeBundle = requireClass('android.os.Bundle');
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
-import FirebaseAnalyticsEvent from './firebaseAnalyticsEvent';
-import FirebaseAnalyticsParam from './firebaseAnalyticsParam';
+import AnalyticsEvent from './analyticsEvent';
+import AnalyticsParam from './analyticsParam';
 
-export default class FirebaseAnalytics {
+export default class Analytics {
     static ios = {};
     static nativeObject = !AndroidConfig.isEmulator ? () => NativeFirebaseAnalytics.getInstance(AndroidConfig.activity) : undefined;
-    static Event = FirebaseAnalyticsEvent;
-    static Param = FirebaseAnalyticsParam;
+    static Event = AnalyticsEvent;
+    static Param = AnalyticsParam;
     /**
      * CustomAttribute for logCustom.
      *
@@ -44,7 +44,7 @@ export default class FirebaseAnalytics {
      */
     static logEvent = (
         name: string,
-        customAttributes: InstanceType<typeof FirebaseAnalytics.CustomAttribute> | InstanceType<typeof FirebaseAnalytics.CustomAttribute>[]
+        customAttributes: InstanceType<typeof Analytics.CustomAttribute> | InstanceType<typeof Analytics.CustomAttribute>[]
     ): void => {
         if (!AndroidConfig.isEmulator) {
             const bundle = new NativeBundle();
@@ -61,7 +61,7 @@ export default class FirebaseAnalytics {
                 }
             }
             // @ts-ignore
-            FirebaseAnalytics.nativeObject().logEvent(name, bundle);
+            Analytics.nativeObject().logEvent(name, bundle);
         }
     };
 
@@ -76,7 +76,7 @@ export default class FirebaseAnalytics {
     static setUserProperty = (name: string, value: string) => {
         if (!AndroidConfig.isEmulator) {
             // @ts-ignore
-            FirebaseAnalytics.nativeObject().setUserProperty(name, value);
+            Analytics.nativeObject().setUserProperty(name, value);
         }
     };
 
@@ -90,7 +90,7 @@ export default class FirebaseAnalytics {
     static setUserId = (id: string) => {
         if (!AndroidConfig.isEmulator) {
             // @ts-ignore
-            FirebaseAnalytics.nativeObject().setUserId(id);
+            Analytics.nativeObject().setUserId(id);
         }
     };
 
@@ -106,7 +106,7 @@ export default class FirebaseAnalytics {
     static setCurrentScreen = (screenName: string, screenClassOverride: null) => {
         if (!AndroidConfig.isEmulator) {
             // @ts-ignore
-            FirebaseAnalytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
+            Analytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
         }
     };
 }

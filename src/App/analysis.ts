@@ -1,4 +1,4 @@
-export default class FirebaseApp {
+export default class App {
     static ios: {
         native?: any;
     } = {
@@ -8,7 +8,7 @@ export default class FirebaseApp {
      * Gets the Auth service for the current app.
      *
      * @event auth
-     * @return {FirebaseAuth}
+     * @return {Auth}
      * @android
      * @ios
      * @since 0.1

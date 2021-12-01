@@ -1,19 +1,19 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
 
-class FirebaseMessaging {
+class Messaging {
     static ios: { native: any; onTokenReflesh: (token?: string) => void } = {
         native: {
             messaging: () => Invocation.invokeClassMethod('FIRMessaging', 'messaging', [], 'NSObject'),
 
-            FCMToken: () => Invocation.invokeInstanceMethod(FirebaseMessaging.ios.native.messaging(), 'FCMToken', [], 'NSString'),
+            FCMToken: () => Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'FCMToken', [], 'NSString'),
 
             subscribeToTopic: (topic) => {
                 const argTopic = new Invocation.Argument({
                     type: 'NSString',
                     value: topic
                 });
-                Invocation.invokeInstanceMethod(FirebaseMessaging.ios.native.messaging(), 'subscribeToTopic:', [argTopic]);
+                Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'subscribeToTopic:', [argTopic]);
             },
 
             unsubscribeFromTopic: (topic) => {
@@ -21,37 +21,30 @@ class FirebaseMessaging {
                     type: 'NSString',
                     value: topic
                 });
-                Invocation.invokeInstanceMethod(FirebaseMessaging.ios.native.messaging(), 'unsubscribeFromTopic:', [argTopic]);
+                Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'unsubscribeFromTopic:', [argTopic]);
             },
 
             messagingDidReceiveRegistrationToken: () => {
-                if (!FirebaseMessaging.ios.native.messagingDelegate) {
+                if (!Messaging.ios.native.messagingDelegate) {
                     const messagingAlloc = Invocation.invokeClassMethod('MessagingDelegate', 'alloc', [], 'id');
-                    FirebaseMessaging.ios.native.messagingDelegate = Invocation.invokeInstanceMethod(
-                        messagingAlloc,
-                        'init',
-                        [],
-                        'NSObject'
-                    );
+                    Messaging.ios.native.messagingDelegate = Invocation.invokeInstanceMethod(messagingAlloc, 'init', [], 'NSObject');
                     const argDelegate = new Invocation.Argument({
                         type: 'NSObject',
-                        value: FirebaseMessaging.ios.native.messagingDelegate
+                        value: Messaging.ios.native.messagingDelegate
                     });
-                    Invocation.invokeInstanceMethod(FirebaseMessaging.ios.native.messaging(), 'setDelegate:', [argDelegate]);
+                    Invocation.invokeInstanceMethod(Messaging.ios.native.messaging(), 'setDelegate:', [argDelegate]);
                 }
                 const argMessaggingDidRecieve = new Invocation.Argument({
                     type: 'JSValue',
                     value: function (e) {
-                        if (typeof FirebaseMessaging.ios.onTokenReflesh === 'function') {
-                            FirebaseMessaging.ios.onTokenReflesh(e.fcmToken);
+                        if (typeof Messaging.ios.onTokenReflesh === 'function') {
+                            Messaging.ios.onTokenReflesh(e.fcmToken);
                         }
                     }
                 });
-                Invocation.invokeInstanceMethod(
-                    FirebaseMessaging.ios.native.messagingDelegate,
-                    'setMessagingDidReceiveRegistrationToken:',
-                    [argMessaggingDidRecieve]
-                );
+                Invocation.invokeInstanceMethod(Messaging.ios.native.messagingDelegate, 'setMessagingDidReceiveRegistrationToken:', [
+                    argMessaggingDidRecieve
+                ]);
             }
         },
         /**
@@ -82,7 +75,7 @@ class FirebaseMessaging {
      * @since 0.1
      */
     static subscribeToTopic(topic: string) {
-        FirebaseMessaging.ios.native.subscribeToTopic(topic);
+        Messaging.ios.native.subscribeToTopic(topic);
     }
     /**
      * Asynchronously unsubscribe from a topic.
@@ -94,7 +87,7 @@ class FirebaseMessaging {
      * @since 0.1
      */
     static unsubscribeFromTopic(topic: string) {
-        FirebaseMessaging.ios.native.unsubscribeFromTopic(topic);
+        Messaging.ios.native.unsubscribeFromTopic(topic);
     }
     /**
      * iOS : Returns the FCM token.
@@ -106,9 +99,9 @@ class FirebaseMessaging {
      * @since 0.1
      */
     static getToken(callback: (token?: string) => void) {
-        typeof callback === 'function' && callback(FirebaseMessaging.ios.native.FCMToken());
+        typeof callback === 'function' && callback(Messaging.ios.native.FCMToken());
     }
 }
-FirebaseMessaging.ios.native.messagingDidReceiveRegistrationToken();
+Messaging.ios.native.messagingDidReceiveRegistrationToken();
 
-export default FirebaseMessaging;
+export default Messaging;

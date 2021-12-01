@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
-import FirebaseAuth from '../firebaseAuth';
+import Auth from '../Auth';
 
 /**
  * @classdesc Firebase App
@@ -131,8 +131,8 @@ export default class FirebaseApp {
      * @ios
      * @since 0.1
      */
-    auth: () => InstanceType<typeof FirebaseAuth> | undefined = () => {
-        return new FirebaseAuth(this);
+    auth: () => InstanceType<typeof Auth> | undefined = () => {
+        return new Auth(this);
     };
 
     /**

@@ -1,4 +1,4 @@
-import FirebaseAuth from '../firebaseAuth';
+import FirebaseAuth from '../Auth';
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 

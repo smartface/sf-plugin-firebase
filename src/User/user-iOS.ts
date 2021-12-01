@@ -1,24 +1,24 @@
-import FirebaseAuthErrors from '../firebaseAuth/firebaseAuthErrors';
+import AuthErrors from '../Auth/authErrors';
 
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
 
-type FirebaseUserErrorBody = {
-    code?: FirebaseAuthErrors;
+type UserErrorBody = {
+    code?: AuthErrors;
     description: string;
 };
 
-type FirebaseUserCallback = (
-    FirebaseUser: any,
+type UserCallback = (
+    User: any,
     options?: {
-        error: FirebaseUserErrorBody;
+        error: UserErrorBody;
         isSuccess?: boolean;
         email?: string;
         token?: string;
     }
 ) => void | ((arg: boolean) => void);
 
-export default class FirebaseUser {
+export default class User {
     nativeUser: any;
     static ios: {
         native?: any;
@@ -226,7 +226,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getEmail: () => string = () => FirebaseUser.ios.native.email(this.nativeUser);
+    getEmail: () => string = () => User.ios.native.email(this.nativeUser);
 
     /**
      * Returns the main display name of this user from the Firebase project's user database.
@@ -236,7 +236,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getDisplayName: () => string = () => FirebaseUser.ios.native.displayName(this.nativeUser);
+    getDisplayName: () => string = () => User.ios.native.displayName(this.nativeUser);
 
     /**
      * Returns the URL of this user's main profile picture, as stored in the Firebase project's user database.
@@ -246,7 +246,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getPhotoURL: () => string = () => FirebaseUser.ios.native.photoURL(this.nativeUser);
+    getPhotoURL: () => string = () => User.ios.native.photoURL(this.nativeUser);
 
     /**
      * Returns the phone number of the user, as stored in the Firebase project's user database, or null if none exists
@@ -256,7 +256,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getPhoneNumber: () => string = () => FirebaseUser.ios.native.phoneNumber(this.nativeUser);
+    getPhoneNumber: () => string = () => User.ios.native.phoneNumber(this.nativeUser);
 
     /**
      * Returns a string used to uniquely identify your user in your Firebase project's user database.
@@ -266,7 +266,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getUID: () => string = () => FirebaseUser.ios.native.uid(this.nativeUser);
+    getUID: () => string = () => User.ios.native.uid(this.nativeUser);
 
     /**
      * Returns true if the user is anonymous.
@@ -276,7 +276,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    isAnonymous: () => boolean = () => FirebaseUser.ios.native.isAnonymous(this.nativeUser);
+    isAnonymous: () => boolean = () => User.ios.native.isAnonymous(this.nativeUser);
 
     /**
      * Indicates the email address associated with this user has been verified.
@@ -287,7 +287,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    isEmailVerified: () => boolean = () => FirebaseUser.ios.native.isEmailVerified(this.nativeUser);
+    isEmailVerified: () => boolean = () => User.ios.native.isEmailVerified(this.nativeUser);
 
     /**
      * Reloads the user’s profile data from the server.
@@ -307,17 +307,17 @@ export default class FirebaseUser {
     * @ios
     * @since 0.1
     */
-    reload = (callback: FirebaseUserCallback) => {
+    reload = (callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error));
+                    callback(false, User.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.reloadWithCompletion(this.nativeUser, callbackHandler);
+        User.ios.native.reloadWithCompletion(this.nativeUser, callbackHandler);
     };
 
     /**
@@ -332,17 +332,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    setDisplayName = (displayName: string, callback: FirebaseUserCallback) => {
+    setDisplayName = (displayName: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error).description);
+                    callback(false, User.ios.native.getErrorObject(e.error).description);
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.setDisplayName(this.nativeUser, displayName, callbackHandler);
+        User.ios.native.setDisplayName(this.nativeUser, displayName, callbackHandler);
     };
 
     /**
@@ -357,17 +357,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    setPhotoURL = (photoURL: string, callback: FirebaseUserCallback) => {
+    setPhotoURL = (photoURL: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error).description);
+                    callback(false, User.ios.native.getErrorObject(e.error).description);
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.setPhotoURL(this.nativeUser, photoURL, callbackHandler);
+        User.ios.native.setPhotoURL(this.nativeUser, photoURL, callbackHandler);
     };
 
     /**
@@ -389,17 +389,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    updateEmail = (email: string, callback: FirebaseUserCallback) => {
+    updateEmail = (email: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error));
+                    callback(false, User.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.updateEmailCompletion(this.nativeUser, email, callbackHandler);
+        User.ios.native.updateEmailCompletion(this.nativeUser, email, callbackHandler);
     };
 
     /**
@@ -421,17 +421,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    updatePassword = (password: string, callback: FirebaseUserCallback) => {
+    updatePassword = (password: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error));
+                    callback(false, User.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.updatePasswordCompletion(this.nativeUser, password, callbackHandler);
+        User.ios.native.updatePasswordCompletion(this.nativeUser, password, callbackHandler);
     };
 
     /**
@@ -456,17 +456,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    reauthenticate = (email: string, password: string, callback: FirebaseUserCallback) => {
+    reauthenticate = (email: string, password: string, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error));
+                    callback(false, User.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.reauthenticateWithCredentialCompletion(this.nativeUser, email, password, callbackHandler);
+        User.ios.native.reauthenticateWithCredentialCompletion(this.nativeUser, email, password, callbackHandler);
     };
 
     /**
@@ -488,17 +488,17 @@ export default class FirebaseUser {
     * @ios
     * @since 0.1
     */
-    delete = (callback: FirebaseUserCallback) => {
+    delete = (callback: UserCallback) => {
         var callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error));
+                    callback(false, User.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.deleteWithCompletion(this.nativeUser, callbackHandler);
+        User.ios.native.deleteWithCompletion(this.nativeUser, callbackHandler);
     };
 
     /**
@@ -520,17 +520,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    sendEmailVerification = (callback: FirebaseUserCallback) => {
+    sendEmailVerification = (callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    callback(false, FirebaseUser.ios.native.getErrorObject(e.error));
+                    callback(false, User.ios.native.getErrorObject(e.error));
                 } else {
                     callback(true, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.sendEmailVerificationWithCompletion(this.nativeUser, callbackHandler);
+        User.ios.native.sendEmailVerificationWithCompletion(this.nativeUser, callbackHandler);
     };
 
     /**
@@ -545,17 +545,17 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getIdToken = (forceRefresh: boolean, callback: FirebaseUserCallback) => {
+    getIdToken = (forceRefresh: boolean, callback: UserCallback) => {
         const callbackHandler = function (e) {
             if (typeof callback === 'function') {
                 if (e.error) {
-                    const error = FirebaseUser.ios.native.getErrorObject(e.error);
+                    const error = User.ios.native.getErrorObject(e.error);
                     callback(undefined, error.description);
                 } else {
                     callback(e.token, undefined);
                 }
             }
         };
-        FirebaseUser.ios.native.getIDTokenForcingRefreshCompletion(this.nativeUser, forceRefresh, callbackHandler);
+        User.ios.native.getIDTokenForcingRefreshCompletion(this.nativeUser, forceRefresh, callbackHandler);
     };
 }

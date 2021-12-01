@@ -1,4 +1,4 @@
-enum FirebaseAuthErrors {
+enum AuthErrors {
     /**
      * Indicates the administrator disabled sign in with the specified identity provider.
      */
@@ -82,4 +82,4 @@ enum FirebaseAuthErrors {
     InvalidActionCode = 17030
 }
 
-export default FirebaseAuthErrors;
+export default AuthErrors;

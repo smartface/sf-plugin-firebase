@@ -138,7 +138,7 @@ var firebaseConfig = {
     iosFile : iOSPlistFile
 };
 
-import FirebaseCrashlytics from '@smartface/plugin-firebase/firebaseCrashlytics';
+import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
 
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);

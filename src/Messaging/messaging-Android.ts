@@ -5,7 +5,7 @@ import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 // @ts-ignore
 import Notifications from '@smartface/native/notifications';
 
-export default class FirebaseMessaging {
+export default class Messaging {
     static nativeObject = !AndroidConfig.isEmulator ? () => NativeFirebaseMessaging.getInstance() : undefined;
     static ios: { native: any; onTokenReflesh: (token?: string) => void } = {
         native: undefined,
@@ -55,8 +55,8 @@ export default class FirebaseMessaging {
      * @since 0.1
      */
     static subscribeToTopic = (topic: string) => {
-        if (FirebaseMessaging.nativeObject) {
-            FirebaseMessaging.nativeObject().subscribeToTopic(topic);
+        if (Messaging.nativeObject) {
+            Messaging.nativeObject().subscribeToTopic(topic);
         }
     };
     /**
@@ -69,8 +69,8 @@ export default class FirebaseMessaging {
      * @since 0.1
      */
     static unsubscribeFromTopic = (topic: string) => {
-        if (FirebaseMessaging.nativeObject) {
-            FirebaseMessaging.nativeObject().unsubscribeFromTopic(topic);
+        if (Messaging.nativeObject) {
+            Messaging.nativeObject().unsubscribeFromTopic(topic);
         }
     };
 }

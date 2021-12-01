@@ -1,11 +1,11 @@
-export default class FirebaseCrashlytics {
+export default class Crashlytics {
     static ios = {
         /**
          * If you would like to take advantage of advanced user identifier features, you can setUserName function.
          *
          *     @example
-         *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-         *      FirebaseCrashlytics.ios.setUserName("UserName");
+         *      import { Crashlytics } from '@smartface/plugin-firebase';
+         *      Crashlytics.ios.setUserName("UserName");
          *
          * @method setUserName
          * @param {String} UserName
@@ -23,8 +23,8 @@ export default class FirebaseCrashlytics {
          * If you would like to take advantage of advanced user identifier features, you can setUserEmail function.
          *
          *     @example
-         *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-         *      FirebaseCrashlytics.ios.setUserEmail("UserEmail");
+         *      import { Crashlytics } from '@smartface/plugin-firebase';
+         *      Crashlytics.ios.setUserEmail("UserEmail");
          *
          * @method setUserEmail
          * @param {String} UserEmail
@@ -45,11 +45,11 @@ export default class FirebaseCrashlytics {
             } catch (e) {}
         },
         /**
-         * FirebaseCrashlytics version. In Android, always returns 0.
+         * Crashlytics version. In Android, always returns 0.
          *
          *     @example
-         *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-         *      FirebaseCrashlytics.ios.getVersion();
+         *      import { Crashlytics } from '@smartface/plugin-firebase';
+         *      Crashlytics.ios.getVersion();
          *
          * @method getVersion
          * @ios
@@ -65,12 +65,12 @@ export default class FirebaseCrashlytics {
             }
         },
         /**
-         * Initialize FirebaseCrashlytics and all provided kits.Only the first call to this method is honored. Subsequent calls are no-ops.
+         * Initialize Crashlytics and all provided kits.Only the first call to this method is honored. Subsequent calls are no-ops.
          * Call this method within your `app.js` and provide the kits you wish to use.
          *
          *     @example
-         *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-         *      FirebaseCrashlytics.ios.with([new FirebaseCrashlytics()]);
+         *      import { Crashlytics } from '@smartface/plugin-firebase';
+         *      Crashlytics.ios.with([new Crashlytics()]);
          *
          * @method with
          * @param {Array} kits
@@ -78,7 +78,7 @@ export default class FirebaseCrashlytics {
          * @static
          * @since 1.0
          */
-        with: function (kits: Array<FirebaseCrashlytics>) {
+        with: function (kits: Array<Crashlytics>) {
             try {
                 let kitsStringArray: string[] = [];
                 for (let kit in kits) {
@@ -91,11 +91,11 @@ export default class FirebaseCrashlytics {
     };
 
     /**
-     * You can use FirebaseCrashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information.
+     * You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information.
      *
      *     @example
-     *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-     *      FirebaseCrashlytics.setUserIdentifier("UserIdentifier");
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      Crashlytics.setUserIdentifier("UserIdentifier");
      *
      * @method setUserIdentifier
      * @param {String} UserIdentifier
@@ -113,11 +113,11 @@ export default class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setBool(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setBool(key, value).
      *
      *     @example
-     *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-     *      FirebaseCrashlytics.setBool("key",true);
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      Crashlytics.setBool("key",true);
      *
      * @method setBool
      * @param {String} key
@@ -136,11 +136,11 @@ export default class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setFloat(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setFloat(key, value).
      *
      *     @example
-     *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-     *      FirebaseCrashlytics.setFloat("key",true);
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      Crashlytics.setFloat("key",true);
      *
      * @method setFloat
      * @param {String} key
@@ -159,11 +159,11 @@ export default class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setInt(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setInt(key, value).
      *
      *     @example
-     *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-     *      FirebaseCrashlytics.setInt("key",true);
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      Crashlytics.setInt("key",true);
      *
      * @method setInt
      * @param {String} key
@@ -182,11 +182,11 @@ export default class FirebaseCrashlytics {
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
-     * Setting keys are as easy as calling: FirebaseCrashlytics.setString(key, value).
+     * Setting keys are as easy as calling: Crashlytics.setString(key, value).
      *
      *     @example
-     *      import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
-     *      FirebaseCrashlytics.setString("key","value");
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      Crashlytics.setString("key","value");
      *
      * @method setString
      * @param {String} key

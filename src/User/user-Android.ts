@@ -8,27 +8,27 @@ const NativeUserProfileChangeRequest = requireClass('com.google.firebase.auth.Us
 const NativeEmailAuthProvider = requireClass('com.google.firebase.auth.EmailAuthProvider');
 // @ts-ignore
 const NativeUri = requireClass('android.net.Uri');
-import FirebaseAuthError from '../firebaseAuth/firebaseAuthErrors';
+import AuthError from '../Auth/authErrors';
 
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
-type FirebaseUserErrorBody = {
-    code?: FirebaseAuthError;
+type UserErrorBody = {
+    code?: AuthError;
     description: string;
 };
 
-type FirebaseUserCallback = (
-    FirebaseUser: any,
+type UserCallback = (
+    User: any,
     options?: {
-        error: FirebaseUserErrorBody;
+        error: UserErrorBody;
         isSuccess?: boolean;
         email?: string;
         token?: string;
     }
 ) => void | ((arg: boolean) => void);
 
-export default class FirebaseUser {
+export default class User {
     nativeObject: any;
     ios = {};
     static ios = {};
@@ -78,7 +78,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    setDisplayName = (name: string, callback: FirebaseUserCallback) => {
+    setDisplayName = (name: string, callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             let profileUpdates = new NativeUserProfileChangeRequest.Builder();
             profileUpdates = profileUpdates.setDisplayName(name);
@@ -128,7 +128,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    setPhotoURL = (url: string, callback: FirebaseUserCallback) => {
+    setPhotoURL = (url: string, callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             let profileUpdates = new NativeUserProfileChangeRequest.Builder();
             profileUpdates = profileUpdates.setPhotoUri(NativeUri.parse(url));
@@ -171,7 +171,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    sendEmailVerification = (callback: FirebaseUserCallback) => {
+    sendEmailVerification = (callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
@@ -185,16 +185,16 @@ export default class FirebaseUser {
 
                     if (errorCode.includes('ERROR_USER_DISABLED')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.UserDisabled, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.UserDisabled, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_USER_NOT_FOUND')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.UserNotFound, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.UserNotFound, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_USER_TOKEN_EXPIRED')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.UserTokenExpired, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.UserTokenExpired, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_INVALID_USER_TOKEN')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.InvalidUserToken, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.InvalidUserToken, description: e.getMessage() } });
                     } else {
                         callback(false, { error: { code: undefined, description: e.getMessage() } });
                     }
@@ -241,7 +241,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    updateEmail = (email: string, callback: FirebaseUserCallback) => {
+    updateEmail = (email: string, callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
@@ -254,15 +254,15 @@ export default class FirebaseUser {
                     const errorCode = '' + e.getErrorCode();
 
                     if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
-                        callback(false, { error: { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.OperationNotAllowed, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
-                        callback(false, { error: { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.InvalidEmail, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
-                        callback(false, { error: { code: FirebaseAuthError.EmailAlreadyInUse, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.EmailAlreadyInUse, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
-                        callback(false, { error: { code: FirebaseAuthError.WeakPassword, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.WeakPassword, description: e.getMessage() } });
                     } else if (errorCode.includes('recent')) {
-                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.RequiresRecentLogin, description: e.getMessage() } });
                     } else {
                         callback(false, { error: { code: undefined, description: e.getMessage() } });
                     }
@@ -294,7 +294,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    updatePassword = (password: string, callback: FirebaseUserCallback) => {
+    updatePassword = (password: string, callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
@@ -307,15 +307,15 @@ export default class FirebaseUser {
                     const errorCode = '' + e.getErrorCode();
 
                     if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
-                        callback(false, { error: { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.OperationNotAllowed, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
-                        callback(false, { error: { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.InvalidEmail, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_EMAIL_ALREADY_IN_USE')) {
-                        callback(false, { error: { code: FirebaseAuthError.EmailAlreadyInUse, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.EmailAlreadyInUse, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_WEAK_PASSWORD')) {
-                        callback(false, { error: { code: FirebaseAuthError.WeakPassword, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.WeakPassword, description: e.getMessage() } });
                     } else if (errorCode.includes('recent')) {
-                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.RequiresRecentLogin, description: e.getMessage() } });
                     } else {
                         callback(false, { error: { code: undefined, description: e.getMessage() } });
                     }
@@ -346,7 +346,7 @@ export default class FirebaseUser {
     * @ios
     * @since 0.1
     */
-    reload = (callback: FirebaseUserCallback) => {
+    reload = (callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
@@ -359,7 +359,7 @@ export default class FirebaseUser {
                     const errorCode = '' + e.getErrorCode();
 
                     if (errorCode.includes('recent')) {
-                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.RequiresRecentLogin, description: e.getMessage() } });
                     } else {
                         callback(false, { error: { code: undefined, description: e.getMessage() } });
                     }
@@ -391,7 +391,7 @@ export default class FirebaseUser {
     * @ios
     * @since 0.1
     */
-    delete = (callback: FirebaseUserCallback) => {
+    delete = (callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
@@ -404,7 +404,7 @@ export default class FirebaseUser {
                     const errorCode = '' + e.getErrorCode();
 
                     if (errorCode.includes('recent')) {
-                        callback(false, { error: { code: FirebaseAuthError.RequiresRecentLogin, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.RequiresRecentLogin, description: e.getMessage() } });
                     } else {
                         callback(false, { error: { code: undefined, description: e.getMessage() } });
                     }
@@ -439,7 +439,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    reauthenticate = (email: string, password: string, callback: FirebaseUserCallback) => {
+    reauthenticate = (email: string, password: string, callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const credential = NativeEmailAuthProvider.getCredential(email, password);
             const innerSuccessCallback = NativeOnSuccessListener.implement({
@@ -454,19 +454,19 @@ export default class FirebaseUser {
 
                     if (errorCode.includes('ERROR_USER_DISABLED')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.UserDisabled, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.UserDisabled, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_USER_NOT_FOUND')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.UserMismatch, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.UserMismatch, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_WRONG_PASSWORD')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.WrongPassword, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.WrongPassword, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_INVALID_EMAIL')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.InvalidEmail, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.InvalidEmail, description: e.getMessage() } });
                     } else if (errorCode.includes('ERROR_OPERATION_NOT_ALLOWED')) {
                         // thrown if the password is not strong enough
-                        callback(false, { error: { code: FirebaseAuthError.OperationNotAllowed, description: e.getMessage() } });
+                        callback(false, { error: { code: AuthError.OperationNotAllowed, description: e.getMessage() } });
                     } else {
                         callback(false, { error: { code: undefined, description: e.getMessage() } });
                     }
@@ -519,7 +519,7 @@ export default class FirebaseUser {
      * @ios
      * @since 0.1
      */
-    getIdToken = (forceRefresh: boolean, callback: FirebaseUserCallback) => {
+    getIdToken = (forceRefresh: boolean, callback: UserCallback) => {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
