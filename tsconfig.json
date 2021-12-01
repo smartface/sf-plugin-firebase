@@ -4,7 +4,7 @@
 		"target": "es5",
 		"moduleResolution": "node",
 		"module": "commonjs",
-		"lib": ["ES2015"],
+		"lib": ["es6"],
 		"checkJs": true,
 		"declaration": true,
 		"sourceMap": true,
