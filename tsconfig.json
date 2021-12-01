@@ -20,7 +20,8 @@
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitAny": false,
-		"strictBindCallApply": true
+		"strictBindCallApply": true,
+		"types": ["node"]
 	},
 	"include": ["./src/**/*.ts"],
 	"exclude": ["node_modules", "lib"]
