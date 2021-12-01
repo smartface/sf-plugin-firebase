@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
-const FirebaseAuth = require('../firebaseAuth');
+import FirebaseAuth from '../firebaseAuth';
 
 export default class FirebaseApp {
     nativeObject: any;
@@ -21,6 +21,13 @@ export default class FirebaseApp {
         this.ios = {};
         this.ios.native = {};
         this.ios.native.firOptions = FirebaseApp.ios.native.options(this.nativeObject);
+        /**-
+         * Delete current app,
+         *
+         * @event delete
+         * @ios
+         * @since 0.1
+         */
         this.ios.delete = (callback) => {
             function callbackHandler(e) {
                 if (typeof callback === 'function') {
@@ -111,19 +118,68 @@ export default class FirebaseApp {
         };
     }
 
+    /**
+     * Gets the Auth service for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     auth = () => {
         return new FirebaseAuth(this);
     };
 
+    /**
+     * Gets the Name for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     getName: () => string = () => FirebaseApp.ios.native.name(this.nativeObject);
 
+    /**
+     * Gets the getApiKey for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     getApiKey: () => string = () => Invocation.invokeInstanceMethod(this.ios.native.firOptions, 'APIKey', [], 'NSString');
 
+    /**
+     * Gets the getApplicationId for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     getApplicationId: () => string = () => Invocation.invokeInstanceMethod(this.ios.native.firOptions, 'googleAppID', [], 'NSString');
 
+    /**
+     * Gets the getDatabaseUrl for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     getDatabaseUrl: () => string = () => Invocation.invokeInstanceMethod(this.ios.native.firOptions, 'databaseURL', [], 'NSString');
 
+    /**
+     * Gets the getGcmSenderId for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     getGcmSenderId: () => string = () => Invocation.invokeInstanceMethod(this.ios.native.firOptions, 'GCMSenderID', [], 'NSString');
 
+    /**
+     * Gets the getStorageBucket for the current app.
+     *
+     * @android
+     * @ios
+     * @since 0.1
+     */
     getStorageBucket: () => string = () => Invocation.invokeInstanceMethod(this.ios.native.firOptions, 'storageBucket', [], 'NSString');
 }

@@ -1,4 +1,4 @@
-const FirebaseUser = require('../firebaseUser');
+import FirebaseUser from '../firebaseUser';
 // @ts-ignore
 const NativeFirebaseAuth = requireClass('com.google.firebase.auth.FirebaseAuth');
 // @ts-ignore
@@ -15,7 +15,7 @@ type FirebaseUserErrorBody = {
 };
 
 type FirebaseUserCallback = (
-    FirebaseUser: any,
+    FirebaseUser?: FirebaseUser,
     options?: {
         error: FirebaseUserErrorBody;
         isSuccess?: boolean;
@@ -27,7 +27,16 @@ export default class FirebaseAuth {
     static ios = {};
     static Error = FirebaseAuthErrors;
     FirebaseApp?: any;
-    ios = { useAppLanguage: function () {} };
+    ios = {
+        /**
+         * Sets `languageCode` to the app's current language.
+         *
+         * @event useAppLanguage
+         * @ios
+         * @since 0.1
+         */
+        useAppLanguage: function () {}
+    };
     nativeObject;
     constructor(FirebaseApp?: any) {
         this.FirebaseApp = FirebaseApp;
@@ -51,10 +60,10 @@ export default class FirebaseAuth {
         if (!AndroidConfig.isEmulator) {
             return new FirebaseUser(this.nativeObject.getCurrentUser());
         } else {
+            // @ts-ignore
             return new FirebaseUser();
         }
     };
-
     /**
      * Initiates a password reset for the given email address.
      *
@@ -79,6 +88,7 @@ export default class FirebaseAuth {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
+                    // @ts-ignore
                     callback(true);
                 }
             });
@@ -130,6 +140,7 @@ export default class FirebaseAuth {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
+                    // @ts-ignore
                     callback(true);
                 }
             });
@@ -189,6 +200,7 @@ export default class FirebaseAuth {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
+                    // @ts-ignore
                     callback(true);
                 }
             });

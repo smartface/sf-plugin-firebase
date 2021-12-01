@@ -2,8 +2,24 @@
 import { Invocation } from '@smartface/native/util';
 
 export default class FirebaseMessaging {
-    static ios: FirebaseMessagingIOS = {
+    static ios: { native: any; onTokenReflesh: (token?: string) => void } = {
         native: {},
+        /**
+         *  The FCM token is used to identify this device so that FCM can send notifications to it.
+         *  It is associated with your APNS token when the APNS token is supplied, so that sending
+         *  messages to the FCM token will be delivered over APNS.
+         *
+         *  The FCM token is sometimes refreshed automatically. `onTokenReflesh` method will be called once a token is
+         *  available, or has been refreshed. Typically it should be called once per app start, but
+         *  may be called more often, if token is invalidated or updated.
+         *
+         *  Once you have an FCM token, you should send it to your application server, so it can use
+         *  the FCM token to send notifications to your device.
+         *
+         * @event onTokenReflesh
+         * @ios
+         * @since 0.1
+         */
         onTokenReflesh: () => {}
     };
     constructor() {
@@ -53,10 +69,10 @@ export default class FirebaseMessaging {
 
         FirebaseMessaging.ios.native.messagingDidReceiveRegistrationToken();
     }
-    static subscribeToTopic(topic) {
+    static subscribeToTopic(topic: string) {
         FirebaseMessaging.ios.native.subscribeToTopic(topic);
     }
-    static unsubscribeFromTopic(topic) {
+    static unsubscribeFromTopic(topic: string) {
         FirebaseMessaging.ios.native.unsubscribeFromTopic(topic);
     }
     static getToken(callback: (token?: string) => void) {

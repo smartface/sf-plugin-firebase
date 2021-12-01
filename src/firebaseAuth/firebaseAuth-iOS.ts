@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
 import FirebaseAuthErrors from './firebaseAuthErrors';
-const FirebaseUser = require('../firebaseUser');
+import FirebaseUser from '../firebaseUser';
 
 type FirebaseUserErrorBody = {
     code?: FirebaseAuthErrors;
@@ -354,6 +354,7 @@ export default class FirebaseAuth {
      */
     getCurrentUser = () => {
         if (!FirebaseAuth.ios.native.isFrameworkEnabled()) {
+            // @ts-ignore
             return new FirebaseUser();
         }
         const user = FirebaseAuth.ios.native.currentUser(this.nativeAuth);
