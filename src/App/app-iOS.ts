@@ -3,10 +3,10 @@ import { Invocation } from '@smartface/native/util';
 import Auth from '../Auth';
 
 /**
- * @classdesc Firebase App
+ * @classdesc App
  * @class
  */
-export default class FirebaseApp {
+export default class App {
     nativeObject: any;
     android: any;
     ios: {
@@ -26,7 +26,7 @@ export default class FirebaseApp {
         this.android = {};
         this.ios = {};
         this.ios.native = {};
-        this.ios.native.firOptions = FirebaseApp.ios.native.options(this.nativeObject);
+        this.ios.native.firOptions = App.ios.native.options(this.nativeObject);
         /**-
          * Delete current app,
          *
@@ -40,7 +40,7 @@ export default class FirebaseApp {
                     callback(e.success);
                 }
             }
-            FirebaseApp.ios.native.deleteApp(this.nativeObject, callbackHandler);
+            App.ios.native.deleteApp(this.nativeObject, callbackHandler);
         };
 
         Object.defineProperties(this.ios, {
@@ -67,9 +67,9 @@ export default class FirebaseApp {
             }
         });
 
-        FirebaseApp.ios = {};
-        FirebaseApp.ios.native = {};
-        FirebaseApp.ios.native.configureWithOptions = function (firOptions) {
+        App.ios = {};
+        App.ios.native = {};
+        App.ios.native.configureWithOptions = function (firOptions) {
             // @ts-ignore
             const argOptions = new Invocation.Argument({
                 type: 'NSObject',
@@ -79,7 +79,7 @@ export default class FirebaseApp {
             Invocation.invokeClassMethod('FIRApp', 'configureWithOptions:', [argOptions]);
         };
 
-        FirebaseApp.ios.native.configureWithNameOptions = function (name, firOptions) {
+        App.ios.native.configureWithNameOptions = function (name, firOptions) {
             // @ts-ignore
             const argName = new Invocation.Argument({
                 type: 'NSString',
@@ -94,11 +94,11 @@ export default class FirebaseApp {
             Invocation.invokeClassMethod('FIRApp', 'configureWithName:options:', [argName, argOptions]);
         };
 
-        FirebaseApp.ios.native.defaultApp = function () {
+        App.ios.native.defaultApp = function () {
             return Invocation.invokeClassMethod('FIRApp', 'defaultApp', [], 'NSObject');
         };
 
-        FirebaseApp.ios.native.appNamed = function (name) {
+        App.ios.native.appNamed = function (name) {
             // @ts-ignore
             const argName = new Invocation.Argument({
                 type: 'NSString',
@@ -107,19 +107,19 @@ export default class FirebaseApp {
             return Invocation.invokeClassMethod('FIRApp', 'appNamed:', [argName], 'NSObject');
         };
 
-        FirebaseApp.ios.native.allApps = function () {
+        App.ios.native.allApps = function () {
             return Invocation.invokeClassMethod('FIRApp', 'allApps', [], 'id');
         };
 
-        FirebaseApp.ios.native.name = function (firApp) {
+        App.ios.native.name = function (firApp) {
             return Invocation.invokeInstanceMethod(firApp, 'name', [], 'NSString');
         };
 
-        FirebaseApp.ios.native.options = function (firApp) {
+        App.ios.native.options = function (firApp) {
             return Invocation.invokeInstanceMethod(firApp, 'options', [], 'NSObject');
         };
 
-        FirebaseApp.ios.native.deleteApp = function (firApp, callback) {
+        App.ios.native.deleteApp = function (firApp, callback) {
             // @ts-ignore
             const argCallback = new Invocation.Argument({
                 type: 'JSValue',
@@ -150,7 +150,7 @@ export default class FirebaseApp {
      * @ios
      * @since 0.1
      */
-    getName: () => string = () => FirebaseApp.ios.native.name(this.nativeObject);
+    getName: () => string = () => App.ios.native.name(this.nativeObject);
 
     /**
      * Gets the getApiKey for the current app.

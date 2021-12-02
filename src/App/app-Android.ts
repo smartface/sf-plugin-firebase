@@ -1,12 +1,12 @@
-import FirebaseAuth from '../Auth';
+import Auth from '../Auth';
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 /**
- * @classdesc Firebase App
+ * @classdesc App
  * @class
  */
-export default class FirebaseApp {
+export default class App {
     nativeObject: any;
     static ios = {};
     ios: {};
@@ -61,7 +61,7 @@ export default class FirebaseApp {
      */
     auth = () => {
         if (!AndroidConfig.isEmulator) {
-            return new FirebaseAuth(this);
+            return new Auth(this);
         }
     };
 
