@@ -1,13 +1,13 @@
 {
   "name": "@smartface/plugin-firebase",
-  "version": "7.0.0-rc.22",
+  "version": "7.0.0-rc.20",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "repository": "https://github.com/smartface/sf-plugin-firebase",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "postinstall": "node postinstall.js"
+    "postinstall": "node -e \"if (require('fs').existsSync('config/project.json')){require('child_process').fork('postinstall.js');} \""
   },
   "keywords": [
     "smartface",
