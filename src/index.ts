@@ -2,12 +2,12 @@
 import System from '@smartface/native/device/system';
 import type FirebaseAndroid from './firebase-Android';
 import type FirebaseIOS from './firebase-iOS';
-import Analytics from 'Analytics';
-import App from 'App';
-import Auth from 'Auth';
-import Crashlytics from 'Crashlytics';
-import Messaging from 'Messaging';
-import User from 'User';
+import Analytics from './Analytics';
+import App from './App';
+import Auth from './Auth';
+import Crashlytics from './Crashlytics';
+import Messaging from './Messaging';
+import User from './User';
 
 const Firebase: typeof FirebaseAndroid & typeof FirebaseIOS = require(`./firebase-${System.OS}`);
 export default Firebase;
