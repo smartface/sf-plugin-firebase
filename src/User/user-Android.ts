@@ -105,7 +105,7 @@ export default class User {
     /**
      * Returns the URL of this user's main profile picture, as stored in the Firebase project's user database.
      *
-     * @event NtosURL
+     * @event getPhotoURL
      * @android
      * @ios
      * @since 0.1
@@ -476,6 +476,20 @@ export default class User {
             const tokenTask = this.nativeObject.reauthenticate(credential);
             tokenTask.addOnSuccessListener(innerSuccessCallback);
             tokenTask.addOnFailureListener(innerFailureCallback);
+        }
+    };
+
+    /**
+     * Returns the phone number of the user, as stored in the Firebase project's user database, or null if none exists
+     *
+     * @event getPhoneNumber
+     * @android
+     * @ios
+     * @since 0.1
+     */
+    getPhoneNumber = () => {
+        if (!AndroidConfig.isEmulator) {
+            return this.nativeObject.getPhoneNumber();
         }
     };
 

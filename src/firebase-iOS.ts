@@ -9,8 +9,8 @@ export default class Firebase {
     static analytics = FirebaseAnalytics;
     static messaging = Messaging;
 
-    static initializeApp(name: string, options?: { iosFile: any }) {
-        if (options && options.iosFile.exists) {
+    static initializeApp(options?: { iosFile: any }, name?: string) {
+        if (options?.iosFile?.exists) {
             const pathPlist = options.iosFile.nativeObject.getActualPath();
 
             const alloc = Invocation.invokeClassMethod('FIROptions', 'alloc', [], 'id');

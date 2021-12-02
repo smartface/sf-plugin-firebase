@@ -6,7 +6,6 @@ import NativeFirebaseApp from 'com.google.firebase.FirebaseApp';
 import NativeFirebaseOptions from 'com.google.firebase.FirebaseOptions';
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
-
 import Analytics from './Analytics';
 import Messaging from './Messaging';
 
