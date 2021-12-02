@@ -3,4 +3,7 @@ node_modules
 .DS_Store
 npm-debug.log
 yarn-error.*
-tsconfig.*
+.DS_Store
+npm-debug.log
+.git
+.gitignore
