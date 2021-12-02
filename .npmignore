@@ -4,8 +4,6 @@ tsconfig.*
 .DS_Store
 npm-debug.log
 yarn-error.*
-.DS_Store
-npm-debug.log
 .git
 .gitignore
 Native/iOS
