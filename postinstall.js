@@ -65,7 +65,7 @@ function deleteRemainders() {
 
 const AC_APPCIRCLE = !!process.env.AC_APPCIRCLE;
 const projectJSONPath = path.normalize(path.join(__dirname, '../../../../config/project.json'));
-if (fs.existsSync(projectJSONPath) && AC_APPCIRCLE) {
+if (fs.existsSync(projectJSONPath) || AC_APPCIRCLE) {
     Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
         .then(() => {
             addDefaultConfigToProjectJSON();
