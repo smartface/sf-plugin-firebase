@@ -1,9 +1,9 @@
 import App from './App';
 import FirebaseAuth from './Auth';
 // @ts-ignore
-import NativeFirebaseApp from 'com.google.firebase.FirebaseApp';
+const NativeFirebaseApp = requireClass('com.google.firebase.FirebaseApp');
 // @ts-ignore
-import NativeFirebaseOptions from 'com.google.firebase.FirebaseOptions';
+const NativeFirebaseOptions = requireClass('com.google.firebase.FirebaseOptions');
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 import Analytics from './Analytics';
