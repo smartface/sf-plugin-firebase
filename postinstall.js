@@ -63,9 +63,8 @@ function deleteRemainders() {
     rimraf.sync(nativePath, { recursive: true, force: true, disableGlob: true });
 }
 
-const AC_APPCIRCLE = !!process.env.AC_APPCIRCLE;
-const projectJSONPath = path.normalize(path.join(__dirname, '../../../../config/project.json'));
-if (fs.existsSync(projectJSONPath) || AC_APPCIRCLE) {
+const projectJSONPath = 'config/project.json';
+if (fs.existsSync(projectJSONPath)) {
     Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
         .then(() => {
             addDefaultConfigToProjectJSON();
