@@ -11,6 +11,7 @@ import User from './User';
 
 const Firebase: typeof FirebaseAndroid & typeof FirebaseIOS = require(`./firebase-${System.OS}`);
 export default Firebase;
+module.exports = Firebase;
 export { Analytics, App, Auth, Crashlytics, Messaging, User };
 export {
     Analytics as FirebaseAnalytics,
