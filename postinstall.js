@@ -63,7 +63,7 @@ function deleteRemainders() {
     rimraf.sync(nativePath, { recursive: true, force: true, disableGlob: true });
 }
 
-const projectJSONPath = 'config/project.json';
+const projectJSONPath = path.normalize(path.join(__dirname, '../../../../config/project.json'));
 if (fs.existsSync(projectJSONPath)) {
     Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
         .then(() => {
