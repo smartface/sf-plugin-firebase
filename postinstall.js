@@ -5,15 +5,7 @@ const rimraf = require('./rimraf');
 
 const FIREBASE_URL = 'https://cd.smartface.io/repository/smartfacefirebase/ios/3.0.4/firebaseios.zip';
 
-function checkExistenceOfProjectJson() {
-    const projectJSONPath = path.normalize(path.join(__dirname, '../../../../config/project.json'));
-    if (!fs.existsSync(projectJSONPath)) {
-        throw new Error(`To run postinstall properly ${projectJSONPath} is needed`);
-    }
-}
-
 async function getIOSFirebasePlugin() {
-    checkExistenceOfProjectJson();
     const projectPluginPath = path.normalize(path.join(__dirname, '../../../../plugins/iOS/firebaseios.zip'));
     return new Promise((resolve, reject) => {
         https.get(FIREBASE_URL, (res) => {
@@ -29,7 +21,6 @@ async function getIOSFirebasePlugin() {
 }
 
 async function getAndroidFirebasePlugin() {
-    checkExistenceOfProjectJson();
     const androidFirebasePath = path.normalize(path.join(__dirname, 'Native/Android/firebaseplugin'));
     const projectPluginPath = path.normalize(path.join(__dirname, '../../../../plugins/Android/firebaseplugin'));
     rimraf.sync(projectPluginPath, { recursive: true, force: true, disableGlob: true });
@@ -72,12 +63,15 @@ function deleteRemainders() {
     rimraf.sync(nativePath, { recursive: true, force: true, disableGlob: true });
 }
 
-Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
-    .then(() => {
-        addDefaultConfigToProjectJSON();
-        deleteRemainders();
-    })
-    .catch((err) => {
-        console.error('An error occurred : ', err);
-        process.exit(1);
-    });
+const projectJSONPath = path.normalize(path.join(__dirname, '../../../../config/project.json'));
+if (fs.existsSync(projectJSONPath)) {
+    Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
+        .then(() => {
+            addDefaultConfigToProjectJSON();
+            deleteRemainders();
+        })
+        .catch((err) => {
+            console.error('An error occurred : ', err);
+            process.exit(1);
+        });
+}
