@@ -10,3 +10,4 @@
 **/.tmp
 lib
 node_modules
+tsconfig.tsbuildinfo
