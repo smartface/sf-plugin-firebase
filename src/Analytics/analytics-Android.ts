@@ -110,3 +110,4 @@ export default class Analytics {
         }
     };
 }
+module.exports = Analytics;

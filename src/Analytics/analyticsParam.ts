@@ -190,3 +190,4 @@ enum FirebaseAnalyticsParam {
 }
 
 export default FirebaseAnalyticsParam;
+module.exports = FirebaseAnalyticsParam;

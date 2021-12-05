@@ -654,3 +654,4 @@ export default class Auth {
         Auth.ios.native.signOut(this.nativeAuth);
     };
 }
+module.exports = Auth;

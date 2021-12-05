@@ -252,3 +252,4 @@ enum FirebaseAnalyticsEvent {
 }
 
 export default FirebaseAnalyticsEvent;
+module.exports = FirebaseAnalyticsEvent;

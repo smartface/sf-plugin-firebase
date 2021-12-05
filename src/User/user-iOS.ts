@@ -580,3 +580,4 @@ export default class User {
         User.ios.native.getIDTokenForcingRefreshCompletion(this.nativeUser, forceRefresh, callbackHandler);
     };
 }
+module.exports = User;

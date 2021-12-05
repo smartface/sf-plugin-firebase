@@ -5,4 +5,5 @@ import type authIOS from './auth-iOS';
 
 const Auth: typeof authAndroid & typeof authIOS = require(`./auth-${System.OS}`);
 
-export = Auth;
+export default Auth;
+module.exports = Auth;

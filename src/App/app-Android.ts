@@ -143,3 +143,4 @@ export default class App {
         }
     };
 }
+module.exports = App;

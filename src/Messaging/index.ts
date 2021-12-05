@@ -5,4 +5,5 @@ import type messagingIOS from './messaging-iOS';
 
 const Messaging: typeof messagingAndroid & typeof messagingIOS = require(`./messaging-${System.OS}`);
 
-export = Messaging;
+export default Messaging;
+module.exports = Messaging;

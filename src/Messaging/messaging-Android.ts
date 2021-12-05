@@ -74,3 +74,4 @@ export default class Messaging {
         }
     };
 }
+module.exports = Messaging;

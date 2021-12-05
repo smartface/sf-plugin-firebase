@@ -5,4 +5,5 @@ import type crashlyticsIOS from './crashlytics-iOS';
 
 const Crashlytics: typeof crashlyticsAndroid & typeof crashlyticsIOS = require(`./crashlytics-${System.OS}`);
 
-export = Crashlytics;
+export default Crashlytics;
+module.exports = Crashlytics;

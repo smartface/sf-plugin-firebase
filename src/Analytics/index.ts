@@ -5,4 +5,5 @@ import type analyticsIOS from './analytics-iOS';
 
 const Analytics: typeof analyticsAndroid & typeof analyticsIOS = require(`./analytics-${System.OS}`);
 
-export = Analytics;
+export default Analytics;
+module.exports = Analytics;

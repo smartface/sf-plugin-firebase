@@ -113,3 +113,4 @@ class Messaging {
 Messaging.ios.native.messagingDidReceiveRegistrationToken();
 
 export default Messaging;
+module.exports = Messaging;

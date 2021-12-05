@@ -83,3 +83,4 @@ enum AuthErrors {
 }
 
 export default AuthErrors;
+module.exports = AuthErrors;

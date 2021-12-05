@@ -5,4 +5,5 @@ import type appIOS from './app-iOS';
 
 const App: typeof appAndroid & typeof appIOS = require(`./app-${System.OS}`);
 
-export = App;
+export default App;
+module.exports = App;

@@ -203,3 +203,4 @@ export default class Crashlytics {
         } catch (e) {}
     };
 }
+module.exports = Crashlytics;

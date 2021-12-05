@@ -461,3 +461,4 @@ export default class Auth {
         }
     };
 }
+module.exports = Auth;

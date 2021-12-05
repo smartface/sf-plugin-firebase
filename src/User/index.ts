@@ -5,4 +5,5 @@ import type userIOS from './user-iOS';
 
 const User: typeof userAndroid & typeof userIOS = require(`./user-${System.OS}`);
 
-export = User;
+export default User;
+module.exports = User;

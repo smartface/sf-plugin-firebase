@@ -118,3 +118,4 @@ export default class Crashlytics {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
     };
 }
+module.exports = Crashlytics;

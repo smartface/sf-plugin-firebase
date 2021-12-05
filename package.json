@@ -3,7 +3,7 @@
   "version": "7.0.0-rc.36",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "repository": "https://github.com/smartface/sf-plugin-firebase",
-  "main": "lib/index.js",
+  "main": "lib/index",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",

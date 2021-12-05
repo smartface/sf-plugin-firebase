@@ -197,3 +197,4 @@ export default class App {
      */
     getStorageBucket: () => string = () => Invocation.invokeInstanceMethod(this.ios.native.firOptions, 'storageBucket', [], 'NSString');
 }
+module.exports = App;
