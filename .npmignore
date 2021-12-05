@@ -4,6 +4,15 @@ tsconfig.*
 .DS_Store
 npm-debug.log
 yarn-error.*
-.git
 .gitignore
 Native/iOS
+plugins
+.npmrc
+.git
+.hg
+.lock-wscript
+.svn
+.wafpickle-*
+.*.swp
+._*
+.c9
