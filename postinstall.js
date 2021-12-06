@@ -62,7 +62,7 @@ function deleteRemainders() {
     const nativePath = path.normalize(path.join(__dirname, 'Native'));
     rimraf.sync(nativePath, { recursive: true, force: true, disableGlob: true });
 }
-if (!process.env.AC_APPCIRLCE) {
+if (!process.env.AC_APPCIRCLE) {
     return;
 }
 Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
