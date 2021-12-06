@@ -62,16 +62,15 @@ function deleteRemainders() {
     const nativePath = path.normalize(path.join(__dirname, 'Native'));
     rimraf.sync(nativePath, { recursive: true, force: true, disableGlob: true });
 }
-
-const projectJSONPath = path.normalize(path.join(__dirname, '../../../../config/project.json'));
-if (fs.existsSync(projectJSONPath)) {
-    Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
-        .then(() => {
-            addDefaultConfigToProjectJSON();
-            deleteRemainders();
-        })
-        .catch((err) => {
-            console.error('An error occurred : ', err);
-            process.exit(1);
-        });
+if (!process.env.AC_APPCIRLCE) {
+    return;
 }
+Promise.all([getAndroidFirebasePlugin(), getIOSFirebasePlugin()])
+    .then(() => {
+        addDefaultConfigToProjectJSON();
+        deleteRemainders();
+    })
+    .catch((err) => {
+        console.error('An error occurred : ', err);
+        process.exit(1);
+    });
