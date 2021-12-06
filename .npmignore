@@ -5,7 +5,7 @@ tsconfig.*
 npm-debug.log
 yarn-error.*
 .gitignore
-!Native/Android/src
+!Native/Android/firebaseplugin/src/*
 Native/iOS
 plugins
 .npmrc
