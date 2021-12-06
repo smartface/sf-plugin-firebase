@@ -5,6 +5,7 @@ tsconfig.*
 npm-debug.log
 yarn-error.*
 .gitignore
+!Native/Android/
 Native/iOS
 plugins
 .npmrc
