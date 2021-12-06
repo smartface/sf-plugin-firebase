@@ -1,11 +1,10 @@
-src
+lib
 node_modules
 tsconfig.*
 .DS_Store
 npm-debug.log
 yarn-error.*
 .gitignore
-!Native/Android/firebaseplugin/src/*
 Native/iOS
 plugins
 .npmrc
