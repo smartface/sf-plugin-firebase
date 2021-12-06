@@ -11,3 +11,5 @@
 dist
 node_modules
 tsconfig.tsbuildinfo
+package-lock.json
+yarn.lock

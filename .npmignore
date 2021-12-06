@@ -16,3 +16,4 @@ plugins
 .*.swp
 ._*
 .c9
+package-lock.json
