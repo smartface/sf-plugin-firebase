@@ -19,7 +19,69 @@ export default class App {
     static ios: {
         native?: any;
     } = {
-        native: {}
+        native: {
+            configureWithOptions : function (firOptions) {
+                // @ts-ignore
+                const argOptions = new Invocation.Argument({
+                    type: 'NSObject',
+                    value: firOptions
+                });
+                // @ts-ignore
+                Invocation.invokeClassMethod('FIRApp', 'configureWithOptions:', [argOptions]);
+            },
+    
+            configureWithNameOptions : function (name, firOptions) {
+                // @ts-ignore
+                const argName = new Invocation.Argument({
+                    type: 'NSString',
+                    value: name
+                });
+                // @ts-ignore
+                const argOptions = new Invocation.Argument({
+                    type: 'NSObject',
+                    value: firOptions
+                });
+                // @ts-ignore
+                Invocation.invokeClassMethod('FIRApp', 'configureWithName:options:', [argName, argOptions]);
+            },
+    
+            defaultApp : function () {
+                return Invocation.invokeClassMethod('FIRApp', 'defaultApp', [], 'NSObject');
+            },
+    
+            appNamed : function (name) {
+                // @ts-ignore
+                const argName = new Invocation.Argument({
+                    type: 'NSString',
+                    value: name
+                });
+                return Invocation.invokeClassMethod('FIRApp', 'appNamed:', [argName], 'NSObject');
+            },
+    
+            allApps : function () {
+                return Invocation.invokeClassMethod('FIRApp', 'allApps', [], 'id');
+            },
+    
+            name : function (firApp) {
+                return Invocation.invokeInstanceMethod(firApp, 'name', [], 'NSString');
+            },
+    
+            options : function (firApp) {
+                return Invocation.invokeInstanceMethod(firApp, 'options', [], 'NSObject');
+            },
+    
+            deleteApp : function (firApp, callback) {
+                // @ts-ignore
+                const argCallback = new Invocation.Argument({
+                    type: 'JSValue',
+                    value: function (e) {
+                        callback(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(firApp, 'deleteAppBridge:', [argCallback]);
+            }
+        }
     };
     constructor(nativeObject: any) {
         this.nativeObject = nativeObject;
@@ -69,67 +131,7 @@ export default class App {
 
         App.ios = {};
         App.ios.native = {};
-        App.ios.native.configureWithOptions = function (firOptions) {
-            // @ts-ignore
-            const argOptions = new Invocation.Argument({
-                type: 'NSObject',
-                value: firOptions
-            });
-            // @ts-ignore
-            Invocation.invokeClassMethod('FIRApp', 'configureWithOptions:', [argOptions]);
-        };
-
-        App.ios.native.configureWithNameOptions = function (name, firOptions) {
-            // @ts-ignore
-            const argName = new Invocation.Argument({
-                type: 'NSString',
-                value: name
-            });
-            // @ts-ignore
-            const argOptions = new Invocation.Argument({
-                type: 'NSObject',
-                value: firOptions
-            });
-            // @ts-ignore
-            Invocation.invokeClassMethod('FIRApp', 'configureWithName:options:', [argName, argOptions]);
-        };
-
-        App.ios.native.defaultApp = function () {
-            return Invocation.invokeClassMethod('FIRApp', 'defaultApp', [], 'NSObject');
-        };
-
-        App.ios.native.appNamed = function (name) {
-            // @ts-ignore
-            const argName = new Invocation.Argument({
-                type: 'NSString',
-                value: name
-            });
-            return Invocation.invokeClassMethod('FIRApp', 'appNamed:', [argName], 'NSObject');
-        };
-
-        App.ios.native.allApps = function () {
-            return Invocation.invokeClassMethod('FIRApp', 'allApps', [], 'id');
-        };
-
-        App.ios.native.name = function (firApp) {
-            return Invocation.invokeInstanceMethod(firApp, 'name', [], 'NSString');
-        };
-
-        App.ios.native.options = function (firApp) {
-            return Invocation.invokeInstanceMethod(firApp, 'options', [], 'NSObject');
-        };
-
-        App.ios.native.deleteApp = function (firApp, callback) {
-            // @ts-ignore
-            const argCallback = new Invocation.Argument({
-                type: 'JSValue',
-                value: function (e) {
-                    callback(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(firApp, 'deleteAppBridge:', [argCallback]);
-        };
+        
     }
 
     /**

@@ -82,7 +82,251 @@ export default class Auth {
     static ios: {
         native?: any;
     } = {
-        native: {}
+        native: {
+            auth : function () {
+                return Invocation.invokeClassMethod('FIRAuth', 'auth', [], 'NSObject');
+            },
+    
+            authWithApp : function (app) {
+                // @ts-ignore
+                var argApp = new Invocation.Argument({
+                    type: 'NSObject',
+                    value: app
+                });
+                return Invocation.invokeClassMethod('FIRAuth', 'authWithApp:', [argApp], 'NSObject');
+            },
+    
+            app : function (auth) {
+                return Invocation.invokeInstanceMethod(auth, 'app', [], 'NSObject');
+            },
+    
+            currentUser : function (auth) {
+                return Invocation.invokeInstanceMethod(auth, 'currentUser', [], 'NSObject');
+            },
+    
+            getLanguageCode : function (auth) {
+                return Invocation.invokeInstanceMethod(auth, 'languageCode', [], 'NSString');
+            },
+    
+            setLanguageCode : function (auth, languageCode) {
+                // @ts-ignore
+                var argLanguageCode = new Invocation.Argument({
+                    type: 'NSString',
+                    value: languageCode
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'setLanguageCode:', [argLanguageCode]);
+            },
+    
+            /**
+                Possible error codes:
+            
+                + `OperationNotAllowed` - Indicates that email and password
+                    accounts are not enabled. Enable them in the Auth section of the
+                    Firebase console.
+                + `UserDisabled` - Indicates the user's account is disabled.
+                + `WrongPassword` - Indicates the user attempted
+                    sign in with an incorrect password.
+                + `InvalidEmail` - Indicates the email address is malformed.
+            */
+            signInWithEmailPasswordCompletion : function (auth, email, password, completion) {
+                // @ts-ignore
+                var argEmail = new Invocation.Argument({
+                    type: 'NSString',
+                    value: email
+                });
+                // @ts-ignore
+                var argPassword = new Invocation.Argument({
+                    type: 'NSString',
+                    value: password
+                });
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'FIRAuthResultCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'signInWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
+            },
+    
+            /**
+                Possible error codes:
+                
+                + `InvalidEmail` - Indicates the email address is malformed.
+                + `EmailAlreadyInUse` - Indicates the email used to attempt sign up
+                    already exists. Call fetchProvidersForEmail to check which sign-in mechanisms the user
+                    used, and prompt the user to sign in with one of those.
+                + `OperationNotAllowed` - Indicates that email and password accounts
+                    are not enabled. Enable them in the Auth section of the Firebase console.
+                + `WeakPassword` - Indicates an attempt to set a password that is
+                    considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
+                    dictionary object will contain more detailed explanation that can be shown to the user.
+            */
+            createUserWithEmailPasswordCompletion : function (auth, email, password, completion) {
+                // @ts-ignore
+                var argEmail = new Invocation.Argument({
+                    type: 'NSString',
+                    value: email
+                });
+                // @ts-ignore
+                var argPassword = new Invocation.Argument({
+                    type: 'NSString',
+                    value: password
+                });
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'FIRAuthResultCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'createUserWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
+            },
+    
+            /**
+                Possible error codes:
+            
+                + `InvalidCustomToken` - Indicates a validation error with
+                    the custom token.
+                + `CustomTokenMismatch` - Indicates the service account and the API key
+                    belong to different projects.
+            */
+            signInWithCustomTokenCompletion : function (auth, token, completion) {
+                // @ts-ignore
+                var argToken = new Invocation.Argument({
+                    type: 'NSString',
+                    value: token
+                });
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'FIRAuthResultCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'signInWithCustomToken:completion:', [argToken, argCompletion]);
+            },
+    
+            /**
+                Possible error codes:
+            
+                + `OperationNotAllowed` - Indicates that anonymous accounts are
+                    not enabled. Enable them in the Auth section of the Firebase console.
+            */
+            signInAnonymouslyWithCompletion : function (auth, completion) {
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'FIRAuthResultCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'signInAnonymouslyWithCompletion:', [argCompletion]);
+            },
+    
+            /**
+                Possible error codes:
+            
+                + `KeychainError` - Indicates an error occurred when accessing the
+                    keychain. The `NSLocalizedFailureReasonErrorKey` field in the `NSError.userInfo`
+                    dictionary will contain more information about the error encountered.
+            */
+    
+            signOut : function (auth) {
+                // @ts-ignore
+                var argError = new Invocation.Argument({
+                    type: 'NSObject',
+                    value: undefined
+                });
+                // @ts-ignore
+                return Invocation.invokeInstanceMethod(auth, 'signOut:', [argError]);
+            },
+    
+            getErrorObject : function (nativeError) {
+                var code = Invocation.invokeInstanceMethod(nativeError, 'code', [], 'NSInteger');
+                var localizedDescription = Invocation.invokeInstanceMethod(nativeError, 'localizedDescription', [], 'NSString');
+    
+                return { code: code, description: localizedDescription };
+            },
+    
+            useAppLanguage : function (auth) {
+                // @ts-ignore
+                return Invocation.invokeInstanceMethod(auth, 'useAppLanguage', []);
+            },
+    
+            sendPasswordResetWithEmailCompletion : function (auth, email, completion) {
+                // @ts-ignore
+                var argEmail = new Invocation.Argument({
+                    type: 'NSString',
+                    value: email
+                });
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'UserProfileChangeCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'sendPasswordResetWithEmail:completion:', [argEmail, argCompletion]);
+            },
+    
+            verifyPasswordResetCodeCompletion : function (auth, code, completion) {
+                // @ts-ignore
+                var argCode = new Invocation.Argument({
+                    type: 'NSString',
+                    value: code
+                });
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'VerifyPasswordResetCodeCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'verifyPasswordResetCode:completion:', [argCode, argCompletion]);
+            },
+    
+            confirmPasswordResetWithCodeNewPasswordCompletion : function (auth, code, newPassword, completion) {
+                // @ts-ignore
+                var argCode = new Invocation.Argument({
+                    type: 'NSString',
+                    value: code
+                });
+                // @ts-ignore
+                var argNewPassword = new Invocation.Argument({
+                    type: 'NSString',
+                    value: newPassword
+                });
+                // @ts-ignore
+                var argCompletion = new Invocation.Argument({
+                    type: 'UserProfileChangeCallback',
+                    value: function (e) {
+                        completion(e);
+                    }
+                });
+                // @ts-ignore
+                Invocation.invokeInstanceMethod(auth, 'confirmPasswordResetWithCode:newPassword:completion:', [
+                    argCode,
+                    argNewPassword,
+                    argCompletion
+                ]);
+            },
+    
+            errorCode : errorCode,
+    
+            isFrameworkEnabled : function () {
+                // @ts-ignore
+                var invocation = __SF_NSInvocation.createClassInvocationWithSelectorInstance('alloc', 'FIROptions');
+                return invocation ? true : false;
+            }
+        }
     };
     ios: {
         /**
@@ -124,250 +368,6 @@ export default class Auth {
                 configurable: true
             }
         });
-
-        Auth.ios.native.auth = function () {
-            return Invocation.invokeClassMethod('FIRAuth', 'auth', [], 'NSObject');
-        };
-
-        Auth.ios.native.authWithApp = function (app) {
-            // @ts-ignore
-            var argApp = new Invocation.Argument({
-                type: 'NSObject',
-                value: app
-            });
-            return Invocation.invokeClassMethod('FIRAuth', 'authWithApp:', [argApp], 'NSObject');
-        };
-
-        Auth.ios.native.app = function (auth) {
-            return Invocation.invokeInstanceMethod(auth, 'app', [], 'NSObject');
-        };
-
-        Auth.ios.native.currentUser = function (auth) {
-            return Invocation.invokeInstanceMethod(auth, 'currentUser', [], 'NSObject');
-        };
-
-        Auth.ios.native.getLanguageCode = function (auth) {
-            return Invocation.invokeInstanceMethod(auth, 'languageCode', [], 'NSString');
-        };
-
-        Auth.ios.native.setLanguageCode = function (auth, languageCode) {
-            // @ts-ignore
-            var argLanguageCode = new Invocation.Argument({
-                type: 'NSString',
-                value: languageCode
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'setLanguageCode:', [argLanguageCode]);
-        };
-
-        /**
-            Possible error codes:
-        
-            + `OperationNotAllowed` - Indicates that email and password
-                accounts are not enabled. Enable them in the Auth section of the
-                Firebase console.
-            + `UserDisabled` - Indicates the user's account is disabled.
-            + `WrongPassword` - Indicates the user attempted
-                sign in with an incorrect password.
-            + `InvalidEmail` - Indicates the email address is malformed.
-        */
-        Auth.ios.native.signInWithEmailPasswordCompletion = function (auth, email, password, completion) {
-            // @ts-ignore
-            var argEmail = new Invocation.Argument({
-                type: 'NSString',
-                value: email
-            });
-            // @ts-ignore
-            var argPassword = new Invocation.Argument({
-                type: 'NSString',
-                value: password
-            });
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'FIRAuthResultCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'signInWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
-        };
-
-        /**
-            Possible error codes:
-            
-            + `InvalidEmail` - Indicates the email address is malformed.
-            + `EmailAlreadyInUse` - Indicates the email used to attempt sign up
-                already exists. Call fetchProvidersForEmail to check which sign-in mechanisms the user
-                used, and prompt the user to sign in with one of those.
-            + `OperationNotAllowed` - Indicates that email and password accounts
-                are not enabled. Enable them in the Auth section of the Firebase console.
-            + `WeakPassword` - Indicates an attempt to set a password that is
-                considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
-                dictionary object will contain more detailed explanation that can be shown to the user.
-        */
-        Auth.ios.native.createUserWithEmailPasswordCompletion = function (auth, email, password, completion) {
-            // @ts-ignore
-            var argEmail = new Invocation.Argument({
-                type: 'NSString',
-                value: email
-            });
-            // @ts-ignore
-            var argPassword = new Invocation.Argument({
-                type: 'NSString',
-                value: password
-            });
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'FIRAuthResultCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'createUserWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
-        };
-
-        /**
-            Possible error codes:
-        
-            + `InvalidCustomToken` - Indicates a validation error with
-                the custom token.
-            + `CustomTokenMismatch` - Indicates the service account and the API key
-                belong to different projects.
-        */
-        Auth.ios.native.signInWithCustomTokenCompletion = function (auth, token, completion) {
-            // @ts-ignore
-            var argToken = new Invocation.Argument({
-                type: 'NSString',
-                value: token
-            });
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'FIRAuthResultCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'signInWithCustomToken:completion:', [argToken, argCompletion]);
-        };
-
-        /**
-            Possible error codes:
-        
-            + `OperationNotAllowed` - Indicates that anonymous accounts are
-                not enabled. Enable them in the Auth section of the Firebase console.
-        */
-        Auth.ios.native.signInAnonymouslyWithCompletion = function (auth, completion) {
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'FIRAuthResultCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'signInAnonymouslyWithCompletion:', [argCompletion]);
-        };
-
-        /**
-            Possible error codes:
-        
-            + `KeychainError` - Indicates an error occurred when accessing the
-                keychain. The `NSLocalizedFailureReasonErrorKey` field in the `NSError.userInfo`
-                dictionary will contain more information about the error encountered.
-        */
-
-        Auth.ios.native.signOut = function (auth) {
-            // @ts-ignore
-            var argError = new Invocation.Argument({
-                type: 'NSObject',
-                value: undefined
-            });
-            // @ts-ignore
-            return Invocation.invokeInstanceMethod(auth, 'signOut:', [argError]);
-        };
-
-        Auth.ios.native.getErrorObject = function (nativeError) {
-            var code = Invocation.invokeInstanceMethod(nativeError, 'code', [], 'NSInteger');
-            var localizedDescription = Invocation.invokeInstanceMethod(nativeError, 'localizedDescription', [], 'NSString');
-
-            return { code: code, description: localizedDescription };
-        };
-
-        Auth.ios.native.useAppLanguage = function (auth) {
-            // @ts-ignore
-            return Invocation.invokeInstanceMethod(auth, 'useAppLanguage', []);
-        };
-
-        Auth.ios.native.sendPasswordResetWithEmailCompletion = function (auth, email, completion) {
-            // @ts-ignore
-            var argEmail = new Invocation.Argument({
-                type: 'NSString',
-                value: email
-            });
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'UserProfileChangeCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'sendPasswordResetWithEmail:completion:', [argEmail, argCompletion]);
-        };
-
-        Auth.ios.native.verifyPasswordResetCodeCompletion = function (auth, code, completion) {
-            // @ts-ignore
-            var argCode = new Invocation.Argument({
-                type: 'NSString',
-                value: code
-            });
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'VerifyPasswordResetCodeCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'verifyPasswordResetCode:completion:', [argCode, argCompletion]);
-        };
-
-        Auth.ios.native.confirmPasswordResetWithCodeNewPasswordCompletion = function (auth, code, newPassword, completion) {
-            // @ts-ignore
-            var argCode = new Invocation.Argument({
-                type: 'NSString',
-                value: code
-            });
-            // @ts-ignore
-            var argNewPassword = new Invocation.Argument({
-                type: 'NSString',
-                value: newPassword
-            });
-            // @ts-ignore
-            var argCompletion = new Invocation.Argument({
-                type: 'UserProfileChangeCallback',
-                value: function (e) {
-                    completion(e);
-                }
-            });
-            // @ts-ignore
-            Invocation.invokeInstanceMethod(auth, 'confirmPasswordResetWithCode:newPassword:completion:', [
-                argCode,
-                argNewPassword,
-                argCompletion
-            ]);
-        };
-
-        Auth.ios.native.errorCode = errorCode;
-
-        Auth.ios.native.isFrameworkEnabled = function () {
-            // @ts-ignore
-            var invocation = __SF_NSInvocation.createClassInvocationWithSelectorInstance('alloc', 'FIROptions');
-            return invocation ? true : false;
-        };
     }
 
     /**
