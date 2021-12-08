@@ -17,7 +17,7 @@ export default class App {
             /**-
              * Delete current app,
              *
-             * @event delete
+             * @method delete
              * @ios
              * @since 0.1
              */
@@ -25,7 +25,7 @@ export default class App {
             /**
              * Gets the getBundleId for the current app.
              *
-             * @event getBundleId
+             * @method getBundleId
              * @return {String}
              * @ios
              * @since 0.1
@@ -34,7 +34,7 @@ export default class App {
             /**
              * Gets the getClientId for the current app.
              *
-             * @event getClientId
+             * @method getClientId
              * @return {String}
              * @ios
              * @since 0.1
@@ -43,7 +43,7 @@ export default class App {
             /**
              * Gets the getTrackingId for the current app.
              *
-             * @event getTrackingId
+             * @method getTrackingId
              * @return {String}
              * @ios
              * @since 0.1
@@ -55,6 +55,7 @@ export default class App {
     /**
      * Gets the Auth service for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1
@@ -68,6 +69,7 @@ export default class App {
     /**
      * Gets the Name for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1
@@ -81,6 +83,7 @@ export default class App {
     /**
      * Gets the getApiKey for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1
@@ -94,6 +97,7 @@ export default class App {
     /**
      * Gets the getApplicationId for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1
@@ -107,6 +111,7 @@ export default class App {
     /**
      * Gets the getDatabaseUrl for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1
@@ -120,6 +125,7 @@ export default class App {
     /**
      * Gets the getGcmSenderId for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1
@@ -133,6 +139,7 @@ export default class App {
     /**
      * Gets the getStorageBucket for the current app.
      *
+     * @method
      * @android
      * @ios
      * @since 0.1

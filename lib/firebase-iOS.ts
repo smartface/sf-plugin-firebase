@@ -1,17 +1,52 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
+import File from '@smartface/native/io/file';
 import FirebaseAnalytics from './Analytics';
 import App from './App';
 import Auth from './Auth';
 import Messaging from './Messaging';
 
 export default class Firebase {
+    /**
+     * Firebase Analytics service
+     * @static
+     * @public
+     * @property {object}
+     */
     static analytics = FirebaseAnalytics;
+    /**
+     * Gets the messaging service.
+     * @property {object}
+     * @static
+     * @readonly
+     * @public
+     */
     static messaging = Messaging;
 
-    static initializeApp(options?: { iosFile: any }, name?: string) {
-        if (options?.iosFile?.exists) {
-            const pathPlist = options.iosFile.nativeObject.getActualPath();
+    /**
+     * Initialize your SDK
+     * @method initializeApp
+     * @static
+     * @public
+     * @param {Object} config
+     * @param {IO.File} config.iosFile - iOS plist file
+     * @param {String} name(Optional)
+     * @example
+     * import Firebase from '@smartace/plugin-firebase';
+     * const File = require('@smartface/native/io/file');
+     * 
+     * var iOSPlistFile = new File({
+     *     path: 'assets://GoogleService-Info.plist'
+     * });
+     * var firebaseConfig = {
+     *     iosFile : iOSPlistFile
+     * };
+     * Firebase.initializeApp(firebaseConfig);
+     */
+    static initializeApp(config?: { iosFile: File }, name?: string) {
+        if (config?.iosFile?.exists) {
+            // @ts-ignore
+            const pathPlist = config.iosFile.nativeObject.getActualPath();
 
             const alloc = Invocation.invokeClassMethod('FIROptions', 'alloc', [], 'id');
             // @ts-ignore
@@ -33,7 +68,15 @@ export default class Firebase {
         }
     }
 
-    static app(name: string) {
+    /**
+     * When called with no arguments, the default app is returned
+     * @method app
+     * @static
+     * @param {string} [name] - When an app name is provided, the app corresponding to that name is returned.
+     * @public
+     * @returns {FirebaseApp}
+     */
+    static app(name?: string) {
         let nativeFirebaseApp;
         if (name) {
             nativeFirebaseApp = App.ios.native.appNamed(name);
@@ -43,6 +86,13 @@ export default class Firebase {
         return new App(nativeFirebaseApp);
     }
 
+    /**
+     * Gets the FirebaseApp Array.
+     * @method apps
+     * @static
+     * @public
+     * @returns {FirebaseApp[]} apps
+     */
     static apps() {
         const apps = App.ios.native.allApps();
         let appArray: any = [];

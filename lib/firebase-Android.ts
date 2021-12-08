@@ -1,5 +1,6 @@
 import App from './App';
 import FirebaseAuth from './Auth';
+import File from '@smartface/native/io/file';
 // @ts-ignore
 const NativeFirebaseApp = requireClass('com.google.firebase.FirebaseApp');
 // @ts-ignore
@@ -10,11 +11,44 @@ import Analytics from './Analytics';
 import Messaging from './Messaging';
 
 export default class Firebase {
+    /**
+     * Firebase Analytics service
+     * @static
+     * @public
+     * @property {object}
+     */
     static analytics = Analytics;
+    /**
+     * Gets the messaging service.
+     * @property {object}
+     * @static
+     * @readonly
+     * @public
+     */
     static messaging = Messaging;
     static iOS = {};
 
-    static initializeApp(name: string, options?: { iosFile: any }) {
+    /**
+     * Initialize your SDK
+     * @method initializeApp
+     * @static
+     * @public
+     * @param {Object} config
+     * @param {IO.File} config.iosFile - iOS plist file
+     * @param {String} name(Optional)
+     * @example
+     * const Firebase = require('@smartace/plugin-firebase');
+     * const File = require('@smartface/native/io/file');
+     * 
+     * var iOSPlistFile = new File({
+     *     path: 'assets://GoogleService-Info.plist'
+     * });
+     * var firebaseConfig = {
+     *     iosFile : iOSPlistFile
+     * };
+     * Firebase.initializeApp(firebaseConfig);
+     */
+    static initializeApp(config?: { iosFile: File }, name?: string) {
         if (!AndroidConfig.isEmulator) {
             const nativeFirebaseApp = name
                 ? NativeFirebaseApp.initializeApp(AndroidConfig.activity, name)
@@ -26,7 +60,15 @@ export default class Firebase {
         }
     }
 
-    static app(name: string) {
+    /**
+     * When called with no arguments, the default app is returned
+     * @method app
+     * @static
+     * @param {string} [name] - When an app name is provided, the app corresponding to that name is returned.
+     * @public
+     * @returns {FirebaseApp}
+     */
+    static app(name?: string) {
         if (!AndroidConfig.isEmulator) {
             const nativeFirebaseApp = name ? NativeFirebaseApp.getInstance(name) : NativeFirebaseApp.getInstance();
             return new App(nativeFirebaseApp);
@@ -36,6 +78,13 @@ export default class Firebase {
         }
     }
 
+    /**
+     * Gets the FirebaseApp Array.
+     * @method apps
+     * @static
+     * @public
+     * @returns {FirebaseApp[]} apps
+     */
     static apps() {
         const result: InstanceType<typeof App>[] = [];
         if (!AndroidConfig.isEmulator) {

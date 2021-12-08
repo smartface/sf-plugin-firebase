@@ -24,7 +24,7 @@ export default class Crashlytics {
      * You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely identifies the end-user of your application without disclosing or transmitting any of their personal information.
      *
      *     @example
-     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
      *      Crashlytics.setUserIdentifier("UserIdentifier");
      *
      * @method setUserIdentifier
@@ -43,7 +43,7 @@ export default class Crashlytics {
      * Setting keys are as easy as calling: Crashlytics.setString(key, value).
      *
      *     @example
-     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
      *      Crashlytics.setString("key","value");
      *
      * @method setString
@@ -63,7 +63,7 @@ export default class Crashlytics {
      * Setting keys are as easy as calling: Crashlytics.setBool(key, value).
      *
      *     @example
-     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
      *      Crashlytics.setBool("key",true);
      *
      * @method setBool
@@ -83,7 +83,7 @@ export default class Crashlytics {
      * Setting keys are as easy as calling: Crashlytics.setFloat(key, value).
      *
      *     @example
-     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
      *      Crashlytics.setFloat("key",true);
      *
      * @method setFloat
@@ -103,7 +103,7 @@ export default class Crashlytics {
      * Setting keys are as easy as calling: Crashlytics.setInt(key, value).
      *
      *     @example
-     *      import {Crashlytics} from '@smartface/plugin-firebase';
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
      *      Crashlytics.setInt("key",true);
      *
      * @method setInt

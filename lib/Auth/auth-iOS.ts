@@ -89,7 +89,7 @@ export default class Auth {
     
             authWithApp : function (app) {
                 // @ts-ignore
-                var argApp = new Invocation.Argument({
+                const argApp = new Invocation.Argument({
                     type: 'NSObject',
                     value: app
                 });
@@ -110,7 +110,7 @@ export default class Auth {
     
             setLanguageCode : function (auth, languageCode) {
                 // @ts-ignore
-                var argLanguageCode = new Invocation.Argument({
+                const argLanguageCode = new Invocation.Argument({
                     type: 'NSString',
                     value: languageCode
                 });
@@ -131,17 +131,17 @@ export default class Auth {
             */
             signInWithEmailPasswordCompletion : function (auth, email, password, completion) {
                 // @ts-ignore
-                var argEmail = new Invocation.Argument({
+                const argEmail = new Invocation.Argument({
                     type: 'NSString',
                     value: email
                 });
                 // @ts-ignore
-                var argPassword = new Invocation.Argument({
+                const argPassword = new Invocation.Argument({
                     type: 'NSString',
                     value: password
                 });
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'FIRAuthResultCallback',
                     value: function (e) {
                         completion(e);
@@ -166,17 +166,17 @@ export default class Auth {
             */
             createUserWithEmailPasswordCompletion : function (auth, email, password, completion) {
                 // @ts-ignore
-                var argEmail = new Invocation.Argument({
+                const argEmail = new Invocation.Argument({
                     type: 'NSString',
                     value: email
                 });
                 // @ts-ignore
-                var argPassword = new Invocation.Argument({
+                const argPassword = new Invocation.Argument({
                     type: 'NSString',
                     value: password
                 });
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'FIRAuthResultCallback',
                     value: function (e) {
                         completion(e);
@@ -196,12 +196,12 @@ export default class Auth {
             */
             signInWithCustomTokenCompletion : function (auth, token, completion) {
                 // @ts-ignore
-                var argToken = new Invocation.Argument({
+                const argToken = new Invocation.Argument({
                     type: 'NSString',
                     value: token
                 });
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'FIRAuthResultCallback',
                     value: function (e) {
                         completion(e);
@@ -219,7 +219,7 @@ export default class Auth {
             */
             signInAnonymouslyWithCompletion : function (auth, completion) {
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'FIRAuthResultCallback',
                     value: function (e) {
                         completion(e);
@@ -239,7 +239,7 @@ export default class Auth {
     
             signOut : function (auth) {
                 // @ts-ignore
-                var argError = new Invocation.Argument({
+                const argError = new Invocation.Argument({
                     type: 'NSObject',
                     value: undefined
                 });
@@ -248,8 +248,8 @@ export default class Auth {
             },
     
             getErrorObject : function (nativeError) {
-                var code = Invocation.invokeInstanceMethod(nativeError, 'code', [], 'NSInteger');
-                var localizedDescription = Invocation.invokeInstanceMethod(nativeError, 'localizedDescription', [], 'NSString');
+                const code = Invocation.invokeInstanceMethod(nativeError, 'code', [], 'NSInteger');
+                const localizedDescription = Invocation.invokeInstanceMethod(nativeError, 'localizedDescription', [], 'NSString');
     
                 return { code: code, description: localizedDescription };
             },
@@ -261,12 +261,12 @@ export default class Auth {
     
             sendPasswordResetWithEmailCompletion : function (auth, email, completion) {
                 // @ts-ignore
-                var argEmail = new Invocation.Argument({
+                const argEmail = new Invocation.Argument({
                     type: 'NSString',
                     value: email
                 });
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
@@ -278,12 +278,12 @@ export default class Auth {
     
             verifyPasswordResetCodeCompletion : function (auth, code, completion) {
                 // @ts-ignore
-                var argCode = new Invocation.Argument({
+                const argCode = new Invocation.Argument({
                     type: 'NSString',
                     value: code
                 });
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'VerifyPasswordResetCodeCallback',
                     value: function (e) {
                         completion(e);
@@ -295,17 +295,17 @@ export default class Auth {
     
             confirmPasswordResetWithCodeNewPasswordCompletion : function (auth, code, newPassword, completion) {
                 // @ts-ignore
-                var argCode = new Invocation.Argument({
+                const argCode = new Invocation.Argument({
                     type: 'NSString',
                     value: code
                 });
                 // @ts-ignore
-                var argNewPassword = new Invocation.Argument({
+                const argNewPassword = new Invocation.Argument({
                     type: 'NSString',
                     value: newPassword
                 });
                 // @ts-ignore
-                var argCompletion = new Invocation.Argument({
+                const argCompletion = new Invocation.Argument({
                     type: 'UserProfileChangeCallback',
                     value: function (e) {
                         completion(e);
@@ -341,7 +341,7 @@ export default class Auth {
         /**
          * Sets `languageCode` to the app's current language.
          *
-         * @event useAppLanguage
+         * @method useAppLanguage
          * @ios
          * @since 0.1
          */
@@ -373,7 +373,7 @@ export default class Auth {
     /**
      * Synchronously gets the cached current user, or undefined if there is none
      *
-     * @event getCurrentUser
+     * @method getCurrentUser
      * @return {User}
      * @android
      * @ios
@@ -407,7 +407,7 @@ export default class Auth {
      *       dictionary object will contain more detailed explanation that can be shown to the user.
      *
      *
-     * @event createUserWithEmailAndPassword
+     * @method createUserWithEmailAndPassword
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
@@ -446,7 +446,7 @@ export default class Auth {
      *   + `InvalidEmail` - Indicates the email address is malformed.
      *
      *
-     * @event signInWithEmailAndPassword
+     * @method signInWithEmailAndPassword
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
@@ -482,7 +482,7 @@ export default class Auth {
      *       belong to different projects.
      *
      *
-     * @event signInWithCustomToken
+     * @method signInWithCustomToken
      * @param {String} token
      * @param {Function} callback
      * @param {User} callback.User
@@ -514,7 +514,7 @@ export default class Auth {
      *   + `OperationNotAllowed` - Indicates that anonymous accounts are
      *       not enabled. Enable them in the Auth section of the Firebase console.
      *
-     * @event signInAnonymously
+     * @method signInAnonymously
      * @param {Function} callback
      * @param {User} callback.User
      * @param {Object} callback.error
@@ -546,7 +546,7 @@ export default class Auth {
      *           in with the specified identity provider.
      *       + `UserNotFound` - Indicates the OOB code is expired.
      *
-     * @event sendPasswordResetEmail
+     * @method sendPasswordResetEmail
      * @param {String} email
      * @param {Function} callback
      * @param {Boolean} callback.isSuccess
@@ -580,7 +580,7 @@ export default class Auth {
      *       + `ExpiredActionCode` - Indicates the OOB code is expired.
      *       + `InvalidActionCode` - Indicates the OOB code is invalid.
      *
-     * @event verifyPasswordResetCode
+     * @method verifyPasswordResetCode
      * @param {String} code
      * @param {Function} callback
      * @param {Boolean} callback.email
@@ -617,7 +617,7 @@ export default class Auth {
      *       + `InvalidActionCode` - Indicates the OOB code is invalid.
      *
      *
-     * @event confirmPasswordReset
+     * @method confirmPasswordReset
      * @param {String} code
      * @param {String} newPassword
      * @param {Function} callback
@@ -645,7 +645,7 @@ export default class Auth {
     /**
      * Signs out the current user.
      *
-     * @event signOut
+     * @method signOut
      * @android
      * @ios
      * @since 0.1

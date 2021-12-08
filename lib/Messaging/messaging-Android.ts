@@ -21,7 +21,7 @@ export default class Messaging {
          *  Once you have an FCM token, you should send it to your application server, so it can use
          *  the FCM token to send notifications to your device.
          *
-         * @event onTokenReflesh
+         * @method onTokenReflesh
          * @ios
          * @since 0.1
          */
@@ -32,7 +32,7 @@ export default class Messaging {
      * iOS : Returns the FCM token.
      * Android : Returns the notification token.
      *
-     * @event getToken
+     * @method getToken
      * @android
      * @ios
      * @since 0.1
@@ -48,7 +48,7 @@ export default class Messaging {
     /**
      * Asynchronously subscribes to a topic.
      *
-     * @event subscribeToTopic
+     * @method subscribeToTopic
      * @param {String} topic
      * @android
      * @ios
@@ -62,7 +62,7 @@ export default class Messaging {
     /**
      * Asynchronously unsubscribe from a topic.
      *
-     * @event unsubscribeFromTopic
+     * @method unsubscribeFromTopic
      * @param {String} topic
      * @android
      * @ios

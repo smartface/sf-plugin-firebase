@@ -242,7 +242,7 @@ export default class User {
     /**
      * Returns the main email address of the user, as stored in the Firebase project's user database.
      *
-     * @event getEmail
+     * @method getEmail
      * @android
      * @ios
      * @since 0.1
@@ -252,7 +252,7 @@ export default class User {
     /**
      * Returns the main display name of this user from the Firebase project's user database.
      *
-     * @event getDisplayName
+     * @method getDisplayName
      * @android
      * @ios
      * @since 0.1
@@ -262,7 +262,7 @@ export default class User {
     /**
      * Returns the URL of this user's main profile picture, as stored in the Firebase project's user database.
      *
-     * @event NtosURL
+     * @method getPhotoURL
      * @android
      * @ios
      * @since 0.1
@@ -272,7 +272,7 @@ export default class User {
     /**
      * Returns the phone number of the user, as stored in the Firebase project's user database, or null if none exists
      *
-     * @event getPhoneNumber
+     * @method getPhoneNumber
      * @android
      * @ios
      * @since 0.1
@@ -282,7 +282,7 @@ export default class User {
     /**
      * Returns a string used to uniquely identify your user in your Firebase project's user database.
      *
-     * @event getUID
+     * @method getUID
      * @android
      * @ios
      * @since 0.1
@@ -292,7 +292,7 @@ export default class User {
     /**
      * Returns true if the user is anonymous.
      *
-     * @event isAnonymous
+     * @method isAnonymous
      * @android
      * @ios
      * @since 0.1
@@ -302,7 +302,7 @@ export default class User {
     /**
      * Indicates the email address associated with this user has been verified.
      *
-     * @event isEmailVerified
+     * @method isEmailVerified
      * @return {Boolean} verified
      * @android
      * @ios
@@ -318,7 +318,7 @@ export default class User {
                 operation that requires a recent login from the user. This error indicates the user
                 has not signed in recently enough.
     *
-    * @event reload
+    * @method reload
     * @param {Function} callback
     * @param {Boolean} callback.isSuccess
     * @param {Object} callback.error
@@ -344,7 +344,7 @@ export default class User {
     /**
      * Set displayName.
      *
-     * @event setDisplayName
+     * @method setDisplayName
      * @param {String} displayName
      * @param {Function} callback
      * @param {String} callback.token
@@ -369,7 +369,7 @@ export default class User {
     /**
      * Set photoURL.
      *
-     * @event setPhotoURL
+     * @method setPhotoURL
      * @param {String} photoURL
      * @param {Function} callback
      * @param {String} callback.token
@@ -399,7 +399,7 @@ export default class User {
      *   + `InvalidEmail`
      *   + `RequiresRecentLogin`
      *
-     * @event updateEmail
+     * @method updateEmail
      * @param {String} email
      * @param {Function} callback
      * @param {Boolean} callback.isSuccess
@@ -431,7 +431,7 @@ export default class User {
      *   + `WeakPassword`
      *   + `RequiresRecentLogin`
      *
-     * @event updatePassword
+     * @method updatePassword
      * @param {String} password
      * @param {Function} callback
      * @param {Boolean} callback.isSuccess
@@ -465,7 +465,7 @@ export default class User {
      *   + `UserMismatch`
      *   + `InvalidEmail`
      *
-     * @event reauthenticate
+     * @method reauthenticate
      * @param {String} email
      * @param {String} password
      * @param {Function} callback
@@ -499,7 +499,7 @@ export default class User {
                 operation that requires a recent login from the user. This error indicates the user
                 has not signed in recently enough.
     *
-    * @event delete
+    * @method delete
     * @param {Function} callback
     * @param {Boolean} callback.isSuccess
     * @param {Object} callback.error
@@ -531,7 +531,7 @@ export default class User {
      *   + `InvalidUserToken`
      *   + `UserTokenExpired`
      *
-     * @event sendEmailVerification
+     * @method sendEmailVerification
      * @param {Function} callback
      * @param {Boolean} callback.isSuccess
      * @param {Object} callback.error
@@ -557,7 +557,7 @@ export default class User {
     /**
      * Returns token.
      *
-     * @event getIdToken
+     * @method getIdToken
      * @param {Boolean} forceRefresh
      * @param {Function} callback
      * @param {String} callback.token
