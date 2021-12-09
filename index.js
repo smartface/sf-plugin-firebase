@@ -1,1 +1,1 @@
-module.exports = require(`./firebase-${global.Device.deviceOS}`);
+module.exports = require('./dist');
