@@ -3,7 +3,7 @@
  * @readonly
  * @enum {string}
  */
-enum FirebaseAnalyticsEvent {
+enum Events {
     /** Add Payment Info event. This event signifies that a user has submitted their payment information to your app. */
     ADD_PAYMENT_INFO = 'add_payment_info',
 
@@ -251,5 +251,5 @@ enum FirebaseAnalyticsEvent {
     EARN_VIRTUAL_CURRENCY = 'earn_virtual_currency'
 }
 
-export default FirebaseAnalyticsEvent;
-module.exports = FirebaseAnalyticsEvent;
+export default Events;
+module.exports = Events;

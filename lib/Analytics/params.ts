@@ -1,4 +1,4 @@
-enum FirebaseAnalyticsParam {
+enum Params {
     /**
      * Game achievement ID (String).
      */
@@ -189,5 +189,5 @@ enum FirebaseAnalyticsParam {
     CP1 = 'cp1'
 }
 
-export default FirebaseAnalyticsParam;
-module.exports = FirebaseAnalyticsParam;
+export default Params;
+module.exports = Params;

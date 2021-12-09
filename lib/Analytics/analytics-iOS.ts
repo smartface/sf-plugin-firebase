@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Invocation } from '@smartface/native/util';
-import AnalyticsEvent from './analyticsEvent';
-import AnalyticsParam from './analyticsParam';
+import AnalyticsEvent from './events';
+import AnalyticsParam from './params';
 
 /**
  * Firebase Analytics service
