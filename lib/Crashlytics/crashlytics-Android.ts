@@ -1,7 +1,14 @@
 // @ts-ignore
 const NativeClass = requireClass('com.google.firebase.crashlytics.FirebaseCrashlytics');
 // @ts-ignore
+const NativeException = global.requireClass('java.lang.Exception');
+// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
+
+type LogErrorParams = {
+    error: string;
+    identifier?: string;
+};
 
 /**
  * @class Crashlytics
@@ -116,6 +123,28 @@ export default class Crashlytics {
      */
     static setInt = function (key: string, value: number) {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
+    };
+
+    /**
+     * logError method helps you report the error with an optional identifier.
+     *
+     *     @example
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      const err = new Error('Unexpected error');
+     *      const stringError = JSON.stringify(err, null, '\t');
+     *      Crashlytics.logError({error: stringError, identifier: 'UnhandledException' });
+     *
+     * @method logError
+     * @param {LogErrorParams} params
+     * @android
+     * @ios
+     * @static
+     * @since 7.0
+     */
+    static logError = function (params: LogErrorParams) {
+        const { error, identifier = 'Exception' } = params;
+        Crashlytics.NativeClass.log(identifier);
+        Crashlytics.NativeClass.recordException(new NativeException(error));
     };
 }
 module.exports = Crashlytics;

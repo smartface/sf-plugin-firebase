@@ -1,3 +1,12 @@
+import Application from '@smartface/native/application';
+const Invocation = require('@smartface/native/util/iOS/invocation.js');
+import AndroidConfig from '@smartface/native/util/Android/androidconfig';
+
+type LogErrorParams = {
+    error: string;
+    identifier?: string;
+    errorCode?: number;
+};
 export default class Crashlytics {
     static ios = {
         /**
@@ -201,6 +210,51 @@ export default class Crashlytics {
             // @ts-ignore
             __SF_Crashlytics.sharedInstance().setObjectValueForKey(value, key);
         } catch (e) {}
+    };
+
+    /**
+     * logError method helps you report the error with an optional identifier.
+     *
+     *     @example
+     *      import { Crashlytics } from '@smartface/plugin-firebase';
+     *      const err = new Error('Unexpected error');
+     *      const stringError = JSON.stringify(err, null, '\t');
+     *      Crashlytics.logError({error: stringError, identifier: 'UnhandledException' });
+     *
+     * @method logError
+     * @param {LogErrorParams} params
+     * @android
+     * @ios
+     * @static
+     * @since 7.0
+     */
+    static logError = function (params: LogErrorParams) {
+        const { error, identifier = 'Exception', errorCode = -1000 } = params;
+        const argDomain = new Invocation.Argument({
+            type: 'NSString',
+            value: Application.ios.bundleIdentifier
+        });
+
+        const argCode = new Invocation.Argument({
+            type: 'NSInteger',
+            value: errorCode
+        });
+
+        const argUserInfo = new Invocation.Argument({
+            type: 'id',
+            value: {
+                NSLocalizedDescription: error,
+                NSLocalizedFailureReason: identifier
+            }
+        });
+
+        const errorRecord = Invocation.invokeClassMethod(
+            'NSError',
+            'errorWithDomain:code:userInfo:',
+            [argDomain, argCode, argUserInfo],
+            'NSObject'
+        );
+        !AndroidConfig.isEmulator && global.__SF_Crashlytics.sharedInstance().recordError(errorRecord);
     };
 }
 module.exports = Crashlytics;
