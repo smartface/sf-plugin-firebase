@@ -36,28 +36,39 @@ import Firebase, { Crashlytics, Analytics } from '@smartface/plugin-firebase';
 
 Other usages and functionalities are kept the same. You can use the other parts without changing anything.
 
-## Installation
+# Installation
 Smartface Firebase plugin can be installed via npm easily from our public npm repository. The installation is pretty easy via Smartface Cloud IDE.
 
 - Run command in terminal on script directory `yarn add @smartface/firebase`
 
-## Configuration
+# Configuration
+| Th
+
 Installation script automatically configures project.json. Please verify following records are in place.
 Configuration is needed once only
 
-### iOS
+## iOS
 
 You can manually access the Firebaseios.zip file from the link below.
+
+```
 https://cd.smartface.io/repository/smartfacefirebase/ios/VERSION_NUMBER/firebaseios.zip
-Sample : https://cd.smartface.io/repository/smartfacefirebase/ios/3.0.2/firebaseios.zip
+```
 
-**Step 1**
+Sample link:
+```
+https://cd.smartface.io/repository/smartfacefirebase/ios/3.0.2/firebaseios.zip
+```
 
-Download GoogleService-Info.plist from [Firebase console](https://console.firebase.google.com) and placed this file into workspace's /assets directory.
+### Step 1
 
-**Step 2**
+Download GoogleService-Info.plist from [Firebase console](https://console.firebase.google.com) and placed this file into workspace's **assets** directory.
 
-Add firebase plugin to config/project.json.
+### Step 2
+
+> This step is automatically configured by postinstall script. It is advised to double check on your project.
+
+Add firebase plugin to `config/project.json`.
 
 ```javascript
 "firebaseios": {
@@ -67,16 +78,17 @@ Add firebase plugin to config/project.json.
 }
 ```
 
-### Android
+## Android
 
-***Building Android Plugin***
-It is necessary to place a few files & modification in order to use firebase plugin. Follow the below steps;
+Unlike iOS, firebase plugin on Android needs to be built. Please follow this steps to enable Smartface to automatically build the plugin.
 
-**Step 1**
+### Step 1
 
 Download google-services.json from [Firebase console](https://console.firebase.google.com)
 
-**Step 2**
+### Step 2
+
+> This step is automatically configured by postinstall script. It is advised to double check on your project.
 
 - Place google-services.json  file  into `~/workspace/config/Android` 
 - This repository contains prepared android library project under `~/Native/Android` directory. 
@@ -93,7 +105,7 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 },
 ```
 
-**Step 3**
+### Step 3
 
 - Get senderID from firebase and edit `config/project.json`'s senderID ⇒ (senderID = gcm_defaultSenderId ) 
 
@@ -102,7 +114,7 @@ Download google-services.json from [Firebase console](https://console.firebase.g
   "senderID": "${senderID}"
 }
 ```
-**Step 4**
+### Step 4
 
 - Open this lines in `config/Android/AndroidManifest.xml` file.
 ```xml
@@ -111,14 +123,14 @@ Download google-services.json from [Firebase console](https://console.firebase.g
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
-**Step 5**
+### Step 5
 - By default, crashlytic and its ndk is disabled so enable it, apply plugins & specify library project in dependencies.gradle which is located under `~/workspace/config/Android` folder. Such as;
 ```groovy
-apply plugin:  'com.google.firebase.crashlytics'
-apply plugin:  'com.google.gms.google-services'
-
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.firebase-perf' //(Optional)
 dependencies {
-    implementation project(":firebaseplugin")
+implementation project(":firebaseplugin")
 }
 googleServices.disableVersionCheck = true
 ```
@@ -144,14 +156,12 @@ If `nativeSymbolUploadEnabled` is true then add this below statement to your bui
 > ./gradlew app:uploadCrashlyticsSymbolFile$BUILT_TYPES
 ```
 
-- Congrats you have just done Android configuration.
 
-*Note:  By post-install scripts, Firebase's Android & iOS libraries/zip will be placed to appropriate paths and specify the its configuration to `config/project.json`*
 
-## API docs (TypeScript)
+# API docs
 After initializing the Firebase, Firebase APIs can be used.
-- [Full API Docs](./doc/API.md) - You can use intelliSense on Smartface Cloud IDE for better & faster development.
-- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md) - You can access the values from code via intelliSense on `Firebase.analytics.Events`
+- [API Docs](https://smartface.github.io/sf-plugin-firebase) - You can use intelliSense on Smartface Cloud IDE for better & faster development.
+- [Predefined Analytics Events](https://smartface.github.io/sf-plugin-firebase/modules/analytics/events) - You can access the values from code via intelliSense on `Firebase.analytics.Events`
 
 ## Crashlytics
 - Initialize your SDK using the following code snippet: (You must write this code in app.ts)
@@ -161,24 +171,28 @@ Firebase has to be initialized before any use.
 ```typescript
 import Firebase from '@smartface/plugin-firebase';
 import File from '@smartface/native/io/file';
-import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
+import { Crashlytics } from '@smartface/plugin-firebase';
+import { AssetsUriScheme } from '@smartface/native/io/path';
 
-var iOSPlistFile = new File({
-    path: 'assets://GoogleService-Info.plist'
+const iOSPlistFile = new File({
+    path: `${AssetsUriScheme}GoogleService-Info.plist`
 });
-var firebaseConfig = {
+const firebaseConfig = {
     iosFile : iOSPlistFile
 };
 
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);
-  FirebaseCrashlytics.ios.with([new FirebaseCrashlytics()]);
+  Crashlytics.ios.with([new Crashlytics()]);
 }
 ```
-### Sample Page for Crashlytics
+
+# Samples
+All of the samples assumes that initialization has been completed
+## Crashlytics
 ```typescript
 
-import FirebaseAnalytics from '@smartface/plugin-firebase/firebaseAnalytics';
+import { Analytics } from '@smartface/plugin-firebase';
 
 import Page1Design from 'generated/pages/page1'; // Generated default page on ts workspace
 
@@ -192,10 +206,6 @@ export default class Page1 extends Page1Design {
 
 function onShow(superOnShow) {
     superOnShow();
-
-    this.statusBar.visible = true;
-    this.headerBar.visible = true;
-
      /*
       You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely     
       identifies the end-user of your application without disclosing or transmitting any of their personal 
@@ -223,10 +233,8 @@ function onLoad(superOnLoad) {
 }
 ```
 
-## Samples
-All of the samples assumes that initialization has been completed
 
-### Push Notifications
+## Push Notifications
 ```typescript
 import Application from '@smartface/native/application';
 import Firebase from '@smartface/plugin-firebase';
@@ -240,8 +248,11 @@ Application.on(Application.Events.ReceivedNotification) = (e) => {
 
 Firebase.messaging.subscribeToTopic("all"); //this triggers register for notifications
 ```
+For Push Notification details and more samples&usage on Smartface, please refer to this documentation on Smartface Docs:
 
-### Sample Analytics
+[Push Notification](https://docs.smartface.io/smartface-native-framework/device/push-notification)
+
+## Analytics
 ```typescript
 import Firebase from '@smartface/plugin-firebase';
 /*
