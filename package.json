@@ -1,12 +1,12 @@
 {
   "name": "@smartface/plugin-firebase",
-  "version": "7.0.0-rc.1",
+  "version": "7.0.0-rc.49",
   "description": "Smartface Firebase Plugin for Smartface Native Framework",
   "repository": "https://github.com/smartface/sf-plugin-firebase",
-  "main": "index.js",
+  "main": "dist/index",
   "scripts": {
-    "build": "rm -rf lib && tsc",
-    "watch": "rm -rf lib && tsc -w",
+    "build": "tsc",
+    "watch": "tsc -w",
     "postinstall": "node postinstall.js"
   },
   "keywords": [
@@ -26,7 +26,8 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "^16.11.10",
+    "@smartface/native": "4.3.5",
+    "@types/node": "^16.11.11",
     "typescript": "^4.5.2"
   }
 }
