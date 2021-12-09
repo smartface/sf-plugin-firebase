@@ -41,9 +41,9 @@ export default class Crashlytics {
      * @static
      * @since 1.0
      */
-    static setUserIdentifier = function (identifier: string) {
+    static setUserIdentifier(identifier: string) {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setUserId(identifier);
-    };
+    }
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
@@ -61,9 +61,9 @@ export default class Crashlytics {
      * @static
      * @since 1.0
      */
-    static setString = function (key: string, value: string) {
+    static setString(key: string, value: string) {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
-    };
+    }
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
@@ -81,9 +81,9 @@ export default class Crashlytics {
      * @static
      * @since 1.0
      */
-    static setBool = function (key: string, value: boolean) {
+    static setBool(key: string, value: boolean) {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
-    };
+    }
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
@@ -101,9 +101,9 @@ export default class Crashlytics {
      * @static
      * @since 1.0
      */
-    static setFloat = function (key: string, value: number) {
+    static setFloat(key: string, value: number) {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
-    };
+    }
 
     /**
      * Custom keys help you get the specific state of your app leading up to a crash. You can associate arbitrary key/value pairs with your crash reports, then use the custom keys to search and filter crash reports in the Firebase console.
@@ -121,9 +121,9 @@ export default class Crashlytics {
      * @static
      * @since 1.0
      */
-    static setInt = function (key: string, value: number) {
+    static setInt(key: string, value: number) {
         if (!AndroidConfig.isEmulator) Crashlytics.NativeClass.getInstance().setCustomKey(key, value);
-    };
+    }
 
     /**
      * logError method helps you report the error with an optional identifier.
@@ -141,10 +141,10 @@ export default class Crashlytics {
      * @static
      * @since 7.0
      */
-    static logError = function (params: LogErrorParams) {
+    static logError(params: LogErrorParams) {
         const { error, identifier = 'Exception' } = params;
         Crashlytics.NativeClass.log(identifier);
         Crashlytics.NativeClass.recordException(new NativeException(error));
-    };
+    }
 }
 module.exports = Crashlytics;
