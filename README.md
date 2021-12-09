@@ -1,15 +1,45 @@
 # Firebase plugin from Smartface
+[![NPM](https://img.shields.io/npm/v/@smartface/plugin-firebase?style=flat-square)](https://www.npmjs.com/package/@smartface/plugin-firebase)
 [![Twitter: @Smartface_io](https://img.shields.io/badge/contact-@Smartface_io-blue.svg?style=flat)](https://twitter.com/smartface_io)
-[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/smartface/sf-extension-extendedlabel/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/smartface/sf-plugin-firebase/master/LICENSE)
 
 ## Firebase plugin
 As a plugin, this plugin only works when published. Will not perform any action with regular run-on-device scenarios.
 Firebase gives you the tools to develop high-quality apps, grow your user base, and earn more money. We cover the essentials so you can monetize your business and focus on your users.
 
+# Migration Notice
+If your project already has firebase plugin version 6, there are small changes to take care of after migrating to version 7.
+
+Together with version `7.0.0`, the module is refactored using TypeScript. There are a few changes to take note of:
+
+* The file imports have been changed. The following changes are:
+  1. firebaseAnalytics -> Analytics
+  2. firebaseApp -> App
+  3. firebaseAuth -> Auth
+  4. firebaseCrashlytics -> Crashlytics
+  5. firebaseMessaging -> Messaging
+  6. firebaseUser -> User
+
+Since the file structure is changed, the file imports have been changed as well.
+
+**Old Usage:**
+```
+import Firebase from '@smartface/plugin-firebase';
+import Crashlytics from '@smartface/plugin-firebase/firebaseCrashlytics';
+import Analytics from '@smartface/plugin-firebase/firebaseAnalytics';
+```
+
+**New Usage:**
+```
+import Firebase, { Crashlytics, Analytics } from '@smartface/plugin-firebase';
+```
+
+Other usages and functionalities are kept the same. You can use the other parts without changing anything.
+
 ## Installation
 Smartface Firebase plugin can be installed via npm easily from our public npm repository. The installation is pretty easy via Smartface Cloud IDE.
 
-- Run command in terminal `(cd ~/workspace/scripts && npm i -S @smartface/firebase)`
+- Run command in terminal on script directory `yarn add @smartface/firebase`
 
 ## Configuration
 Installation script automatically configures project.json. Please verify following records are in place.
@@ -130,15 +160,15 @@ Firebase has to be initialized before any use.
 
 ```typescript
 import Firebase from '@smartface/plugin-firebase';
-import File = require('@smartface/native/io/file');
+import File from '@smartface/native/io/file';
+import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
+
 var iOSPlistFile = new File({
     path: 'assets://GoogleService-Info.plist'
 });
 var firebaseConfig = {
     iosFile : iOSPlistFile
 };
-
-import { FirebaseCrashlytics } from '@smartface/plugin-firebase';
 
 if (Firebase.apps().length === 0) {
   Firebase.initializeApp(firebaseConfig);
@@ -198,12 +228,12 @@ All of the samples assumes that initialization has been completed
 
 ### Push Notifications
 ```typescript
-import * as Application from '@smartface/native/application';
+import Application from '@smartface/native/application';
 import Firebase from '@smartface/plugin-firebase';
 /*
  * Init code
  */
-Application.onReceivedNotification = (e) => {
+Application.on(Application.Events.ReceivedNotification) = (e) => {
     alert("Notification: " + typeof e);
     alert("Notification: " + JSON.stringify(e.remote));
 };
@@ -211,128 +241,13 @@ Application.onReceivedNotification = (e) => {
 Firebase.messaging.subscribeToTopic("all"); //this triggers register for notifications
 ```
 
-### Sample Analtics
+### Sample Analytics
 ```typescript
 import Firebase from '@smartface/plugin-firebase';
 /*
  * Init code
  */
 Firebase.analytics.logEvent(Firebase.analytics.Event.APP_OPEN);
-```
-
-## API docs (JavaScript) - For older versions
-If your project is not yet migrated to TypeScript, please refer to this usage.
-
-After initializing the Firebase, Firebase APIs can be used.
-- [Full API Docs](./doc/API.md)
-- [Predefined Analitics Events](./doc/firebaseAnalyticsEvent.md)
-
-## Crashlytics
-- Initialize your SDK using the following code snippet: (You must write this code in app.js)
-
-Firebase has to be initialized before any use
-```javascript
-const Firebase = require('@smartface/plugin-firebase');
-const File = require('@smartface/native/io/file');
-var iOSPlistFile = new File({
-    path: 'assets://GoogleService-Info.plist'
-});
-var firebaseConfig = {
-    iosFile : iOSPlistFile
-};
-
-if (Firebase.apps().length === 0) {
-  Firebase.initializeApp(firebaseConfig);
-}
-
-```
-### Sample Page for Crashlytics
-```javascript
-
-const Page = require("@smartface/native/ui/page");
-const extend = require("js-base/core/extend");
-
-const Fabric = require("@smartface/firebase/fabric");   
-const Crashlytics = require("@smartface/firebase/fabric/crashlytics");
-const Answers = require("@smartface/firebase/fabric/answers");
-                
-var Page1 = extend(Page)(
-    function(_super) {
-        _super(this, {
-            onShow: function(params) {
-                this.statusBar.visible = true;
-                this.headerBar.visible = true;
-       
-                /*
-                  You can use Crashlytics.setUserIdentifier to provide an ID number, token, or hashed value that uniquely     
-                  identifies the end-user of your application without disclosing or transmitting any of their personal 
-                  information. This value is displayed right in the Fabric dashboard.
-                */
-                Crashlytics.setUserIdentifier("UserIdentifier");
-                
-                // If you would like to take advantage of advanced user identifier features, you can additionally use both:
-                Crashlytics.setUserName("UserName");
-                Crashlytics.setUserEmail("UserEmail");
-                
-                /*
-                  Crashlytics allows you to associate arbitrary key/value pairs with your crash reports, which are viewable 
-                  right from the Crashlytics dashboard. Setting keys are as easy as calling: Crashlytics.setString(key, value) 
-                  or one of the related methods. Options are:
-                */
-                Crashlytics.setString("key", "value");
-                Crashlytics.setBool("key", true);
-                Crashlytics.setFloat("key", 15.5);
-                Crashlytics.setInt("key", 12);
-
-                /*
-                  To log a custom event to be sent to Answers, use the following.
-                  You can also include a series of custom attributes to get even deeper insight into what’s happening in your 
-                  app.
-                  In addition to the recommended attributes for each event, you can also add custom attributes for any event. 
-                  To log an event with a custom attribute, use the following.
-                */
-                Answers.logCustom('Log-Title', 
-                  [
-                    // Value must be only string or number
-                    new Answers.CustomAttribute("key1","value1"), 
-                    new Answers.CustomAttribute("key2",2)
-                  ] 
-                );
-                
-            }
-        });
-
-    }
-);
-module.exports = Page1;
-```
-
-## Samples
-All of the samples assumes that initialization has been completed
-
-### Push Notifications
-```javascript
-const Application = require("@smartface/native/application");
-const Firebase = require('@smartface/firebase');
-/*
- * Init code
- */
-Application.onReceivedNotification = function(e){
-    alert("Notification: " + typeof e);
-    alert("Notification: " + JSON.stringify(e.remote));
-};
-
-Firebase.messaging.subscribeToTopic("all"); //this triggers register for notifications
-```
-
-### Sample Analtics
-```javascript
-const Firebase = require('@smartface/firebase');
-/*
- * Init code
- */
-Firebase.analytics.logEvent(Firebase.analytics.Event.APP_OPEN);
-
 ```
 
 # License
