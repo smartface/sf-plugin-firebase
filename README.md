@@ -42,10 +42,9 @@ Smartface Firebase plugin can be installed via npm easily from our public npm re
 - Run command in terminal on script directory `yarn add @smartface/firebase`
 
 # Configuration
-| Th
 
-Installation script automatically configures project.json. Please verify following records are in place.
-Configuration is needed once only
+Some plugin configurations are automatically updated by the plugin itself, some need extra actions. 
+Configurations are needed only once within the plugin installation.
 
 ## iOS
 
