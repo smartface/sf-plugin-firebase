@@ -5,7 +5,9 @@ import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 type LogErrorParams = {
     error: string;
     identifier?: string;
-    errorCode?: number;
+    ios?: {
+        errorCode: number;
+    };
 };
 export default class Crashlytics {
     static ios = {
@@ -229,7 +231,7 @@ export default class Crashlytics {
      * @since 7.0
      */
     static logError(params: LogErrorParams) {
-        const { error, identifier = 'Exception', errorCode = -1000 } = params;
+        const { error, identifier = 'Exception', ios = { errorCode: -1000 } } = params;
         const argDomain = new Invocation.Argument({
             type: 'NSString',
             value: Application.ios.bundleIdentifier
@@ -237,7 +239,7 @@ export default class Crashlytics {
 
         const argCode = new Invocation.Argument({
             type: 'NSInteger',
-            value: errorCode
+            value: ios.errorCode
         });
 
         const argUserInfo = new Invocation.Argument({
