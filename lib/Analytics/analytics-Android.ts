@@ -42,10 +42,10 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static logEvent = (
+    static logEvent(
         name: string,
         customAttributes: InstanceType<typeof Analytics.CustomAttribute> | InstanceType<typeof Analytics.CustomAttribute>[]
-    ): void => {
+    ): void {
         if (!AndroidConfig.isEmulator) {
             const bundle = new NativeBundle();
 
@@ -63,7 +63,7 @@ export default class Analytics {
             // @ts-ignore
             Analytics.nativeObject().logEvent(name, bundle);
         }
-    };
+    }
 
     /**
      * Sets a user property to a given value. Up to 25 user property names are supported.
@@ -73,12 +73,12 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static setUserProperty = (name: string, value: string) => {
+    static setUserProperty(name: string, value: string) {
         if (!AndroidConfig.isEmulator) {
             // @ts-ignore
             Analytics.nativeObject().setUserProperty(name, value);
         }
-    };
+    }
 
     /**
      * Sets the user ID property. This feature must be used in accordance with Google’s Privacy Policy.
@@ -87,12 +87,12 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static setUserId = (id: string) => {
+    static setUserId(id: string) {
         if (!AndroidConfig.isEmulator) {
             // @ts-ignore
             Analytics.nativeObject().setUserId(id);
         }
-    };
+    }
 
     /**
      * Sets the current screen name, which specifies the current visual context in your app.
@@ -103,11 +103,11 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static setCurrentScreen = (screenName: string, screenClassOverride: null) => {
+    static setCurrentScreen(screenName: string, screenClassOverride: null) {
         if (!AndroidConfig.isEmulator) {
             // @ts-ignore
             Analytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
         }
-    };
+    }
 }
 module.exports = Analytics;

@@ -101,10 +101,10 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static logEvent = (
+    static logEvent(
         name: string,
         customAttributes: InstanceType<typeof Analytics.CustomAttribute> | InstanceType<typeof Analytics.CustomAttribute>[]
-    ): void => {
+    ): void {
         const customDictionary = {};
         if (customAttributes instanceof Array) {
             for (var i = 0; i < customAttributes.length; i++) {
@@ -112,7 +112,7 @@ export default class Analytics {
             }
         }
         Analytics.ios.native.logEventWithNameParameters(name, customDictionary);
-    };
+    }
 
     /**
      * Sets a user property to a given value. Up to 25 user property names are supported.
@@ -122,9 +122,9 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static setUserProperty = function (name: string, value: string) {
+    static setUserProperty(name: string, value: string) {
         Analytics.ios.native.setUserPropertyStringForName(value, name);
-    };
+    }
 
     /**
      * Sets the user ID property. This feature must be used in accordance with Google’s Privacy Policy.
@@ -133,9 +133,9 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static setUserId = function (id: string) {
+    static setUserId(id: string) {
         Analytics.ios.native.setUserID(id);
-    };
+    }
 
     /**
      * Sets the current screen name, which specifies the current visual context in your app.
@@ -146,14 +146,14 @@ export default class Analytics {
      * @ios
      * @since 0.1
      */
-    static setCurrentScreen = function (screenName: string, screenClassOverride: null) {
+    static setCurrentScreen(screenName: string, screenClassOverride: null) {
         Analytics.ios.native.setScreenNameScreenClass(screenName, screenClassOverride);
-    };
+    }
 
-    static getAppInstanceId = function (callback) {
+    static getAppInstanceId(callback) {
         if (typeof callback === 'function') {
             callback(Analytics.ios.native.appInstanceID());
         }
-    };
+    }
 }
 module.exports = Analytics;

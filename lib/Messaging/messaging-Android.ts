@@ -37,14 +37,14 @@ export default class Messaging {
      * @ios
      * @since 0.1
      */
-    static getToken = (callback: (token?: string) => void) => {
+    static getToken(callback: (token?: string) => void) {
         if (!AndroidConfig.isEmulator) {
             Notifications.registerForPushNotifications(
                 (e) => callback(e.token),
                 () => callback(undefined)
             );
         }
-    };
+    }
     /**
      * Asynchronously subscribes to a topic.
      *
@@ -54,11 +54,11 @@ export default class Messaging {
      * @ios
      * @since 0.1
      */
-    static subscribeToTopic = (topic: string) => {
+    static subscribeToTopic(topic: string) {
         if (Messaging.nativeObject) {
             Messaging.nativeObject().subscribeToTopic(topic);
         }
-    };
+    }
     /**
      * Asynchronously unsubscribe from a topic.
      *
@@ -68,10 +68,10 @@ export default class Messaging {
      * @ios
      * @since 0.1
      */
-    static unsubscribeFromTopic = (topic: string) => {
+    static unsubscribeFromTopic(topic: string) {
         if (Messaging.nativeObject) {
             Messaging.nativeObject().unsubscribeFromTopic(topic);
         }
-    };
+    }
 }
 module.exports = Messaging;
