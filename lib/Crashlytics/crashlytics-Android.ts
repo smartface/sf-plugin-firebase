@@ -143,8 +143,8 @@ export default class Crashlytics {
      */
     static logError(params: LogErrorParams) {
         const { error, identifier = 'Exception' } = params;
-        Crashlytics.NativeClass.log(identifier);
-        Crashlytics.NativeClass.recordException(new NativeException(error));
+        Crashlytics.NativeClass.getInstance().log(identifier);
+        Crashlytics.NativeClass.getInstance().recordException(new NativeException(error));
     }
 }
 module.exports = Crashlytics;
