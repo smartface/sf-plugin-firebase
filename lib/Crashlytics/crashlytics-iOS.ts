@@ -1,5 +1,5 @@
 import Application from '@smartface/native/application';
-const Invocation = require('@smartface/native/util/iOS/invocation.js');
+import Invocation from '@smartface/native/util/iOS/invocation';
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 type LogErrorParams = {

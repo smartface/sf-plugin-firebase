@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Invocation } from '@smartface/native/util';
+import Invocation from '@smartface/native/util/iOS/invocation';
 
 class Messaging {
     static ios: { native: any; onTokenReflesh: (token?: string) => void } = {
