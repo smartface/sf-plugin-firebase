@@ -1,5 +1,5 @@
 // @ts-ignore
-import Invocation from '@smartface/native/util/iOS/invocation';
+import { Invocation } from '@smartface/native/util';
 import File from '@smartface/native/io/file';
 import FirebaseAnalytics from './Analytics';
 import App from './App';
@@ -34,7 +34,7 @@ export default class Firebase {
      * @example
      * import Firebase from '@smartace/plugin-firebase';
      * const File = require('@smartface/native/io/file');
-     *
+     * 
      * var iOSPlistFile = new File({
      *     path: 'assets://GoogleService-Info.plist'
      * });
