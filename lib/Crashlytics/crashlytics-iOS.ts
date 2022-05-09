@@ -1,6 +1,5 @@
 import Application from '@smartface/native/application';
 import Invocation from '@smartface/native/util/iOS/invocation';
-import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 type LogErrorParams = {
     error: string;
@@ -232,16 +231,19 @@ export default class Crashlytics {
      */
     static logError(params: LogErrorParams) {
         const { error, identifier = 'Exception', ios = { errorCode: -1000 } } = params;
+        //@ts-ignore
         const argDomain = new Invocation.Argument({
             type: 'NSString',
             value: Application.ios.bundleIdentifier
         });
 
+        //@ts-ignore
         const argCode = new Invocation.Argument({
             type: 'NSInteger',
             value: ios.errorCode
         });
 
+        //@ts-ignore
         const argUserInfo = new Invocation.Argument({
             type: 'id',
             value: {
@@ -256,7 +258,9 @@ export default class Crashlytics {
             [argDomain, argCode, argUserInfo],
             'NSObject'
         );
-        !AndroidConfig.isEmulator && global.__SF_Crashlytics.sharedInstance().recordError(errorRecord);
+        if (Application.ios.bundleIdentifier !== 'io.smartface.SmartfaceEnterpriseApp') {
+            global.__SF_Crashlytics.sharedInstance().recordError(errorRecord);
+        }
     }
 }
 module.exports = Crashlytics;

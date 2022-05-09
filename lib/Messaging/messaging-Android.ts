@@ -3,7 +3,7 @@ const NativeFirebaseMessaging = requireClass('com.google.firebase.messaging.Fire
 // @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 // @ts-ignore
-import Notifications from '@smartface/native/global/notifications';
+import Notifications from '@smartface/native/notifications';
 
 export default class Messaging {
     static nativeObject = !AndroidConfig.isEmulator ? () => NativeFirebaseMessaging.getInstance() : undefined;

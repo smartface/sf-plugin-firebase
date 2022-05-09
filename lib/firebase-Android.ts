@@ -39,7 +39,7 @@ export default class Firebase {
      * @example
      * const Firebase = require('@smartace/plugin-firebase');
      * const File = require('@smartface/native/io/file');
-     *
+     * 
      * var iOSPlistFile = new File({
      *     path: 'assets://GoogleService-Info.plist'
      * });
