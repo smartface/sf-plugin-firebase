@@ -1,5 +1,4 @@
-// @ts-ignore
-import { Invocation } from '@smartface/native/util';
+import Invocation from '@smartface/native/util/iOS/invocation';
 import AnalyticsEvent from './events';
 import AnalyticsParam from './params';
 

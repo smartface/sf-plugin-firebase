@@ -1,7 +1,6 @@
 import AuthErrors from '../Auth/authErrors';
 
-// @ts-ignore
-import { Invocation } from '@smartface/native/util';
+import Invocation from '@smartface/native/util/iOS/invocation';
 
 type UserErrorBody = {
     code?: AuthErrors;
