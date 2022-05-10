@@ -1,4 +1,3 @@
-// @ts-ignore
 import System from '@smartface/native/device/system';
 import type crashlyticsAndroid from './crashlytics-Android';
 import type crashlyticsIOS from './crashlytics-iOS';

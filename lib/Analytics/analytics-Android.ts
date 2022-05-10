@@ -2,7 +2,6 @@
 const NativeFirebaseAnalytics = requireClass('com.google.firebase.analytics.FirebaseAnalytics');
 // @ts-ignore
 const NativeBundle = requireClass('android.os.Bundle');
-// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 import AnalyticsEvent from './events';
 import AnalyticsParam from './params';

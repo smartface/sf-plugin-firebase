@@ -11,7 +11,7 @@ export default class App {
     static ios = {};
     ios: {};
     android = {};
-    constructor(nativeFirebaseApp: any) {
+    constructor(nativeFirebaseApp?: any) {
         this.nativeObject = nativeFirebaseApp;
         this.ios = {
             /**-

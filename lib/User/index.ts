@@ -1,4 +1,3 @@
-// @ts-ignore
 import System from '@smartface/native/device/system';
 import type userAndroid from './user-Android';
 import type userIOS from './user-iOS';

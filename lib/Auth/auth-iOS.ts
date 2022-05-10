@@ -380,7 +380,6 @@ export default class Auth {
      */
     getCurrentUser = () => {
         if (!Auth.ios.native.isFrameworkEnabled()) {
-            // @ts-ignore
             return new User();
         }
         const user = Auth.ios.native.currentUser(this.nativeAuth);
