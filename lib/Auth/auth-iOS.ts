@@ -1,5 +1,4 @@
-// @ts-ignore
-import { Invocation } from '@smartface/native/util';
+import Invocation from '@smartface/native/util/iOS/invocation';
 import AuthErrors from './authErrors';
 import User from '../User';
 
@@ -83,11 +82,11 @@ export default class Auth {
         native?: any;
     } = {
         native: {
-            auth : function () {
+            auth: function () {
                 return Invocation.invokeClassMethod('FIRAuth', 'auth', [], 'NSObject');
             },
-    
-            authWithApp : function (app) {
+
+            authWithApp: function (app) {
                 // @ts-ignore
                 const argApp = new Invocation.Argument({
                     type: 'NSObject',
@@ -95,20 +94,20 @@ export default class Auth {
                 });
                 return Invocation.invokeClassMethod('FIRAuth', 'authWithApp:', [argApp], 'NSObject');
             },
-    
-            app : function (auth) {
+
+            app: function (auth) {
                 return Invocation.invokeInstanceMethod(auth, 'app', [], 'NSObject');
             },
-    
-            currentUser : function (auth) {
+
+            currentUser: function (auth) {
                 return Invocation.invokeInstanceMethod(auth, 'currentUser', [], 'NSObject');
             },
-    
-            getLanguageCode : function (auth) {
+
+            getLanguageCode: function (auth) {
                 return Invocation.invokeInstanceMethod(auth, 'languageCode', [], 'NSString');
             },
-    
-            setLanguageCode : function (auth, languageCode) {
+
+            setLanguageCode: function (auth, languageCode) {
                 // @ts-ignore
                 const argLanguageCode = new Invocation.Argument({
                     type: 'NSString',
@@ -117,7 +116,7 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'setLanguageCode:', [argLanguageCode]);
             },
-    
+
             /**
                 Possible error codes:
             
@@ -129,7 +128,7 @@ export default class Auth {
                     sign in with an incorrect password.
                 + `InvalidEmail` - Indicates the email address is malformed.
             */
-            signInWithEmailPasswordCompletion : function (auth, email, password, completion) {
+            signInWithEmailPasswordCompletion: function (auth, email, password, completion) {
                 // @ts-ignore
                 const argEmail = new Invocation.Argument({
                     type: 'NSString',
@@ -150,7 +149,7 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'signInWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
             },
-    
+
             /**
                 Possible error codes:
                 
@@ -164,7 +163,7 @@ export default class Auth {
                     considered too weak. The NSLocalizedFailureReasonErrorKey field in the NSError.userInfo
                     dictionary object will contain more detailed explanation that can be shown to the user.
             */
-            createUserWithEmailPasswordCompletion : function (auth, email, password, completion) {
+            createUserWithEmailPasswordCompletion: function (auth, email, password, completion) {
                 // @ts-ignore
                 const argEmail = new Invocation.Argument({
                     type: 'NSString',
@@ -185,7 +184,7 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'createUserWithEmail:password:completion:', [argEmail, argPassword, argCompletion]);
             },
-    
+
             /**
                 Possible error codes:
             
@@ -194,7 +193,7 @@ export default class Auth {
                 + `CustomTokenMismatch` - Indicates the service account and the API key
                     belong to different projects.
             */
-            signInWithCustomTokenCompletion : function (auth, token, completion) {
+            signInWithCustomTokenCompletion: function (auth, token, completion) {
                 // @ts-ignore
                 const argToken = new Invocation.Argument({
                     type: 'NSString',
@@ -210,14 +209,14 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'signInWithCustomToken:completion:', [argToken, argCompletion]);
             },
-    
+
             /**
                 Possible error codes:
             
                 + `OperationNotAllowed` - Indicates that anonymous accounts are
                     not enabled. Enable them in the Auth section of the Firebase console.
             */
-            signInAnonymouslyWithCompletion : function (auth, completion) {
+            signInAnonymouslyWithCompletion: function (auth, completion) {
                 // @ts-ignore
                 const argCompletion = new Invocation.Argument({
                     type: 'FIRAuthResultCallback',
@@ -228,7 +227,7 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'signInAnonymouslyWithCompletion:', [argCompletion]);
             },
-    
+
             /**
                 Possible error codes:
             
@@ -236,8 +235,8 @@ export default class Auth {
                     keychain. The `NSLocalizedFailureReasonErrorKey` field in the `NSError.userInfo`
                     dictionary will contain more information about the error encountered.
             */
-    
-            signOut : function (auth) {
+
+            signOut: function (auth) {
                 // @ts-ignore
                 const argError = new Invocation.Argument({
                     type: 'NSObject',
@@ -246,20 +245,20 @@ export default class Auth {
                 // @ts-ignore
                 return Invocation.invokeInstanceMethod(auth, 'signOut:', [argError]);
             },
-    
-            getErrorObject : function (nativeError) {
+
+            getErrorObject: function (nativeError) {
                 const code = Invocation.invokeInstanceMethod(nativeError, 'code', [], 'NSInteger');
                 const localizedDescription = Invocation.invokeInstanceMethod(nativeError, 'localizedDescription', [], 'NSString');
-    
+
                 return { code: code, description: localizedDescription };
             },
-    
-            useAppLanguage : function (auth) {
+
+            useAppLanguage: function (auth) {
                 // @ts-ignore
                 return Invocation.invokeInstanceMethod(auth, 'useAppLanguage', []);
             },
-    
-            sendPasswordResetWithEmailCompletion : function (auth, email, completion) {
+
+            sendPasswordResetWithEmailCompletion: function (auth, email, completion) {
                 // @ts-ignore
                 const argEmail = new Invocation.Argument({
                     type: 'NSString',
@@ -275,8 +274,8 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'sendPasswordResetWithEmail:completion:', [argEmail, argCompletion]);
             },
-    
-            verifyPasswordResetCodeCompletion : function (auth, code, completion) {
+
+            verifyPasswordResetCodeCompletion: function (auth, code, completion) {
                 // @ts-ignore
                 const argCode = new Invocation.Argument({
                     type: 'NSString',
@@ -292,8 +291,8 @@ export default class Auth {
                 // @ts-ignore
                 Invocation.invokeInstanceMethod(auth, 'verifyPasswordResetCode:completion:', [argCode, argCompletion]);
             },
-    
-            confirmPasswordResetWithCodeNewPasswordCompletion : function (auth, code, newPassword, completion) {
+
+            confirmPasswordResetWithCodeNewPasswordCompletion: function (auth, code, newPassword, completion) {
                 // @ts-ignore
                 const argCode = new Invocation.Argument({
                     type: 'NSString',
@@ -318,10 +317,10 @@ export default class Auth {
                     argCompletion
                 ]);
             },
-    
-            errorCode : errorCode,
-    
-            isFrameworkEnabled : function () {
+
+            errorCode: errorCode,
+
+            isFrameworkEnabled: function () {
                 // @ts-ignore
                 var invocation = __SF_NSInvocation.createClassInvocationWithSelectorInstance('alloc', 'FIROptions');
                 return invocation ? true : false;

@@ -1,5 +1,4 @@
-// @ts-ignore
-import { Invocation } from '@smartface/native/util';
+import Invocation from '@smartface/native/util/iOS/invocation';
 import Auth from '../Auth';
 
 /**
@@ -20,7 +19,7 @@ export default class App {
         native?: any;
     } = {
         native: {
-            configureWithOptions : function (firOptions) {
+            configureWithOptions: function (firOptions) {
                 // @ts-ignore
                 const argOptions = new Invocation.Argument({
                     type: 'NSObject',
@@ -29,8 +28,8 @@ export default class App {
                 // @ts-ignore
                 Invocation.invokeClassMethod('FIRApp', 'configureWithOptions:', [argOptions]);
             },
-    
-            configureWithNameOptions : function (name, firOptions) {
+
+            configureWithNameOptions: function (name, firOptions) {
                 // @ts-ignore
                 const argName = new Invocation.Argument({
                     type: 'NSString',
@@ -44,12 +43,12 @@ export default class App {
                 // @ts-ignore
                 Invocation.invokeClassMethod('FIRApp', 'configureWithName:options:', [argName, argOptions]);
             },
-    
-            defaultApp : function () {
+
+            defaultApp: function () {
                 return Invocation.invokeClassMethod('FIRApp', 'defaultApp', [], 'NSObject');
             },
-    
-            appNamed : function (name) {
+
+            appNamed: function (name) {
                 // @ts-ignore
                 const argName = new Invocation.Argument({
                     type: 'NSString',
@@ -57,20 +56,20 @@ export default class App {
                 });
                 return Invocation.invokeClassMethod('FIRApp', 'appNamed:', [argName], 'NSObject');
             },
-    
-            allApps : function () {
+
+            allApps: function () {
                 return Invocation.invokeClassMethod('FIRApp', 'allApps', [], 'id');
             },
-    
-            name : function (firApp) {
+
+            name: function (firApp) {
                 return Invocation.invokeInstanceMethod(firApp, 'name', [], 'NSString');
             },
-    
-            options : function (firApp) {
+
+            options: function (firApp) {
                 return Invocation.invokeInstanceMethod(firApp, 'options', [], 'NSObject');
             },
-    
-            deleteApp : function (firApp, callback) {
+
+            deleteApp: function (firApp, callback) {
                 // @ts-ignore
                 const argCallback = new Invocation.Argument({
                     type: 'JSValue',
@@ -131,7 +130,6 @@ export default class App {
 
         App.ios = {};
         App.ios.native = {};
-        
     }
 
     /**
