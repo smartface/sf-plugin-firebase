@@ -5,7 +5,6 @@ import File from '@smartface/native/io/file';
 const NativeFirebaseApp = requireClass('com.google.firebase.FirebaseApp');
 // @ts-ignore
 const NativeFirebaseOptions = requireClass('com.google.firebase.FirebaseOptions');
-// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 import Analytics from './Analytics';
 import Messaging from './Messaging';
@@ -39,7 +38,7 @@ export default class Firebase {
      * @example
      * const Firebase = require('@smartace/plugin-firebase');
      * const File = require('@smartface/native/io/file');
-     * 
+     *
      * var iOSPlistFile = new File({
      *     path: 'assets://GoogleService-Info.plist'
      * });
@@ -55,7 +54,6 @@ export default class Firebase {
                 : NativeFirebaseApp.initializeApp(AndroidConfig.activity);
             return new App(nativeFirebaseApp);
         } else {
-            // @ts-ignore
             return new App();
         }
     }
@@ -73,7 +71,6 @@ export default class Firebase {
             const nativeFirebaseApp = name ? NativeFirebaseApp.getInstance(name) : NativeFirebaseApp.getInstance();
             return new App(nativeFirebaseApp);
         } else {
-            // @ts-ignore
             return new App();
         }
     }

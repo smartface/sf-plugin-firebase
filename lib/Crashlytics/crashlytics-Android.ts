@@ -2,7 +2,6 @@
 const NativeClass = requireClass('com.google.firebase.crashlytics.FirebaseCrashlytics');
 // @ts-ignore
 const NativeException = global.requireClass('java.lang.Exception');
-// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 type LogErrorParams = {

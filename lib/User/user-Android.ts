@@ -10,7 +10,6 @@ const NativeEmailAuthProvider = requireClass('com.google.firebase.auth.EmailAuth
 const NativeUri = requireClass('android.net.Uri');
 import AuthError from '../Auth/authErrors';
 
-// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 
 type UserErrorBody = {
@@ -32,7 +31,7 @@ export default class User {
     nativeObject: any;
     ios = {};
     static ios = {};
-    constructor(nativeUser) {
+    constructor(nativeUser?: any) {
         if (!AndroidConfig.isEmulator) {
             this.nativeObject = nativeUser;
         }

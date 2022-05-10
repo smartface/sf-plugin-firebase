@@ -1,4 +1,3 @@
-// @ts-ignore
 import System from '@smartface/native/device/system';
 import type FirebaseAndroid from './firebase-Android';
 import type FirebaseIOS from './firebase-iOS';

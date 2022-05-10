@@ -6,7 +6,6 @@ const NativeOnSuccessListener = requireClass('com.google.android.gms.tasks.OnSuc
 // @ts-ignore
 const NativeOnFailureListener = requireClass('com.google.android.gms.tasks.OnFailureListener');
 
-// @ts-ignore
 import AndroidConfig from '@smartface/native/util/Android/androidconfig';
 import AuthErrors from './authErrors';
 type UserErrorBody = {
@@ -61,7 +60,6 @@ export default class Auth {
         if (!AndroidConfig.isEmulator) {
             return new User(this.nativeObject.getCurrentUser());
         } else {
-            // @ts-ignore
             return new User();
         }
     };
@@ -89,7 +87,6 @@ export default class Auth {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
-                    // @ts-ignore
                     callback(true);
                 }
             });
@@ -141,7 +138,6 @@ export default class Auth {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
-                    // @ts-ignore
                     callback(true);
                 }
             });
@@ -201,7 +197,6 @@ export default class Auth {
         if (!AndroidConfig.isEmulator) {
             const innerSuccessCallback = NativeOnSuccessListener.implement({
                 onSuccess: function (result) {
-                    // @ts-ignore
                     callback(true);
                 }
             });
