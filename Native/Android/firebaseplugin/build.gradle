@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
     
     defaultConfig {
         minSdkVersion 26
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    api 'com.google.firebase:firebase-core:16.0.4'
-    api 'com.google.firebase:firebase-perf:16.2.0'
-    api 'com.google.firebase:firebase-crashlytics-ndk:18.2.1'
+    api 'com.google.firebase:firebase-core:21.0.0'
+    api 'com.google.firebase:firebase-perf:20.1.0'
+    api 'com.google.firebase:firebase-crashlytics-ndk:18.2.11'
 }
