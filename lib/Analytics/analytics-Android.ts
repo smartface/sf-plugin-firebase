@@ -104,8 +104,10 @@ export default class Analytics {
      */
     static setCurrentScreen(screenName: string, screenClassOverride: null) {
         if (!AndroidConfig.isEmulator) {
+            const screenNameAttribute = new Analytics.CustomAttribute(NativeFirebaseAnalytics.Param.SCREEN_NAME, screenName);
             // @ts-ignore
-            Analytics.nativeObject().setCurrentScreen(AndroidConfig.activity, screenName, screenClassOverride);
+            const screenClassAttribute = new Analytics.CustomAttribute(NativeFirebaseAnalytics.Param.SCREEN_CLASS, screenClassOverride);
+            this.logEvent(NativeFirebaseAnalytics.Event.SCREEN_VIEW, [screenNameAttribute, screenClassAttribute]);
         }
     }
 }
